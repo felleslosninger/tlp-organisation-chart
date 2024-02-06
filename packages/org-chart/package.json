@@ -1,5 +1,11 @@
 {
   "name": "@root/org-chart",
   "version": "0.0.0",
-  "description": "Org chart generator"
+  "description": "Org chart generator",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
