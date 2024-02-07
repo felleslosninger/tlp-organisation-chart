@@ -6,6 +6,10 @@
     "packages/*",
     "apps/*"
   ],
+  "scripts": {
+    "test org-chart": "cd packages/org-chart && npm test",
+    "start-react": "cd apps/react && npm start"
+  },
   "dependencies": {
     "@babel/core": "^7.23.9",
     "@babel/plugin-transform-runtime": "^7.23.9",
