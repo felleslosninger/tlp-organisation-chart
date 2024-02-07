@@ -174,6 +174,8 @@ export default function Home() {
     `;
   const [code, setCode] = React.useState(code2);
 
+  console.log("test");
+
   const test = () => {
     let json = JSON.parse(code);
     let boxes = json["boxes"];
