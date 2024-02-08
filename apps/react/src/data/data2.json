@@ -1,0 +1,60 @@
+{
+  "nodes": [
+    {
+      "title": "Direktør",
+      "id": "dir",
+      "backgroundColor": "#0062BA"
+    },
+    {
+      "title": "Tilsynet for universell utforming av ikt",
+      "id": "tilsyn",
+      "url": "https://vg.no",
+      "parent": "dir",
+      "offset": false,
+      "backgroundColor": "#95227D"
+    },
+    {
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "url": "https://vg.no",
+      "parent": "dir",
+      "backgroundColor": "#1e2b3c"
+    },
+    {
+      "title": "Verksemdstyring",
+      "id": "verk",
+      "url": "https://vg.no",
+      "parent": "dir",
+      "backgroundColor": "#1e2b3c"
+    }
+  ],
+  "layout": [
+    {
+      "cols": [
+        {
+          "col": ["dir"]
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": [""]
+        },
+        {
+          "col": ["tilsyn"]
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": ["kom"]
+        },
+        {
+          "col": ["verk"]
+        }
+      ]
+    }
+  ]
+}

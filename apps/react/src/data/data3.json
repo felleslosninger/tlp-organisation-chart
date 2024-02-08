@@ -1,0 +1,159 @@
+{
+  "nodes": [
+    {
+      "title": "CEO",
+      "id": "ceo",
+      "backgroundColor": "#0073e6"
+    },
+    {
+      "title": "Product Development",
+      "id": "product_dev",
+      "url": "https://example.com",
+      "parent": "ceo",
+      "backgroundColor": "#ff9900"
+    },
+    {
+      "title": "Marketing",
+      "id": "marketing",
+      "url": "https://example.com",
+      "parent": "ceo",
+      "backgroundColor": "#4d0099"
+    },
+    {
+      "title": "Sales",
+      "id": "sales",
+      "url": "https://example.com",
+      "parent": "ceo",
+      "backgroundColor": "#4d0099"
+    },
+    {
+      "title": "Customer Support",
+      "id": "customer_support",
+      "url": "https://example.com",
+      "parent": "ceo",
+      "backgroundColor": "#4d0099"
+    },
+    {
+      "title": "Human Resources",
+      "id": "hr",
+      "url": "https://example.com",
+      "parent": "ceo",
+      "backgroundColor": "#4d0099"
+    },
+    {
+      "title": "Finance",
+      "id": "finance",
+      "url": "https://example.com",
+      "parent": "ceo",
+      "backgroundColor": "#4d0099",
+      "children": ["accounting", "budgeting"]
+    },
+    {
+      "title": "Accounting",
+      "id": "accounting",
+      "url": "https://example.com",
+      "parent": "finance",
+      "backgroundColor": "#cccccc"
+    },
+    {
+      "title": "Budgeting",
+      "id": "budgeting",
+      "url": "https://example.com",
+      "parent": "finance",
+      "backgroundColor": "#cccccc"
+    },
+    {
+      "title": "R&D",
+      "id": "rnd",
+      "url": "https://example.com",
+      "parent": "product_dev",
+      "backgroundColor": "#ff9900",
+      "children": ["innovation", "product_testing"]
+    },
+    {
+      "title": "Innovation",
+      "id": "innovation",
+      "url": "https://example.com",
+      "parent": "rnd",
+      "backgroundColor": "#cccccc"
+    },
+    {
+      "title": "Product Testing",
+      "id": "product_testing",
+      "url": "https://example.com",
+      "parent": "rnd",
+      "backgroundColor": "#cccccc"
+    },
+    {
+      "title": "Digital Marketing",
+      "id": "digital_marketing",
+      "url": "https://example.com",
+      "parent": "marketing",
+      "backgroundColor": "#ff9900",
+      "children": ["seo", "content_creation"]
+    },
+    {
+      "title": "SEO",
+      "id": "seo",
+      "url": "https://example.com",
+      "parent": "digital_marketing",
+      "backgroundColor": "#cccccc"
+    },
+    {
+      "title": "Content Creation",
+      "id": "content_creation",
+      "url": "https://example.com",
+      "parent": "digital_marketing",
+      "backgroundColor": "#cccccc"
+    }
+  ],
+  "layout": [
+    {
+      "cols": [
+        {
+          "col": ["ceo"]
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": ["product_dev"]
+        },
+        {
+          "col": ["marketing"]
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": ["sales"]
+        },
+        {
+          "col": ["customer_support"]
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": ["hr"]
+        },
+        {
+          "col": ["finance"]
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": ["rnd"]
+        },
+        {
+          "col": ["digital_marketing"]
+        }
+      ]
+    }
+  ]
+}
