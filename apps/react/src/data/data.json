@@ -18,35 +18,36 @@
       "id": "kom",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Verksemdstyring",
       "id": "verk",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c"
     },
     {
       "title": "HR",
       "id": "hr",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Tverrgåande marknadsgruppe",
       "id": "tverr",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Samanhengande tenester og livshendingar",
       "id": "samenhengende_tjenester",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c",
+      "children": ["seksjon_1", "seksjon_2"]
     },
     {
       "title": "Seksjon 1",
@@ -67,7 +68,8 @@
       "id": "digital_strategi",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c",
+      "children": ["nasjonal_arkitektur", "internasjonalt"]
     },
     {
       "title": "Nasjonal arkitektur",
@@ -88,7 +90,8 @@
       "id": "fellesløysinger",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c",
+      "children": ["felles_strategi_forretning", "utvikling"]
     },
     {
       "title": "Strategi og forretningsutvikling",
@@ -109,7 +112,8 @@
       "id": "brukaroppleving",
       "url": "https://vg.no",
       "parent": "dir",
-      "backgroundColor": "#e9eaec"
+      "backgroundColor": "#1e2b3c",
+      "children": ["brukar_strategi_forretning", "strategi_utvikling"]
     },
     {
       "title": "Strategi og forretningsutvikling",
@@ -147,10 +151,20 @@
     {
       "cols": [
         {
-          "col": ["kom", "verk"]
+          "col": ["kom"]
         },
         {
-          "col": ["hr", "tverr"]
+          "col": ["hr"]
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": ["verk"]
+        },
+        {
+          "col": ["tverr"]
         }
       ]
     },

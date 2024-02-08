@@ -1,31 +1,57 @@
 export function generateOrgChart(data: any, containerId: string) {
   const { nodes, layout } = data;
-  /////
 
   function findNodeById(id: string) {
     return nodes.find((node: any) => node.id === id);
   }
 
+  function generateNodeWithChildrenHTML(node: any) {
+    const nodeElement = document.createElement("div");
+    nodeElement.className = "node";
+    const nodeList = document.createElement("ul");
+    nodeList.className = "node-list";
+    nodeElement.appendChild(nodeList);
+
+    const listTitle = document.createElement("li");
+    listTitle.appendChild(generateNodeHTML(node));
+
+    nodeList.appendChild(listTitle);
+
+    if (node.children) {
+      node.children.forEach((childId: string) => {
+        const child = findNodeById(childId);
+        if (child) {
+          const listElement = document.createElement("li");
+          listElement.appendChild(generateNodeHTML(child));
+          nodeList.appendChild(listElement);
+        }
+      });
+    }
+    return nodeElement;
+  }
+
   function generateNodeHTML(node: any) {
     const nodeElement = document.createElement("div");
     nodeElement.className = "node";
+
     if (node !== undefined) {
       nodeElement.style.backgroundColor = node.backgroundColor;
+
+      const heading = document.createElement("h3");
+
       if (node.url) {
         const link = document.createElement("a");
         link.href = node.url;
         link.target = "_blank";
         link.innerText = node.title;
-        nodeElement.appendChild(link);
+        heading.appendChild(link);
       } else {
-        nodeElement.innerText = node.title;
+        heading.innerText = node.title;
       }
+      nodeElement.appendChild(heading);
     }
     return nodeElement;
   }
-
-  const orgChart = document.createElement("div");
-  orgChart.className = "org-chart";
 
   function createColumnElement(col: any) {
     const colElement = document.createElement("div");
@@ -33,7 +59,12 @@ export function generateOrgChart(data: any, containerId: string) {
 
     col.forEach((id: string) => {
       const node = findNodeById(id);
-      colElement.appendChild(generateNodeHTML(node));
+      if (node !== undefined && node.children !== undefined) {
+        console.log("node.children");
+        colElement.appendChild(generateNodeWithChildrenHTML(node));
+      } else {
+        colElement.appendChild(generateNodeHTML(node));
+      }
     });
     return colElement;
   }
@@ -60,6 +91,9 @@ export function generateOrgChart(data: any, containerId: string) {
 
     return rows;
   }
+
+  const orgChart = document.createElement("div");
+  orgChart.className = "org-chart";
 
   const mainContainer = document.getElementById(containerId);
   //create element to hold the org chart

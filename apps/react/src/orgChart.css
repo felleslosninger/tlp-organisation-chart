@@ -1,6 +1,10 @@
+a {
+  color: white;
+}
+
 .node {
   width: 260px;
-  height: 70px;
+  min-height: 70px;
   padding: 0 20px;
   display: flex;
   flex-direction: column;
@@ -25,4 +29,16 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 0px;
   position: relative;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.node-list {
+  list-style: none;
 }
