@@ -198,7 +198,10 @@
         {
           "col": {
             "nodeIds": ["fellesløysinger", "brukaroppleving"],
-            "cols": { "col": { "nodeIds": ["test1", "test2"] } }
+            "cols": [ 
+              {"col": { "nodeIds": ["test1"] }},
+              {"col": { "nodeIds": ["test2"] }}
+            ]
           }
         }
       ]

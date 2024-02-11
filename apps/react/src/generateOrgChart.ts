@@ -5,30 +5,30 @@ export function generateOrgChart(data: any, containerId: string) {
     return nodes.find((node: any) => node.id === id);
   }
 
-  function generateNodeWithChildrenHTML(node: any) {
-    const nodeElement = document.createElement("div");
-    nodeElement.className = "node";
-    const nodeList = document.createElement("ul");
-    nodeList.className = "node-list";
-    nodeElement.appendChild(nodeList);
+  // function generateNodeWithChildrenHTML(node: any) {
+  //   const nodeElement = document.createElement("div");
+  //   nodeElement.className = "node";
+  //   const nodeList = document.createElement("ul");
+  //   nodeList.className = "node-list";
+  //   nodeElement.appendChild(nodeList);
 
-    const listTitle = document.createElement("li");
-    listTitle.appendChild(generateNodeHTML(node));
+  //   const listTitle = document.createElement("li");
+  //   listTitle.appendChild(generateNodeHTML(node));
 
-    nodeList.appendChild(listTitle);
+  //   nodeList.appendChild(listTitle);
 
-    if (node.children) {
-      node.children.forEach((childId: string) => {
-        const child = findNodeById(childId);
-        if (child) {
-          const listElement = document.createElement("li");
-          listElement.appendChild(generateNodeHTML(child));
-          nodeList.appendChild(listElement);
-        }
-      });
-    }
-    return nodeElement;
-  }
+  //   if (node.children) {
+  //     node.children.forEach((childId: string) => {
+  //       const child = findNodeById(childId);
+  //       if (child) {
+  //         const listElement = document.createElement("li");
+  //         listElement.appendChild(generateNodeHTML(child));
+  //         nodeList.appendChild(listElement);
+  //       }
+  //     });
+  //   }
+  //   return nodeElement;
+  // }
 
   function generateNodeHTML(node: any) {
     const nodeElement = document.createElement("div");
@@ -52,17 +52,48 @@ export function generateOrgChart(data: any, containerId: string) {
     }
     return nodeElement;
   }
+  
+  function generateNodesHTMLWithSharedChildren(nodeIds: []) {
+    const nodeElement = document.createElement("div");
+    nodeElement.className = "test";
+    const nodeHeader = document.createElement("h3");
+    nodeHeader.className = "nodeHeader";
+
+    nodeIds.forEach((nodeId: string) => {
+      const node = findNodeById(nodeId);
+      const headerElement = document.createElement("div");
+      headerElement.className = "node";
+       headerElement.style.backgroundColor = node.backgroundColor;
+
+      if (node.url) {
+        const link = document.createElement("a");
+        link.href = node.url;
+        link.target = "_blank";
+        link.innerText = node.title;
+        headerElement.appendChild(link);
+      } else {
+        headerElement.innerText = node.title;
+      }       
+      nodeHeader.appendChild(headerElement);
+    });
+    nodeElement.appendChild(nodeHeader);
+    return nodeElement;
+  }
 
   function createColumnElement(col: any) {
     const colElement = document.createElement("div");
     colElement.className = "column";
-    console.log(col.nodeIds);
-    col.nodeIds.forEach((id: string) => {
-      const node = findNodeById(id);
 
+    if(col.nodeIds.length > 1){
+      console.log(col.nodeIds);
+      colElement.appendChild(generateNodesHTMLWithSharedChildren(col.nodeIds));
+      return colElement;
+    }
+    else{
+      const node = findNodeById(col.nodeIds[0]);
       colElement.appendChild(generateNodeHTML(node));
-    });
-    return colElement;
+      return colElement;
+    }
   }
 
   function createRows(row: any) {
