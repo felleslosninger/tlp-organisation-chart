@@ -56,15 +56,11 @@ export function generateOrgChart(data: any, containerId: string) {
   function createColumnElement(col: any) {
     const colElement = document.createElement("div");
     colElement.className = "column";
-
-    col.forEach((id: string) => {
+    console.log(col.nodeIds);
+    col.nodeIds.forEach((id: string) => {
       const node = findNodeById(id);
-      if (node !== undefined && node.children !== undefined) {
-        console.log("node.children");
-        colElement.appendChild(generateNodeWithChildrenHTML(node));
-      } else {
-        colElement.appendChild(generateNodeHTML(node));
-      }
+
+      colElement.appendChild(generateNodeHTML(node));
     });
     return colElement;
   }
