@@ -5,31 +5,6 @@ export function generateOrgChart(data: any, containerId: string) {
     return nodes.find((node: any) => node.id === id);
   }
 
-  // function generateNodeWithChildrenHTML(node: any) {
-  //   const nodeElement = document.createElement("div");
-  //   nodeElement.className = "node";
-  //   const nodeList = document.createElement("ul");
-  //   nodeList.className = "node-list";
-  //   nodeElement.appendChild(nodeList);
-
-  //   const listTitle = document.createElement("li");
-  //   listTitle.appendChild(generateNodeHTML(node));
-
-  //   nodeList.appendChild(listTitle);
-
-  //   if (node.children) {
-  //     node.children.forEach((childId: string) => {
-  //       const child = findNodeById(childId);
-  //       if (child) {
-  //         const listElement = document.createElement("li");
-  //         listElement.appendChild(generateNodeHTML(child));
-  //         nodeList.appendChild(listElement);
-  //       }
-  //     });
-  //   }
-  //   return nodeElement;
-  // }
-
   function generateNodeHTML(node: any) {
     const nodeElement = document.createElement("div");
     nodeElement.className = "node";
@@ -48,11 +23,12 @@ export function generateOrgChart(data: any, containerId: string) {
       } else {
         heading.innerText = node.title;
       }
+
       nodeElement.appendChild(heading);
     }
     return nodeElement;
   }
-  
+
   function generateNodesHTMLWithSharedChildren(nodeIds: []) {
     const nodeElement = document.createElement("div");
     nodeElement.className = "test";
@@ -63,7 +39,7 @@ export function generateOrgChart(data: any, containerId: string) {
       const node = findNodeById(nodeId);
       const headerElement = document.createElement("div");
       headerElement.className = "node";
-       headerElement.style.backgroundColor = node.backgroundColor;
+      headerElement.style.backgroundColor = node.backgroundColor;
 
       if (node.url) {
         const link = document.createElement("a");
@@ -73,7 +49,7 @@ export function generateOrgChart(data: any, containerId: string) {
         headerElement.appendChild(link);
       } else {
         headerElement.innerText = node.title;
-      }       
+      }
       nodeHeader.appendChild(headerElement);
     });
     nodeElement.appendChild(nodeHeader);
@@ -84,12 +60,21 @@ export function generateOrgChart(data: any, containerId: string) {
     const colElement = document.createElement("div");
     colElement.className = "column";
 
-    if(col.nodeIds.length > 1){
-      console.log(col.nodeIds);
-      colElement.appendChild(generateNodesHTMLWithSharedChildren(col.nodeIds));
-      return colElement;
-    }
-    else{
+    //if children
+    if (col.cols) {
+      if (col.nodeIds.length > 1) {
+        colElement.appendChild(
+          generateNodesHTMLWithSharedChildren(col.nodeIds),
+        );
+        colElement.appendChild(createRows(col.cols));
+        return colElement;
+      } else {
+        const node = findNodeById(col.nodeIds[0]);
+        colElement.appendChild(generateNodeHTML(node));
+        colElement.appendChild(createRows(col.cols));
+        return colElement;
+      }
+    } else {
       const node = findNodeById(col.nodeIds[0]);
       colElement.appendChild(generateNodeHTML(node));
       return colElement;

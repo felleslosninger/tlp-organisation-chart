@@ -189,7 +189,11 @@
       "cols": [
         {
           "col": {
-            "nodeIds": ["samenhengende_tjenester"]
+            "nodeIds": ["samenhengende_tjenester"],
+            "cols": [
+              { "col": { "nodeIds": ["test1"] } },
+              { "col": { "nodeIds": ["test2"] } }
+            ]
           }
         },
         {
@@ -198,9 +202,9 @@
         {
           "col": {
             "nodeIds": ["fellesløysinger", "brukaroppleving"],
-            "cols": [ 
-              {"col": { "nodeIds": ["test1"] }},
-              {"col": { "nodeIds": ["test2"] }}
+            "cols": [
+              { "col": { "nodeIds": ["test1"] } },
+              { "col": { "nodeIds": ["test2"] } }
             ]
           }
         }
