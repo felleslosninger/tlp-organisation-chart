@@ -44,9 +44,10 @@ a {
   padding: 0;
 }
 
-.test{
+.multipleParents{
   width: 100%;
 }
+
 .nodeHeader{
   margin: 0;
   display: flex;

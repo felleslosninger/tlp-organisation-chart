@@ -9,7 +9,7 @@
       "title": "Tilsynet for universell utforming av ikt",
       "id": "tilsyn",
       "url": "https://vg.no",
-      "parent": "dir",
+      "parent": ["dir"],
       "offset": true,
       "backgroundColor": "#95227D"
     },
@@ -17,116 +17,111 @@
       "title": "Kommunikasjon",
       "id": "kom",
       "url": "https://vg.no",
-      "parent": "dir",
+      "parent": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Verksemdstyring",
       "id": "verk",
       "url": "https://vg.no",
-      "parent": "dir",
+      "parent": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "HR",
       "id": "hr",
       "url": "https://vg.no",
-      "parent": "dir",
-      "backgroundColor": "#1e2b3c"
-    },
-    {
-      "title": "Tverrgåande marknadsgruppe",
-      "id": "tverr",
-      "url": "https://vg.no",
-      "parent": "dir",
+      "parent": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Samanhengande tenester og livshendingar",
       "id": "samenhengende_tjenester",
       "url": "https://vg.no",
-      "parent": "dir",
-      "backgroundColor": "#1e2b3c",
-      "children": ["seksjon_1", "seksjon_2"]
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Seksjon 1",
       "id": "seksjon_1",
       "url": "https://vg.no",
-      "parent": "samenhengende_tjenester",
+      "parent": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Seksjon 2",
       "id": "seksjon_2",
       "url": "https://vg.no",
-      "parent": "samenhengende_tjenester",
+      "parent": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Digital strategi og samhandling",
       "id": "digital_strategi",
       "url": "https://vg.no",
-      "parent": "dir",
-      "backgroundColor": "#1e2b3c",
-      "children": ["nasjonal_arkitektur", "internasjonalt"]
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Nasjonal arkitektur",
       "id": "nasjonal_arkitektur",
       "url": "https://vg.no",
-      "parent": "digital_strategi",
+      "parent": ["digital_strategi"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Internasjonalt og analyse",
       "id": "internasjonalt",
       "url": "https://vg.no",
-      "parent": "digital_strategi",
+      "parent": ["digital_strategi"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Fellesløysingar",
       "id": "fellesløysinger",
       "url": "https://vg.no",
-      "parent": "dir",
-      "backgroundColor": "#1e2b3c",
-      "children": ["felles_strategi_forretning", "utvikling"]
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Strategi og forretningsutvikling",
-      "id": "felles_strategi_forretning",
+      "title": "Test 1",
+      "id": "test1",
       "url": "https://vg.no",
-      "parent": "fellesløysinger",
+      "parent": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
-      "title": "Utvikling",
-      "id": "utvikling",
+      "title": "Test 2",
+      "id": "test2",
       "url": "https://vg.no",
-      "parent": "fellesløysinger",
+      "parent": ["fellesløysinger"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Test 3",
+      "id": "test3",
+      "url": "https://vg.no",
+      "parent": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Brukaroppleving og datadeling",
       "id": "brukaroppleving",
       "url": "https://vg.no",
-      "parent": "dir",
-      "backgroundColor": "#1e2b3c",
-      "children": ["brukar_strategi_forretning", "strategi_utvikling"]
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Strategi og forretningsutvikling",
-      "id": "brukar_strategi_forretning",
+      "title": "Test 4",
+      "id": "test4",
       "url": "https://vg.no",
-      "parent": "brukaroppleving",
+      "parent": ["brukaroppleving"],
       "backgroundColor": "#e9eaec"
     },
     {
-      "title": "Utvikling",
-      "id": "strategi_utvikling",
-      "url": "https://vg.no",
-      "parent": "brukaroppleving",
+      "title": "Test 5",
+      "id": "test5",
+      "parent": ["brukaroppleving"],
       "backgroundColor": "#e9eaec"
     }
   ],
@@ -134,53 +129,77 @@
     {
       "cols": [
         {
-          "col": ["dir"]
+          "col": { "nodeIds": ["dir"] }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": [""]
+          "col": { "nodeIds": [""] }
         },
         {
-          "col": ["tilsyn"]
+          "col": { "nodeIds": ["tilsyn"] }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": ["kom"]
+          "col": { "nodeIds": ["kom"] }
         },
         {
-          "col": ["hr"]
+          "col": { "nodeIds": ["hr"] }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": ["verk"]
+          "col": { "nodeIds": ["verk"] }
         },
         {
-          "col": ["tverr"]
+          "col": { "nodeIds": ["tverr"] }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": ["samenhengende_tjenester"]
+          "col": {
+            "nodeIds": ["samenhengende_tjenester"],
+            "cols": [
+              { "col": { "nodeIds": ["seksjon_1"] } },
+              { "col": { "nodeIds": ["seksjon_2"] } }
+            ]
+          }
         },
         {
-          "col": ["digital_strategi"]
+          "col": {
+            "nodeIds": ["digital_strategi"],
+            "cols": [
+              { "col": { "nodeIds": ["nasjonal_arkitektur"] } },
+              { "col": { "nodeIds": ["internasjonalt"] } }
+            ]
+          }
         },
         {
-          "col": ["fellesløysinger"]
+          "col": {
+            "nodeIds": ["fellesløysinger"],
+            "cols": [
+              { "col": { "nodeIds": ["test1"] } },
+              { "col": { "nodeIds": ["test2"] } }
+            ]
+          }
         },
         {
-          "col": ["brukaroppleving"]
+          "col": {
+            "nodeIds": ["brukaroppleving"],
+            "cols": [
+              { "col": { "nodeIds": ["test3"] } },
+              { "col": { "nodeIds": ["test4"] } }
+            ]
+          }
         }
       ]
     }

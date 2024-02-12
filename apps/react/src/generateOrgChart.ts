@@ -29,9 +29,9 @@ export function generateOrgChart(data: any, containerId: string) {
     return nodeElement;
   }
 
-  function generateNodesHTMLWithSharedChildren(nodeIds: []) {
+  function generateNodesHTMLWithSharedChildren(nodeIds: [], children: any) {
     const nodeElement = document.createElement("div");
-    nodeElement.className = "test";
+    nodeElement.className = "multipleParents";
     const nodeHeader = document.createElement("h3");
     nodeHeader.className = "nodeHeader";
 
@@ -51,8 +51,16 @@ export function generateOrgChart(data: any, containerId: string) {
         headerElement.innerText = node.title;
       }
       nodeHeader.appendChild(headerElement);
+      nodeElement.appendChild(nodeHeader);
     });
-    nodeElement.appendChild(nodeHeader);
+
+    //Add children to node element
+    children.forEach((child: any) => {
+      const newChildColumn = createColumnElement(child.col);
+      newChildColumn.style.width = "100%";
+      nodeElement.appendChild(newChildColumn);
+    });
+
     return nodeElement;
   }
 
@@ -65,8 +73,13 @@ export function generateOrgChart(data: any, containerId: string) {
     if (col.cols) {
       if (col.nodeIds.length > 1) {
         colElement.appendChild(
-          generateNodesHTMLWithSharedChildren(col.nodeIds),
+          generateNodesHTMLWithSharedChildren(col.nodeIds, col.cols),
         );
+        //colElement.appendChild(createRows(col.cols));
+        return colElement;
+      } else if (col.cols.length > 1) {
+        const node = findNodeById(col.nodeIds[0]);
+        colElement.appendChild(generateNodeHTML(node));
         colElement.appendChild(createRows(col.cols));
         return colElement;
       } else {

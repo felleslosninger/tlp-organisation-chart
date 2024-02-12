@@ -1,105 +1,265 @@
 {
   "nodes": [
     {
-      "title": "Chief Technology Officer",
-      "id": "cto",
-      "backgroundColor": "#004D40"
+      "title": "Direktør",
+      "id": "dir",
+      "backgroundColor": "#0062BA"
     },
     {
-      "title": "Software Development",
-      "id": "software_dev",
-      "url": "https://example.com",
-      "parent": ["cto"],
-      "offset": true,
-      "backgroundColor": "#00796B"
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "url": "https://vg.no",
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Infrastructure",
-      "id": "infra",
-      "url": "https://example.com",
-      "parent": ["cto"],
-      "backgroundColor": "#00897B"
+      "title": "HR",
+      "id": "hr",
+      "url": "https://vg.no",
+      "parent": ["kom"],
+      "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Security",
-      "id": "security",
-      "url": "https://example.com",
-      "parent": ["cto"],
-      "backgroundColor": "#009688"
+      "title": "Samanhengande tenester",
+      "id": "samenhengende_tjenester",
+      "url": "https://vg.no",
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Research and Development",
-      "id": "rnd",
-      "url": "https://example.com",
-      "parent": ["cto"],
-      "backgroundColor": "#26A69A"
+      "title": "Seksjon 1",
+      "id": "seksjon_1",
+      "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
     },
     {
-      "title": "Quality Assurance",
-      "id": "qa",
-      "url": "https://example.com",
-      "parent": ["software_dev"],
-      "backgroundColor": "#4DB6AC"
+      "title": "Seksjon 2",
+      "id": "seksjon_2",
+      "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
     },
     {
-      "title": "Deployment",
-      "id": "deployment",
-      "url": "https://example.com",
-      "parent": ["infra"],
-      "backgroundColor": "#80CBC4"
+      "title": "Seksjon 3",
+      "id": "seksjon_3",
+      "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
     },
     {
-      "title": "Compliance",
-      "id": "compliance",
-      "url": "https://example.com",
-      "parent": ["security"],
-      "backgroundColor": "#B2DFDB"
+      "title": "Underseksjon 1",
+      "id": "underseksjon1",
+      "parent": ["seksjon_3"],
+      "backgroundColor": "#e9eaec"
     },
     {
-      "title": "Innovation Lab",
-      "id": "innovation_lab",
-      "url": "https://example.com",
-      "parent": ["rnd"],
-      "backgroundColor": "#E0F2F1"
+      "title": "Seksjon 4",
+      "id": "seksjon_4",
+      "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Underseksjon 2",
+      "id": "underseksjon2",
+      "parent": ["seksjon_4"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Seksjon 5",
+      "id": "seksjon_5",
+      "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Seksjon 6",
+      "id": "seksjon_6",
+      "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Digital strategi og samhandling",
+      "id": "digital_strategi",
+      "url": "https://vg.no",
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
+    },
+    {
+      "title": "Nasjonal arkitektur",
+      "id": "nasjonal_arkitektur",
+      "url": "https://vg.no",
+      "parent": ["digital_strategi"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Internasjonalt og analyse",
+      "id": "internasjonalt",
+      "url": "https://vg.no",
+      "parent": ["digital_strategi"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Fellesløysingar",
+      "id": "fellesløysinger",
+      "url": "https://vg.no",
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
+    },
+    {
+      "title": "Felles 1",
+      "id": "felles1",
+      "parent": ["fellesløysinger"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Under felles 1",
+      "id": "underfelles1",
+      "parent": ["felles1"],
+      "url": "https://vg.no",
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Felles 2",
+      "id": "felles2",
+      "url": "https://vg.no",
+      "parent": ["fellesløysinger"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Felles 3",
+      "id": "felles3",
+      "url": "https://vg.no",
+      "parent": ["fellesløysinger"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Felles 4",
+      "id": "felles4",
+      "url": "https://vg.no",
+      "parent": ["fellesløysinger"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Felles 5",
+      "id": "felles5",
+      "url": "https://vg.no",
+      "parent": ["fellesløysinger"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Felles 6",
+      "id": "felles2",
+      "url": "https://vg.no",
+      "parent": ["fellesløysinger"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Brukaroppleving og datadeling",
+      "id": "brukaroppleving",
+      "url": "https://vg.no",
+      "parent": ["dir"],
+      "backgroundColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukaropplevelse 1",
+      "id": "brukaropp1",
+      "url": "https://vg.no",
+      "parent": ["brukaroppleving"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Under Brukaropplevelse 1",
+      "id": "underbrukaropp",
+      "url": "https://vg.no",
+      "parent": ["brukaropp1"],
+      "backgroundColor": "#e9eaec"
     }
   ],
   "layout": [
     {
       "cols": [
         {
-          "col": { "nodeIds": ["cto"] }
+          "col": { "nodeIds": ["dir"] }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": { "nodeIds": ["software_dev"] }
+          "col": { "nodeIds": [""] }
         },
         {
-          "col": { "nodeIds": ["infra"] }
-        },
-        {
-          "col": { "nodeIds": ["security"] }
-        },
-        {
-          "col": { "nodeIds": ["rnd"] }
+          "col": {
+            "nodeIds": ["kom"],
+            "cols": [{ "col": { "nodeIds": ["hr"] } }]
+          }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": { "nodeIds": ["qa"] }
+          "col": {
+            "nodeIds": ["samenhengende_tjenester"],
+            "cols": [
+              { "col": { "nodeIds": ["seksjon_1"] } },
+              { "col": { "nodeIds": ["seksjon_2"] } },
+              {
+                "col": {
+                  "nodeIds": ["seksjon_3"],
+                  "cols": [{ "col": { "nodeIds": ["underseksjon1"] } }]
+                }
+              },
+              {
+                "col": {
+                  "nodeIds": ["seksjon_4"],
+                  "cols": [{ "col": { "nodeIds": ["underseksjon2"] } }]
+                }
+              },
+              { "col": { "nodeIds": ["seksjon_5"] } },
+              { "col": { "nodeIds": ["seksjon_6"] } }
+            ]
+          }
         },
         {
-          "col": { "nodeIds": ["deployment"] }
+          "col": {
+            "nodeIds": ["digital_strategi"],
+            "cols": [{ "col": { "nodeIds": ["nasjonal_arkitektur"] } }]
+          }
         },
         {
-          "col": { "nodeIds": ["compliance"] }
+          "col": {
+            "nodeIds": ["fellesløysinger"],
+            "cols": [
+              {
+                "col": {
+                  "nodeIds": ["felles1"],
+                  "cols": [{ "col": { "nodeIds": ["underfelles1"] } }]
+                }
+              },
+              { "col": { "nodeIds": ["felles2"] } },
+              { "col": { "nodeIds": ["felles3"] } },
+              { "col": { "nodeIds": ["felles4"] } },
+              { "col": { "nodeIds": ["felles5"] } },
+              { "col": { "nodeIds": ["felles6"] } }
+            ]
+          }
         },
         {
-          "col": { "nodeIds": ["innovation_lab"] }
+          "col": {
+            "nodeIds": ["brukaroppleving"],
+            "cols": [
+              {
+                "col": {
+                  "nodeIds": ["brukaropp1"],
+                  "cols": [{ "col": { "nodeIds": ["underbrukaropp"] } }]
+                }
+              }
+            ]
+          }
         }
       ]
     }
