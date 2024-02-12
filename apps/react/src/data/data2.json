@@ -228,29 +228,49 @@
         {
           "col": {
             "nodeIds": ["samenhengende_tjenester"],
-            "cols": [
-              { "col": { "nodeIds": ["test1"] } },
-              { "col": { "nodeIds": ["test2"] } }
+            "layout": [
+              {
+                "cols": [
+                  { "col": { "nodeIds": ["test1"] } },
+                  { "col": { "nodeIds": ["test2"] } }
+                ]
+              }
             ]
           }
         },
         {
           "col": {
             "nodeIds": ["digital_strategi"],
-            "cols": [
-              { "col": { "nodeIds": ["test3"] } },
-              { "col": { "nodeIds": ["test4"] } }
+            "layout": [
+              {
+                "cols": [
+                  { "col": { "nodeIds": ["test3"] } },
+                  { "col": { "nodeIds": ["test4"] } }
+                ]
+              }
             ]
           }
         },
         {
           "col": {
             "nodeIds": ["fellesløysinger", "brukaroppleving"],
-            "cols": [
-              { "col": { "nodeIds": ["test5"] } },
-              { "col": { "nodeIds": ["test6"] } },
-              { "col": { "nodeIds": ["test7"] } },
-              { "col": { "nodeIds": ["test8"] } }
+            "layout": [
+              {
+                "cols": [
+                  {
+                    "col": { "nodeIds": ["test5"] }
+                  },
+                  {
+                    "col": { "nodeIds": ["test6"] }
+                  },
+                  {
+                    "col": { "nodeIds": ["test7"] }
+                  },
+                  {
+                    "col": { "nodeIds": ["test8"] }
+                  }
+                ]
+              }
             ]
           }
         }

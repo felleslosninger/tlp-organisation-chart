@@ -29,7 +29,7 @@ export function generateOrgChart(data: any, containerId: string) {
     return nodeElement;
   }
 
-  function generateNodesHTMLWithSharedChildren(nodeIds: [], children: any) {
+  function generateNodesHTMLWithSharedChildren(nodeIds: [], children: []) {
     const nodeElement = document.createElement("div");
     nodeElement.className = "multipleParents";
     const nodeHeader = document.createElement("h3");
@@ -55,11 +55,7 @@ export function generateOrgChart(data: any, containerId: string) {
     });
 
     //Add children to node element
-    children.forEach((child: any) => {
-      const newChildColumn = createColumnElement(child.col);
-      newChildColumn.style.width = "100%";
-      nodeElement.appendChild(newChildColumn);
-    });
+    nodeElement.appendChild(createRowsWrapper(children));
 
     return nodeElement;
   }
@@ -69,29 +65,25 @@ export function generateOrgChart(data: any, containerId: string) {
     colElement.className = "column";
     colElement.style.gridColumn = "span " + col.nodeIds.length;
 
+    //if shared parents
+    if (col.nodeIds.length > 1) {
+      colElement.appendChild(
+        generateNodesHTMLWithSharedChildren(col.nodeIds, col.layout),
+      );
+      return colElement;
+    }
     //if children
-    if (col.cols) {
-      if (col.nodeIds.length > 1) {
-        colElement.appendChild(
-          generateNodesHTMLWithSharedChildren(col.nodeIds, col.cols),
-        );
-        //colElement.appendChild(createRows(col.cols));
-        return colElement;
-      } else if (col.cols.length > 1) {
+    else {
+      if (col.layout) {
         const node = findNodeById(col.nodeIds[0]);
         colElement.appendChild(generateNodeHTML(node));
-        colElement.appendChild(createRows(col.cols));
+        colElement.appendChild(createRowsWrapper(col.layout));
         return colElement;
       } else {
         const node = findNodeById(col.nodeIds[0]);
         colElement.appendChild(generateNodeHTML(node));
-        colElement.appendChild(createRows(col.cols));
         return colElement;
       }
-    } else {
-      const node = findNodeById(col.nodeIds[0]);
-      colElement.appendChild(generateNodeHTML(node));
-      return colElement;
     }
   }
 
