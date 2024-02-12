@@ -133,16 +133,54 @@
       "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Tillitstjenester",
+      "title": "Test 1",
       "id": "test1",
       "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Test 2",
+      "id": "test2",
+      "url": "https://vg.no",
+      "parent": ["samenhengende_tjenester"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Test 3",
+      "id": "test3",
+      "url": "https://vg.no",
+      "parent": ["digital_strategi"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Test 4",
+      "id": "test4",
+      "url": "https://vg.no",
+      "parent": ["digital_strategi"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Test 5",
+      "id": "test5",
       "parent": ["fellesløysinger", "brukaroppleving"],
       "backgroundColor": "#e9eaec"
     },
     {
-      "title": "Datadeling",
-      "id": "test2",
-      "url": "https://vg.no",
+      "title": "Test 6",
+      "id": "test6",
+      "parent": ["fellesløysinger", "brukaroppleving"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Test 7",
+      "id": "test7",
+      "parent": ["fellesløysinger", "brukaroppleving"],
+      "backgroundColor": "#e9eaec"
+    },
+    {
+      "title": "Test 8",
+      "id": "test8",
       "parent": ["fellesløysinger", "brukaroppleving"],
       "backgroundColor": "#e9eaec"
     }
@@ -197,14 +235,22 @@
           }
         },
         {
-          "col": { "nodeIds": ["digital_strategi"] }
+          "col": {
+            "nodeIds": ["digital_strategi"],
+            "cols": [
+              { "col": { "nodeIds": ["test3"] } },
+              { "col": { "nodeIds": ["test4"] } }
+            ]
+          }
         },
         {
           "col": {
             "nodeIds": ["fellesløysinger", "brukaroppleving"],
             "cols": [
-              { "col": { "nodeIds": ["test1"] } },
-              { "col": { "nodeIds": ["test2"] } }
+              { "col": { "nodeIds": ["test5"] } },
+              { "col": { "nodeIds": ["test6"] } },
+              { "col": { "nodeIds": ["test7"] } },
+              { "col": { "nodeIds": ["test8"] } }
             ]
           }
         }

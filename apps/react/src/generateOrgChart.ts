@@ -59,6 +59,7 @@ export function generateOrgChart(data: any, containerId: string) {
   function createColumnElement(col: any) {
     const colElement = document.createElement("div");
     colElement.className = "column";
+    colElement.style.gridColumn = "span " + col.nodeIds.length;
 
     //if children
     if (col.cols) {

@@ -1,157 +1,105 @@
 {
   "nodes": [
     {
-      "title": "CEO",
-      "id": "ceo",
-      "backgroundColor": "#0073e6"
+      "title": "Chief Technology Officer",
+      "id": "cto",
+      "backgroundColor": "#004D40"
     },
     {
-      "title": "Product Development",
-      "id": "product_dev",
+      "title": "Software Development",
+      "id": "software_dev",
       "url": "https://example.com",
-      "parent": "ceo",
-      "backgroundColor": "#ff9900"
+      "parent": ["cto"],
+      "offset": true,
+      "backgroundColor": "#00796B"
     },
     {
-      "title": "Marketing",
-      "id": "marketing",
+      "title": "Infrastructure",
+      "id": "infra",
       "url": "https://example.com",
-      "parent": "ceo",
-      "backgroundColor": "#4d0099"
+      "parent": ["cto"],
+      "backgroundColor": "#00897B"
     },
     {
-      "title": "Sales",
-      "id": "sales",
+      "title": "Security",
+      "id": "security",
       "url": "https://example.com",
-      "parent": "ceo",
-      "backgroundColor": "#4d0099"
+      "parent": ["cto"],
+      "backgroundColor": "#009688"
     },
     {
-      "title": "Customer Support",
-      "id": "customer_support",
-      "url": "https://example.com",
-      "parent": "ceo",
-      "backgroundColor": "#4d0099"
-    },
-    {
-      "title": "Human Resources",
-      "id": "hr",
-      "url": "https://example.com",
-      "parent": "ceo",
-      "backgroundColor": "#4d0099"
-    },
-    {
-      "title": "Finance",
-      "id": "finance",
-      "url": "https://example.com",
-      "parent": "ceo",
-      "backgroundColor": "#4d0099",
-      "children": ["accounting", "budgeting"]
-    },
-    {
-      "title": "Accounting",
-      "id": "accounting",
-      "url": "https://example.com",
-      "parent": "finance",
-      "backgroundColor": "#cccccc"
-    },
-    {
-      "title": "Budgeting",
-      "id": "budgeting",
-      "url": "https://example.com",
-      "parent": "finance",
-      "backgroundColor": "#cccccc"
-    },
-    {
-      "title": "R&D",
+      "title": "Research and Development",
       "id": "rnd",
       "url": "https://example.com",
-      "parent": "product_dev",
-      "backgroundColor": "#ff9900",
-      "children": ["innovation", "product_testing"]
+      "parent": ["cto"],
+      "backgroundColor": "#26A69A"
     },
     {
-      "title": "Innovation",
-      "id": "innovation",
+      "title": "Quality Assurance",
+      "id": "qa",
       "url": "https://example.com",
-      "parent": "rnd",
-      "backgroundColor": "#cccccc"
+      "parent": ["software_dev"],
+      "backgroundColor": "#4DB6AC"
     },
     {
-      "title": "Product Testing",
-      "id": "product_testing",
+      "title": "Deployment",
+      "id": "deployment",
       "url": "https://example.com",
-      "parent": "rnd",
-      "backgroundColor": "#cccccc"
+      "parent": ["infra"],
+      "backgroundColor": "#80CBC4"
     },
     {
-      "title": "Digital Marketing",
-      "id": "digital_marketing",
+      "title": "Compliance",
+      "id": "compliance",
       "url": "https://example.com",
-      "parent": "marketing",
-      "backgroundColor": "#ff9900",
-      "children": ["seo", "content_creation"]
+      "parent": ["security"],
+      "backgroundColor": "#B2DFDB"
     },
     {
-      "title": "SEO",
-      "id": "seo",
+      "title": "Innovation Lab",
+      "id": "innovation_lab",
       "url": "https://example.com",
-      "parent": "digital_marketing",
-      "backgroundColor": "#cccccc"
-    },
-    {
-      "title": "Content Creation",
-      "id": "content_creation",
-      "url": "https://example.com",
-      "parent": "digital_marketing",
-      "backgroundColor": "#cccccc"
+      "parent": ["rnd"],
+      "backgroundColor": "#E0F2F1"
     }
   ],
   "layout": [
     {
       "cols": [
         {
-          "col": ["ceo"]
+          "col": { "nodeIds": ["cto"] }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": ["product_dev"]
+          "col": { "nodeIds": ["software_dev"] }
         },
         {
-          "col": ["marketing"]
+          "col": { "nodeIds": ["infra"] }
+        },
+        {
+          "col": { "nodeIds": ["security"] }
+        },
+        {
+          "col": { "nodeIds": ["rnd"] }
         }
       ]
     },
     {
       "cols": [
         {
-          "col": ["sales"]
+          "col": { "nodeIds": ["qa"] }
         },
         {
-          "col": ["customer_support"]
-        }
-      ]
-    },
-    {
-      "cols": [
-        {
-          "col": ["hr"]
+          "col": { "nodeIds": ["deployment"] }
         },
         {
-          "col": ["finance"]
-        }
-      ]
-    },
-    {
-      "cols": [
-        {
-          "col": ["rnd"]
+          "col": { "nodeIds": ["compliance"] }
         },
         {
-          "col": ["digital_marketing"]
+          "col": { "nodeIds": ["innovation_lab"] }
         }
       ]
     }
