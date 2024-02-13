@@ -1,11 +1,13 @@
 export function generateOrgChart(data: any, containerId: string) {
   const { nodes, layout } = data;
 
+  const cssPropList = [];
+
   function findNodeById(id: string) {
     return nodes.find((node: any) => node.id === id);
   }
 
-  function generateNodeHTML(node: any) {
+  function generateNodeHTML(node: any, size: string) {
     if (node !== undefined && node.url !== undefined) {
       const nodeElement = document.createElement("a");
       nodeElement.role = "treeitem";
@@ -14,6 +16,7 @@ export function generateOrgChart(data: any, containerId: string) {
       nodeElement.href = node.url;
       nodeElement.target = "_blank";
       nodeElement.innerText = node.title;
+      nodeElement.id = node.id;
 
       return nodeElement;
     } else if (node !== undefined) {
@@ -23,6 +26,45 @@ export function generateOrgChart(data: any, containerId: string) {
       nodeElement.style.backgroundColor = node.backgroundColor;
       nodeElement.className = "node";
       nodeElement.innerText = node.title;
+      nodeElement.id = node.id;
+
+      if (size === "L") {
+        const element = findNodeById(node.id);
+
+        let parentId = "";
+        element.parent.forEach((parent: any) => {
+          parentId += parent;
+        });
+
+        const parentElement = document.getElementById(parentId);
+        const countParents = element.parent.length;
+
+        cssPropList.push({
+          element: parentElement,
+          property: "--parent-count",
+          value: countParents,
+        });
+
+        applyCssProperty(parentElement, "--parent-count", countParents);
+
+        parentElement?.style.setProperty(
+          "--parent-count",
+          countParents.toString(),
+        );
+        //   //get the parent elements with
+        //   const parentElement = document.getElementById(parentId);
+        //   const parentWidth = parentElement?.clientWidth;
+        //   const countParents = element.parent.length;
+        //   let remainingSpace = 0;
+        //   if (parentWidth !== undefined) {
+        //     remainingSpace = parentWidth - 300 * countParents;
+        //     remainingSpace = remainingSpace / (countParents + 1);
+        //     remainingSpace = remainingSpace + remainingSpace + 40;
+        //   }
+        //   //set nodeElement width to be 100% -  remainingSpace
+        //   nodeElement.style.minWidth = "calc(100% - " + remainingSpace + "px)";
+        //   nodeElement.style.margin = "0 auto 12px auto";
+      }
 
       return nodeElement;
     } else {
@@ -39,17 +81,31 @@ export function generateOrgChart(data: any, containerId: string) {
     nodeHeader.tabIndex = 0;
     nodeHeader.className = "nodeHeader";
 
+    let createNodeId = "";
+
     nodeIds.forEach((nodeId: string) => {
+      createNodeId += nodeId;
+
       const node = findNodeById(nodeId);
       const headerElement = document.createElement("div");
-      headerElement.appendChild(generateNodeHTML(node));
+      headerElement.appendChild(generateNodeHTML(node, "M"));
 
       nodeHeader.appendChild(headerElement);
       nodeElement.appendChild(nodeHeader);
     });
 
+    children.forEach((child: any) => {
+      child.cols.forEach((col: any) => {
+        const child = findNodeById(col.col.nodeIds[0]);
+        nodeElement.appendChild(generateNodeHTML(child, "L"));
+      });
+    });
+
+    //Give the nodeElement a unique id
+    nodeElement.id = createNodeId;
+
     //Add children to node element
-    nodeElement.appendChild(createRowsWrapper(children));
+    //nodeElement.appendChild(createRowsWrapper(children));
 
     return nodeElement;
   }
@@ -63,7 +119,7 @@ export function generateOrgChart(data: any, containerId: string) {
       colElement.role = "group";
     }
 
-    colElement.style.gridColumn = "span " + col.nodeIds.length;
+    colElement.style.setProperty("grid-column", "span " + col.nodeIds.length);
 
     //if shared parents
     if (col.nodeIds.length > 1) {
@@ -74,12 +130,12 @@ export function generateOrgChart(data: any, containerId: string) {
     } else {
       if (col.layout) {
         const node = findNodeById(col.nodeIds[0]);
-        colElement.appendChild(generateNodeHTML(node));
+        colElement.appendChild(generateNodeHTML(node, "M"));
         colElement.appendChild(createRowsWrapper(col.layout));
         return colElement;
       } else {
         const node = findNodeById(col.nodeIds[0]);
-        colElement.appendChild(generateNodeHTML(node));
+        colElement.appendChild(generateNodeHTML(node, "M"));
         return colElement;
       }
     }
@@ -114,6 +170,15 @@ export function generateOrgChart(data: any, containerId: string) {
 
   const mainContainer = document.getElementById(containerId);
   //create element to hold the org chart
+
+  function applyCssProperty(
+    element: HTMLElement | null,
+    property: string,
+    value: any,
+  ) {
+    element?.style.setProperty(property, value);
+    console.log(element?.style.getPropertyValue(property));
+  }
 
   if (mainContainer) {
     //insert the org chart into the container
