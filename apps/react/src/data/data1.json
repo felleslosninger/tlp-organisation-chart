@@ -6,123 +6,32 @@
       "backgroundColor": "#0062BA"
     },
     {
-      "title": "Tilsynet for universell utforming av ikt",
-      "id": "tilsyn",
-      "url": "https://vg.no",
-      "parent": ["dir"],
-      "offset": true,
-      "backgroundColor": "#95227D"
-    },
-    {
-      "title": "Kommunikasjon",
-      "id": "kom",
-      "url": "https://vg.no",
-      "parent": ["dir"],
-      "backgroundColor": "#1e2b3c"
-    },
-    {
-      "title": "Verksemdstyring",
-      "id": "verk",
-      "url": "https://vg.no",
-      "parent": ["dir"],
-      "backgroundColor": "#1e2b3c"
-    },
-    {
       "title": "HR",
       "id": "hr",
-      "url": "https://vg.no",
       "parent": ["dir"],
+      "url": "http://www.google.com",
       "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Samanhengande tenester og livshendingar",
-      "id": "samenhengende_tjenester",
-      "url": "https://vg.no",
+      "title": "IT",
+      "id": "it",
       "parent": ["dir"],
+      "url": "http://www.google.com",
       "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Seksjon 1",
-      "id": "seksjon_1",
-      "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Seksjon 2",
-      "id": "seksjon_2",
-      "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Digital strategi og samhandling",
-      "id": "digital_strategi",
-      "url": "https://vg.no",
+      "title": "Markedsføring",
+      "id": "markedsforing",
       "parent": ["dir"],
+      "url": "http://www.google.com",
       "backgroundColor": "#1e2b3c"
     },
     {
-      "title": "Nasjonal arkitektur",
-      "id": "nasjonal_arkitektur",
-      "url": "https://vg.no",
-      "parent": ["digital_strategi"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Internasjonalt og analyse",
-      "id": "internasjonalt",
-      "url": "https://vg.no",
-      "parent": ["digital_strategi"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Fellesløysingar",
-      "id": "fellesløysinger",
-      "url": "https://vg.no",
-      "parent": ["dir"],
-      "backgroundColor": "#1e2b3c"
-    },
-    {
-      "title": "Test 1",
-      "id": "test1",
-      "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Test 2",
-      "id": "test2",
-      "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Test 3",
-      "id": "test3",
-      "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Brukaroppleving og datadeling",
-      "id": "brukaroppleving",
-      "url": "https://vg.no",
-      "parent": ["dir"],
-      "backgroundColor": "#1e2b3c"
-    },
-    {
-      "title": "Test 4",
-      "id": "test4",
-      "url": "https://vg.no",
-      "parent": ["brukaroppleving"],
-      "backgroundColor": "#e9eaec"
-    },
-    {
-      "title": "Test 5",
-      "id": "test5",
-      "parent": ["brukaroppleving"],
-      "backgroundColor": "#e9eaec"
+      "title": "Test",
+      "id": "test",
+      "parent": ["markedsforing"],
+      "url": "http://www.google.com",
+      "backgroundColor": "lightgrey"
     }
   ],
   "layout": [
@@ -136,68 +45,22 @@
     {
       "cols": [
         {
-          "col": { "nodeIds": [""] }
-        },
-        {
-          "col": { "nodeIds": ["tilsyn"] }
-        }
-      ]
-    },
-    {
-      "cols": [
-        {
-          "col": { "nodeIds": ["kom"] }
-        },
-        {
           "col": { "nodeIds": ["hr"] }
-        }
-      ]
-    },
-    {
-      "cols": [
-        {
-          "col": { "nodeIds": ["verk"] }
         },
         {
-          "col": { "nodeIds": ["tverr"] }
-        }
-      ]
-    },
-    {
-      "cols": [
-        {
-          "col": {
-            "nodeIds": ["samenhengende_tjenester"],
-            "cols": [
-              { "col": { "nodeIds": ["seksjon_1"] } },
-              { "col": { "nodeIds": ["seksjon_2"] } }
-            ]
-          }
+          "col": { "nodeIds": ["it"] }
         },
         {
           "col": {
-            "nodeIds": ["digital_strategi"],
-            "cols": [
-              { "col": { "nodeIds": ["nasjonal_arkitektur"] } },
-              { "col": { "nodeIds": ["internasjonalt"] } }
-            ]
-          }
-        },
-        {
-          "col": {
-            "nodeIds": ["fellesløysinger"],
-            "cols": [
-              { "col": { "nodeIds": ["test1"] } },
-              { "col": { "nodeIds": ["test2"] } }
-            ]
-          }
-        },
-        {
-          "col": {
-            "nodeIds": ["brukaroppleving"],
-            "cols": [
-              { "col": { "nodeIds": ["test3"] } },
-              { "col": { "nodeIds": ["test4"] } }
+            "nodeIds": ["markedsforing"],
+            "layout": [
+              {
+                "cols": [
+                  {
+                    "col": { "nodeIds": ["test"] }
+                  }
+                ]
+              }
             ]
           }
         }

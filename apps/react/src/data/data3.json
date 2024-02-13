@@ -208,19 +208,35 @@
               {
                 "cols": [
                   { "col": { "nodeIds": ["seksjon_1"] } },
-                  { "col": { "nodeIds": ["seksjon_2"] } },
+                  { "col": { "nodeIds": ["seksjon_2"] } }
+                ]
+              },
+              {
+                "cols": [
                   {
                     "col": {
                       "nodeIds": ["seksjon_3"],
-                      "cols": [{ "col": { "nodeIds": ["underseksjon1"] } }]
+                      "layout": [
+                        {
+                          "cols": [{ "col": { "nodeIds": ["underseksjon1"] } }]
+                        }
+                      ]
                     }
                   },
                   {
                     "col": {
                       "nodeIds": ["seksjon_4"],
-                      "cols": [{ "col": { "nodeIds": ["underseksjon2"] } }]
+                      "layout": [
+                        {
+                          "cols": [{ "col": { "nodeIds": ["underseksjon2"] } }]
+                        }
+                      ]
                     }
-                  },
+                  }
+                ]
+              },
+              {
+                "cols": [
                   { "col": { "nodeIds": ["seksjon_5"] } },
                   { "col": { "nodeIds": ["seksjon_6"] } }
                 ]
