@@ -6,50 +6,44 @@ export function generateOrgChart(data: any, containerId: string) {
   }
 
   function generateNodeHTML(node: any) {
-    const nodeElement = document.createElement("div");
-    nodeElement.className = "node";
-
-    if (node !== undefined) {
+    if (node !== undefined && node.url !== undefined) {
+      const nodeElement = document.createElement("a");
+      nodeElement.role = "treeitem";
       nodeElement.style.backgroundColor = node.backgroundColor;
+      nodeElement.className = "node";
+      nodeElement.href = node.url;
+      nodeElement.target = "_blank";
+      nodeElement.innerText = node.title;
 
-      const heading = document.createElement("h3");
+      return nodeElement;
+    } else if (node !== undefined) {
+      const nodeElement = document.createElement("div");
+      nodeElement.role = "treeitem";
+      nodeElement.tabIndex = 0;
+      nodeElement.style.backgroundColor = node.backgroundColor;
+      nodeElement.className = "node";
+      nodeElement.innerText = node.title;
 
-      if (node.url) {
-        const link = document.createElement("a");
-        link.href = node.url;
-        link.target = "_blank";
-        link.innerText = node.title;
-        heading.appendChild(link);
-      } else {
-        heading.innerText = node.title;
-      }
-
-      nodeElement.appendChild(heading);
+      return nodeElement;
+    } else {
+      const nodeElement = document.createElement("div");
+      nodeElement.className = "node";
+      return nodeElement;
     }
-    return nodeElement;
   }
 
   function generateNodesHTMLWithSharedChildren(nodeIds: [], children: []) {
     const nodeElement = document.createElement("div");
     nodeElement.className = "multipleParents";
-    const nodeHeader = document.createElement("h3");
+    const nodeHeader = document.createElement("div");
+    nodeHeader.tabIndex = 0;
     nodeHeader.className = "nodeHeader";
 
     nodeIds.forEach((nodeId: string) => {
       const node = findNodeById(nodeId);
       const headerElement = document.createElement("div");
-      headerElement.className = "node";
-      headerElement.style.backgroundColor = node.backgroundColor;
+      headerElement.appendChild(generateNodeHTML(node));
 
-      if (node.url) {
-        const link = document.createElement("a");
-        link.href = node.url;
-        link.target = "_blank";
-        link.innerText = node.title;
-        headerElement.appendChild(link);
-      } else {
-        headerElement.innerText = node.title;
-      }
       nodeHeader.appendChild(headerElement);
       nodeElement.appendChild(nodeHeader);
     });
@@ -63,6 +57,12 @@ export function generateOrgChart(data: any, containerId: string) {
   function createColumnElement(col: any) {
     const colElement = document.createElement("div");
     colElement.className = "column";
+
+    //if column will have children, add role group
+    if (col.layout) {
+      colElement.role = "group";
+    }
+
     colElement.style.gridColumn = "span " + col.nodeIds.length;
 
     //if shared parents
@@ -71,9 +71,7 @@ export function generateOrgChart(data: any, containerId: string) {
         generateNodesHTMLWithSharedChildren(col.nodeIds, col.layout),
       );
       return colElement;
-    }
-    //if children
-    else {
+    } else {
       if (col.layout) {
         const node = findNodeById(col.nodeIds[0]);
         colElement.appendChild(generateNodeHTML(node));
@@ -112,6 +110,7 @@ export function generateOrgChart(data: any, containerId: string) {
 
   const orgChart = document.createElement("div");
   orgChart.className = "org-chart";
+  orgChart.role = "tree";
 
   const mainContainer = document.getElementById(containerId);
   //create element to hold the org chart
