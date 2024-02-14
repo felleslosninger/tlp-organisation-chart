@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tlp-organization-chart/static/css/main.75d0180a.css",
-    "main.js": "/tlp-organization-chart/static/js/main.cd1a6418.js",
-    "static/js/860.95257a54.chunk.js": "/tlp-organization-chart/static/js/860.95257a54.chunk.js",
+    "main.css": "/tlp-organization-chart/static/css/main.1201e623.css",
+    "main.js": "/tlp-organization-chart/static/js/main.1229acb1.js",
+    "static/js/832.72471cf1.chunk.js": "/tlp-organization-chart/static/js/832.72471cf1.chunk.js",
     "index.html": "/tlp-organization-chart/index.html",
-    "main.75d0180a.css.map": "/tlp-organization-chart/static/css/main.75d0180a.css.map",
-    "main.cd1a6418.js.map": "/tlp-organization-chart/static/js/main.cd1a6418.js.map",
-    "860.95257a54.chunk.js.map": "/tlp-organization-chart/static/js/860.95257a54.chunk.js.map"
+    "main.1201e623.css.map": "/tlp-organization-chart/static/css/main.1201e623.css.map",
+    "main.1229acb1.js.map": "/tlp-organization-chart/static/js/main.1229acb1.js.map",
+    "832.72471cf1.chunk.js.map": "/tlp-organization-chart/static/js/832.72471cf1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.75d0180a.css",
-    "static/js/main.cd1a6418.js"
+    "static/css/main.1201e623.css",
+    "static/js/main.1229acb1.js"
   ]
 }
