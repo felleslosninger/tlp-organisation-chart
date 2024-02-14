@@ -7,10 +7,6 @@ export function generateOrgChart(data: any, containerId: string) {
     value: string;
   }[] = [];
 
-  type OrgNode = {
-    url: string;
-  };
-
   function findNodeById(id: string) {
     return nodes.find((node: any) => node.id === id);
   }
