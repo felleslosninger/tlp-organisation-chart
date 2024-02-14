@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "test org-chart": "cd packages/org-chart && npm test",
-    "start-react": "cd apps/react && npm start"
+    "start-react": "cd apps/react && npm start",
+    "deploy": "cd apps/react && npm run predeploy && npm run deploy"
   },
   "dependencies": {
     "@babel/core": "^7.23.9",

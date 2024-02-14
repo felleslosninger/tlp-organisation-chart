@@ -1,7 +1,15 @@
 export function generateOrgChart(data: any, containerId: string) {
   const { nodes, layout } = data;
 
-  const cssPropList = [];
+  const cssPropList: {
+    id: string;
+    property: string;
+    value: string;
+  }[] = [];
+
+  type OrgNode = {
+    url: string;
+  };
 
   function findNodeById(id: string) {
     return nodes.find((node: any) => node.id === id);
@@ -36,21 +44,14 @@ export function generateOrgChart(data: any, containerId: string) {
           parentId += parent;
         });
 
-        const parentElement = document.getElementById(parentId);
+        //const parentElement = document.getElementById(parentId);
         const countParents = element.parent.length;
 
         cssPropList.push({
-          element: parentElement,
+          id: parentId,
           property: "--parent-count",
-          value: countParents,
+          value: countParents.toString(),
         });
-
-        applyCssProperty(parentElement, "--parent-count", countParents);
-
-        parentElement?.style.setProperty(
-          "--parent-count",
-          countParents.toString(),
-        );
         //   //get the parent elements with
         //   const parentElement = document.getElementById(parentId);
         //   const parentWidth = parentElement?.clientWidth;
@@ -171,11 +172,8 @@ export function generateOrgChart(data: any, containerId: string) {
   const mainContainer = document.getElementById(containerId);
   //create element to hold the org chart
 
-  function applyCssProperty(
-    element: HTMLElement | null,
-    property: string,
-    value: any,
-  ) {
+  function applyCssProperty(id: string, property: string, value: any) {
+    const element = document.getElementById(id);
     element?.style.setProperty(property, value);
     console.log(element?.style.getPropertyValue(property));
   }
@@ -186,6 +184,10 @@ export function generateOrgChart(data: any, containerId: string) {
     //clear the container for all existing children
     mainContainer.innerHTML = "";
     mainContainer.appendChild(orgChart);
+
+    cssPropList.forEach((prop: any) => {
+      applyCssProperty(prop.id, prop.property, prop.value);
+    });
 
     return mainContainer;
   }
