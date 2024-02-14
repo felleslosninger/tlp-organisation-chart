@@ -1,0 +1,63 @@
+a {
+  color: white;
+}
+
+.node {
+  width: 260px;
+  min-height: 83px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 12px;
+  text-decoration: none;
+  line-height: 1.4em;
+  position: relative;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  padding-bottom: 44px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0px;
+  position: relative;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.node-list {
+  list-style: none;
+  padding: 0;
+}
+
+.multipleParents{
+  width: 100%;
+}
+
+.nodeHeader{
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.multipleParents > .node {
+  --flex-space: calc(calc(100% - calc(300px * var(--parent-count))) / calc(var(--parent-count) + 1));
+  width: calc(100% - calc(var(--flex-space) * var(--parent-count)));
+  margin: 0 auto 12px auto;
+}

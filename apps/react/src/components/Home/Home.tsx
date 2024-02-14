@@ -4,11 +4,11 @@ import classes from "./Home.module.css";
 import { Button } from "@digdir/design-system-react";
 import CodeEditor from "@uiw/react-textarea-code-editor";
 import cn from "classnames";
-import jsonData from "../../data/data.json";
+//import jsonData from "../../data/data1.json";
 import Box from "../Box/Box";
 
 export default function Home() {
-  console.log(jsonData);
+  //console.log(jsonData);
   const [nestedMenu, setNested] = React.useState<any>(null);
   const [items, setItems] = React.useState([]);
 

@@ -1,0 +1,70 @@
+{
+  "nodes": [
+    {
+      "title": "Direktør",
+      "id": "dir",
+      "backgroundColor": "#0062BA"
+    },
+    {
+      "title": "HR",
+      "id": "hr",
+      "parent": ["dir"],
+      "url": "http://www.google.com",
+      "backgroundColor": "#1e2b3c"
+    },
+    {
+      "title": "IT",
+      "id": "it",
+      "parent": ["dir"],
+      "url": "http://www.google.com",
+      "backgroundColor": "#1e2b3c"
+    },
+    {
+      "title": "Markedsføring",
+      "id": "markedsforing",
+      "parent": ["dir"],
+      "url": "http://www.google.com",
+      "backgroundColor": "#1e2b3c"
+    },
+    {
+      "title": "Test",
+      "id": "test",
+      "parent": ["markedsforing"],
+      "url": "http://www.google.com",
+      "backgroundColor": "lightgrey"
+    }
+  ],
+  "layout": [
+    {
+      "cols": [
+        {
+          "col": { "nodeIds": ["dir"] }
+        }
+      ]
+    },
+    {
+      "cols": [
+        {
+          "col": { "nodeIds": ["hr"] }
+        },
+        {
+          "col": { "nodeIds": ["it"] }
+        },
+        {
+          "col": {
+            "nodeIds": ["markedsforing"],
+            "layout": [
+              {
+                "cols": [
+                  {
+                    "col": { "nodeIds": ["test"] }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
