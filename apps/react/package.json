@@ -1,7 +1,7 @@
 {
   "name": "@root/react",
   "version": "0.1.0",
-  "homepage": "http://jensmo98.github.io/tlp-organization-chart",
+  "homepage": "http://digdir.github.io/tlp-organization-chart",
   "private": true,
   "dependencies": {
     "@digdir/design-system-react": "^0.33.0",
