@@ -1,0 +1,31 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Replace with your default branch if not 'main'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'  # Or whatever version your project uses
+
+    - name: Install dependencies and build
+      run: |
+        cd apps/react
+        pnpm ci
+        pnpm run build
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.5
+      with:
+        branch: gh-pages
+        folder: apps/react/build
