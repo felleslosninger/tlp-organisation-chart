@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tlp-organization-chart/apps/react/static/css/main.75d0180a.css",
+    "main.js": "/tlp-organization-chart/apps/react/static/js/main.aace4806.js",
+    "static/js/860.95257a54.chunk.js": "/tlp-organization-chart/apps/react/static/js/860.95257a54.chunk.js",
+    "index.html": "/tlp-organization-chart/apps/react/index.html",
+    "main.75d0180a.css.map": "/tlp-organization-chart/apps/react/static/css/main.75d0180a.css.map",
+    "main.aace4806.js.map": "/tlp-organization-chart/apps/react/static/js/main.aace4806.js.map",
+    "860.95257a54.chunk.js.map": "/tlp-organization-chart/apps/react/static/js/860.95257a54.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.75d0180a.css",
+    "static/js/main.aace4806.js"
+  ]
+}
