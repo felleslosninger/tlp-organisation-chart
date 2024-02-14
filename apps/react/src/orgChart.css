@@ -60,4 +60,5 @@ a {
   --flex-space: calc(calc(100% - calc(300px * var(--parent-count))) / calc(var(--parent-count) + 1));
   width: calc(100% - calc(var(--flex-space) * var(--parent-count)));
   margin: 0 auto 12px auto;
+  padding: 0px;
 }
