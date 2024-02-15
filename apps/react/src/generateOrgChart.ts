@@ -1,4 +1,31 @@
-export function generateOrgChart(data: any, containerId: string) {
+type Node = {
+  title: string;
+  id: string;
+  backgroundColor: string;
+  url?: string; // Optional because not all nodes might have a URL
+  parents?: string[]; // Optional because not all nodes might have parents
+};
+
+type Column = {
+  nodeIds: string[];
+  layout?: Layout[]; // Optional to support nested layouts
+};
+
+type Row = {
+  col: Column;
+};
+
+type Layout = {
+  cols: Row[];
+};
+
+// Function argument type for `generateOrgChart`
+type OrgChartData = {
+  nodes: Node[];
+  layout: Layout[];
+};
+
+export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layout } = data;
 
   const cssPropList: {
@@ -8,10 +35,10 @@ export function generateOrgChart(data: any, containerId: string) {
   }[] = [];
 
   function findNodeById(id: string) {
-    return nodes.find((node: any) => node.id === id);
+    return nodes.find((node: Node) => node.id === id);
   }
 
-  function generateNodeHTML(node: any, size: string) {
+  function generateNodeHTML(node: Node, size: string) {
     if (node !== undefined && node.url !== undefined) {
       const nodeElement = document.createElement("a");
       nodeElement.role = "treeitem";
@@ -35,32 +62,20 @@ export function generateOrgChart(data: any, containerId: string) {
       if (size === "L") {
         const element = findNodeById(node.id);
 
-        let parentId = "";
-        element.parent.forEach((parent: any) => {
-          parentId += parent;
-        });
+        if (element?.parents) {
+          let parentId = "";
+          element.parents.forEach((parent: string) => {
+            parentId += parent;
+          });
 
-        //const parentElement = document.getElementById(parentId);
-        const countParents = element.parent.length;
+          const countParents = element.parents.length;
 
-        cssPropList.push({
-          id: parentId,
-          property: "--parent-count",
-          value: countParents.toString(),
-        });
-        //   //get the parent elements with
-        //   const parentElement = document.getElementById(parentId);
-        //   const parentWidth = parentElement?.clientWidth;
-        //   const countParents = element.parent.length;
-        //   let remainingSpace = 0;
-        //   if (parentWidth !== undefined) {
-        //     remainingSpace = parentWidth - 300 * countParents;
-        //     remainingSpace = remainingSpace / (countParents + 1);
-        //     remainingSpace = remainingSpace + remainingSpace + 40;
-        //   }
-        //   //set nodeElement width to be 100% -  remainingSpace
-        //   nodeElement.style.minWidth = "calc(100% - " + remainingSpace + "px)";
-        //   nodeElement.style.margin = "0 auto 12px auto";
+          cssPropList.push({
+            id: parentId,
+            property: "--parent-count",
+            value: countParents.toString(),
+          });
+        }
       }
 
       return nodeElement;
@@ -71,7 +86,10 @@ export function generateOrgChart(data: any, containerId: string) {
     }
   }
 
-  function generateNodesHTMLWithSharedChildren(nodeIds: [], children: []) {
+  function generateNodesHTMLWithSharedChildren(
+    nodeIds: string[],
+    children: any,
+  ) {
     const nodeElement = document.createElement("div");
     nodeElement.className = "multipleParents";
     const nodeHeader = document.createElement("div");
@@ -85,7 +103,9 @@ export function generateOrgChart(data: any, containerId: string) {
 
       const node = findNodeById(nodeId);
       const headerElement = document.createElement("div");
-      headerElement.appendChild(generateNodeHTML(node, "M"));
+      if (node) {
+        headerElement.appendChild(generateNodeHTML(node, "M"));
+      }
 
       nodeHeader.appendChild(headerElement);
       nodeElement.appendChild(nodeHeader);
@@ -94,7 +114,9 @@ export function generateOrgChart(data: any, containerId: string) {
     children.forEach((child: any) => {
       child.cols.forEach((col: any) => {
         const child = findNodeById(col.col.nodeIds[0]);
-        nodeElement.appendChild(generateNodeHTML(child, "L"));
+        if (child) {
+          nodeElement.appendChild(generateNodeHTML(child, "L"));
+        }
       });
     });
 
@@ -107,7 +129,7 @@ export function generateOrgChart(data: any, containerId: string) {
     return nodeElement;
   }
 
-  function createColumnElement(col: any) {
+  function createColumnElement(col: Column) {
     const colElement = document.createElement("div");
     colElement.className = "column";
 
@@ -127,18 +149,23 @@ export function generateOrgChart(data: any, containerId: string) {
     } else {
       if (col.layout) {
         const node = findNodeById(col.nodeIds[0]);
-        colElement.appendChild(generateNodeHTML(node, "M"));
-        colElement.appendChild(createRowsWrapper(col.layout));
+        if (node) {
+          colElement.appendChild(generateNodeHTML(node, "M"));
+          colElement.appendChild(createRowsWrapper(col.layout));
+        }
+
         return colElement;
       } else {
         const node = findNodeById(col.nodeIds[0]);
-        colElement.appendChild(generateNodeHTML(node, "M"));
+        if (node) {
+          colElement.appendChild(generateNodeHTML(node, "M"));
+        }
         return colElement;
       }
     }
   }
 
-  function createRows(row: any) {
+  function createRows(row: Row[]) {
     const rows = document.createElement("div");
     rows.className = "row";
     row.forEach((column: any) => {
@@ -148,7 +175,7 @@ export function generateOrgChart(data: any, containerId: string) {
     return rows;
   }
 
-  function createRowsWrapper(layout: Array<any>) {
+  function createRowsWrapper(layout: Layout[]) {
     const rows = document.createElement("div");
     rows.className = "rows";
     layout.forEach((row: any) => {
@@ -168,10 +195,9 @@ export function generateOrgChart(data: any, containerId: string) {
   const mainContainer = document.getElementById(containerId);
   //create element to hold the org chart
 
-  function applyCssProperty(id: string, property: string, value: any) {
+  function applyCssProperty(id: string, property: string, value: string) {
     const element = document.getElementById(id);
     element?.style.setProperty(property, value);
-    console.log(element?.style.getPropertyValue(property));
   }
 
   if (mainContainer) {

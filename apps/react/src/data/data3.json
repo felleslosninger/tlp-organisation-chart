@@ -9,115 +9,115 @@
       "title": "Kommunikasjon",
       "id": "kom",
       "url": "https://vg.no",
-      "parent": ["dir"],
+      "parents": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "HR",
       "id": "hr",
       "url": "https://vg.no",
-      "parent": ["kom"],
+      "parents": ["kom"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Samanhengande tenester",
       "id": "samenhengende_tjenester",
       "url": "https://vg.no",
-      "parent": ["dir"],
+      "parents": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Seksjon 1",
       "id": "seksjon_1",
       "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
+      "parents": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Seksjon 2",
       "id": "seksjon_2",
       "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
+      "parents": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Seksjon 3",
       "id": "seksjon_3",
       "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
+      "parents": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Underseksjon 1",
       "id": "underseksjon1",
-      "parent": ["seksjon_3"],
+      "parents": ["seksjon_3"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Seksjon 4",
       "id": "seksjon_4",
       "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
+      "parents": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Underseksjon 2",
       "id": "underseksjon2",
-      "parent": ["seksjon_4"],
+      "parents": ["seksjon_4"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Seksjon 5",
       "id": "seksjon_5",
       "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
+      "parents": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Seksjon 6",
       "id": "seksjon_6",
       "url": "https://vg.no",
-      "parent": ["samenhengende_tjenester"],
+      "parents": ["samenhengende_tjenester"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Digital strategi og samhandling",
       "id": "digital_strategi",
       "url": "https://vg.no",
-      "parent": ["dir"],
+      "parents": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Nasjonal arkitektur",
       "id": "nasjonal_arkitektur",
       "url": "https://vg.no",
-      "parent": ["digital_strategi"],
+      "parents": ["digital_strategi"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Internasjonalt og analyse",
       "id": "internasjonalt",
       "url": "https://vg.no",
-      "parent": ["digital_strategi"],
+      "parents": ["digital_strategi"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Fellesløysingar",
       "id": "fellesløysinger",
       "url": "https://vg.no",
-      "parent": ["dir"],
+      "parents": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Felles 1",
       "id": "felles1",
-      "parent": ["fellesløysinger"],
+      "parents": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Under felles 1",
       "id": "underfelles1",
-      "parent": ["felles1"],
+      "parents": ["felles1"],
       "url": "https://vg.no",
       "backgroundColor": "#e9eaec"
     },
@@ -125,56 +125,56 @@
       "title": "Felles 2",
       "id": "felles2",
       "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
+      "parents": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Felles 3",
       "id": "felles3",
       "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
+      "parents": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Felles 4",
       "id": "felles4",
       "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
+      "parents": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Felles 5",
       "id": "felles5",
       "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
+      "parents": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Felles 6",
       "id": "felles6",
       "url": "https://vg.no",
-      "parent": ["fellesløysinger"],
+      "parents": ["fellesløysinger"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Brukaroppleving og datadeling",
       "id": "brukaroppleving",
       "url": "https://vg.no",
-      "parent": ["dir"],
+      "parents": ["dir"],
       "backgroundColor": "#1e2b3c"
     },
     {
       "title": "Brukaropplevelse 1",
       "id": "brukaropp1",
       "url": "https://vg.no",
-      "parent": ["brukaroppleving"],
+      "parents": ["brukaroppleving"],
       "backgroundColor": "#e9eaec"
     },
     {
       "title": "Under Brukaropplevelse 1",
       "id": "underbrukaropp",
       "url": "https://vg.no",
-      "parent": ["brukaropp1"],
+      "parents": ["brukaropp1"],
       "backgroundColor": "#e9eaec"
     }
   ],
