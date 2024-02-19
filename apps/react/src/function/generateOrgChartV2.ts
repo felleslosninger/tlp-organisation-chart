@@ -1,12 +1,4 @@
-import {
-  OrgChartData,
-  Layout,
-  Node,
-  Column,
-  Layouts,
-  Row,
-  TableOfContentsItem,
-} from "../types/types";
+import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 
 function createElement(type: string) {
   const element = document.createElement(type);
@@ -14,7 +6,7 @@ function createElement(type: string) {
 }
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
-  const { nodes, layouts, toc } = data;
+  const { nodes, layouts } = data;
 
   function findNodeById(id: string | string[]) {
     return nodes.find((node: Node) => node.id === id);
@@ -31,6 +23,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodeElement.target = "_blank";
       }
       nodeElement.className = "node";
+      nodeElement.tabIndex = 0;
       nodeElement.style.backgroundColor = nodeData.backgroundColor;
       nodeElement.style.color = nodeData.textColor;
       nodeElement.innerHTML = nodeData.title;
@@ -56,16 +49,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       test.className = "node";
       test.style.backgroundColor = "red";
       test.innerHTML = "Special node";
+
       columnElement.appendChild(test);
     }
     return columnElement;
   }
 
-  function createRow(row: any) {
+  function createRow(row: Row) {
     const rowElement = createElement("div");
     rowElement.className = "row";
 
-    row.row.forEach((column: any) => {
+    row.row.forEach((column: Column) => {
       rowElement.appendChild(createColumn(column));
     });
 
