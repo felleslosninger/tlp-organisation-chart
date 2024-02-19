@@ -17,7 +17,7 @@ export type Component = {
 };
 
 export type Column = {
-  id: string;
+  id: string | string[];
   alignment: string;
   parent?: string; // Optional
   component?: Component; // Optional

@@ -30,6 +30,24 @@
       "textColor": "white"
     },
     {
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Fellesløsninger",
+      "id": "fel",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Bod",
+      "id": "bod",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
       "title": "Test",
       "id": "test",
       "backgroundColor": "#68707c",
@@ -72,7 +90,12 @@
               "alignment": "center"
             },
             {
-              "id": "bod",
+              "id": "test",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": ["bod", "fel"],
               "parent": "dir",
               "alignment": "center"
             }

@@ -1,21 +1,78 @@
-import { OrgChartData, Layout, Node, Column, Layouts } from "../types/types";
+import {
+  OrgChartData,
+  Layout,
+  Node,
+  Column,
+  Layouts,
+  Row,
+  TableOfContentsItem,
+} from "../types/types";
+
+function createElement(type: string) {
+  const element = document.createElement(type);
+  return element;
+}
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, toc } = data;
 
+  function findNodeById(id: string | string[]) {
+    return nodes.find((node: Node) => node.id === id);
+  }
+
+  function createNode(node: Column) {
+    const nodeElement = createElement("div");
+    nodeElement.className = "node";
+
+    const nodeData = findNodeById(node.id);
+
+    if (nodeData) {
+      nodeElement.style.backgroundColor = nodeData.backgroundColor;
+      nodeElement.style.color = nodeData.textColor;
+      nodeElement.innerHTML = nodeData.title;
+    }
+    return nodeElement;
+  }
+
+  function createColumn(column: Column) {
+    const columnElement = createElement("div");
+
+    columnElement.className = "column";
+
+    if (typeof column.id === "string") {
+      columnElement.appendChild(createNode(column));
+    } else {
+      const test = createElement("div");
+      test.className = "node";
+      test.style.backgroundColor = "red";
+      test.innerHTML = "Special node";
+      columnElement.appendChild(test);
+    }
+    return columnElement;
+  }
+
+  function createRow(row: any) {
+    const rowElement = createElement("div");
+    rowElement.className = "row";
+
+    row.row.forEach((column: any) => {
+      rowElement.appendChild(createColumn(column));
+    });
+
+    return rowElement;
+  }
+
   function createRowsWrapper(layout: Layout) {
-    const rows = document.createElement("div");
+    const rows = createElement("div");
     rows.className = "rows";
-    layout.rows.forEach((row: any) => {
-      const rowElement = document.createElement("div");
-      //add class name to the row element
-      rowElement.className = "rowElement";
+    layout.rows.forEach((row: Row) => {
+      rows.appendChild(createRow(row));
     });
 
     return rows;
   }
 
-  const orgChart = document.createElement("div");
+  const orgChart = createElement("div");
   orgChart.className = "org-chart";
   orgChart.role = "tree";
 
