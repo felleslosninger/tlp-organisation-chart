@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import jsonData1 from "../../data/v2Data/data1.json";
-//import jsonData2 from "../../data/v2Data/data2.json";
+// import jsonData2 from "../../data/v2Data/data2.json";
 import { generateOrgChart } from "../../function/generateOrgChartV2";
 import { Button } from "@digdir/design-system-react";
 

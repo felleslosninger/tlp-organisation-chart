@@ -1,7 +1,7 @@
 
 .org-chart{
-  padding: 34px;
   border: 1px solid black;
+  padding: 34px;
 }
 
 .node:focus-visible {
@@ -16,12 +16,29 @@
 }
 
 .row {
-  padding-bottom: 44px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  box-sizing: border-box;
+  display: flex;
   position: relative;
   border: 1px solid red;
+  width: 100%;
+  justify-content: space-between;
+  gap: 24px;
+  @media screen and (max-width: 1500px){
+   flex-wrap: wrap; 
+  }
+}
+
+.row-center {
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.row > :first-child {
+  margin-left: 0;
+}
+
+.row > :last-child {
+  margin-right: 0;
 }
 
 .column {
@@ -30,11 +47,13 @@
   align-items: center;
   justify-content: flex-start;
   position: relative;
-  border: 1px solid green;
+  margin-bottom: 84px;
 }
 
+
 .node {
-  width: 260px;
+  box-sizing: border-box;
+  width: 100%;
   min-height: 83px;
   padding: 0 20px;
   display: flex;
@@ -48,3 +67,4 @@
   line-height: 1.4em;
   position: relative;
 }
+

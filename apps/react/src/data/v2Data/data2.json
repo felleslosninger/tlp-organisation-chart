@@ -15,7 +15,8 @@
       "title": "HR",
       "id": "hr",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
     },
     {
       "title": "IT",
@@ -26,6 +27,24 @@
     {
       "title": "Markedsføring",
       "id": "markedsforing",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Fellesløsninger",
+      "id": "fel",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Bod",
+      "id": "bod",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
@@ -51,6 +70,7 @@
           "row": [
             {
               "id": "hr",
+              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -72,7 +92,26 @@
               "alignment": "center"
             },
             {
-              "id": "bod",
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "test",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": ["bod", "fel"],
               "parent": "dir",
               "alignment": "center"
             }
