@@ -39,7 +39,6 @@ function createNodeLineClass(
 ) {
   let className = " node-line";
 
-  //
   if (siblingsAmount === 2) {
     if (indexInRow === 1) {
       className += "-right";
@@ -54,6 +53,11 @@ function createNodeLineClass(
       className += "-up-left node-line-up";
     }
   } else if (siblingsAmount > 2) {
+    if (indexInRow <= siblingsAmount / 2) {
+      className += "-up-right node-line-up";
+    } else {
+      className += "-up-left node-line-up";
+    }
   }
 
   return className;
