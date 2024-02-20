@@ -1,6 +1,5 @@
 
 .org-chart{
-  border: 1px solid black;
   padding: 34px;
 }
 
@@ -13,16 +12,17 @@
 .rows {
   display: flex;
   flex-direction: column;
+
 }
 
 .row {
   box-sizing: border-box;
   display: flex;
   position: relative;
-  border: 1px solid red;
   width: 100%;
   justify-content: space-between;
   gap: 24px;
+  padding: 52px 0;
   @media screen and (max-width: 1500px){
    flex-wrap: wrap; 
   }
@@ -33,12 +33,18 @@
   justify-content: center;
 }
 
-.row > :first-child {
-  margin-left: 0;
+.row::before{
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #68707C;
+    top: 0;
+    left: 50%;
 }
 
-.row > :last-child {
-  margin-right: 0;
+.row:last-child::before{
+  display: none;
 }
 
 .column {
@@ -50,6 +56,25 @@
   margin-bottom: 84px;
 }
 
+/* .column::before{
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #68707C;
+    top: -52px;
+    left: 50%;
+} */
+
+.column-flex-start{
+  align-items: flex-start;
+  margin-left: 52px;
+}
+
+.column-flex-end{
+  align-items: flex-end;
+  margin-right: 52px;
+}
 
 .node {
   box-sizing: border-box;
@@ -67,4 +92,61 @@
   line-height: 1.4em;
   position: relative;
 }
+
+.node-line-right::before{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 72%;
+    height: 2px;
+    background-color: #68707C;
+    left: 50%;
+    right: 0;
+}
+
+.node-line-up::before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 2px;
+    height: calc(50% + 40px);
+    background-color: #68707C;
+    top: -40px;
+    left: 50%;
+}
+
+ .node-line-left::before{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 75%;
+    height: 2px;
+    background-color: #68707C;
+    left: -22%;
+}
+
+
+.node-line-up-right::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(100% + 24px);
+    height: 2px;
+    background-color: #68707C;
+    left: 50%;
+    right: 0;
+    top: -40px;
+}
+
+.node-line-up-left::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(100% + 24px);
+    height: 2px;
+    background-color: #68707C;
+    right: 50%;
+    top: -40px;
+} 
+
 

@@ -32,6 +32,33 @@ function calculateColumnWidth(siblingsAmount: number, indexInRow: number) {
   return { width, additionalWidth };
 }
 
+function createNodeLineClass(
+  indexInRow: number,
+  siblingsAmount: number,
+  isLastRow?: boolean,
+) {
+  let className = " node-line";
+
+  //
+  if (siblingsAmount === 2) {
+    if (indexInRow === 1) {
+      className += "-right";
+    } else {
+      className += "-left";
+    }
+  } else if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+    let lowerHalf = (siblingsAmount - 1) / 2;
+    if (indexInRow <= lowerHalf) {
+      className += "-up-right node-line-up";
+    } else {
+      className += "-up-left node-line-up";
+    }
+  } else if (siblingsAmount > 2) {
+  }
+
+  return className;
+}
+
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts } = data;
 
@@ -39,7 +66,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return nodes.find((node: Node) => node.id === id);
   }
 
-  function createNode(node: Column, siblingsAmount?: number) {
+  function createNode(
+    node: Column,
+    siblingsAmount: number,
+    indexInRow: number,
+  ) {
     const nodeData = findNodeById(node.id);
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
@@ -50,6 +81,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodeElement.target = "_blank";
       }
       nodeElement.className = "node";
+
       nodeElement.tabIndex = 0;
       nodeElement.style.backgroundColor = nodeData.backgroundColor;
       nodeElement.style.color = nodeData.textColor;
@@ -58,6 +90,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       if (siblingsAmount && siblingsAmount <= 2) {
         nodeElement.style.maxWidth = "300px";
       }
+
+      nodeElement.className += createNodeLineClass(indexInRow, siblingsAmount);
 
       return nodeElement;
     } else {
@@ -70,15 +104,23 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     columnWidth: number,
     siblingsAmount: number,
     additionalWidth: number,
+    indexInRow: number,
   ) {
     const columnElement = createElement("div");
 
     columnElement.className = "column";
 
+    if (siblingsAmount === 2 && indexInRow === 1) {
+      columnElement.className += " column-flex-end";
+    } else if (siblingsAmount === 2 && indexInRow === 2) {
+      columnElement.className += " column-flex-start";
+    }
+
     if (typeof column.id === "string") {
-      const innerColumn = createNode(column, siblingsAmount);
+      const innerColumn = createNode(column, siblingsAmount, indexInRow);
 
       columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+
       if (innerColumn !== null) {
         columnElement.appendChild(innerColumn);
       }
@@ -121,10 +163,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             columnWidth.width,
             row.row.length,
             columnWidth.additionalWidth,
+            count,
           ),
         );
       } else {
-        rowElement.appendChild(createColumn(column, 100, row.row.length, 0));
+        rowElement.appendChild(
+          createColumn(column, 100, row.row.length, 0, count),
+        );
       }
     });
 

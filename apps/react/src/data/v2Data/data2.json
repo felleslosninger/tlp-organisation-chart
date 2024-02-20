@@ -90,7 +90,11 @@
               "id": "fel",
               "parent": "dir",
               "alignment": "center"
-            },
+            }
+          ]
+        },
+        {
+          "row": [
             {
               "id": "kom",
               "parent": "dir",
@@ -106,14 +110,50 @@
               "alignment": "center"
             },
             {
-              "id": "test",
+              "id": "fel",
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": ["bod", "fel"],
+              "id": "fel",
               "parent": "dir",
               "alignment": "center"
+            },
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
             }
           ]
         }
