@@ -10,6 +10,28 @@ function isEvenOrOne(num: number) {
   return num % 2 === 0 || num === 1;
 }
 
+function isOdd(number: number) {
+  return number % 2 !== 0;
+}
+
+function calculateColumnWidth(siblingsAmount: number, indexInRow: number) {
+  let width = 100;
+  let additionalWidth = 0;
+
+  if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+    if (indexInRow < siblingsAmount / 2) {
+      width = 100 / (siblingsAmount - 1);
+      additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+    } else {
+      width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+    }
+  } else if (siblingsAmount > 2) {
+    width = 100 / siblingsAmount;
+  }
+
+  return { width, additionalWidth };
+}
+
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts } = data;
 
@@ -33,7 +55,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       nodeElement.style.color = nodeData.textColor;
       nodeElement.innerHTML = nodeData.title;
       //if siblingsAmount is less 2, set max-with to 300px
-      if (siblingsAmount && siblingsAmount < 2) {
+      if (siblingsAmount && siblingsAmount <= 2) {
         nodeElement.style.maxWidth = "300px";
       }
 
@@ -47,6 +69,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     column: Column,
     columnWidth: number,
     siblingsAmount: number,
+    additionalWidth: number,
   ) {
     const columnElement = createElement("div");
 
@@ -54,7 +77,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     if (typeof column.id === "string") {
       const innerColumn = createNode(column, siblingsAmount);
-      columnElement.style.width = `${columnWidth}%`;
+
+      columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
       if (innerColumn !== null) {
         columnElement.appendChild(innerColumn);
       }
@@ -76,10 +100,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     let rowClass = "row";
 
     if (isEvenOrOne(row.row.length) && isLastRow) {
-      if (row.row.length === 1) {
-        rowClass += " row-center";
-      }
-      if (row.row.length === 2) {
+      if (row.row.length <= 2) {
         rowClass += " row-center";
       }
     }
@@ -87,35 +108,24 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     rowElement.className = rowClass;
 
     let count = 0;
+
     row.row.forEach((column: Column) => {
       count++;
-      let colWidth = 100;
 
-      if (row.row.length === 3) {
-        if (count === 1) {
-          colWidth = 50;
-        } else {
-          colWidth = 25;
-        }
+      if (!isLastRow) {
+        const columnWidth = calculateColumnWidth(row.row.length, count);
+
+        rowElement.appendChild(
+          createColumn(
+            column,
+            columnWidth.width,
+            row.row.length,
+            columnWidth.additionalWidth,
+          ),
+        );
+      } else {
+        rowElement.appendChild(createColumn(column, 100, row.row.length, 0));
       }
-
-      if (row.row.length === 4) {
-        colWidth = 100 / row.row.length;
-      }
-
-      if (row.row.length === 5 && !isLastRow) {
-        if (count === 1 || count === 2) {
-          colWidth = 25;
-        } else {
-          colWidth = 50 / 3;
-        }
-      }
-
-      if (row.row.length === 6) {
-        colWidth = 100 / row.row.length;
-      }
-
-      rowElement.appendChild(createColumn(column, colWidth, row.row.length));
     });
 
     return rowElement;
