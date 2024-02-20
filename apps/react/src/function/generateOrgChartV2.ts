@@ -32,11 +32,7 @@ function calculateColumnWidth(siblingsAmount: number, indexInRow: number) {
   return { width, additionalWidth };
 }
 
-function createNodeLineClass(
-  indexInRow: number,
-  siblingsAmount: number,
-  isLastRow?: boolean,
-) {
+function createNodeLineClass(indexInRow: number, siblingsAmount: number) {
   let className = " node-line";
 
   if (siblingsAmount === 2) {
@@ -58,6 +54,8 @@ function createNodeLineClass(
     } else {
       className += "-up-left node-line-up";
     }
+  } else {
+    className = "";
   }
 
   return className;
@@ -145,7 +143,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     let rowClass = "row";
 
-    if (isEvenOrOne(row.row.length) && isLastRow) {
+    if (isEvenOrOne(row.row.length)) {
       if (row.row.length <= 2) {
         rowClass += " row-center";
       }
