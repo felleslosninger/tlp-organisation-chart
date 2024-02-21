@@ -11,6 +11,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   ).providedLayout;
   //let layoutName = provideLayout(windowWidth, allowedBreakpoints).layoutName;
   let isMobile = windowWidth < allowedBreakpoints.tablet;
+  let rowHasWrapped = true;
 
   function provideLayout(
     windowWidth: number,
@@ -64,7 +65,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodeElement.style.maxWidth = "300px";
       }
 
-      nodeElement.className += createNodeLineClass(indexInRow, siblingsAmount);
+      nodeElement.className += createNodeLineClass(
+        indexInRow,
+        siblingsAmount,
+        windowWidth,
+        allowedBreakpoints,
+        rowHasWrapped,
+      );
 
       return nodeElement;
     } else {
@@ -144,29 +151,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           count,
         ),
       );
-
-      // if (!isLastRow) {
-      //   const columnWidth = calculateColumnWidth(
-      //     row.row.length,
-      //     count,
-      //     windowWidth,
-      //     allowedBreakpoints,
-      //   );
-
-      //   rowElement.appendChild(
-      //     createColumn(
-      //       column,
-      //       columnWidth.width,
-      //       row.row.length,
-      //       columnWidth.additionalWidth,
-      //       count,
-      //     ),
-      //   );
-      // } else {
-      //   rowElement.appendChild(
-      //     createColumn(column, 100, row.row.length, 0, count),
-      //   );
-      // }
     });
 
     return rowElement;
@@ -351,31 +335,95 @@ function calculateColumnWidth(
 }
 
 //function to create the line between the nodes
-function createNodeLineClass(indexInRow: number, siblingsAmount: number) {
-  let className = " node-line";
+function createNodeLineClass(
+  indexInRow: number,
+  siblingsAmount: number,
+  windowWidth: number,
+  breakpoints: { main: number; laptop: number; tablet: number },
+  isLastRow: boolean,
+) {
+  let width = 100;
+  let additionalWidth = 0;
 
+  //destructuring the breakpoints object
+  const { main, laptop, tablet } = breakpoints;
+
+  let className = " node-line";
   if (siblingsAmount === 2) {
     if (indexInRow === 1) {
       className += "-right";
     } else {
       className += "-left";
     }
-  } else if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    let lowerHalf = (siblingsAmount - 1) / 2;
-    if (indexInRow <= lowerHalf) {
-      className += "-up-right node-line-up";
-    } else {
-      className += "-up-left node-line-up";
-    }
-  } else if (siblingsAmount > 2) {
-    if (indexInRow <= siblingsAmount / 2) {
-      className += "-up-right node-line-up";
-    } else {
-      className += "-up-left node-line-up";
-    }
-  } else {
-    className = "";
+    return className;
   }
 
-  return className;
+  if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+    //if the window width is greater than 1500px
+    if (windowWidth > main) {
+      let lowerHalf = (siblingsAmount - 1) / 2;
+      if (indexInRow <= lowerHalf) {
+        className += "-up-right node-line-up";
+      } else {
+        className += "-up-left node-line-up";
+      }
+      return className;
+    }
+
+    //if the window width is less than 1500px and greater than 992px
+    if (windowWidth <= main && windowWidth > laptop) {
+      let lowerHalf = (siblingsAmount - 1) / 2;
+      if (indexInRow <= lowerHalf) {
+        className += "-up-right node-line-up";
+      }
+      if (indexInRow === siblingsAmount && siblingsAmount > 3) {
+        className += "-up-right-long node-line-up";
+      } else {
+        className += "-up-left node-line-up";
+      }
+      return className;
+    }
+
+    if (windowWidth <= laptop && windowWidth > tablet) {
+      let lowerHalf = (siblingsAmount - 1) / 2;
+      if (indexInRow <= lowerHalf) {
+        className += "-up-right node-line-up";
+      } else {
+        className += "-up-left node-line-up";
+      }
+      return className;
+    }
+
+    // if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+    //   let lowerHalf = (siblingsAmount - 1) / 2;
+    //   if (indexInRow <= lowerHalf) {
+    //     className += "-up-right node-line-up";
+    //   } else {
+    //     className += "-up-left node-line-up";
+    //   }
+    //   return className;
+    // } else if (siblingsAmount > 2) {
+    //   if (indexInRow <= siblingsAmount / 2) {
+    //     className += "-up-right node-line-up";
+    //   } else {
+    //     className += "-up-left node-line-up";
+    //   }
+    //   return className;
+    // } else {
+    //   className = "";
+    //   return className;
+    // }
+  }
+  // else if (siblingsAmount > 2) {
+  //   if (indexInRow <= siblingsAmount / 2) {
+  //     className += "-up-right node-line-up";
+  //   } else {
+  //     className += "-up-left node-line-up";
+  //   }
+  //   return className;
+  // }
+  else {
+    className = "";
+    return className;
+  }
 }

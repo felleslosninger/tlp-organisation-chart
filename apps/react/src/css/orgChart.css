@@ -21,8 +21,10 @@
   position: relative;
   width: 100%;
   justify-content: flex-start;
-  gap: 24px;
+  row-gap: 80px;
+  column-gap: 24px;
   padding: 40px 0;
+  /* border: 1px solid red; */
 
 }
 
@@ -149,6 +151,18 @@
     z-index: -1;
     position: absolute;
     width: calc(100% + 24px);
+    height: 2px;
+    background-color: #68707C;
+    left: 50%;
+    right: 0;
+    top: -40px;
+}
+
+.node-line-up-right-long::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(150% + 24px + 12px);
     height: 2px;
     background-color: #68707C;
     left: 50%;
