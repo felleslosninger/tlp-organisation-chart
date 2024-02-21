@@ -262,7 +262,6 @@ function isOdd(number: number) {
 }
 
 //function to calculate the width of the columns
-
 //TODO: Refactor this function to make it more readable
 function calculateColumnWidth(
   siblingsAmount: number,
