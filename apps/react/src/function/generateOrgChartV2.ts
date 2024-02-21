@@ -127,28 +127,46 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     row.row.forEach((column: Column) => {
       count++;
 
-      if (!isLastRow) {
-        const columnWidth = calculateColumnWidth(
-          row.row.length,
-          count,
-          windowWidth,
-          allowedBreakpoints,
-        );
+      const columnWidth = calculateColumnWidth(
+        row.row.length,
+        count,
+        windowWidth,
+        allowedBreakpoints,
+        isLastRow,
+      );
 
-        rowElement.appendChild(
-          createColumn(
-            column,
-            columnWidth.width,
-            row.row.length,
-            columnWidth.additionalWidth,
-            count,
-          ),
-        );
-      } else {
-        rowElement.appendChild(
-          createColumn(column, 100, row.row.length, 0, count),
-        );
-      }
+      rowElement.appendChild(
+        createColumn(
+          column,
+          columnWidth.width,
+          row.row.length,
+          columnWidth.additionalWidth,
+          count,
+        ),
+      );
+
+      // if (!isLastRow) {
+      //   const columnWidth = calculateColumnWidth(
+      //     row.row.length,
+      //     count,
+      //     windowWidth,
+      //     allowedBreakpoints,
+      //   );
+
+      //   rowElement.appendChild(
+      //     createColumn(
+      //       column,
+      //       columnWidth.width,
+      //       row.row.length,
+      //       columnWidth.additionalWidth,
+      //       count,
+      //     ),
+      //   );
+      // } else {
+      //   rowElement.appendChild(
+      //     createColumn(column, 100, row.row.length, 0, count),
+      //   );
+      // }
     });
 
     return rowElement;
@@ -244,11 +262,14 @@ function isOdd(number: number) {
 }
 
 //function to calculate the width of the columns
+
+//TODO: Refactor this function to make it more readable
 function calculateColumnWidth(
   siblingsAmount: number,
   indexInRow: number,
   windowWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
+  isLastRow: boolean,
 ) {
   let width = 100;
   let additionalWidth = 0;
@@ -258,29 +279,48 @@ function calculateColumnWidth(
 
   if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
     if (windowWidth > main) {
-      if (indexInRow < siblingsAmount / 2) {
-        width = 100 / (siblingsAmount - 1);
-        additionalWidth = 24 / ((siblingsAmount - 1) / 2);
-      } else {
-        width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-      }
-    }
-    if (windowWidth < main && windowWidth > laptop) {
-      if (siblingsAmount > 4) {
-        width = 100 / 4;
-        additionalWidth = -(24 - (siblingsAmount + 1));
+      if (isLastRow) {
+        width = 100 / siblingsAmount;
       } else {
         if (indexInRow < siblingsAmount / 2) {
           width = 100 / (siblingsAmount - 1);
-          additionalWidth = -(24 / 2);
+          additionalWidth = 24 / ((siblingsAmount - 1) / 2);
         } else {
           width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-          additionalWidth = -(24 - (siblingsAmount + 3));
+        }
+      }
+    }
+    if (windowWidth <= main && windowWidth > laptop) {
+      if (isLastRow) {
+        if (siblingsAmount > 3) {
+          if (indexInRow <= 2) {
+            width = 100 / 2;
+            additionalWidth = -12;
+          } else {
+            width = 100 / 3;
+            additionalWidth = -16;
+          }
+        } else {
+          width = 100 / 2;
+          additionalWidth = -12;
+        }
+      } else {
+        if (siblingsAmount > 4) {
+          width = 100 / 4;
+          additionalWidth = -(24 - (siblingsAmount + 1));
+        } else {
+          if (indexInRow < siblingsAmount / 2) {
+            width = 100 / (siblingsAmount - 1);
+            additionalWidth = -(24 / 2);
+          } else {
+            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+            additionalWidth = -(24 - (siblingsAmount + 3));
+          }
         }
       }
     }
 
-    if (windowWidth < laptop && windowWidth > tablet) {
+    if (windowWidth <= laptop && windowWidth > tablet) {
       if (siblingsAmount > 2) {
         width = 100 / 2;
         additionalWidth = -(24 / 2);
@@ -298,11 +338,11 @@ function calculateColumnWidth(
     if (windowWidth > tablet) {
       width = 100 / siblingsAmount;
     }
-    if (windowWidth < main && windowWidth > laptop) {
+    if (windowWidth <= main && windowWidth > laptop) {
       width = 100 / 4;
       additionalWidth = -18;
     }
-    if (windowWidth < laptop && windowWidth > tablet) {
+    if (windowWidth <= laptop && windowWidth > tablet) {
       width = 100 / 2;
       additionalWidth = -12;
     }
