@@ -20,15 +20,16 @@
   display: flex;
   position: relative;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 24px;
   padding: 40px 0;
 }
 
-.main .row{
-   @media screen and (max-width: 1500px){
-   flex-wrap: wrap; 
+@media screen and (max-width: 1500px){
+  .row{
+    flex-wrap: wrap;
   }
+  
 }
 
 .row:first-child{
@@ -45,6 +46,12 @@
     left: 50%;
 }
 
+
+@media screen and (max-width: 768px){
+  .row::before{display: none;}
+      
+}    
+
 .row:last-child::before{
   display: none;
 }
@@ -52,10 +59,13 @@
 .row-center {
   flex-wrap: nowrap;
   justify-content: center;
+}
 
-    @media screen and (max-width: 1500px){
-   flex-wrap: nowrap; 
-  }
+@media screen and (max-width: 768px){
+  .row-center {
+    flex-wrap: wrap;
+    justify-content: center;
+  }    
 }
 
 .column {
@@ -74,6 +84,13 @@
 .column-flex-end{
   align-items: flex-end;
   margin-right: 52px;
+}
+
+@media screen and (max-width: 768px){
+  .column-flex-start, .column-flex-end{
+    margin: 0;
+    align-items: center;
+  }
 }
 
 .node {

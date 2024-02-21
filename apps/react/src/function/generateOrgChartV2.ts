@@ -1,4 +1,3 @@
-import { mainModule } from "process";
 import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
@@ -6,20 +5,29 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let windowWidth = window.innerWidth;
-  let currentLayout = provideLayout(windowWidth).providedLayout;
-  let layoutName = provideLayout(windowWidth).layoutName;
+  let currentLayout = provideLayout(
+    windowWidth,
+    allowedBreakpoints,
+  ).providedLayout;
+  //let layoutName = provideLayout(windowWidth, allowedBreakpoints).layoutName;
+  let isMobile = windowWidth < allowedBreakpoints.tablet;
 
-  function provideLayout(windowWidth: number) {
+  function provideLayout(
+    windowWidth: number,
+    breakpoints: { main: number; laptop: number; tablet: number },
+  ) {
     let providedLayout = layouts.main;
     let layoutName = "main";
 
+    const { main, laptop } = breakpoints;
+
     //if the window width is less than 1500px, set the currentLayout to laptop
-    if (windowWidth < allowedBreakpoints.main && layouts.laptop) {
+    if (windowWidth < main && layouts.laptop) {
       providedLayout = layouts.laptop;
       layoutName = "laptop";
     }
     //if the window width is less than 992px, set the currentLayout to tablet
-    if (windowWidth < allowedBreakpoints.laptop && layouts.tablet) {
+    if (windowWidth < laptop && layouts.tablet) {
       providedLayout = layouts.tablet;
       layoutName = "tablet";
     }
@@ -52,7 +60,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       nodeElement.style.color = nodeData.textColor;
       nodeElement.innerHTML = nodeData.title;
       //if siblingsAmount is less 2, set max-with to 300px
-      if (siblingsAmount && siblingsAmount <= 2) {
+      if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
         nodeElement.style.maxWidth = "300px";
       }
 
@@ -195,8 +203,14 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       //get the current window width and provide the layout
       windowWidth = window.innerWidth;
 
+      //check if the window width is less than 768px
+      isMobile = windowWidth < allowedBreakpoints.tablet;
+
       //get the current layout
-      currentLayout = provideLayout(windowWidth).providedLayout;
+      currentLayout = provideLayout(
+        windowWidth,
+        allowedBreakpoints,
+      ).providedLayout;
 
       //set the class of the org chart to the current layout
       orgChart.className = provideLayoutClass(windowWidth);
