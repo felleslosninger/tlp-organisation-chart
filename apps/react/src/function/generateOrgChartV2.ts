@@ -5,21 +5,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let windowWidth = window.innerWidth;
-  let currentLayout = provideLayout(windowWidth);
+  let currentLayout = provideLayout(windowWidth).providedLayout;
+  let layoutName = provideLayout(windowWidth).layoutName;
 
   function provideLayout(windowWidth: number) {
     let providedLayout = layouts.main;
+    let layoutName = "main";
 
     //if the window width is less than 1500px, set the currentLayout to laptop
     if (windowWidth < allowedBreakpoints.main && layouts.laptop) {
       providedLayout = layouts.laptop;
+      layoutName = "laptop";
     }
     //if the window width is less than 992px, set the currentLayout to tablet
     if (windowWidth < allowedBreakpoints.laptop && layouts.tablet) {
       providedLayout = layouts.tablet;
+      layoutName = "tablet";
     }
 
-    return providedLayout;
+    return { providedLayout: providedLayout, layoutName: layoutName };
   }
 
   function findNodeById(id: string | string[]) {
@@ -115,7 +119,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       count++;
 
       if (!isLastRow) {
-        const columnWidth = calculateColumnWidth(row.row.length, count);
+        const columnWidth = calculateColumnWidth(
+          row.row.length,
+          count,
+          layoutName,
+          windowWidth,
+        );
 
         rowElement.appendChild(
           createColumn(
@@ -186,7 +195,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       windowWidth = window.innerWidth;
 
       //get the current layout
-      currentLayout = provideLayout(windowWidth);
+      currentLayout = provideLayout(windowWidth).providedLayout;
 
       //set the class of the org chart to the current layout
       orgChart.className = provideLayoutClass(windowWidth);
@@ -220,16 +229,54 @@ function isOdd(number: number) {
 }
 
 //function to calculate the width of the columns
-function calculateColumnWidth(siblingsAmount: number, indexInRow: number) {
+function calculateColumnWidth(
+  siblingsAmount: number,
+  indexInRow: number,
+  layoutName: string,
+  windowWidth: number,
+) {
   let width = 100;
   let additionalWidth = 0;
 
   if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    if (indexInRow < siblingsAmount / 2) {
-      width = 100 / (siblingsAmount - 1);
-      additionalWidth = 24 / ((siblingsAmount - 1) / 2);
-    } else {
-      width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+    if (layoutName === "main") {
+      if (windowWidth > 1500) {
+        if (indexInRow < siblingsAmount / 2) {
+          width = 100 / (siblingsAmount - 1);
+          additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+        } else {
+          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+        }
+      }
+      if (windowWidth < 1500 && windowWidth > 992) {
+        if (siblingsAmount > 4) {
+          width = 100 / 4;
+          additionalWidth = -(24 - (siblingsAmount + 1));
+        } else {
+          if (indexInRow < siblingsAmount / 2) {
+            width = 100 / (siblingsAmount - 1);
+            additionalWidth = -(24 / 2);
+          } else {
+            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+            additionalWidth = -(24 - (siblingsAmount + 3));
+          }
+        }
+      }
+
+      if (windowWidth < 992 && windowWidth > 768) {
+        if (siblingsAmount > 2) {
+          width = 100 / 2;
+          additionalWidth = -(24 / 2);
+        } else {
+          if (indexInRow < siblingsAmount / 2) {
+            width = 100 / (siblingsAmount - 1);
+            additionalWidth = -(24 / 2);
+          } else {
+            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+            additionalWidth = -(24 - (siblingsAmount + 3));
+          }
+        }
+      }
     }
   } else if (siblingsAmount > 2) {
     width = 100 / siblingsAmount;
