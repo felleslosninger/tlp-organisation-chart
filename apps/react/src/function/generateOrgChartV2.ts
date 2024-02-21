@@ -414,16 +414,40 @@ function createNodeLineClass(
     //   className = "";
     //   return className;
     // }
-  }
-  // else if (siblingsAmount > 2) {
-  //   if (indexInRow <= siblingsAmount / 2) {
-  //     className += "-up-right node-line-up";
-  //   } else {
-  //     className += "-up-left node-line-up";
-  //   }
-  //   return className;
-  // }
-  else {
+  } else if (siblingsAmount > 2) {
+    if (windowWidth > main) {
+      if (indexInRow <= siblingsAmount / 2) {
+        className = " node-line-up-right node-line-up";
+      } else {
+        className = " node-line-up-left node-line-up";
+      }
+      return className;
+    } else if (windowWidth <= main && windowWidth > laptop) {
+      if (siblingsAmount <= 4) {
+        if (indexInRow <= siblingsAmount / 2) {
+          className = " node-line-up-right node-line-up";
+        } else {
+          className = " node-line-up-left node-line-up";
+        }
+      } else {
+        if (indexInRow === 1 || indexInRow === 5) {
+          className = " node-line-up-right-long node-line-up";
+        } else if (indexInRow === siblingsAmount) {
+          className = " node-line-up-right-half node-line-up";
+        } else {
+          className = " node-line-up-left node-line-up";
+        }
+      }
+      return className;
+    } else if (windowWidth <= laptop && windowWidth > tablet) {
+      if (isOdd(indexInRow) || indexInRow === 1) {
+        className = " node-line-up-right node-line-up";
+      } else {
+        className = " node-line-up-left node-line-up";
+      }
+      return className;
+    }
+  } else {
     className = "";
     return className;
   }

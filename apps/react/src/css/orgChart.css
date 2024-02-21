@@ -132,7 +132,6 @@
     height: calc(50% + 40px);
     background-color: #68707C;
     top: -40px;
-    left: 50%;
 }
 
  .node-line-left::before{
