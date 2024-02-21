@@ -34,6 +34,7 @@ export type Layout = {
 export type Layouts = {
   desktop: Layout;
   laptop?: Layout; // Optional
+  tablet?: Layout; // Optional
 };
 
 export type OrgChartData = {

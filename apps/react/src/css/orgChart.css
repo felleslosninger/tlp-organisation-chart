@@ -23,9 +23,9 @@
   justify-content: space-between;
   gap: 24px;
   padding: 40px 0;
-  @media screen and (max-width: 1500px){
+  /* @media screen and (max-width: 1500px){
    flex-wrap: wrap; 
-  }
+  } */
 }
 
 .row:first-child{
