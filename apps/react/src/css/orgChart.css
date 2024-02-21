@@ -158,6 +158,18 @@
     top: -40px;
 }
 
+.node-line-up-right-half::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(50% + 12px);
+    height: 2px;
+    background-color: #68707C;
+    left: 50%;
+    right: 0;
+    top: -40px;
+}
+
 .node-line-up-right-long::after{
     content: "";
     z-index: -1;
@@ -174,7 +186,18 @@
     content: "";
     z-index: -1;
     position: absolute;
-    width: calc(100% + 25px);
+    width: calc(100% + 24px);
+    height: 2px;
+    background-color: #68707C;
+    right: 50%;
+    top: -40px;
+}
+
+.node-line-up-left-half::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(50% + 12px);
     height: 2px;
     background-color: #68707C;
     right: 50%;

@@ -54,7 +54,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodeElement.href = nodeData.url;
         nodeElement.target = "_blank";
       }
-      nodeElement.className = "node";
+      nodeElement.className = "node ";
 
       nodeElement.tabIndex = 0;
       nodeElement.style.backgroundColor = nodeData.backgroundColor;
@@ -342,18 +342,15 @@ function createNodeLineClass(
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
 ) {
-  let width = 100;
-  let additionalWidth = 0;
-
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
 
-  let className = " node-line";
+  let className = "";
   if (siblingsAmount === 2) {
     if (indexInRow === 1) {
-      className += "-right";
+      className = " node-line-right";
     } else {
-      className += "-left";
+      className = " node-line-left";
     }
     return className;
   }
@@ -363,9 +360,9 @@ function createNodeLineClass(
     if (windowWidth > main) {
       let lowerHalf = (siblingsAmount - 1) / 2;
       if (indexInRow <= lowerHalf) {
-        className += "-up-right node-line-up";
+        className = " node-line-up-right node-line-up";
       } else {
-        className += "-up-left node-line-up";
+        className = " node-line-up-left node-line-up";
       }
       return className;
     }
@@ -373,23 +370,27 @@ function createNodeLineClass(
     //if the window width is less than 1500px and greater than 992px
     if (windowWidth <= main && windowWidth > laptop) {
       let lowerHalf = (siblingsAmount - 1) / 2;
+      let upperHalf = siblingsAmount - lowerHalf;
+
       if (indexInRow <= lowerHalf) {
-        className += "-up-right node-line-up";
-      }
-      if (indexInRow === siblingsAmount && siblingsAmount > 3) {
-        className += "-up-right-long node-line-up";
+        className = " node-line-up-right node-line-up";
+      } else if (indexInRow > upperHalf && !isOdd(indexInRow)) {
+        className = " node-line-up-left node-line-up";
+      } else if (indexInRow === siblingsAmount && siblingsAmount > 3) {
+        className = " node-line-up-right-long node-line-up";
+      } else if (indexInRow === 3) {
+        className = " node-line-up-left-half node-line-up";
       } else {
-        className += "-up-left node-line-up";
+        className = " node-line-up-right-half node-line-up";
       }
       return className;
     }
 
     if (windowWidth <= laptop && windowWidth > tablet) {
-      let lowerHalf = (siblingsAmount - 1) / 2;
-      if (indexInRow <= lowerHalf) {
-        className += "-up-right node-line-up";
+      if (isOdd(indexInRow)) {
+        className = " node-line-up-right-half node-line-up";
       } else {
-        className += "-up-left node-line-up";
+        className = " node-line-up-left-half node-line-up";
       }
       return className;
     }
