@@ -1,3 +1,4 @@
+import { mainModule } from "process";
 import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
@@ -122,8 +123,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         const columnWidth = calculateColumnWidth(
           row.row.length,
           count,
-          layoutName,
           windowWidth,
+          allowedBreakpoints,
         );
 
         rowElement.appendChild(
@@ -232,54 +233,65 @@ function isOdd(number: number) {
 function calculateColumnWidth(
   siblingsAmount: number,
   indexInRow: number,
-  layoutName: string,
   windowWidth: number,
+  breakpoints: { main: number; laptop: number; tablet: number },
 ) {
   let width = 100;
   let additionalWidth = 0;
 
+  //destructuring the breakpoints object
+  const { main, laptop, tablet } = breakpoints;
+
   if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    if (layoutName === "main") {
-      if (windowWidth > 1500) {
+    if (windowWidth > main) {
+      if (indexInRow < siblingsAmount / 2) {
+        width = 100 / (siblingsAmount - 1);
+        additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+      } else {
+        width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+      }
+    }
+    if (windowWidth < main && windowWidth > laptop) {
+      if (siblingsAmount > 4) {
+        width = 100 / 4;
+        additionalWidth = -(24 - (siblingsAmount + 1));
+      } else {
         if (indexInRow < siblingsAmount / 2) {
           width = 100 / (siblingsAmount - 1);
-          additionalWidth = 24 / ((siblingsAmount - 1) / 2);
-        } else {
-          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-        }
-      }
-      if (windowWidth < 1500 && windowWidth > 992) {
-        if (siblingsAmount > 4) {
-          width = 100 / 4;
-          additionalWidth = -(24 - (siblingsAmount + 1));
-        } else {
-          if (indexInRow < siblingsAmount / 2) {
-            width = 100 / (siblingsAmount - 1);
-            additionalWidth = -(24 / 2);
-          } else {
-            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-            additionalWidth = -(24 - (siblingsAmount + 3));
-          }
-        }
-      }
-
-      if (windowWidth < 992 && windowWidth > 768) {
-        if (siblingsAmount > 2) {
-          width = 100 / 2;
           additionalWidth = -(24 / 2);
         } else {
-          if (indexInRow < siblingsAmount / 2) {
-            width = 100 / (siblingsAmount - 1);
-            additionalWidth = -(24 / 2);
-          } else {
-            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-            additionalWidth = -(24 - (siblingsAmount + 3));
-          }
+          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+          additionalWidth = -(24 - (siblingsAmount + 3));
+        }
+      }
+    }
+
+    if (windowWidth < laptop && windowWidth > tablet) {
+      if (siblingsAmount > 2) {
+        width = 100 / 2;
+        additionalWidth = -(24 / 2);
+      } else {
+        if (indexInRow < siblingsAmount / 2) {
+          width = 100 / (siblingsAmount - 1);
+          additionalWidth = -(24 / 2);
+        } else {
+          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+          additionalWidth = -(24 - (siblingsAmount + 3));
         }
       }
     }
   } else if (siblingsAmount > 2) {
-    width = 100 / siblingsAmount;
+    if (windowWidth > tablet) {
+      width = 100 / siblingsAmount;
+    }
+    if (windowWidth < main && windowWidth > laptop) {
+      width = 100 / 4;
+      additionalWidth = -18;
+    }
+    if (windowWidth < laptop && windowWidth > tablet) {
+      width = 100 / 2;
+      additionalWidth = -12;
+    }
   }
 
   return { width, additionalWidth };
