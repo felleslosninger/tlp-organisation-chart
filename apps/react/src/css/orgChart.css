@@ -1,0 +1,149 @@
+
+.org-chart{
+  padding: 34px;
+}
+
+.node:focus-visible {
+    outline: 3px solid #fadf4b;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 5px #1e2b3c;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.row {
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 40px 0;
+  /* @media screen and (max-width: 1500px){
+   flex-wrap: wrap; 
+  } */
+}
+
+.row:first-child{
+  padding-top: 0;
+}
+
+.row::before{
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #68707C;
+    top: 0;
+    left: 50%;
+}
+
+.row:last-child::before{
+  display: none;
+}
+
+.row-center {
+  flex-wrap: nowrap;
+  justify-content: center;
+
+    @media screen and (max-width: 1500px){
+   flex-wrap: nowrap; 
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.column-flex-start{
+  align-items: flex-start;
+  margin-left: 52px;
+}
+
+.column-flex-end{
+  align-items: flex-end;
+  margin-right: 52px;
+}
+
+.node {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 83px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 12px;
+  text-decoration: none;
+  line-height: 1.4em;
+  position: relative;
+}
+
+.node-line-right::before{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 72%;
+    height: 2px;
+    background-color: #68707C;
+    left: 50%;
+    right: 0;
+}
+
+.node-line-up::before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 2px;
+    height: calc(50% + 40px);
+    background-color: #68707C;
+    top: -40px;
+    left: 50%;
+}
+
+ .node-line-left::before{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 75%;
+    height: 2px;
+    background-color: #68707C;
+    left: -22%;
+}
+
+
+.node-line-up-right::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(100% + 24px);
+    height: 2px;
+    background-color: #68707C;
+    left: 50%;
+    right: 0;
+    top: -40px;
+}
+
+.node-line-up-left::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: calc(100% + 24px);
+    height: 2px;
+    background-color: #68707C;
+    right: 50%;
+    top: -40px;
+} 
+
+
