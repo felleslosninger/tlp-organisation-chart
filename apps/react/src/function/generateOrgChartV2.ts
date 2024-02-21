@@ -153,13 +153,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   function provideLayoutClass(windowWidth: number) {
-    let layoutClass = " main";
+    let layoutClass = " org-chart main";
 
-    if (windowWidth < allowedBreakpoints.main) {
-      layoutClass = " laptop";
+    if (windowWidth < allowedBreakpoints.main && layouts.laptop) {
+      layoutClass = "org-chart laptop";
     }
-    if (windowWidth < allowedBreakpoints.laptop) {
-      layoutClass = " tablet";
+    if (windowWidth < allowedBreakpoints.laptop && layouts.tablet) {
+      layoutClass = "org-chart tablet";
     }
 
     return layoutClass;
@@ -171,10 +171,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   if (mainContainer) {
     //create element to hold the org chart
     const orgChart = createElement("div");
-    orgChart.className = "org-chart";
+    orgChart.className = provideLayoutClass(windowWidth);
     orgChart.role = "tree";
-
-    orgChart.className += provideLayoutClass(windowWidth);
 
     //insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
@@ -189,6 +187,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       //get the current layout
       currentLayout = provideLayout(windowWidth);
+
+      //set the class of the org chart to the current layout
+      orgChart.className = provideLayoutClass(windowWidth);
 
       //insert the org chart into the container
       orgChart.appendChild(createRowsWrapper(currentLayout));
