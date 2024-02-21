@@ -3,15 +3,15 @@ import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts } = data;
 
-  let allowedBreakpoints = { desktop: 1500, laptop: 992, tablet: 768 };
+  let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let windowWidth = window.innerWidth;
   let currentLayout = provideLayout(windowWidth);
 
   function provideLayout(windowWidth: number) {
-    let providedLayout = layouts.desktop;
+    let providedLayout = layouts.main;
 
     //if the window width is less than 1500px, set the currentLayout to laptop
-    if (windowWidth < allowedBreakpoints.desktop && layouts.laptop) {
+    if (windowWidth < allowedBreakpoints.main && layouts.laptop) {
       providedLayout = layouts.laptop;
     }
     //if the window width is less than 992px, set the currentLayout to tablet
@@ -152,15 +152,30 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return rows;
   }
 
-  //create element to hold the org chart
-  const orgChart = createElement("div");
-  orgChart.className = "org-chart";
-  orgChart.role = "tree";
+  function provideLayoutClass(windowWidth: number) {
+    let layoutClass = " main";
+
+    if (windowWidth < allowedBreakpoints.main) {
+      layoutClass = " laptop";
+    }
+    if (windowWidth < allowedBreakpoints.laptop) {
+      layoutClass = " tablet";
+    }
+
+    return layoutClass;
+  }
 
   //find the main container
   const mainContainer = document.getElementById(containerId);
 
   if (mainContainer) {
+    //create element to hold the org chart
+    const orgChart = createElement("div");
+    orgChart.className = "org-chart";
+    orgChart.role = "tree";
+
+    orgChart.className += provideLayoutClass(windowWidth);
+
     //insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 

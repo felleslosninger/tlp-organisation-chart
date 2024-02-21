@@ -56,7 +56,7 @@
     }
   ],
   "layouts": {
-    "desktop": {
+    "main": {
       "rows": [
         {
           "row": [
