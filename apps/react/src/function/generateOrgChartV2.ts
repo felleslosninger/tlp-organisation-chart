@@ -13,7 +13,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     //if the window width is less than 1500px, set the currentLayout to laptop
     if (windowWidth < allowedBreakpoints.desktop && layouts.laptop) {
       providedLayout = layouts.laptop;
-      console.log("laptop", currentLayout);
     }
     //if the window width is less than 992px, set the currentLayout to tablet
     if (windowWidth < allowedBreakpoints.laptop && layouts.tablet) {
