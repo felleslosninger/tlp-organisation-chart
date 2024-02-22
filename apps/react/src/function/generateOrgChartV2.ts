@@ -11,7 +11,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   ).providedLayout;
   //let layoutName = provideLayout(windowWidth, allowedBreakpoints).layoutName;
   let isMobile = windowWidth < allowedBreakpoints.tablet;
-  let rowHasWrapped = true;
 
   function provideLayout(
     windowWidth: number,
