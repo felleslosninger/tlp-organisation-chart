@@ -9,7 +9,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     windowWidth,
     allowedBreakpoints,
   ).providedLayout;
-  //let layoutName = provideLayout(windowWidth, allowedBreakpoints).layoutName;
+
   let isMobile = windowWidth < allowedBreakpoints.tablet;
 
   function provideLayout(
@@ -39,14 +39,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return nodes.find((node: Node) => node.id === id);
   }
 
-  function createChildren(children: string[]) {
+  function createChildren(parentSiblingsAmount: number, children: string[]) {
     const childrenList = createElement("ul");
     childrenList.className = "node-children";
+
+    if (parentSiblingsAmount === 2) {
+      childrenList.style.maxWidth = "300px";
+    }
 
     children.forEach((childId: string) => {
       const childData = findNodeById(childId);
       if (childData) {
-        console.log(childData);
         const childElement = createElement("li");
         childElement.innerHTML = childData.title;
         childElement.className = "node node-child";
@@ -132,7 +135,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
 
       if (column.component?.children) {
-        columnElement.appendChild(createChildren(column.component.children));
+        columnElement.appendChild(
+          createChildren(siblingsAmount, column.component.children),
+        );
       }
     } else {
       const test = createElement("div");
