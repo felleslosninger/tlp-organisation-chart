@@ -1,0 +1,218 @@
+{
+  "toc": [
+    { "title": "Direktør", "color": "#0062BA" },
+    { "title": "Avdeling", "color": "#1e2b3c" },
+    { "title": "Seksjon", "color": "#68707c" }
+  ],
+  "nodes": [
+    {
+      "title": "Direktør",
+      "id": "dir",
+      "backgroundColor": "#0062BA",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "HR",
+      "id": "hr",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "IT",
+      "id": "it",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Markedsføring",
+      "id": "markedsforing",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Fellesløsninger",
+      "id": "fel",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Bod",
+      "id": "bod",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Test",
+      "id": "test",
+      "backgroundColor": "#68707c",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Bod",
+      "id": "id1",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Test",
+      "id": "id2",
+      "backgroundColor": "#68707c",
+      "textColor": "#1e2b3c"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "rows": [
+        {
+          "row": [
+            {
+              "id": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "test",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "test",
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "test",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "test",
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
