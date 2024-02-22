@@ -126,12 +126,38 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   function createRow(row: Row, isLastRow: boolean) {
     const rowElement = createElement("div");
 
-    let rowClass = "row";
+    let rowClass = "row row-normal";
 
     if (isEvenOrOne(row.row.length)) {
       if (row.row.length <= 2) {
         rowClass += " row-center";
       }
+    }
+
+    if (
+      isLastRow &&
+      row.row.length === 5 &&
+      windowWidth < allowedBreakpoints.laptop
+    ) {
+      rowClass = "row row-last-5";
+    } else if (
+      isLastRow &&
+      row.row.length === 3 &&
+      windowWidth < allowedBreakpoints.laptop
+    ) {
+      rowClass = "row row-last-3";
+    } else if (
+      isLastRow &&
+      row.row.length === 4 &&
+      windowWidth < allowedBreakpoints.laptop
+    ) {
+      rowClass = "row row-last-4";
+    } else if (
+      isLastRow &&
+      row.row.length === 6 &&
+      windowWidth < allowedBreakpoints.main
+    ) {
+      rowClass = "row row-last-6";
     }
 
     rowElement.className = rowClass;
@@ -292,8 +318,8 @@ function calculateColumnWidth(
             additionalWidth = -16;
           }
         } else {
-          width = 100 / 2;
-          additionalWidth = -12;
+          width = 100 / 3;
+          additionalWidth = -(24 - 24 / siblingsAmount);
         }
       } else {
         if (siblingsAmount > 4) {
