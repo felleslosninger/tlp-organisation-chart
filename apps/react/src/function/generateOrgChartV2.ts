@@ -9,7 +9,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     windowWidth,
     allowedBreakpoints,
   ).providedLayout;
-  //let layoutName = provideLayout(windowWidth, allowedBreakpoints).layoutName;
+
   let isMobile = windowWidth < allowedBreakpoints.tablet;
 
   function provideLayout(
@@ -39,6 +39,29 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return nodes.find((node: Node) => node.id === id);
   }
 
+  function createChildren(parentSiblingsAmount: number, children: string[]) {
+    const childrenList = createElement("ul");
+    childrenList.className = "node-children";
+
+    if (parentSiblingsAmount === 2) {
+      childrenList.style.maxWidth = "300px";
+    }
+
+    children.forEach((childId: string) => {
+      const childData = findNodeById(childId);
+      if (childData) {
+        const childElement = createElement("li");
+        childElement.innerHTML = childData.title;
+        childElement.className = "node node-child";
+        childElement.style.color = childData.textColor;
+        childElement.style.backgroundColor = childData.backgroundColor;
+        childrenList.appendChild(childElement);
+      }
+    });
+
+    return childrenList;
+  }
+
   function createNode(
     node: Column,
     siblingsAmount: number,
@@ -48,6 +71,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const nodeData = findNodeById(node.id);
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
+
+      //if nodeData has border, provide border
+      if (nodeData.border) {
+        nodeElement.style.border = `2px ${nodeData.border} #000`;
+      }
 
       //if nodeElement is anchor, provide href
       if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
@@ -109,6 +137,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       if (innerColumn !== null) {
         columnElement.appendChild(innerColumn);
+      }
+
+      if (column.component?.children) {
+        columnElement.appendChild(
+          createChildren(siblingsAmount, column.component.children),
+        );
       }
     } else {
       const test = createElement("div");

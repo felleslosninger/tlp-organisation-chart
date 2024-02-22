@@ -9,6 +9,7 @@ export type Node = {
   backgroundColor: string;
   textColor: string;
   url?: string; // Optional
+  border?: "dotted" | "solid" | "dashed"; // Optional
 };
 
 export type Component = {

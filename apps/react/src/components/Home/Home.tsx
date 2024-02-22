@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import jsonData1 from "../../data/v2Data/data1.json";
-import jsonData2 from "../../data/v2Data/data2.json";
-import jsonData3 from "../../data/v2Data/data3.json";
-import jsonData4 from "../../data/v2Data/data4.json";
-import jsonData5 from "../../data/v2Data/data5.json";
+import jsonData1 from "../../data/data1.json";
+import jsonData2 from "../../data/data2.json";
+import jsonData3 from "../../data/data3.json";
+import jsonData4 from "../../data/data4.json";
+import jsonData5 from "../../data/data5.json";
+import jsonDigdir1 from "../../data/digdir1.json";
+import jsonDigdir2 from "../../data/digdir2.json";
 import { generateOrgChart } from "../../function/generateOrgChartV2";
 import { Button } from "@digdir/design-system-react";
 
 const Home = () => {
-  const [data, setData] = useState(jsonData4);
+  const [data, setData] = useState(jsonDigdir1);
 
   useEffect(() => {
     generateOrgChart(data, "test");
@@ -32,6 +34,8 @@ const Home = () => {
         <Button onClick={() => setData(jsonData3)}>Data 3</Button>
         <Button onClick={() => setData(jsonData4)}>Data 4</Button>  
         <Button onClick={() => setData(jsonData5)}>Data 5</Button>
+        <Button onClick={() => setData(jsonDigdir1)}>Digdir 1</Button>
+        <Button onClick={() => setData(jsonDigdir2)}>Digdir 2</Button>
       </div>
       <div id="test"></div>
     </div>
