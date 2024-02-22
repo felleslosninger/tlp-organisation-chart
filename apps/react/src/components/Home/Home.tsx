@@ -5,6 +5,7 @@ import jsonData3 from "../../data/data3.json";
 import jsonData4 from "../../data/data4.json";
 import jsonData5 from "../../data/data5.json";
 import jsonDigdir1 from "../../data/digdir1.json";
+import jsonDigdir2 from "../../data/digdir2.json";
 import { generateOrgChart } from "../../function/generateOrgChartV2";
 import { Button } from "@digdir/design-system-react";
 
@@ -34,6 +35,7 @@ const Home = () => {
         <Button onClick={() => setData(jsonData4)}>Data 4</Button>  
         <Button onClick={() => setData(jsonData5)}>Data 5</Button>
         <Button onClick={() => setData(jsonDigdir1)}>Digdir 1</Button>
+        <Button onClick={() => setData(jsonDigdir2)}>Digdir 2</Button>
       </div>
       <div id="test"></div>
     </div>

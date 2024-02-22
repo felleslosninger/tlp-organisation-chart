@@ -72,6 +72,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
 
+      //if nodeData has border, provide border
+      if (nodeData.border) {
+        nodeElement.style.border = `2px ${nodeData.border} #000`;
+      }
+
       //if nodeElement is anchor, provide href
       if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
         nodeElement.href = nodeData.url;

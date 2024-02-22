@@ -1,0 +1,277 @@
+{
+  "toc": [
+    { "title": "Direktør", "color": "#0062BA" },
+    { "title": "Avdeling", "color": "#1e2b3c" },
+    { "title": "Seksjon", "color": "#D2D5D8" }
+  ],
+  "nodes": [
+    {
+      "title": "Direktør",
+      "id": "dir",
+      "backgroundColor": "#0062BA",
+      "textColor": "white"
+    },
+    {
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Tilsynet for universell utforming av ikt",
+      "id": "tuu",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Verksomhetsstyring",
+      "id": "verk",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "HR",
+      "id": "hr",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Tverrgåande tjenester",
+      "id": "tverr",
+      "backgroundColor": "white",
+      "textColor": "#1e2b3c",
+      "border": "dashed"
+    },
+    {
+      "title": "Samanhengande tjenester og livshendelser",
+      "id": "sam",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Livshendingar",
+      "id": "liv",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Digitaliseringsrådet",
+      "id": "dig",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Medfinansieringsordninga",
+      "id": "medf",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Stimulab",
+      "id": "stim",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "StartOff",
+      "id": "start",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Innovation@digdir.no",
+      "id": "inno",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Digital strategi og samhandling",
+      "id": "digss",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Fellessystem",
+      "id": "felles",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Deling av data og informasjonsforvaltning",
+      "id": "deling",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Internasjonalt arbeid",
+      "id": "inter",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Informasjonssikkerhet",
+      "id": "info",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Kunnskap og analyse",
+      "id": "kunn",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Skate",
+      "id": "skate",
+      "backgroundColor": "#f28b82",
+      "textColor": "black"
+    },
+    {
+      "title": "Fellesløsninger",
+      "id": "fel",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Brukaropplevning og datadeling",
+      "id": "bod",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Tillitstjenester",
+      "id": "tillit",
+      "backgroundColor": "#aecbfa",
+      "textColor": "black"
+    },
+    {
+      "title": "Datadeling",
+      "id": "data",
+      "backgroundColor": "#aecbfa",
+      "textColor": "black"
+    },
+    {
+      "title": "Meldingsutveksling",
+      "id": "meld",
+      "backgroundColor": "#aecbfa",
+      "textColor": "black"
+    },
+    {
+      "title": "Portaler og brukeropplevelse",
+      "id": "port",
+      "backgroundColor": "#aecbfa",
+      "textColor": "black"
+    },
+    {
+      "title": "Tjenesteutvikling",
+      "id": "tjen",
+      "backgroundColor": "#aecbfa",
+      "textColor": "black"
+    },
+    {
+      "title": "Innsyn og oppslag",
+      "id": "innsyn",
+      "backgroundColor": "#aecbfa",
+      "textColor": "black"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "rows": [
+        {
+          "row": [
+            {
+              "id": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "tuu",
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "kom",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "hr",
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "verk",
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": "tverr",
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": "sam",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["liv", "dig", "medf", "stim", "start", "inno"]
+              }
+            },
+            {
+              "id": "digss",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": [
+                  "felles",
+                  "deling",
+                  "inter",
+                  "info",
+                  "kunn",
+                  "skate"
+                ]
+              }
+            },
+            {
+              "id": "fel",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["tillit", "data", "meld", "port", "tjen", "innsyn"]
+              }
+            },
+            {
+              "id": "bod",
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["tillit", "data", "meld", "port", "tjen", "innsyn"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
