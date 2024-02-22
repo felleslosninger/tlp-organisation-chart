@@ -39,6 +39,26 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return nodes.find((node: Node) => node.id === id);
   }
 
+  function createChildren(children: string[]) {
+    const childrenList = createElement("ul");
+    childrenList.className = "node-children";
+
+    children.forEach((childId: string) => {
+      const childData = findNodeById(childId);
+      if (childData) {
+        console.log(childData);
+        const childElement = createElement("li");
+        childElement.innerHTML = childData.title;
+        childElement.className = "node node-child";
+        childElement.style.color = childData.textColor;
+        childElement.style.backgroundColor = childData.backgroundColor;
+        childrenList.appendChild(childElement);
+      }
+    });
+
+    return childrenList;
+  }
+
   function createNode(
     node: Column,
     siblingsAmount: number,
@@ -109,6 +129,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       if (innerColumn !== null) {
         columnElement.appendChild(innerColumn);
+      }
+
+      if (column.component?.children) {
+        columnElement.appendChild(createChildren(column.component.children));
       }
     } else {
       const test = createElement("div");
