@@ -3,9 +3,8 @@
 }
 
 .node:focus-visible {
-    outline: 3px solid #fadf4b;
-    outline-offset: 3px;
-    box-shadow: 0 0 0 5px #1e2b3c;
+    outline: 3px solid #1e2b3c;
+    outline-offset: 2px;
 }
 
 .rows {

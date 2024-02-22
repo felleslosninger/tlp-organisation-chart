@@ -68,7 +68,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     indexInRow: number,
     isLastRow: boolean,
   ) {
-    const nodeData = findNodeById(node.id);
+    const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
 
@@ -107,6 +107,20 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
   }
 
+  function createSpecialColumn() {
+    const columnElement = createElement("div");
+    columnElement.className = "column column-special";
+
+    const nodesWrapper = createElement("div");
+    nodesWrapper.className = "nodes-wrapper";
+
+    const children = createChildren(2, ["1", "2"]);
+    columnElement.appendChild(children);
+
+    columnElement.appendChild(nodesWrapper);
+    return columnElement;
+  }
+
   function createColumn(
     column: Column,
     columnWidth: number,
@@ -125,7 +139,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       columnElement.className += " column-flex-start";
     }
 
-    if (typeof column.id === "string") {
+    //if typeof column.is is array, create a special column
+    console.log("column.id", column.id, Array.isArray(column.id));
+
+    if (column.id.length === 1) {
       const innerColumn = createNode(
         column,
         siblingsAmount,
@@ -145,13 +162,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         );
       }
     } else {
-      const test = createElement("div");
-      columnElement.style.width = `${columnWidth}%`;
-      test.className = "node";
-      test.style.backgroundColor = "red";
-      test.innerHTML = "Special node";
-
-      columnElement.appendChild(test);
+      //if column.id is an array, create a special column
+      //this special column allows nodes to share children
+      console.log("createSpecialColumn");
+      const specialColumn = createSpecialColumn();
+      columnElement.appendChild(specialColumn);
     }
     return columnElement;
   }

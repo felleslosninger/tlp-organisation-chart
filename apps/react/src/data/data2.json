@@ -61,7 +61,7 @@
         {
           "row": [
             {
-              "id": "dir",
+              "id": ["dir"],
               "alignment": "center"
             }
           ]
@@ -69,25 +69,7 @@
         {
           "row": [
             {
-              "id": "hr",
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": "kom",
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": "fel",
+              "id": ["hr"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -96,7 +78,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -105,22 +87,40 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -133,7 +133,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -142,12 +142,12 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {

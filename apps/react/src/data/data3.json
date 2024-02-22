@@ -96,7 +96,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -105,22 +105,22 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -133,7 +133,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -142,12 +142,12 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -164,7 +164,7 @@
         {
           "row": [
             {
-              "id": "dir",
+              "id": ["dir"],
               "alignment": "center"
             }
           ]
@@ -172,25 +172,7 @@
         {
           "row": [
             {
-              "id": "hr",
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": "kom",
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": "fel",
+              "id": ["hr"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -199,7 +181,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -208,17 +190,7 @@
               }
             },
             {
-              "id": "fel",
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": "fel",
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -227,7 +199,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -236,12 +208,26 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "kom",
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -250,7 +236,21 @@
               }
             },
             {
-              "id": "kom",
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": ["kom"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -267,7 +267,7 @@
         {
           "row": [
             {
-              "id": "dir",
+              "id": ["dir"],
               "alignment": "center"
             }
           ]
@@ -275,7 +275,7 @@
         {
           "row": [
             {
-              "id": "hr",
+              "id": ["hr"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -284,7 +284,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -293,7 +293,7 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -302,7 +302,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -311,7 +311,7 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -320,12 +320,12 @@
         {
           "row": [
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -334,7 +334,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -343,7 +343,7 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -352,7 +352,7 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -361,7 +361,7 @@
               }
             },
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center",
               "component": {
