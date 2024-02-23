@@ -140,8 +140,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
 
     //if typeof column.is is array, create a special column
-    console.log("column.id", column.id, Array.isArray(column.id));
-
     if (column.id.length === 1) {
       const innerColumn = createNode(
         column,
@@ -164,7 +162,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     } else {
       //if column.id is an array, create a special column
       //this special column allows nodes to share children
-      console.log("createSpecialColumn");
       const specialColumn = createSpecialColumn();
       columnElement.appendChild(specialColumn);
     }
@@ -279,28 +276,36 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     //insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
+    //set the last breakpoint
+    let lastBreakpoint = getBreakpointName(windowWidth);
+
     //add event listener to the window to listen for resize
     window.addEventListener("resize", () => {
-      //clear the org chart
-      orgChart.innerHTML = "";
-
       //get the current window width and provide the layout
       windowWidth = window.innerWidth;
-
       //check if the window width is less than 768px
       isMobile = windowWidth < allowedBreakpoints.tablet;
 
-      //get the current layout
-      currentLayout = provideLayout(
-        windowWidth,
-        allowedBreakpoints,
-      ).providedLayout;
+      if (useNewBreakpoint(lastBreakpoint, windowWidth)) {
+        //set the last breakpoint
+        lastBreakpoint = getBreakpointName(windowWidth);
+        //get the current layout
+        currentLayout = provideLayout(
+          windowWidth,
+          allowedBreakpoints,
+        ).providedLayout;
 
-      //set the class of the org chart to the current layout
-      orgChart.className = provideLayoutClass(windowWidth);
+        //set the class of the org chart to the current layout
+        orgChart.className = provideLayoutClass(windowWidth);
 
-      //insert the org chart into the container
-      orgChart.appendChild(createRowsWrapper(currentLayout));
+        //clear the org chart
+        orgChart.innerHTML = "";
+
+        //insert the org chart into the container
+        orgChart.appendChild(createRowsWrapper(currentLayout));
+
+        console.log("new layout", lastBreakpoint);
+      }
     });
 
     //clear the container for all existing children
@@ -522,5 +527,41 @@ function createNodeLineClass(
   } else {
     className = "";
     return className;
+  }
+}
+
+function getBreakpointName(width: number) {
+  let lastBreakpoint =
+    width > 1500
+      ? "main"
+      : width > 992
+        ? "laptop"
+        : width > 768
+          ? "tablet"
+          : "mobile";
+  return lastBreakpoint;
+}
+
+function useNewBreakpoint(
+  lastBreakpoint: string,
+  windowWidth: number,
+): boolean {
+  switch (lastBreakpoint) {
+    case "main":
+      // For "main", only change the breakpoint if we go below or above 1500
+      return windowWidth < 1500;
+    case "laptop":
+      // For "laptop", there's only a new breakpoint if we go outside of 992 to 1500
+      return windowWidth > 1500 || windowWidth < 992;
+    case "tablet":
+      // For "tablet", we don't change when going below 992 since that's already covered by "mobile"
+      // But we switch if we go above 992 or below 768
+      return windowWidth > 992 || windowWidth < 768;
+    case "mobile":
+      // For "mobile", we switch to a new breakpoint if we are above 768
+      return windowWidth > 768;
+    default:
+      // If "lastBreakpoint" is not one of the above, we assume no change
+      return false;
   }
 }
