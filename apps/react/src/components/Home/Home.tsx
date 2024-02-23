@@ -12,7 +12,7 @@ import { generateOrgChart } from "../../function/generateOrgChartV2";
 import { Button } from "@digdir/design-system-react";
 
 const Home = () => {
-  const [data, setData] = useState(jsonDigdir3);
+  const [data, setData] = useState(jsonData1);
 
   useEffect(() => {
     generateOrgChart(data, "test");

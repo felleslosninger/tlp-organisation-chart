@@ -4,16 +4,16 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts } = data;
 
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
-  let mainContainerWith = window.innerWidth;
+  let mainContainerWidth = 0;
   let currentLayout = provideLayout(
-    mainContainerWith,
+    mainContainerWidth,
     allowedBreakpoints,
   ).providedLayout;
 
-  let isMobile = mainContainerWith < allowedBreakpoints.tablet;
+  let isMobile = false;
 
   function provideLayout(
-    mainContainerWith: number,
+    mainContainerWidth: number,
     breakpoints: { main: number; laptop: number; tablet: number },
   ) {
     let providedLayout = layouts.main;
@@ -22,12 +22,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const { main, laptop } = breakpoints;
 
     //if the window width is less than 1500px, set the currentLayout to laptop
-    if (mainContainerWith < main && layouts.laptop) {
+    if (mainContainerWidth < main && layouts.laptop) {
       providedLayout = layouts.laptop;
       layoutName = "laptop";
     }
     //if the window width is less than 992px, set the currentLayout to tablet
-    if (mainContainerWith < laptop && layouts.tablet) {
+    if (mainContainerWidth < laptop && layouts.tablet) {
       providedLayout = layouts.tablet;
       layoutName = "tablet";
     }
@@ -96,7 +96,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       nodeElement.className += createNodeLineClass(
         indexInRow,
         siblingsAmount,
-        mainContainerWith,
+        mainContainerWidth,
         allowedBreakpoints,
         isLastRow,
       );
@@ -182,25 +182,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (
       isLastRow &&
       row.row.length === 5 &&
-      mainContainerWith < allowedBreakpoints.laptop
+      mainContainerWidth < allowedBreakpoints.laptop
     ) {
       rowClass = "row row-last-5";
     } else if (
       isLastRow &&
       row.row.length === 3 &&
-      mainContainerWith < allowedBreakpoints.laptop
+      mainContainerWidth < allowedBreakpoints.laptop
     ) {
       rowClass = "row row-last-3";
     } else if (
       isLastRow &&
       row.row.length === 4 &&
-      mainContainerWith < allowedBreakpoints.laptop
+      mainContainerWidth < allowedBreakpoints.laptop
     ) {
       rowClass = "row row-last-4";
     } else if (
       isLastRow &&
       row.row.length === 6 &&
-      mainContainerWith < allowedBreakpoints.main
+      mainContainerWidth < allowedBreakpoints.main
     ) {
       rowClass = "row row-last-6";
     }
@@ -215,7 +215,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const columnWidth = calculateColumnWidth(
         row.row.length,
         count,
-        mainContainerWith,
+        mainContainerWidth,
         allowedBreakpoints,
         isLastRow,
       );
@@ -251,13 +251,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return rows;
   }
 
-  function provideLayoutClass(mainContainerWith: number) {
+  function provideLayoutClass(mainContainerWidth: number) {
     let layoutClass = " org-chart main";
 
-    if (mainContainerWith < allowedBreakpoints.main && layouts.laptop) {
+    if (mainContainerWidth < allowedBreakpoints.main && layouts.laptop) {
       layoutClass = "org-chart laptop";
     }
-    if (mainContainerWith < allowedBreakpoints.laptop && layouts.tablet) {
+    if (mainContainerWidth < allowedBreakpoints.laptop && layouts.tablet) {
       layoutClass = "org-chart tablet";
     }
 
@@ -268,45 +268,69 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   const mainContainer = document.getElementById(containerId);
 
   if (mainContainer) {
-    //create element to hold the org chart
-    const orgChart = createElement("div");
-    orgChart.className = provideLayoutClass(mainContainerWith);
+    // Create element to hold the org chart
+    const orgChart = document.createElement("div");
+
+    orgChart.className = provideLayoutClass(mainContainerWidth);
+
     orgChart.role = "tree";
 
-    //insert the org chart into the container
+    // Initial setup based on mainContainer's current width
+    mainContainerWidth = mainContainer.offsetWidth;
+
+    // Check if the window width is less than 768px
+    isMobile = mainContainerWidth < allowedBreakpoints.tablet;
+
+    // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
-    //set the last breakpoint
-    let lastBreakpoint = getBreakpointName(mainContainerWith);
+    // Set the last breakpoint based on mainContainer's width
+    let lastBreakpoint = getBreakpointName(mainContainerWidth);
 
-    //add event listener to the window to listen for resize
-    window.addEventListener("resize", () => {
-      //get the current window width and provide the layout
-      mainContainerWith = window.innerWidth;
-      //check if the window width is less than 768px
-      isMobile = mainContainerWith < allowedBreakpoints.tablet;
+    // Function to update layout based on mainContainer's width
+    const updateLayout = () => {
+      // Update variables based on the current state
+      mainContainerWidth = mainContainer.offsetWidth;
 
-      if (provideNewBreakpoint(lastBreakpoint, mainContainerWith)) {
-        //set the last breakpoint
-        lastBreakpoint = getBreakpointName(mainContainerWith);
-        //get the current layout
+      // Check if the window width is less than 768px
+      isMobile = mainContainerWidth < allowedBreakpoints.tablet;
+
+      if (provideNewBreakpoint(lastBreakpoint, mainContainerWidth)) {
+        lastBreakpoint = getBreakpointName(mainContainerWidth);
+
         currentLayout = provideLayout(
-          mainContainerWith,
+          mainContainerWidth,
           allowedBreakpoints,
         ).providedLayout;
 
-        //set the class of the org chart to the current layout
-        orgChart.className = provideLayoutClass(mainContainerWith);
+        // Update org chart's class to reflect the current layout
+        orgChart.className = provideLayoutClass(mainContainerWidth);
 
-        //clear the org chart
+        // Clear and re-insert the org chart into the container
         orgChart.innerHTML = "";
-
-        //insert the org chart into the container
         orgChart.appendChild(createRowsWrapper(currentLayout));
       }
+    };
+
+    let timeoutId: any = null;
+    const throttleUpdateLayout = () => {
+      if (timeoutId === null) {
+        timeoutId = setTimeout(() => {
+          updateLayout();
+          timeoutId = null;
+        }, 100); // Vent 100ms før du kjører updateLayout igjen
+      }
+    };
+
+    // Create a ResizeObserver to watch for changes in size of mainContainer
+    const resizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(throttleUpdateLayout); // Use requestAnimationFrame for optimal updating
     });
 
-    //clear the container for all existing children
+    // Start observing the mainContainer
+    resizeObserver.observe(mainContainer);
+
+    // Clear the container of all existing children and add the org chart
     mainContainer.innerHTML = "";
     mainContainer.appendChild(orgChart);
 
@@ -335,7 +359,7 @@ function isOdd(number: number) {
 function calculateColumnWidth(
   siblingsAmount: number,
   indexInRow: number,
-  mainContainerWith: number,
+  mainContainerWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
 ) {
@@ -346,7 +370,7 @@ function calculateColumnWidth(
   const { main, laptop, tablet } = breakpoints;
 
   if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    if (mainContainerWith > main) {
+    if (mainContainerWidth > main) {
       if (isLastRow) {
         width = 100 / siblingsAmount;
       } else {
@@ -358,7 +382,7 @@ function calculateColumnWidth(
         }
       }
     }
-    if (mainContainerWith <= main && mainContainerWith > laptop) {
+    if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       if (isLastRow) {
         if (siblingsAmount > 3) {
           if (indexInRow <= 2) {
@@ -388,7 +412,7 @@ function calculateColumnWidth(
       }
     }
 
-    if (mainContainerWith <= laptop && mainContainerWith > tablet) {
+    if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
       if (siblingsAmount > 2) {
         width = 100 / 2;
         additionalWidth = -(24 / 2);
@@ -403,14 +427,14 @@ function calculateColumnWidth(
       }
     }
   } else if (siblingsAmount > 2) {
-    if (mainContainerWith > tablet) {
+    if (mainContainerWidth > tablet) {
       width = 100 / siblingsAmount;
     }
-    if (mainContainerWith <= main && mainContainerWith > laptop) {
+    if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       width = 100 / 4;
       additionalWidth = -18;
     }
-    if (mainContainerWith <= laptop && mainContainerWith > tablet) {
+    if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
       width = 100 / 2;
       additionalWidth = -12;
     }
@@ -423,7 +447,7 @@ function calculateColumnWidth(
 function createNodeLineClass(
   indexInRow: number,
   siblingsAmount: number,
-  mainContainerWith: number,
+  mainContainerWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
 ) {
@@ -442,7 +466,7 @@ function createNodeLineClass(
 
   if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
     //if the window width is greater than 1500px
-    if (mainContainerWith > main) {
+    if (mainContainerWidth > main) {
       let lowerHalf = (siblingsAmount - 1) / 2;
       if (indexInRow <= lowerHalf) {
         className = " node-line-up-right node-line-up";
@@ -453,7 +477,7 @@ function createNodeLineClass(
     }
 
     //if the window width is less than 1500px and greater than 992px
-    if (mainContainerWith <= main && mainContainerWith > laptop) {
+    if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       let lowerHalf = (siblingsAmount - 1) / 2;
       let upperHalf = siblingsAmount - lowerHalf;
       if (isLastRow) {
@@ -481,7 +505,7 @@ function createNodeLineClass(
       return className;
     }
 
-    if (mainContainerWith <= laptop && mainContainerWith > tablet) {
+    if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
       if (isOdd(indexInRow)) {
         className = " node-line-up-right-half node-line-up";
       } else {
@@ -490,14 +514,14 @@ function createNodeLineClass(
       return className;
     }
   } else if (siblingsAmount > 2) {
-    if (mainContainerWith > main) {
+    if (mainContainerWidth > main) {
       if (indexInRow <= siblingsAmount / 2) {
         className = " node-line-up-right node-line-up";
       } else {
         className = " node-line-up-left node-line-up";
       }
       return className;
-    } else if (mainContainerWith <= main && mainContainerWith > laptop) {
+    } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       if (siblingsAmount <= 4) {
         if (indexInRow <= siblingsAmount / 2) {
           className = " node-line-up-right node-line-up";
@@ -514,7 +538,7 @@ function createNodeLineClass(
         }
       }
       return className;
-    } else if (mainContainerWith <= laptop && mainContainerWith > tablet) {
+    } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
       if (isOdd(indexInRow) || indexInRow === 1) {
         className = " node-line-up-right node-line-up";
       } else {
@@ -529,7 +553,7 @@ function createNodeLineClass(
 }
 
 function getBreakpointName(width: number) {
-  let lastBreakpoint =
+  let breakpointName =
     width > 1500
       ? "main"
       : width > 992
@@ -537,27 +561,27 @@ function getBreakpointName(width: number) {
         : width > 768
           ? "tablet"
           : "mobile";
-  return lastBreakpoint;
+  return breakpointName;
 }
 
 function provideNewBreakpoint(
   lastBreakpoint: string,
-  mainContainerWith: number,
+  mainContainerWidth: number,
 ): boolean {
   switch (lastBreakpoint) {
     case "main":
       // For "main", only change the breakpoint if we go below or above 1500
-      return mainContainerWith < 1500;
+      return mainContainerWidth < 1500;
     case "laptop":
       // For "laptop", there's only a new breakpoint if we go outside of 992 to 1500
-      return mainContainerWith > 1500 || mainContainerWith < 992;
+      return mainContainerWidth > 1500 || mainContainerWidth < 992;
     case "tablet":
       // For "tablet", we don't change when going below 992 since that's already covered by "mobile"
       // But we switch if we go above 992 or below 768
-      return mainContainerWith > 992 || mainContainerWith < 768;
+      return mainContainerWidth > 992 || mainContainerWidth < 768;
     case "mobile":
       // For "mobile", we switch to a new breakpoint if we are above 768
-      return mainContainerWith > 768;
+      return mainContainerWidth > 768;
     default:
       // If "lastBreakpoint" is not one of the above, we assume no change
       return false;
