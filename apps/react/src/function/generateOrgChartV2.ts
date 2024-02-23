@@ -107,17 +107,52 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
   }
 
-  function createSpecialColumn() {
+  function createSpecialColumn(column: Column) {
     const columnElement = createElement("div");
-    columnElement.className = "column column-special";
+    columnElement.className = "column-special";
 
     const nodesWrapper = createElement("div");
     nodesWrapper.className = "nodes-wrapper";
 
-    const children = createChildren(2, ["1", "2"]);
-    columnElement.appendChild(children);
+    //if column.id is an array, create a special column
+    if (Array.isArray(column.id)) {
+      column.id.forEach((nodeId: string) => {
+        const nodeData = findNodeById(nodeId);
+        if (nodeData) {
+          const nodeElement = document.createElement(
+            nodeData.url ? "a" : "div",
+          );
+
+          //if nodeData has border, provide border
+          if (nodeData.border) {
+            nodeElement.style.border = `2px ${nodeData.border} #000`;
+          }
+
+          //if nodeElement is anchor, provide href
+          if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
+            nodeElement.href = nodeData.url;
+          }
+          nodeElement.className = "node ";
+          nodeElement.tabIndex = 0;
+          nodeElement.style.backgroundColor = nodeData.backgroundColor;
+          nodeElement.style.color = nodeData.textColor;
+          nodeElement.innerHTML = nodeData.title;
+          nodesWrapper.appendChild(nodeElement);
+        }
+      });
+    }
 
     columnElement.appendChild(nodesWrapper);
+
+    if (column.component?.children) {
+      columnElement.appendChild(
+        createChildren(
+          3,
+          column.component.children ? column.component.children : [],
+        ),
+      );
+    }
+
     return columnElement;
   }
 
@@ -162,7 +197,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     } else {
       //if column.id is an array, create a special column
       //this special column allows nodes to share children
-      const specialColumn = createSpecialColumn();
+      const specialColumn = createSpecialColumn(column);
       columnElement.appendChild(specialColumn);
     }
     return columnElement;

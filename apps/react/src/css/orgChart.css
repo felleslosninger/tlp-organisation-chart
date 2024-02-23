@@ -318,3 +318,15 @@
 }
 
 
+.column-special {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.nodes-wrapper{
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+}
