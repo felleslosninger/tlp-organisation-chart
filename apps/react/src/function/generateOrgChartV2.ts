@@ -107,9 +107,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
   }
 
-  function createSpecialColumn(column: Column) {
+  function createSpecialColumn(
+    column: Column,
+    columnWidth: number,
+    siblingsAmount: number,
+    additionalWidth: number,
+    indexInRow: number,
+    isLastRow: boolean,
+  ) {
     const columnElement = createElement("div");
     columnElement.className = "column-special";
+    columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
 
     const nodesWrapper = createElement("div");
     nodesWrapper.className = "nodes-wrapper";
@@ -174,32 +182,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       columnElement.className += " column-flex-start";
     }
 
-    //if typeof column.is is array, create a special column
-    if (column.id.length === 1) {
-      const innerColumn = createNode(
-        column,
-        siblingsAmount,
-        indexInRow,
-        isLastRow,
-      );
+    const innerColumn = createNode(
+      column,
+      siblingsAmount,
+      indexInRow,
+      isLastRow,
+    );
 
-      columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
 
-      if (innerColumn !== null) {
-        columnElement.appendChild(innerColumn);
-      }
-
-      if (column.component?.children) {
-        columnElement.appendChild(
-          createChildren(siblingsAmount, column.component.children),
-        );
-      }
-    } else {
-      //if column.id is an array, create a special column
-      //this special column allows nodes to share children
-      const specialColumn = createSpecialColumn(column);
-      columnElement.appendChild(specialColumn);
+    if (innerColumn !== null) {
+      columnElement.appendChild(innerColumn);
     }
+
+    if (column.component?.children) {
+      columnElement.appendChild(
+        createChildren(siblingsAmount, column.component.children),
+      );
+    }
+
     return columnElement;
   }
 
@@ -244,8 +245,24 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     let count = 0;
 
+    let indexToColumnsWithSpecialColumnList: number[] = [];
+
+    let rowContainsSpecialColumn = false;
+
     row.row.forEach((column: Column) => {
       count++;
+
+      if (Array.isArray(column.id) && column.id.length > 1) {
+        rowContainsSpecialColumn = true;
+      }
+
+      if (rowContainsSpecialColumn) {
+        row.row.forEach((column: Column, index: number) => {
+          if (column.id.length > 1) {
+            indexToColumnsWithSpecialColumnList.push(index);
+          }
+        });
+      }
 
       const columnWidth = calculateColumnWidth(
         row.row.length,
@@ -253,18 +270,33 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         mainContainerWidth,
         allowedBreakpoints,
         isLastRow,
+        rowContainsSpecialColumn,
+        indexToColumnsWithSpecialColumnList,
       );
 
-      rowElement.appendChild(
-        createColumn(
-          column,
-          columnWidth.width,
-          row.row.length,
-          columnWidth.additionalWidth,
-          count,
-          isLastRow,
-        ),
-      );
+      if (!rowContainsSpecialColumn) {
+        rowElement.appendChild(
+          createColumn(
+            column,
+            columnWidth.width,
+            row.row.length,
+            columnWidth.additionalWidth,
+            count,
+            isLastRow,
+          ),
+        );
+      } else {
+        rowElement.appendChild(
+          createSpecialColumn(
+            column,
+            columnWidth.width,
+            row.row.length,
+            columnWidth.additionalWidth,
+            count,
+            isLastRow,
+          ),
+        );
+      }
     });
 
     return rowElement;
@@ -375,6 +407,118 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   return null;
 }
 
+//function to calculate the width of the columns
+//TODO: Refactor this function to make it more readable
+function calculateColumnWidth(
+  siblingsAmount: number,
+  indexInRow: number,
+  mainContainerWidth: number,
+  breakpoints: { main: number; laptop: number; tablet: number },
+  isLastRow: boolean,
+  rowContainsSpecialColumn: boolean,
+  indexToSpecialColumnList: number[],
+) {
+  let width = 100;
+  let additionalWidth = 0;
+
+  //destructuring the breakpoints object
+  const { main, laptop, tablet } = breakpoints;
+  if (!rowContainsSpecialColumn) {
+    if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+      if (mainContainerWidth > main) {
+        if (isLastRow) {
+          width = 100 / siblingsAmount;
+        } else {
+          if (indexInRow < siblingsAmount / 2) {
+            width = 100 / (siblingsAmount - 1);
+            additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+          } else {
+            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+          }
+        }
+      }
+      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+        if (isLastRow) {
+          if (siblingsAmount > 3) {
+            if (indexInRow <= 2) {
+              width = 100 / 2;
+              additionalWidth = -12;
+            } else {
+              width = 100 / 3;
+              additionalWidth = -16;
+            }
+          } else {
+            width = 100 / 3;
+            additionalWidth = -(24 - 24 / siblingsAmount);
+          }
+        } else {
+          if (siblingsAmount > 4) {
+            width = 100 / 4;
+            additionalWidth = -(24 - (siblingsAmount + 1));
+          } else {
+            if (indexInRow < siblingsAmount / 2) {
+              width = 100 / (siblingsAmount - 1);
+              additionalWidth = -(24 / 2);
+            } else {
+              width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+              additionalWidth = -(24 - (siblingsAmount + 3));
+            }
+          }
+        }
+      }
+
+      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+        if (siblingsAmount > 2) {
+          width = 100 / 2;
+          additionalWidth = -(24 / 2);
+        } else {
+          if (indexInRow < siblingsAmount / 2) {
+            width = 100 / (siblingsAmount - 1);
+            additionalWidth = -(24 / 2);
+          } else {
+            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+            additionalWidth = -(24 - (siblingsAmount + 3));
+          }
+        }
+      }
+    } else if (siblingsAmount > 2) {
+      if (mainContainerWidth > tablet) {
+        width = 100 / siblingsAmount;
+      }
+      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+        width = 100 / 4;
+        additionalWidth = -18;
+      }
+      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+        width = 100 / 2;
+        additionalWidth = -12;
+      }
+    }
+  } else {
+    //if row contains special column add the length of the special column to the siblingsAmount, because the special column takes up double node space
+    siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
+    if (siblingsAmount === 2) {
+      width = 100 / siblingsAmount;
+    }
+    if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+      if (mainContainerWidth > main) {
+        if (siblingsAmount === 2) {
+          width = 100 / siblingsAmount;
+        }
+        if (
+          indexInRow < siblingsAmount / 2 &&
+          indexToSpecialColumnList.includes(indexInRow)
+        ) {
+          width = 50;
+          additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+        }
+      }
+    }
+  }
+
+  return { width, additionalWidth };
+}
+
 function createElement(type: string) {
   const element = document.createElement(type);
   return element;
@@ -387,95 +531,6 @@ function isEvenOrOne(num: number) {
 
 function isOdd(number: number) {
   return number % 2 !== 0;
-}
-
-//function to calculate the width of the columns
-//TODO: Refactor this function to make it more readable
-function calculateColumnWidth(
-  siblingsAmount: number,
-  indexInRow: number,
-  mainContainerWidth: number,
-  breakpoints: { main: number; laptop: number; tablet: number },
-  isLastRow: boolean,
-) {
-  let width = 100;
-  let additionalWidth = 0;
-
-  //destructuring the breakpoints object
-  const { main, laptop, tablet } = breakpoints;
-
-  if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    if (mainContainerWidth > main) {
-      if (isLastRow) {
-        width = 100 / siblingsAmount;
-      } else {
-        if (indexInRow < siblingsAmount / 2) {
-          width = 100 / (siblingsAmount - 1);
-          additionalWidth = 24 / ((siblingsAmount - 1) / 2);
-        } else {
-          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-        }
-      }
-    }
-    if (mainContainerWidth <= main && mainContainerWidth > laptop) {
-      if (isLastRow) {
-        if (siblingsAmount > 3) {
-          if (indexInRow <= 2) {
-            width = 100 / 2;
-            additionalWidth = -12;
-          } else {
-            width = 100 / 3;
-            additionalWidth = -16;
-          }
-        } else {
-          width = 100 / 3;
-          additionalWidth = -(24 - 24 / siblingsAmount);
-        }
-      } else {
-        if (siblingsAmount > 4) {
-          width = 100 / 4;
-          additionalWidth = -(24 - (siblingsAmount + 1));
-        } else {
-          if (indexInRow < siblingsAmount / 2) {
-            width = 100 / (siblingsAmount - 1);
-            additionalWidth = -(24 / 2);
-          } else {
-            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-            additionalWidth = -(24 - (siblingsAmount + 3));
-          }
-        }
-      }
-    }
-
-    if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      if (siblingsAmount > 2) {
-        width = 100 / 2;
-        additionalWidth = -(24 / 2);
-      } else {
-        if (indexInRow < siblingsAmount / 2) {
-          width = 100 / (siblingsAmount - 1);
-          additionalWidth = -(24 / 2);
-        } else {
-          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-          additionalWidth = -(24 - (siblingsAmount + 3));
-        }
-      }
-    }
-  } else if (siblingsAmount > 2) {
-    if (mainContainerWidth > tablet) {
-      width = 100 / siblingsAmount;
-    }
-    if (mainContainerWidth <= main && mainContainerWidth > laptop) {
-      width = 100 / 4;
-      additionalWidth = -18;
-    }
-    if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      width = 100 / 2;
-      additionalWidth = -12;
-    }
-  }
-
-  return { width, additionalWidth };
 }
 
 //function to create the line between the nodes

@@ -319,11 +319,6 @@
                 "type": "nodeList",
                 "children": ["it", "markedsforing", "hr"]
               }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
             }
           ]
         }
