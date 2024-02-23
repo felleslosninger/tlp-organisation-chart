@@ -69,19 +69,6 @@
         {
           "row": [
             {
-              "id": ["hr", "kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "fel"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
               "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
@@ -145,13 +132,17 @@
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
             },
             {
-              "id": ["fel"],
+              "id": ["kom"],
               "parent": "dir",
-              "alignment": "center"
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
             },
             {
               "id": ["kom", "fel"],
@@ -181,156 +172,11 @@
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
                 "children": ["it", "markedsforing", "hr"]
               }
             },
             {
               "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {

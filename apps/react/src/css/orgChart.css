@@ -132,9 +132,8 @@
 @media screen and (max-width: 1500px){
   .row, .row-last-3, .row-last-5{
     flex-wrap: wrap;
-  }
-  
-}
+  } 
+} 
 
 .row:first-child{
   padding-top: 0;

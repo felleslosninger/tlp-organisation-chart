@@ -245,24 +245,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     let count = 0;
 
+    let rowContainsSpecialColumns = false;
+    row.row.forEach((column: Column) => {
+      if (Array.isArray(column.id) && column.id.length > 1) {
+        rowContainsSpecialColumns = true;
+      }
+    });
+
     let indexToColumnsWithSpecialColumnList: number[] = [];
 
-    let rowContainsSpecialColumn = false;
+    if (rowContainsSpecialColumns) {
+      row.row.forEach((column: Column, index: number) => {
+        if (column.id.length > 1) {
+          indexToColumnsWithSpecialColumnList.push(index + 1);
+        }
+      });
+    }
 
     row.row.forEach((column: Column) => {
       count++;
-
-      if (Array.isArray(column.id) && column.id.length > 1) {
-        rowContainsSpecialColumn = true;
-      }
-
-      if (rowContainsSpecialColumn) {
-        row.row.forEach((column: Column, index: number) => {
-          if (column.id.length > 1) {
-            indexToColumnsWithSpecialColumnList.push(index);
-          }
-        });
-      }
 
       const columnWidth = calculateColumnWidth(
         row.row.length,
@@ -270,11 +271,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         mainContainerWidth,
         allowedBreakpoints,
         isLastRow,
-        rowContainsSpecialColumn,
+        rowContainsSpecialColumns,
         indexToColumnsWithSpecialColumnList,
       );
 
-      if (!rowContainsSpecialColumn) {
+      if (!rowContainsSpecialColumns) {
         rowElement.appendChild(
           createColumn(
             column,
@@ -297,6 +298,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           ),
         );
       }
+      rowElement.className = "row " + columnWidth.additionalClass;
     });
 
     return rowElement;
@@ -418,6 +420,7 @@ function calculateColumnWidth(
   rowContainsSpecialColumn: boolean,
   indexToSpecialColumnList: number[],
 ) {
+  let additionalClass = "";
   let width = 100;
   let additionalWidth = 0;
 
@@ -495,28 +498,78 @@ function calculateColumnWidth(
       }
     }
   } else {
+    additionalClass = " special-row";
     //if row contains special column add the length of the special column to the siblingsAmount, because the special column takes up double node space
     siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
-    if (siblingsAmount === 2) {
-      width = 100 / siblingsAmount;
-    }
-    if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-      if (mainContainerWidth > main) {
-        if (siblingsAmount === 2) {
-          width = 100 / siblingsAmount;
-        }
-        if (
-          indexInRow < siblingsAmount / 2 &&
-          indexToSpecialColumnList.includes(indexInRow)
-        ) {
+
+    if (mainContainerWidth > main) {
+      console.log("main");
+      if (siblingsAmount === 3) {
+        width = 50;
+        additionalWidth = -12;
+      } else if (siblingsAmount === 4) {
+        if (indexToSpecialColumnList.includes(indexInRow)) {
           width = 50;
-          additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+          additionalWidth = -18;
+        } else {
+          width = 25;
+          additionalWidth = -18;
+        }
+      }
+    } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+      console.log("laptop");
+      if (siblingsAmount === 3) {
+        width = 50;
+        additionalWidth = -12;
+      } else if (siblingsAmount === 4) {
+        if (indexToSpecialColumnList.includes(indexInRow)) {
+          width = 50;
+          additionalWidth = -18;
+        } else {
+          width = 25;
+          additionalWidth = -18;
+        }
+      }
+    } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+      console.log("tablet");
+      if (siblingsAmount === 3) {
+        width = 100;
+        additionalWidth = -12;
+      } else if (siblingsAmount === 4) {
+        if (indexToSpecialColumnList.includes(indexInRow)) {
+          width = 100;
+        } else {
+          width = 50;
+          additionalWidth = -12;
         }
       }
     }
+    // if (siblingsAmount === 3) {
+    //   width = 100 / 2;
+    //   console.log("1");
+    // } else if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+    //   if (mainContainerWidth > main) {
+    //     if (
+    //       indexInRow < siblingsAmount / 2 &&
+    //       indexToSpecialColumnList.includes(indexInRow)
+    //     ) {
+    //       width = 50;
+    //       additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+    //     }
+    //     if (
+    //       indexInRow > siblingsAmount / 2 &&
+    //       indexToSpecialColumnList.includes(indexInRow)
+    //     ) {
+    //       width = 50;
+    //       additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+    //     } else {
+    //       width = 50;
+    //     }
+    //   }
+    // }
   }
 
-  return { width, additionalWidth };
+  return { width, additionalWidth, additionalClass };
 }
 
 function createElement(type: string) {
