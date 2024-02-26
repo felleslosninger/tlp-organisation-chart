@@ -40,7 +40,7 @@
 }
 
 .row-last-4-tablet::before{
-  height: calc(50%);
+  height: calc(50% + calc(47.45px * var(--diff)));
 }
 
 .row-last-5::before,

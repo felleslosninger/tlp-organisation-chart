@@ -1,3 +1,4 @@
+import { diffieHellman } from "crypto";
 import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
@@ -311,6 +312,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     !isMobile && !isLastRow && rowElement.classList.add("row-line");
     !isMain && rowElement.classList.add("wrap");
+    !isMobile &&
+      isLastRow &&
+      rowElement.style.setProperty(
+        "--diff",
+        calculateChildrenDifferenceInRow(
+          row,
+          row.row.length,
+          isLaptop,
+          isTablet,
+        ).toString(),
+      );
 
     return rowElement;
   }
@@ -742,11 +754,55 @@ function getLastRowClass(
     rowLength += indexToColumnsWithSpecialColumnList.length;
   }
 
-  console.log(rowLength);
-
   if (rowLength >= 3 && !isMobile) {
     return `row row-last-${rowLength}${isLaptop ? "-laptop" : isTablet ? "-tablet" : ""}`;
   } else {
     return "row";
   }
+}
+
+function calculateChildrenDifferenceInRow(
+  row: Row,
+  siblingsAmount: number,
+  isLaptop: boolean,
+  isTablet: boolean,
+) {
+  let diff = 0;
+  // if (isLaptop) {
+  //   if (siblingsAmount === 6) {
+  //     let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 2);
+  //     let lowerHalfHighest = findLowestChildrenAmountInRow(row, 3, 4);
+  //   }
+  // }
+  if (isTablet) {
+    if (siblingsAmount === 4) {
+      let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+      let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
+      return upperHalfHighest - lowerHalfHighest;
+    }
+    if (siblingsAmount === 3) {
+      let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+      let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 2);
+      return upperHalfHighest - lowerHalfHighest;
+    }
+  } else {
+  }
+  return diff.toString();
+}
+
+function findHighestChildrenAmountInRow(
+  row: Row,
+  indexStart: number,
+  indexEnd: number,
+) {
+  let highest = 0;
+  for (let i = indexStart; i <= indexEnd; i++) {
+    // Use optional chaining to safely access nested properties
+    const childrenLength = row.row[i]?.component?.children?.length ?? 0;
+    if (childrenLength > highest) {
+      highest = childrenLength;
+    }
+  }
+
+  return highest;
 }
