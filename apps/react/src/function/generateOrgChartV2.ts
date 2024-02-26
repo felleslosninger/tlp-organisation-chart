@@ -1,4 +1,3 @@
-import { diffieHellman } from "crypto";
 import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
