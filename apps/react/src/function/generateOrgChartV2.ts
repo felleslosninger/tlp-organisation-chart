@@ -80,14 +80,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       //if nodeElement is anchor, provide href
       if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
         nodeElement.href = nodeData.url;
-        nodeElement.target = "_blank";
       }
       nodeElement.className = "node ";
-
       nodeElement.tabIndex = 0;
       nodeElement.style.backgroundColor = nodeData.backgroundColor;
       nodeElement.style.color = nodeData.textColor;
       nodeElement.innerHTML = nodeData.title;
+      nodeData.opacity && (nodeElement.style.opacity = nodeData.opacity + "%");
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
         nodeElement.style.maxWidth = "300px";
@@ -298,7 +297,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           ),
         );
       }
-      rowElement.className = "row " + columnWidth.additionalClass;
+      rowElement.className += " " + columnWidth.additionalClass;
     });
 
     return rowElement;

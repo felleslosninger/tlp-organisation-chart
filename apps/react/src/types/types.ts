@@ -10,6 +10,7 @@ export type Node = {
   textColor: string;
   url?: string; // Optional
   border?: string; // Optional
+  opacity?: string;
 };
 
 export type Component = {

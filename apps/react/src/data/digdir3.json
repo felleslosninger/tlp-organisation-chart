@@ -9,39 +9,45 @@
       "title": "Direktør",
       "id": "dir",
       "backgroundColor": "#0062BA",
-      "textColor": "white"
+      "textColor": "white",
+      "opacity": "50"
     },
     {
       "title": "Kommunikasjon",
       "id": "kom",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "opacity": "50"
     },
     {
       "title": "Tilsynet for universell utforming av ikt",
       "id": "tuu",
       "backgroundColor": "#95227D",
-      "textColor": "white"
+      "textColor": "white",
+      "opacity": "50"
     },
     {
       "title": "Verksomhetsstyring",
       "id": "verk",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "opacity": "50"
     },
     {
       "title": "HR",
       "id": "hr",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "url": "https://www.digdir.no/"
+      "url": "https://www.digdir.no/",
+      "opacity": "50"
     },
     {
       "title": "Tverrgåande tjenester",
       "id": "tverr",
       "backgroundColor": "white",
       "textColor": "#1e2b3c",
-      "border": "dashed"
+      "border": "dashed",
+      "opacity": "50"
     },
     {
       "title": "Samanhengande tjenester og livshendelser",
