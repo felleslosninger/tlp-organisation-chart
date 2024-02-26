@@ -176,6 +176,7 @@
   align-items: center;
   justify-content: flex-start;
   position: relative;
+  background: white;
 }
 
 .column-flex-start{
