@@ -11,6 +11,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   ).providedLayout;
 
   let isMobile = false;
+  let isTablet = false;
+  let isLaptop = false;
+  let isMain = false;
 
   function provideLayout(
     mainContainerWidth: number,
@@ -97,13 +100,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodeElement.style.maxWidth = "300px";
       }
 
-      nodeElement.className += createNodeLineClass(
-        indexInRow,
-        siblingsAmount,
-        mainContainerWidth,
-        allowedBreakpoints,
-        isLastRow,
-      );
+      if (!isMobile) {
+        nodeElement.className += createNodeLineClass(
+          indexInRow,
+          siblingsAmount,
+          mainContainerWidth,
+          allowedBreakpoints,
+          isLastRow,
+        );
+      }
 
       return nodeElement;
     } else {
@@ -194,9 +199,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     columnElement.className = "column";
 
-    if (siblingsAmount === 2 && indexInRow === 1) {
+    if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
       columnElement.className += " column-flex-end";
-    } else if (siblingsAmount === 2 && indexInRow === 2) {
+    } else if (siblingsAmount === 2 && indexInRow === 2 && !isMobile) {
       columnElement.className += " column-flex-start";
     }
 
@@ -227,36 +232,21 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     let rowClass = "row row-normal";
 
-    if (isEvenOrOne(row.row.length)) {
+    if (isEvenOrOne(row.row.length) && !isMobile) {
       if (row.row.length <= 2) {
         rowClass += " row-center";
       }
     }
 
-    if (
-      isLastRow &&
-      row.row.length === 5 &&
-      mainContainerWidth < allowedBreakpoints.laptop
-    ) {
-      rowClass = "row row-last-5";
-    } else if (
-      isLastRow &&
-      row.row.length === 3 &&
-      mainContainerWidth < allowedBreakpoints.laptop
-    ) {
-      rowClass = "row row-last-3";
-    } else if (
-      isLastRow &&
-      row.row.length === 4 &&
-      mainContainerWidth < allowedBreakpoints.laptop
-    ) {
-      rowClass = "row row-last-4";
-    } else if (
-      isLastRow &&
-      row.row.length === 6 &&
-      mainContainerWidth < allowedBreakpoints.main
-    ) {
-      rowClass = "row row-last-6";
+    if (isLastRow) {
+      rowClass += getLastRowClass(
+        row,
+        mainContainerWidth,
+        allowedBreakpoints,
+        isMobile,
+        isLaptop,
+        isTablet,
+      );
     }
 
     rowElement.className = rowClass;
@@ -320,6 +310,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     });
 
     !isMobile && rowElement.classList.add("row-line");
+    !isMain && rowElement.classList.add("wrap");
 
     return rowElement;
   }
@@ -370,6 +361,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Check if the window width is less than 768px
     isMobile = mainContainerWidth < allowedBreakpoints.tablet;
 
+    isMain = mainContainerWidth > allowedBreakpoints.main;
+
     // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
@@ -383,6 +376,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       // Check if the window width is less than 768px
       isMobile = mainContainerWidth < allowedBreakpoints.tablet;
+      isMain = mainContainerWidth > allowedBreakpoints.main;
 
       if (provideNewBreakpoint(lastBreakpoint, mainContainerWidth)) {
         lastBreakpoint = getBreakpointName(mainContainerWidth);
@@ -722,5 +716,24 @@ function provideNewBreakpoint(
     default:
       // If "lastBreakpoint" is not one of the above, we assume no change
       return false;
+  }
+}
+
+function getLastRowClass(
+  row: Row,
+  mainContainerWidth: number,
+  allowedBreakpoints: { main: number; laptop: number; tablet: number },
+  isMobile: boolean,
+  isLaptop: boolean,
+  isTablet: boolean,
+) {
+  if (
+    row.row.length >= 3 &&
+    mainContainerWidth < allowedBreakpoints.laptop &&
+    !isMobile
+  ) {
+    return `row row-last-${row.row.length}${isLaptop ? "-laptop" : isTablet ? "-tablet" : ""}`;
+  } else {
+    return "";
   }
 }
