@@ -51,10 +51,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const childData = findNodeById(childId);
       if (childData) {
         const childElement = createElement("li");
-        childElement.innerHTML = childData.title;
-        childElement.className = "node node-child";
-        childElement.style.color = childData.textColor;
-        childElement.style.backgroundColor = childData.backgroundColor;
+        const innerChild = childData.url
+          ? createElement("a")
+          : createElement("div");
+        innerChild.tabIndex = 0;
+        innerChild.innerHTML = childData.title;
+        innerChild.className = "node node-child";
+        innerChild.style.color = childData.textColor;
+        innerChild.style.backgroundColor = childData.backgroundColor;
+        childElement.appendChild(innerChild);
         childrenList.appendChild(childElement);
       }
     });
@@ -115,14 +120,18 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     isLastRow: boolean,
   ) {
     const columnElement = createElement("div");
-    columnElement.className = "column-special";
-    columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
-
-    const nodesWrapper = createElement("div");
-    nodesWrapper.className = "nodes-wrapper";
+    columnElement.className = "column";
+    isMobile
+      ? (columnElement.style.width = "100%")
+      : (columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`);
 
     //if column.id is an array, create a special column
-    if (Array.isArray(column.id)) {
+    if (Array.isArray(column.id) && column.id.length > 1) {
+      const nodesWrapper = createElement("div");
+      isMobile
+        ? (nodesWrapper.className = "nodes-wrapper-mobile")
+        : (nodesWrapper.className = "nodes-wrapper");
+
       column.id.forEach((nodeId: string) => {
         const nodeData = findNodeById(nodeId);
         if (nodeData) {
@@ -147,9 +156,19 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           nodesWrapper.appendChild(nodeElement);
         }
       });
-    }
 
-    columnElement.appendChild(nodesWrapper);
+      columnElement.appendChild(nodesWrapper);
+    } else {
+      const simpleNode = createNode(
+        column,
+        siblingsAmount + 1,
+        indexInRow,
+        isLastRow,
+      );
+      if (simpleNode !== null) {
+        columnElement.appendChild(simpleNode);
+      }
+    }
 
     if (column.component?.children) {
       columnElement.appendChild(
@@ -299,6 +318,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
       rowElement.className += " " + columnWidth.additionalClass;
     });
+
+    !isMobile && rowElement.classList.add("row-line");
 
     return rowElement;
   }
@@ -502,7 +523,6 @@ function calculateColumnWidth(
     siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
 
     if (mainContainerWidth > main) {
-      console.log("main");
       if (siblingsAmount === 3) {
         width = 50;
         additionalWidth = -12;
@@ -516,7 +536,6 @@ function calculateColumnWidth(
         }
       }
     } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
-      console.log("laptop");
       if (siblingsAmount === 3) {
         width = 50;
         additionalWidth = -12;
@@ -530,7 +549,6 @@ function calculateColumnWidth(
         }
       }
     } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      console.log("tablet");
       if (siblingsAmount === 3) {
         width = 100;
         additionalWidth = -12;
@@ -543,29 +561,6 @@ function calculateColumnWidth(
         }
       }
     }
-    // if (siblingsAmount === 3) {
-    //   width = 100 / 2;
-    //   console.log("1");
-    // } else if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    //   if (mainContainerWidth > main) {
-    //     if (
-    //       indexInRow < siblingsAmount / 2 &&
-    //       indexToSpecialColumnList.includes(indexInRow)
-    //     ) {
-    //       width = 50;
-    //       additionalWidth = 24 / ((siblingsAmount - 1) / 2);
-    //     }
-    //     if (
-    //       indexInRow > siblingsAmount / 2 &&
-    //       indexToSpecialColumnList.includes(indexInRow)
-    //     ) {
-    //       width = 50;
-    //       additionalWidth = 24 / ((siblingsAmount - 1) / 2);
-    //     } else {
-    //       width = 50;
-    //     }
-    //   }
-    // }
   }
 
   return { width, additionalWidth, additionalClass };
