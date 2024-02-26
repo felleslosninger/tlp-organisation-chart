@@ -13,81 +13,87 @@
 
 }
 
-
-.row-last-5::before{
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background-color: #68707C;
-    top: 0;
-    left: calc(50% - 1px);
+.row-last-3::before,
+.row-last-3-tablet::before,
+.row-last-3-laptop::before
+{
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 50%;
+  background-color: #68707C;
+  top: 0;
+  left: calc(50% - 1px);
 }
 
-  .row-last-5-laptop::before{
-    display: block;
-    height: calc(75% - 40px);
-  }
-
-
-
-.row-last-3::before{
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background-color: #68707C;
-    top: 0;
-    left: calc(50% - 1px);
+.row-last-4::before,
+.row-last-4-tablet::before,
+.row-last-4-laptop::before
+{
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 0%;
+  background-color: #68707C;
+  top: 0;
+  left: calc(50% - 1px);
 }
 
-
-  .row-last-3-laptop::before{
-    display: block;
-    height: 50%;
-  }
-
-.row-last-4::before{
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background-color: #68707C;
-    top: 0;
-    left: calc(50% - 1px);
+.row-last-4-tablet::before{
+  height: calc(50%);
 }
 
+.row-last-5::before,
+.row-last-5-tablet::before,
+.row-last-5-laptop::before
+{
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 0%;
+  background-color: #68707C;
+  top: 0;
+  left: calc(50% - 1px);
+}
 
-  .row-last-4-tablet::before{
-    display: block;
-    height: 50%;
-  }
+.row-last-5-laptop::before{
+  height: calc(75% - 40px);
+}
 
+.row-last-5-tablet::before{
+  height: calc(75% - 32px);
+}
+
+.row-last-6::before,
+.row-last-6-tablet::before,
+.row-last-6-laptop::before
+{
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 0%;
+  background-color: #68707C;
+  top: 0;
+  left: calc(50% - 1px);
+}
+.row-last-6-laptop::before{
+  height: 50%;
+}
+
+.row-last-6-tablet::before{
+  height: calc(75% - 40px);
+}
 
 
 .row-last-6::before{
-    content: "";
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background-color: #68707C;
-    top: 0;
-    left: calc(50% - 1px);
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: #68707C;
+  top: 0;
+  left: calc(50% - 1px);
 }
-
-
-  .row-last-6-laptop::before{
-    display: block;
-    height: 50%;
-  }
-
-
-
-  .row-last-6-tablet::before{
-    display: block;
-    height: calc(75% - 40px);
-  }
-
 
 
 .row {
@@ -117,12 +123,8 @@
     background-color: #68707C;
     top: 0;
     left: calc(50% - 1px);
-   
 }   
 
- .row-normal:last-child::before{
-    display: none;
-  }
 
 .row-center {
   flex-wrap: nowrap;
