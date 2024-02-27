@@ -1,3 +1,8 @@
+export type Meta = {
+  title: string;
+  langcode: string;
+};
+
 export type TableOfContentsItem = {
   title: string;
   color: string;
@@ -40,6 +45,7 @@ export type Layouts = {
 };
 
 export type OrgChartData = {
+  meta: Meta;
   toc: TableOfContentsItem[];
   nodes: Node[];
   layouts: Layouts;

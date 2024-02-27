@@ -24,16 +24,7 @@ const Home = () => {
   return (
     <div>
       <h1>Lag organisasjonsKart</h1>
-      <div
-        style={{
-          margin: "50px 0 50px 0",
-          display: "flex",
-          gap: "50px",
-          width: "100%",
-          alignItems: "center",
-          borderBottom: "1px solid #000",
-        }}
-      >
+      <div className={styles.wrapper}>
         <Button onClick={() => setData(jsonDigdir1)}>Digdir 1</Button>
         <Button onClick={() => setData(jsonDigdir2)}>Digdir 2</Button>
         <Button onClick={() => setData(jsonDigdir3)}>Digdir 3</Button>

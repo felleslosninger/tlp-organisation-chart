@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Leveranseområder",
+    "langcode": "no"
+  },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
     { "title": "Avdeling", "color": "#1e2b3c" },
