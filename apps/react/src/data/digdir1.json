@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Avdelinger og seksjoner",
+    "langcode": "no"
+  },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
     { "title": "Avdeling", "color": "#1e2b3c" },
@@ -134,7 +138,20 @@
           "row": [
             {
               "id": ["dir"],
-              "alignment": "center"
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": [
+                  "kom",
+                  "tuu",
+                  "verk",
+                  "hr",
+                  "sam",
+                  "dig",
+                  "fel",
+                  "bod"
+                ]
+              }
             }
           ]
         },
@@ -142,12 +159,10 @@
           "row": [
             {
               "id": ["kom"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["tuu"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -156,12 +171,10 @@
           "row": [
             {
               "id": ["verk"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["hr"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -170,7 +183,6 @@
           "row": [
             {
               "id": ["sam"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -179,7 +191,6 @@
             },
             {
               "id": ["dig"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -188,16 +199,6 @@
             },
             {
               "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["str", "utv", "mar", "bru", "dri"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",

@@ -1,7 +1,7 @@
-import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
+import { OrgChartData, Layout, Node, Column, Row, Meta } from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
-  const { nodes, layouts } = data;
+  const { nodes, layouts, meta } = data;
 
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let mainContainerWidth = 0;
@@ -54,6 +54,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const childData = findNodeById(childId);
       if (childData) {
         const childElement = createElement("li");
+        childElement.id = childData.id;
+        childElement.setAttribute("role", "treeitem");
+
         const innerChild = childData.url
           ? createElement("a")
           : createElement("div");
@@ -79,8 +82,21 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
-      const innerNode = createElement("div");
 
+      //give nodeElement id
+      nodeElement.id = nodeData.id;
+
+      if (node.component?.children) {
+        nodeElement.setAttribute(
+          "aria-owns",
+          node.component.children.join(" "),
+        );
+      }
+
+      //give role treeitem to nodeElement
+      nodeElement.setAttribute("role", "treeitem");
+
+      const innerNode = createElement("div");
       //if nodeData has border, provide border
       if (nodeData.border) {
         innerNode.style.border = `2px ${nodeData.border} #000`;
@@ -178,7 +194,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
     }
 
-    if (column.component?.children) {
+    if (column.component?.children && column.component.type !== "root") {
       columnElement.appendChild(
         createChildren(
           3,
@@ -221,7 +237,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       columnElement.appendChild(innerColumn);
     }
 
-    if (column.component?.children) {
+    if (column.component?.children && column.component.type !== "root") {
       columnElement.appendChild(
         createChildren(siblingsAmount, column.component.children),
       );
@@ -364,10 +380,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   if (mainContainer) {
     // Create element to hold the org chart
     const orgChart = document.createElement("div");
-
     orgChart.className = provideLayoutClass(mainContainerWidth);
-
     orgChart.role = "tree";
+    orgChart.setAttribute("lang", meta.langcode);
+    orgChart.setAttribute("aria-label", meta.title);
 
     // Initial setup based on mainContainer's current width
     mainContainerWidth = mainContainer.offsetWidth;

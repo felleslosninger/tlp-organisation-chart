@@ -1,3 +1,8 @@
+export type Meta = {
+  title: string;
+  langcode: string;
+};
+
 export type TableOfContentsItem = {
   title: string;
   color: string;
@@ -21,7 +26,6 @@ export type Component = {
 export type Column = {
   id: string | string[];
   alignment: string;
-  parent?: string; // Optional
   component?: Component; // Optional
 };
 
@@ -40,6 +44,7 @@ export type Layouts = {
 };
 
 export type OrgChartData = {
+  meta: Meta;
   toc: TableOfContentsItem[];
   nodes: Node[];
   layouts: Layouts;
