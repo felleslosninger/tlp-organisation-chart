@@ -61,109 +61,6 @@
         {
           "row": [
             {
-              "id": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": "hr",
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": "kom",
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": "fel",
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "laptop": {
-      "rows": [
-        {
-          "row": [
-            {
               "id": ["dir"],
               "alignment": "center"
             }
@@ -172,7 +69,29 @@
         {
           "row": [
             {
-              "id": ["hr"],
+              "id": ["hr", "kom"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "fel"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            },
+            {
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -180,6 +99,82 @@
         },
         {
           "row": [
+            {
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            },
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
+            },
+            {
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            },
             {
               "id": ["kom"],
               "parent": "dir",
@@ -213,19 +208,41 @@
               "alignment": "center"
             },
             {
-              "id": ["fel"],
+              "id": ["kom"],
               "parent": "dir",
-              "alignment": "center"
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
             },
             {
               "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
+            },
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
             }
           ]
         },
         {
           "row": [
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            },
             {
               "id": ["kom"],
               "parent": "dir",
@@ -250,39 +267,23 @@
               }
             },
             {
-              "id": ["kom"],
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
-            }
-          ]
-        }
-      ]
-    },
-    "tablet": {
-      "rows": [
-        {
-          "row": [
-            {
-              "id": ["dir"],
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["hr"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
+            },
             {
               "id": ["kom"],
               "parent": "dir",
@@ -296,77 +297,45 @@
               "id": ["fel"],
               "parent": "dir",
               "alignment": "center"
+            },
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
             }
           ]
         },
         {
           "row": [
             {
-              "id": ["kom"],
+              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
             },
             {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom"],
+              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
             },
             {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom"],
+              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
             }
           ]

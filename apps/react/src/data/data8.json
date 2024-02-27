@@ -69,21 +69,12 @@
         {
           "row": [
             {
-              "id": ["hr"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom"],
+              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
             },
             {
@@ -96,36 +87,39 @@
         {
           "row": [
             {
-              "id": ["kom"],
+              "id": ["fel"],
+              "parent": "dir",
+              "alignment": "center"
+            },
+            {
+              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
               }
             },
             {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom"],
+              "id": ["kom", "fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
             }
           ]
@@ -138,13 +132,8 @@
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
               }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
             },
             {
               "id": ["kom"],
@@ -152,7 +141,47 @@
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["id1", "id2"]
+                "children": ["it", "markedsforing", "hr"]
+              }
+            },
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom", "fel"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            },
+            {
+              "id": ["kom"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
+              }
+            },
+            {
+              "id": ["kom"],
+              "parent": "dir",
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["it", "markedsforing", "hr"]
               }
             }
           ]

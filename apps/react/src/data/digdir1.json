@@ -133,7 +133,7 @@
         {
           "row": [
             {
-              "id": "dir",
+              "id": ["dir"],
               "alignment": "center"
             }
           ]
@@ -141,12 +141,12 @@
         {
           "row": [
             {
-              "id": "kom",
+              "id": ["kom"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "tuu",
+              "id": ["tuu"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -155,12 +155,12 @@
         {
           "row": [
             {
-              "id": "verk",
+              "id": ["verk"],
               "parent": "dir",
               "alignment": "center"
             },
             {
-              "id": "hr",
+              "id": ["hr"],
               "parent": "dir",
               "alignment": "center"
             }
@@ -169,7 +169,7 @@
         {
           "row": [
             {
-              "id": "sam",
+              "id": ["sam"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -178,7 +178,7 @@
               }
             },
             {
-              "id": "dig",
+              "id": ["dig"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -187,7 +187,7 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {
@@ -196,7 +196,7 @@
               }
             },
             {
-              "id": "fel",
+              "id": ["fel"],
               "parent": "dir",
               "alignment": "center",
               "component": {

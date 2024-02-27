@@ -9,12 +9,13 @@ export type Node = {
   backgroundColor: string;
   textColor: string;
   url?: string; // Optional
-  border?: "dotted" | "solid" | "dashed"; // Optional
+  border?: string; // Optional
+  opacity?: string;
 };
 
 export type Component = {
-  type: string;
-  children: string[];
+  type?: string;
+  children?: string[];
 };
 
 export type Column = {

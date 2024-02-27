@@ -4,16 +4,19 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts } = data;
 
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
-  let windowWidth = window.innerWidth;
+  let mainContainerWidth = 0;
   let currentLayout = provideLayout(
-    windowWidth,
+    mainContainerWidth,
     allowedBreakpoints,
   ).providedLayout;
 
-  let isMobile = windowWidth < allowedBreakpoints.tablet;
+  let isMobile = false;
+  let isTablet = false;
+  let isLaptop = false;
+  let isMain = false;
 
   function provideLayout(
-    windowWidth: number,
+    mainContainerWidth: number,
     breakpoints: { main: number; laptop: number; tablet: number },
   ) {
     let providedLayout = layouts.main;
@@ -22,12 +25,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const { main, laptop } = breakpoints;
 
     //if the window width is less than 1500px, set the currentLayout to laptop
-    if (windowWidth < main && layouts.laptop) {
+    if (mainContainerWidth < main && layouts.laptop) {
       providedLayout = layouts.laptop;
       layoutName = "laptop";
     }
     //if the window width is less than 992px, set the currentLayout to tablet
-    if (windowWidth < laptop && layouts.tablet) {
+    if (mainContainerWidth < laptop && layouts.tablet) {
       providedLayout = layouts.tablet;
       layoutName = "tablet";
     }
@@ -51,10 +54,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const childData = findNodeById(childId);
       if (childData) {
         const childElement = createElement("li");
-        childElement.innerHTML = childData.title;
-        childElement.className = "node node-child";
-        childElement.style.color = childData.textColor;
-        childElement.style.backgroundColor = childData.backgroundColor;
+        const innerChild = childData.url
+          ? createElement("a")
+          : createElement("div");
+        innerChild.tabIndex = 0;
+        innerChild.innerHTML = childData.title;
+        innerChild.className = "node node-child";
+        innerChild.style.color = childData.textColor;
+        innerChild.style.backgroundColor = childData.backgroundColor;
+        childElement.appendChild(innerChild);
         childrenList.appendChild(childElement);
       }
     });
@@ -68,43 +76,118 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     indexInRow: number,
     isLastRow: boolean,
   ) {
-    const nodeData = findNodeById(node.id);
+    const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
+      const innerNode = createElement("div");
 
       //if nodeData has border, provide border
       if (nodeData.border) {
-        nodeElement.style.border = `2px ${nodeData.border} #000`;
+        innerNode.style.border = `2px ${nodeData.border} #000`;
       }
 
       //if nodeElement is anchor, provide href
       if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
         nodeElement.href = nodeData.url;
-        nodeElement.target = "_blank";
       }
+      innerNode.style.backgroundColor = nodeData.backgroundColor;
+      innerNode.style.color = nodeData.textColor;
+      innerNode.innerHTML = nodeData.title;
+      nodeData.opacity && (innerNode.style.opacity = nodeData.opacity + "%");
+      innerNode.className = "node inner-node";
+      nodeElement.appendChild(innerNode);
       nodeElement.className = "node ";
-
       nodeElement.tabIndex = 0;
-      nodeElement.style.backgroundColor = nodeData.backgroundColor;
-      nodeElement.style.color = nodeData.textColor;
-      nodeElement.innerHTML = nodeData.title;
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
         nodeElement.style.maxWidth = "300px";
       }
 
-      nodeElement.className += createNodeLineClass(
-        indexInRow,
-        siblingsAmount,
-        windowWidth,
-        allowedBreakpoints,
-        isLastRow,
-      );
+      if (!isMobile) {
+        nodeElement.className += createNodeLineClass(
+          indexInRow,
+          siblingsAmount,
+          mainContainerWidth,
+          allowedBreakpoints,
+          isLastRow,
+        );
+      }
 
       return nodeElement;
     } else {
       return null;
     }
+  }
+
+  function createSpecialColumn(
+    column: Column,
+    columnWidth: number,
+    siblingsAmount: number,
+    additionalWidth: number,
+    indexInRow: number,
+    isLastRow: boolean,
+  ) {
+    const columnElement = createElement("div");
+    columnElement.className = "column";
+    isMobile
+      ? (columnElement.style.width = "100%")
+      : (columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`);
+
+    //if column.id is an array, create a special column
+    if (Array.isArray(column.id) && column.id.length > 1) {
+      const nodesWrapper = createElement("div");
+      isMobile
+        ? (nodesWrapper.className = "nodes-wrapper-mobile")
+        : (nodesWrapper.className = "nodes-wrapper");
+
+      column.id.forEach((nodeId: string) => {
+        const nodeData = findNodeById(nodeId);
+        if (nodeData) {
+          const nodeElement = document.createElement(
+            nodeData.url ? "a" : "div",
+          );
+
+          //if nodeData has border, provide border
+          if (nodeData.border) {
+            nodeElement.style.border = `2px ${nodeData.border} #000`;
+          }
+
+          //if nodeElement is anchor, provide href
+          if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
+            nodeElement.href = nodeData.url;
+          }
+          nodeElement.className = "node ";
+          nodeElement.tabIndex = 0;
+          nodeElement.style.backgroundColor = nodeData.backgroundColor;
+          nodeElement.style.color = nodeData.textColor;
+          nodeElement.innerHTML = nodeData.title;
+          nodesWrapper.appendChild(nodeElement);
+        }
+      });
+
+      columnElement.appendChild(nodesWrapper);
+    } else {
+      const simpleNode = createNode(
+        column,
+        siblingsAmount + 1,
+        indexInRow,
+        isLastRow,
+      );
+      if (simpleNode !== null) {
+        columnElement.appendChild(simpleNode);
+      }
+    }
+
+    if (column.component?.children) {
+      columnElement.appendChild(
+        createChildren(
+          3,
+          column.component.children ? column.component.children : [],
+        ),
+      );
+    }
+
+    return columnElement;
   }
 
   function createColumn(
@@ -119,40 +202,31 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     columnElement.className = "column";
 
-    if (siblingsAmount === 2 && indexInRow === 1) {
+    if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
       columnElement.className += " column-flex-end";
-    } else if (siblingsAmount === 2 && indexInRow === 2) {
+    } else if (siblingsAmount === 2 && indexInRow === 2 && !isMobile) {
       columnElement.className += " column-flex-start";
     }
 
-    if (typeof column.id === "string") {
-      const innerColumn = createNode(
-        column,
-        siblingsAmount,
-        indexInRow,
-        isLastRow,
-      );
+    const innerColumn = createNode(
+      column,
+      siblingsAmount,
+      indexInRow,
+      isLastRow,
+    );
 
-      columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
 
-      if (innerColumn !== null) {
-        columnElement.appendChild(innerColumn);
-      }
-
-      if (column.component?.children) {
-        columnElement.appendChild(
-          createChildren(siblingsAmount, column.component.children),
-        );
-      }
-    } else {
-      const test = createElement("div");
-      columnElement.style.width = `${columnWidth}%`;
-      test.className = "node";
-      test.style.backgroundColor = "red";
-      test.innerHTML = "Special node";
-
-      columnElement.appendChild(test);
+    if (innerColumn !== null) {
+      columnElement.appendChild(innerColumn);
     }
+
+    if (column.component?.children) {
+      columnElement.appendChild(
+        createChildren(siblingsAmount, column.component.children),
+      );
+    }
+
     return columnElement;
   }
 
@@ -161,41 +235,43 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     let rowClass = "row row-normal";
 
-    if (isEvenOrOne(row.row.length)) {
+    if (isEvenOrOne(row.row.length) && !isMobile) {
       if (row.row.length <= 2) {
         rowClass += " row-center";
       }
     }
 
-    if (
-      isLastRow &&
-      row.row.length === 5 &&
-      windowWidth < allowedBreakpoints.laptop
-    ) {
-      rowClass = "row row-last-5";
-    } else if (
-      isLastRow &&
-      row.row.length === 3 &&
-      windowWidth < allowedBreakpoints.laptop
-    ) {
-      rowClass = "row row-last-3";
-    } else if (
-      isLastRow &&
-      row.row.length === 4 &&
-      windowWidth < allowedBreakpoints.laptop
-    ) {
-      rowClass = "row row-last-4";
-    } else if (
-      isLastRow &&
-      row.row.length === 6 &&
-      windowWidth < allowedBreakpoints.main
-    ) {
-      rowClass = "row row-last-6";
+    let count = 0;
+
+    let rowContainsSpecialColumns = false;
+    row.row.forEach((column: Column) => {
+      if (Array.isArray(column.id) && column.id.length > 1) {
+        rowContainsSpecialColumns = true;
+      }
+    });
+
+    let indexToColumnsWithSpecialColumnList: number[] = [];
+
+    if (rowContainsSpecialColumns) {
+      row.row.forEach((column: Column, index: number) => {
+        if (column.id.length > 1) {
+          indexToColumnsWithSpecialColumnList.push(index + 1);
+        }
+      });
+    }
+
+    if (isLastRow) {
+      rowClass = getLastRowClass(
+        row,
+        isMobile,
+        isLaptop,
+        isTablet,
+        rowContainsSpecialColumns,
+        indexToColumnsWithSpecialColumnList,
+      );
     }
 
     rowElement.className = rowClass;
-
-    let count = 0;
 
     row.row.forEach((column: Column) => {
       count++;
@@ -203,22 +279,52 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const columnWidth = calculateColumnWidth(
         row.row.length,
         count,
-        windowWidth,
+        mainContainerWidth,
         allowedBreakpoints,
         isLastRow,
+        rowContainsSpecialColumns,
+        indexToColumnsWithSpecialColumnList,
       );
 
-      rowElement.appendChild(
-        createColumn(
-          column,
-          columnWidth.width,
-          row.row.length,
-          columnWidth.additionalWidth,
-          count,
-          isLastRow,
-        ),
-      );
+      if (!rowContainsSpecialColumns) {
+        rowElement.appendChild(
+          createColumn(
+            column,
+            columnWidth.width,
+            row.row.length,
+            columnWidth.additionalWidth,
+            count,
+            isLastRow,
+          ),
+        );
+      } else {
+        rowElement.appendChild(
+          createSpecialColumn(
+            column,
+            columnWidth.width,
+            row.row.length,
+            columnWidth.additionalWidth,
+            count,
+            isLastRow,
+          ),
+        );
+      }
+      rowElement.className += " " + columnWidth.additionalClass;
     });
+
+    !isMobile && !isLastRow && rowElement.classList.add("row-line");
+    !isMain && rowElement.classList.add("wrap");
+    !isMobile &&
+      isLastRow &&
+      rowElement.style.setProperty(
+        "--diff",
+        calculateChildrenDifferenceInRow(
+          row,
+          row.row.length,
+          isLaptop,
+          isTablet,
+        ).toString(),
+      );
 
     return rowElement;
   }
@@ -239,13 +345,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return rows;
   }
 
-  function provideLayoutClass(windowWidth: number) {
+  function provideLayoutClass(mainContainerWidth: number) {
     let layoutClass = " org-chart main";
 
-    if (windowWidth < allowedBreakpoints.main && layouts.laptop) {
+    if (mainContainerWidth < allowedBreakpoints.main && layouts.laptop) {
       layoutClass = "org-chart laptop";
     }
-    if (windowWidth < allowedBreakpoints.laptop && layouts.tablet) {
+    if (mainContainerWidth < allowedBreakpoints.laptop && layouts.tablet) {
       layoutClass = "org-chart tablet";
     }
 
@@ -256,39 +362,81 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   const mainContainer = document.getElementById(containerId);
 
   if (mainContainer) {
-    //create element to hold the org chart
-    const orgChart = createElement("div");
-    orgChart.className = provideLayoutClass(windowWidth);
+    // Create element to hold the org chart
+    const orgChart = document.createElement("div");
+
+    orgChart.className = provideLayoutClass(mainContainerWidth);
+
     orgChart.role = "tree";
 
-    //insert the org chart into the container
+    // Initial setup based on mainContainer's current width
+    mainContainerWidth = mainContainer.offsetWidth;
+
+    isMobile = mainContainerWidth < allowedBreakpoints.tablet;
+    isLaptop =
+      mainContainerWidth < allowedBreakpoints.main &&
+      mainContainerWidth > allowedBreakpoints.laptop;
+    isTablet =
+      mainContainerWidth < allowedBreakpoints.laptop &&
+      mainContainerWidth > allowedBreakpoints.tablet;
+    isMain = mainContainerWidth > allowedBreakpoints.main;
+
+    // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
-    //add event listener to the window to listen for resize
-    window.addEventListener("resize", () => {
-      //clear the org chart
-      orgChart.innerHTML = "";
+    // Set the last breakpoint based on mainContainer's width
+    let lastBreakpoint = getBreakpointName(mainContainerWidth);
 
-      //get the current window width and provide the layout
-      windowWidth = window.innerWidth;
+    // Function to update layout based on mainContainer's width
+    const updateLayout = () => {
+      // Update variables based on the current state
+      mainContainerWidth = mainContainer.offsetWidth;
 
-      //check if the window width is less than 768px
-      isMobile = windowWidth < allowedBreakpoints.tablet;
+      isMobile = mainContainerWidth < allowedBreakpoints.tablet;
+      isLaptop =
+        mainContainerWidth < allowedBreakpoints.main &&
+        mainContainerWidth > allowedBreakpoints.laptop;
+      isTablet =
+        mainContainerWidth < allowedBreakpoints.laptop &&
+        mainContainerWidth > allowedBreakpoints.tablet;
+      isMain = mainContainerWidth > allowedBreakpoints.main;
 
-      //get the current layout
-      currentLayout = provideLayout(
-        windowWidth,
-        allowedBreakpoints,
-      ).providedLayout;
+      if (provideNewBreakpoint(lastBreakpoint, mainContainerWidth)) {
+        lastBreakpoint = getBreakpointName(mainContainerWidth);
 
-      //set the class of the org chart to the current layout
-      orgChart.className = provideLayoutClass(windowWidth);
+        currentLayout = provideLayout(
+          mainContainerWidth,
+          allowedBreakpoints,
+        ).providedLayout;
 
-      //insert the org chart into the container
-      orgChart.appendChild(createRowsWrapper(currentLayout));
+        // Update org chart's class to reflect the current layout
+        orgChart.className = provideLayoutClass(mainContainerWidth);
+
+        // Clear and re-insert the org chart into the container
+        orgChart.innerHTML = "";
+        orgChart.appendChild(createRowsWrapper(currentLayout));
+      }
+    };
+
+    let timeoutId: any = null;
+    const throttleUpdateLayout = () => {
+      if (timeoutId === null) {
+        timeoutId = setTimeout(() => {
+          updateLayout();
+          timeoutId = null;
+        }, 100); // Vent 100ms før du kjører updateLayout igjen
+      }
+    };
+
+    // Create a ResizeObserver to watch for changes in size of mainContainer
+    const resizeObserver = new ResizeObserver(() => {
+      requestAnimationFrame(throttleUpdateLayout); // Use requestAnimationFrame for optimal updating
     });
 
-    //clear the container for all existing children
+    // Start observing the mainContainer
+    resizeObserver.observe(mainContainer);
+
+    // Clear the container of all existing children and add the org chart
     mainContainer.innerHTML = "";
     mainContainer.appendChild(orgChart);
 
@@ -296,6 +444,143 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   return null;
+}
+
+//function to calculate the width of the columns
+//TODO: Refactor this function to make it more readable
+function calculateColumnWidth(
+  siblingsAmount: number,
+  indexInRow: number,
+  mainContainerWidth: number,
+  breakpoints: { main: number; laptop: number; tablet: number },
+  isLastRow: boolean,
+  rowContainsSpecialColumn: boolean,
+  indexToSpecialColumnList: number[],
+) {
+  let additionalClass = "";
+  let width = 100;
+  let additionalWidth = 0;
+
+  //destructuring the breakpoints object
+  const { main, laptop, tablet } = breakpoints;
+  if (!rowContainsSpecialColumn) {
+    if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+      if (mainContainerWidth > main) {
+        if (isLastRow) {
+          width = 100 / siblingsAmount;
+        } else {
+          if (indexInRow < siblingsAmount / 2) {
+            width = 100 / (siblingsAmount - 1);
+            additionalWidth = 24 / ((siblingsAmount - 1) / 2);
+          } else {
+            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+          }
+        }
+      }
+      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+        if (isLastRow) {
+          if (siblingsAmount > 3) {
+            if (indexInRow <= 2) {
+              width = 100 / 2;
+              additionalWidth = -12;
+            } else {
+              width = 100 / 3;
+              additionalWidth = -16;
+            }
+          } else {
+            width = 100 / 3;
+            additionalWidth = -(24 - 24 / siblingsAmount);
+          }
+        } else {
+          if (siblingsAmount > 4) {
+            width = 100 / 4;
+            additionalWidth = -(24 - (siblingsAmount + 1));
+          } else {
+            if (indexInRow < siblingsAmount / 2) {
+              width = 100 / (siblingsAmount - 1);
+              additionalWidth = -(24 / 2);
+            } else {
+              width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+              additionalWidth = -(24 - (siblingsAmount + 3));
+            }
+          }
+        }
+      }
+
+      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+        if (siblingsAmount > 2) {
+          width = 100 / 2;
+          additionalWidth = -(24 / 2);
+        } else {
+          if (indexInRow < siblingsAmount / 2) {
+            width = 100 / (siblingsAmount - 1);
+            additionalWidth = -(24 / 2);
+          } else {
+            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
+            additionalWidth = -(24 - (siblingsAmount + 3));
+          }
+        }
+      }
+    } else if (siblingsAmount > 2) {
+      if (mainContainerWidth > tablet) {
+        width = 100 / siblingsAmount;
+      }
+      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+        width = 100 / 4;
+        additionalWidth = -18;
+      }
+      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+        width = 100 / 2;
+        additionalWidth = -12;
+      }
+    }
+  } else {
+    additionalClass = " special-row";
+    //if row contains special column add the length of the special column to the siblingsAmount, because the special column takes up double node space
+    siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
+
+    if (mainContainerWidth > main) {
+      if (siblingsAmount === 3) {
+        width = 50;
+        additionalWidth = -12;
+      } else if (siblingsAmount === 4) {
+        if (indexToSpecialColumnList.includes(indexInRow)) {
+          width = 50;
+          additionalWidth = -18;
+        } else {
+          width = 25;
+          additionalWidth = -18;
+        }
+      }
+    } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+      if (siblingsAmount === 3) {
+        width = 50;
+        additionalWidth = -12;
+      } else if (siblingsAmount === 4) {
+        if (indexToSpecialColumnList.includes(indexInRow)) {
+          width = 50;
+          additionalWidth = -18;
+        } else {
+          width = 25;
+          additionalWidth = -18;
+        }
+      }
+    } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+      if (siblingsAmount === 3) {
+        width = 100;
+        additionalWidth = -12;
+      } else if (siblingsAmount === 4) {
+        if (indexToSpecialColumnList.includes(indexInRow)) {
+          width = 100;
+        } else {
+          width = 50;
+          additionalWidth = -12;
+        }
+      }
+    }
+  }
+
+  return { width, additionalWidth, additionalClass };
 }
 
 function createElement(type: string) {
@@ -312,100 +597,11 @@ function isOdd(number: number) {
   return number % 2 !== 0;
 }
 
-//function to calculate the width of the columns
-//TODO: Refactor this function to make it more readable
-function calculateColumnWidth(
-  siblingsAmount: number,
-  indexInRow: number,
-  windowWidth: number,
-  breakpoints: { main: number; laptop: number; tablet: number },
-  isLastRow: boolean,
-) {
-  let width = 100;
-  let additionalWidth = 0;
-
-  //destructuring the breakpoints object
-  const { main, laptop, tablet } = breakpoints;
-
-  if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    if (windowWidth > main) {
-      if (isLastRow) {
-        width = 100 / siblingsAmount;
-      } else {
-        if (indexInRow < siblingsAmount / 2) {
-          width = 100 / (siblingsAmount - 1);
-          additionalWidth = 24 / ((siblingsAmount - 1) / 2);
-        } else {
-          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-        }
-      }
-    }
-    if (windowWidth <= main && windowWidth > laptop) {
-      if (isLastRow) {
-        if (siblingsAmount > 3) {
-          if (indexInRow <= 2) {
-            width = 100 / 2;
-            additionalWidth = -12;
-          } else {
-            width = 100 / 3;
-            additionalWidth = -16;
-          }
-        } else {
-          width = 100 / 3;
-          additionalWidth = -(24 - 24 / siblingsAmount);
-        }
-      } else {
-        if (siblingsAmount > 4) {
-          width = 100 / 4;
-          additionalWidth = -(24 - (siblingsAmount + 1));
-        } else {
-          if (indexInRow < siblingsAmount / 2) {
-            width = 100 / (siblingsAmount - 1);
-            additionalWidth = -(24 / 2);
-          } else {
-            width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-            additionalWidth = -(24 - (siblingsAmount + 3));
-          }
-        }
-      }
-    }
-
-    if (windowWidth <= laptop && windowWidth > tablet) {
-      if (siblingsAmount > 2) {
-        width = 100 / 2;
-        additionalWidth = -(24 / 2);
-      } else {
-        if (indexInRow < siblingsAmount / 2) {
-          width = 100 / (siblingsAmount - 1);
-          additionalWidth = -(24 / 2);
-        } else {
-          width = 50 / (siblingsAmount - (siblingsAmount - 1) / 2);
-          additionalWidth = -(24 - (siblingsAmount + 3));
-        }
-      }
-    }
-  } else if (siblingsAmount > 2) {
-    if (windowWidth > tablet) {
-      width = 100 / siblingsAmount;
-    }
-    if (windowWidth <= main && windowWidth > laptop) {
-      width = 100 / 4;
-      additionalWidth = -18;
-    }
-    if (windowWidth <= laptop && windowWidth > tablet) {
-      width = 100 / 2;
-      additionalWidth = -12;
-    }
-  }
-
-  return { width, additionalWidth };
-}
-
 //function to create the line between the nodes
 function createNodeLineClass(
   indexInRow: number,
   siblingsAmount: number,
-  windowWidth: number,
+  mainContainerWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
 ) {
@@ -424,7 +620,7 @@ function createNodeLineClass(
 
   if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
     //if the window width is greater than 1500px
-    if (windowWidth > main) {
+    if (mainContainerWidth > main) {
       let lowerHalf = (siblingsAmount - 1) / 2;
       if (indexInRow <= lowerHalf) {
         className = " node-line-up-right node-line-up";
@@ -435,7 +631,7 @@ function createNodeLineClass(
     }
 
     //if the window width is less than 1500px and greater than 992px
-    if (windowWidth <= main && windowWidth > laptop) {
+    if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       let lowerHalf = (siblingsAmount - 1) / 2;
       let upperHalf = siblingsAmount - lowerHalf;
       if (isLastRow) {
@@ -463,7 +659,7 @@ function createNodeLineClass(
       return className;
     }
 
-    if (windowWidth <= laptop && windowWidth > tablet) {
+    if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
       if (isOdd(indexInRow)) {
         className = " node-line-up-right-half node-line-up";
       } else {
@@ -472,14 +668,14 @@ function createNodeLineClass(
       return className;
     }
   } else if (siblingsAmount > 2) {
-    if (windowWidth > main) {
+    if (mainContainerWidth > main) {
       if (indexInRow <= siblingsAmount / 2) {
         className = " node-line-up-right node-line-up";
       } else {
         className = " node-line-up-left node-line-up";
       }
       return className;
-    } else if (windowWidth <= main && windowWidth > laptop) {
+    } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       if (siblingsAmount <= 4) {
         if (indexInRow <= siblingsAmount / 2) {
           className = " node-line-up-right node-line-up";
@@ -496,7 +692,7 @@ function createNodeLineClass(
         }
       }
       return className;
-    } else if (windowWidth <= laptop && windowWidth > tablet) {
+    } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
       if (isOdd(indexInRow) || indexInRow === 1) {
         className = " node-line-up-right node-line-up";
       } else {
@@ -508,4 +704,107 @@ function createNodeLineClass(
     className = "";
     return className;
   }
+}
+
+function getBreakpointName(width: number) {
+  let breakpointName =
+    width > 1500
+      ? "main"
+      : width > 992
+        ? "laptop"
+        : width > 768
+          ? "tablet"
+          : "mobile";
+  return breakpointName;
+}
+
+function provideNewBreakpoint(
+  lastBreakpoint: string,
+  mainContainerWidth: number,
+): boolean {
+  switch (lastBreakpoint) {
+    case "main":
+      // For "main", only change the breakpoint if we go below or above 1500
+      return mainContainerWidth < 1500;
+    case "laptop":
+      // For "laptop", there's only a new breakpoint if we go outside of 992 to 1500
+      return mainContainerWidth > 1500 || mainContainerWidth < 992;
+    case "tablet":
+      // For "tablet", we don't change when going below 992 since that's already covered by "mobile"
+      // But we switch if we go above 992 or below 768
+      return mainContainerWidth > 992 || mainContainerWidth < 768;
+    case "mobile":
+      // For "mobile", we switch to a new breakpoint if we are above 768
+      return mainContainerWidth > 768;
+    default:
+      // If "lastBreakpoint" is not one of the above, we assume no change
+      return false;
+  }
+}
+
+function getLastRowClass(
+  row: Row,
+  isMobile: boolean,
+  isLaptop: boolean,
+  isTablet: boolean,
+  rowContainsSpecialColumns: boolean,
+  indexToColumnsWithSpecialColumnList?: number[],
+) {
+  let rowLength = row.row.length;
+
+  if (rowContainsSpecialColumns && indexToColumnsWithSpecialColumnList) {
+    rowLength += indexToColumnsWithSpecialColumnList.length;
+  }
+
+  if (rowLength >= 3 && !isMobile) {
+    return `row row-last-${rowLength}${isLaptop ? "-laptop" : isTablet ? "-tablet" : ""}`;
+  } else {
+    return "row";
+  }
+}
+
+function calculateChildrenDifferenceInRow(
+  row: Row,
+  siblingsAmount: number,
+  isLaptop: boolean,
+  isTablet: boolean,
+) {
+  let diff = 0;
+  // if (isLaptop) {
+  //   if (siblingsAmount === 6) {
+  //     let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 2);
+  //     let lowerHalfHighest = findLowestChildrenAmountInRow(row, 3, 4);
+  //   }
+  // }
+  if (isTablet) {
+    if (siblingsAmount === 4) {
+      let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+      let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
+      return upperHalfHighest - lowerHalfHighest;
+    }
+    if (siblingsAmount === 3) {
+      let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+      let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 2);
+      return upperHalfHighest - lowerHalfHighest;
+    }
+  } else {
+  }
+  return diff.toString();
+}
+
+function findHighestChildrenAmountInRow(
+  row: Row,
+  indexStart: number,
+  indexEnd: number,
+) {
+  let highest = 0;
+  for (let i = indexStart; i <= indexEnd; i++) {
+    // Use optional chaining to safely access nested properties
+    const childrenLength = row.row[i]?.component?.children?.length ?? 0;
+    if (childrenLength > highest) {
+      highest = childrenLength;
+    }
+  }
+
+  return highest;
 }

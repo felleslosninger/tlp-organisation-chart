@@ -140,11 +140,19 @@
                 "type": "nodeList",
                 "children": ["id1", "id2"]
               }
-            },
+            }
+          ]
+        },
+        {
+          "row": [
             {
-              "id": ["fel"],
+              "id": ["kom"],
               "parent": "dir",
-              "alignment": "center"
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["id1", "id2"]
+              }
             },
             {
               "id": ["kom"],
