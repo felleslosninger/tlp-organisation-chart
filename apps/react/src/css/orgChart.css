@@ -330,20 +330,41 @@
 
 /** Alignment and offset*/
 
-.column-alignment-offset-left {
+.column-alignment-1-offset-left {
   align-items: start;
+  margin-right: calc(100% - 300px - 52px - 12px);
 }
 
-.column-alignment-left {
-  align-items: start;
-  margin-left: 25%;
+.column-alignment-1-left {
+  margin-left: calc(50% - 300px - 52px - 12px);
+  margin-right: calc(50% + 52px + 12px);
 }
 
-.column-alignment-offset-right {
+.column-alignment-1-offset-right {
   align-items: end;
 }
 
-.column-alignment-right {
+.column-alignment-1-right {
+  margin-right: calc(50% - 300px - 52px - 12px);
+  margin-left: calc(50% + 52px + 12px);
+}
+
+.column-alignment-2-offset-left {
+  align-items: start;
+  margin-right: calc(100% - 600px - 104px - 24px);
+}
+
+.column-alignment-2-left {
+  margin-left: calc(50% - 300px - 52px - 12px);
+  margin-right: calc(50% + 52px + 12px);
+}
+
+.column-alignment-2-offset-right {
   align-items: end;
-  margin-right: 25%;
+  margin-left: calc(100% - 600px - 52px - 24px);
+}
+
+.column-alignment-2-right {
+  margin-right: calc(50% - 300px - 52px - 12px);
+  margin-left: calc(50% + 52px + 12px);
 }

@@ -44,6 +44,12 @@
       "id": "offset-left",
       "backgroundColor": "#95227D",
       "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -72,6 +78,18 @@
             {
               "id": ["offset-left"],
               "alignment": "offset-left"
+            },
+            {
+              "id": ["offset-right"],
+              "alignment": "offset-right"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["offset-left"],
+              "alignment": "offset-left"
             }
           ]
         },
@@ -86,8 +104,28 @@
         {
           "row": [
             {
+              "id": ["normal"]
+            },
+            {
+              "id": ["normal"]
+            }
+          ]
+        },
+        {
+          "row": [
+            {
               "id": ["center"],
               "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["normal"]
+            },
+            {
+              "id": ["normal"]
             }
           ]
         },

@@ -46,7 +46,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const childrenList = createElement("ul");
     childrenList.className = "node-children";
 
-    if (parentSiblingsAmount === 2) {
+    if (parentSiblingsAmount <= 2 && !isMobile) {
       childrenList.style.maxWidth = "300px";
     }
 
@@ -126,6 +126,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           mainContainerWidth,
           allowedBreakpoints,
           isLastRow,
+          node.alignment ? node.alignment : undefined,
         );
       }
 
@@ -219,7 +220,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     //Allow alignment for columns in rows with 2 or less siblings
     if (column.alignment && siblingsAmount <= 2) {
-      columnElement.className += ` column-alignment-${column.alignment}`;
+      columnElement.className += ` column-alignment-${siblingsAmount}-${column.alignment}`;
     }
 
     if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
@@ -628,11 +629,20 @@ function createNodeLineClass(
   mainContainerWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
+  alignment: string | undefined,
 ) {
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
 
   let className = "";
+
+  if (siblingsAmount === 1) {
+    if (alignment === "left") {
+      className = " node-line-right";
+    }
+    return className;
+  }
+
   if (siblingsAmount === 2) {
     if (indexInRow === 1) {
       className = " node-line-right";
