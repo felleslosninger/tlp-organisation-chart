@@ -187,7 +187,11 @@
           "row": [
             {
               "id": ["dir"],
-              "alignment": "center"
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": ["kom", "tuu", "verk", "hr", "tverr"]
+              }
             }
           ]
         },
@@ -195,7 +199,6 @@
           "row": [
             {
               "id": ["tuu"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -204,12 +207,10 @@
           "row": [
             {
               "id": ["kom"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["hr"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -218,12 +219,10 @@
           "row": [
             {
               "id": ["verk"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["tverr"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -232,7 +231,6 @@
           "row": [
             {
               "id": ["sam"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -241,7 +239,6 @@
             },
             {
               "id": ["digss"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -257,7 +254,6 @@
             },
             {
               "id": ["fel"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -266,7 +262,6 @@
             },
             {
               "id": ["bod"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
