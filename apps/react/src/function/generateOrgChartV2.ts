@@ -1,4 +1,4 @@
-import { OrgChartData, Layout, Node, Column, Row, Meta } from "../types/types";
+import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta } = data;
@@ -215,8 +215,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     isLastRow: boolean,
   ) {
     const columnElement = createElement("div");
-
     columnElement.className = "column";
+
+    //Allow alignment for columns in rows with 2 or less siblings
+    if (column.alignment && siblingsAmount <= 2) {
+      columnElement.className += ` column-alignment-${column.alignment}`;
+    }
 
     if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
       columnElement.className += " column-flex-end";
@@ -461,6 +465,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   return null;
 }
+
+// function alignmentAndOffset(){
+
+// }
 
 //function to calculate the width of the columns
 //TODO: Refactor this function to make it more readable

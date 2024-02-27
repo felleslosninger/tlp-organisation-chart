@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "title": "Offset and alignment",
+    "langcode": "no"
+  },
+  "toc": [
+    { "title": "Direktør", "color": "#0062BA" },
+    { "title": "Avdeling", "color": "#1e2b3c" },
+    { "title": "Seksjon", "color": "#D2D5D8" }
+  ],
+  "nodes": [
+    {
+      "title": "Offset and alignment",
+      "id": "offset-and-alignment",
+      "backgroundColor": "#0062BA",
+      "textColor": "white"
+    },
+    {
+      "title": "Offset right",
+      "id": "offset-right",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Right",
+      "id": "right",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Center",
+      "id": "center",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Left",
+      "id": "left",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Offset left",
+      "id": "offset-left",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "rows": [
+        {
+          "row": [
+            {
+              "id": ["offset-and-alignment"],
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": [
+                  "right",
+                  "center",
+                  "left",
+                  "offset-left",
+                  "offset-right"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["offset-left"],
+              "alignment": "offset-left"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["left"],
+              "alignment": "left"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["center"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["right"],
+              "alignment": "right"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["offset-right"],
+              "alignment": "offset-right"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
