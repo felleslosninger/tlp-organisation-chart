@@ -79,22 +79,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
+      const innerNode = createElement("div");
 
       //if nodeData has border, provide border
       if (nodeData.border) {
-        nodeElement.style.border = `2px ${nodeData.border} #000`;
+        innerNode.style.border = `2px ${nodeData.border} #000`;
       }
 
       //if nodeElement is anchor, provide href
       if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
         nodeElement.href = nodeData.url;
       }
+      innerNode.style.backgroundColor = nodeData.backgroundColor;
+      innerNode.style.color = nodeData.textColor;
+      innerNode.innerHTML = nodeData.title;
+      nodeData.opacity && (innerNode.style.opacity = nodeData.opacity + "%");
+      innerNode.className = "node inner-node";
+      nodeElement.appendChild(innerNode);
       nodeElement.className = "node ";
       nodeElement.tabIndex = 0;
-      nodeElement.style.backgroundColor = nodeData.backgroundColor;
-      nodeElement.style.color = nodeData.textColor;
-      nodeElement.innerHTML = nodeData.title;
-      nodeData.opacity && (nodeElement.style.opacity = nodeData.opacity + "%");
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
         nodeElement.style.maxWidth = "300px";
