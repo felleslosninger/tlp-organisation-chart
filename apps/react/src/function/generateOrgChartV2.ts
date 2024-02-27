@@ -54,6 +54,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const childData = findNodeById(childId);
       if (childData) {
         const childElement = createElement("li");
+        childElement.id = childData.id;
         childElement.setAttribute("role", "treeitem");
 
         const innerChild = childData.url
@@ -81,6 +82,16 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
       const nodeElement = document.createElement(nodeData.url ? "a" : "div");
+
+      //give nodeElement id
+      nodeElement.id = nodeData.id;
+
+      if (node.component?.children) {
+        nodeElement.setAttribute(
+          "aria-owns",
+          node.component.children.join(" "),
+        );
+      }
 
       //give role treeitem to nodeElement
       nodeElement.setAttribute("role", "treeitem");
@@ -183,7 +194,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
     }
 
-    if (column.component?.children) {
+    if (column.component?.children && column.component.type !== "root") {
       columnElement.appendChild(
         createChildren(
           3,
@@ -226,7 +237,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       columnElement.appendChild(innerColumn);
     }
 
-    if (column.component?.children) {
+    if (column.component?.children && column.component.type !== "root") {
       columnElement.appendChild(
         createChildren(siblingsAmount, column.component.children),
       );
