@@ -45,7 +45,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   function createChildren(parentSiblingsAmount: number, children: string[]) {
     const childrenList = createElement("ul");
     childrenList.className = "node-children";
-    childrenList.setAttribute("role", "group");
 
     if (parentSiblingsAmount === 2) {
       childrenList.style.maxWidth = "300px";
@@ -373,6 +372,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     orgChart.className = provideLayoutClass(mainContainerWidth);
     orgChart.role = "tree";
     orgChart.setAttribute("lang", meta.langcode);
+    orgChart.setAttribute("aria-label", meta.title);
 
     // Initial setup based on mainContainer's current width
     mainContainerWidth = mainContainer.offsetWidth;
