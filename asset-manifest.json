@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tlp-organization-chart/static/css/main.3aa878ab.css",
-    "main.js": "/tlp-organization-chart/static/js/main.b213a1ac.js",
+    "main.css": "/tlp-organization-chart/static/css/main.c8d39198.css",
+    "main.js": "/tlp-organization-chart/static/js/main.e10dbe8a.js",
     "static/js/400.4f19aae6.chunk.js": "/tlp-organization-chart/static/js/400.4f19aae6.chunk.js",
     "index.html": "/tlp-organization-chart/index.html",
-    "main.3aa878ab.css.map": "/tlp-organization-chart/static/css/main.3aa878ab.css.map",
-    "main.b213a1ac.js.map": "/tlp-organization-chart/static/js/main.b213a1ac.js.map",
+    "main.c8d39198.css.map": "/tlp-organization-chart/static/css/main.c8d39198.css.map",
+    "main.e10dbe8a.js.map": "/tlp-organization-chart/static/js/main.e10dbe8a.js.map",
     "400.4f19aae6.chunk.js.map": "/tlp-organization-chart/static/js/400.4f19aae6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3aa878ab.css",
-    "static/js/main.b213a1ac.js"
+    "static/css/main.c8d39198.css",
+    "static/js/main.e10dbe8a.js"
   ]
 }
