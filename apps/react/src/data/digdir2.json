@@ -190,7 +190,17 @@
               "alignment": "center",
               "component": {
                 "type": "root",
-                "children": ["kom", "tuu", "verk", "hr", "tverr"]
+                "children": [
+                  "tuu",
+                  "kom",
+                  "hr",
+                  "verk",
+                  "tverr",
+                  "sam",
+                  "digss",
+                  "fel",
+                  "bod"
+                ]
               }
             }
           ]
