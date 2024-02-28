@@ -109,6 +109,30 @@
                 "type": "nodeList",
                 "children": ["child"]
               }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["offset-right"],
+              "alignment": "offset-right",
+              "component": {
+                "type": "nodeList",
+                "children": ["child"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["offset-left"],
+              "alignment": "offset-left",
+              "component": {
+                "type": "nodeList",
+                "children": ["child"]
+              }
             },
             {
               "id": ["normal"],

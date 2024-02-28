@@ -47,7 +47,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     childrenList.className = "node-children";
 
     if (parentSiblingsAmount <= 2 && !isMobile) {
-      childrenList.style.width = "300px";
+      childrenList.style.width = "290px";
     }
 
     children.forEach((childId: string) => {
@@ -117,7 +117,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
-        nodeElement.style.width = "300px";
+        nodeElement.style.width = "290px";
       }
 
       if (!isMobile) {
@@ -223,7 +223,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (column.alignment && siblingsAmount <= 2 && !isMobile) {
       columnElement.className += ` column-alignment-${siblingsAmount}-${column.alignment}`;
       if (
-        siblingsAmount === 2 &&
+        siblingsAmount <= 2 &&
         (column.alignment === "offset-left" ||
           column.alignment === "offset-right")
       ) {
@@ -512,7 +512,7 @@ function calculateColumnWidth(
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
   if (!rowContainsSpecialColumn) {
-    if (siblingsAmount === 2 && rowContainsOffsetColumn) {
+    if (siblingsAmount <= 2 && rowContainsOffsetColumn) {
       width = 50;
     }
 

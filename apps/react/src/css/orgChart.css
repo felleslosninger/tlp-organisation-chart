@@ -287,20 +287,20 @@
 .column-line-offset-right::after{
   content: "";
   position: absolute;
-  width: calc(100% + 52px + 12px);
+  width: calc(100% + 52px + 12px - 290px);
   height: 2px;
   background-color: #68707C;
-  right: 0;
+  right: 290px;
   top: 40px;
 }
 
 .column-line-offset-left::after{
   content: "";
   position: absolute;
-  width: calc(100% + 52px + 12px);
+  width: calc(100% + 52px + 12px - 290px);
   height: 2px;
   background-color: #68707C;
-  left: 0;
+  left: 290px;
   top: 40px;
 }
 
@@ -353,47 +353,39 @@
 
 .column-alignment-1-offset-left {
   align-items: start;
-  margin-right: calc(100% - 276px);
+  margin-right: calc(50% + 64px);
 }
 
 .column-alignment-1-offset-right {
   align-items: end;
-  margin-left: calc(100% - 276px);
+  margin-left: calc(50% + 64px);
+
 }
 
 .column-alignment-1-left {
-  margin-left: calc(50% - 300px - 52px - 12px);
+  margin-left: calc(50% - 290px - 52px - 12px);
   margin-right: calc(50% + 52px + 12px);
 }
 
 .column-alignment-1-right {
-  margin-right: calc(50% - 300px - 52px - 12px);
+  margin-right: calc(50% - 290px - 52px - 12px);
   margin-left: calc(50% + 52px + 12px);
 }
 
 .column-alignment-2-left {
-  margin-left: calc(50% - 300px - 52px - 12px);
+  margin-left: calc(50% - 290px - 52px - 12px);
   margin-right: calc(50% + 52px + 12px);
 }
 
 .column-alignment-2-right {
-  margin-right: calc(50% - 300px - 52px - 12px);
+  margin-right: calc(50% - 290px - 52px - 12px);
   margin-left: calc(50% + 52px + 12px);
 }
 
 .column-alignment-2-offset-right {
   align-items: end;
-  /* margin-left: calc(50% - 300px - 12px); */
 }
-/* .column-alignment-2-offset-right.column-flex-start {
-  margin-left: 0;
-} */
 
 .column-alignment-2-offset-left {
   align-items: start;
-  /* margin-right: calc(50% - 300px - 12px); */
 } 
-
-/* .column-alignment-2-offset-left.column-flex-end {
-  margin-right: 0;
-} */
