@@ -78,18 +78,6 @@
             {
               "id": ["offset-left"],
               "alignment": "offset-left"
-            },
-            {
-              "id": ["offset-right"],
-              "alignment": "offset-right"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["offset-left"],
-              "alignment": "offset-left"
             }
           ]
         },

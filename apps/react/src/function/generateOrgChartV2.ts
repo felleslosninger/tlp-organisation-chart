@@ -47,7 +47,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     childrenList.className = "node-children";
 
     if (parentSiblingsAmount <= 2 && !isMobile) {
-      childrenList.style.maxWidth = "300px";
+      childrenList.style.width = "300px";
     }
 
     children.forEach((childId: string) => {
@@ -114,9 +114,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       nodeElement.appendChild(innerNode);
       nodeElement.className = "node ";
       nodeElement.tabIndex = 0;
+
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
-        nodeElement.style.maxWidth = "300px";
+        nodeElement.style.width = "300px";
       }
 
       if (!isMobile) {
@@ -219,7 +220,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     columnElement.className = "column";
 
     //Allow alignment for columns in rows with 2 or less siblings
-    if (column.alignment && siblingsAmount <= 2) {
+    if (column.alignment && siblingsAmount <= 2 && !isMobile) {
       columnElement.className += ` column-alignment-${siblingsAmount}-${column.alignment}`;
     }
 
@@ -236,7 +237,16 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       isLastRow,
     );
 
-    columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    if (
+      !isMobile &&
+      siblingsAmount === 2 &&
+      (column.alignment === "offset-left" ||
+        column.alignment === "offset-right")
+    ) {
+      columnElement.style.width = `300px`;
+    } else {
+      columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    }
 
     if (innerColumn !== null) {
       columnElement.appendChild(innerColumn);
