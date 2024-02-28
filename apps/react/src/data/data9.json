@@ -132,6 +132,14 @@
               "alignment": "offset-right"
             }
           ]
+        },
+        {
+          "row": [
+            {
+              "id": ["normal"],
+              "alignment": "center"
+            }
+          ]
         }
       ]
     }

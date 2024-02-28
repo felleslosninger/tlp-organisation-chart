@@ -222,6 +222,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     //Allow alignment for columns in rows with 2 or less siblings
     if (column.alignment && siblingsAmount <= 2 && !isMobile) {
       columnElement.className += ` column-alignment-${siblingsAmount}-${column.alignment}`;
+      if (
+        siblingsAmount === 2 &&
+        (column.alignment === "offset-left" ||
+          column.alignment === "offset-right")
+      ) {
+        columnElement.classList.add(`column-line-${column.alignment}`);
+      }
     }
 
     if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
@@ -237,15 +244,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       isLastRow,
     );
 
-    if (
-      !isMobile &&
-      siblingsAmount === 2 &&
-      (column.alignment === "offset-left" ||
-        column.alignment === "offset-right")
-    ) {
-      columnElement.style.width = `300px`;
-    } else {
+    if (!isMobile) {
       columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    } else {
+      columnElement.style.width = "100%";
     }
 
     if (innerColumn !== null) {
@@ -304,6 +306,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     rowElement.className = rowClass;
 
+    //find out if the row contains a column with alignment === offset-left or offset-right
+    let rowContainsOffsetColumn = false;
+    row.row.forEach((column: Column) => {
+      if (
+        column.alignment === "offset-left" ||
+        column.alignment === "offset-right"
+      ) {
+        rowContainsOffsetColumn = true;
+      }
+    });
+
     row.row.forEach((column: Column) => {
       count++;
 
@@ -315,6 +328,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         isLastRow,
         rowContainsSpecialColumns,
         indexToColumnsWithSpecialColumnList,
+        column.alignment,
+        rowContainsOffsetColumn,
       );
 
       if (!rowContainsSpecialColumns) {
@@ -477,10 +492,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   return null;
 }
 
-// function alignmentAndOffset(){
-
-// }
-
 //function to calculate the width of the columns
 //TODO: Refactor this function to make it more readable
 function calculateColumnWidth(
@@ -491,6 +502,8 @@ function calculateColumnWidth(
   isLastRow: boolean,
   rowContainsSpecialColumn: boolean,
   indexToSpecialColumnList: number[],
+  alignment?: string | undefined,
+  rowContainsOffsetColumn?: boolean,
 ) {
   let additionalClass = "";
   let width = 100;
@@ -499,6 +512,10 @@ function calculateColumnWidth(
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
   if (!rowContainsSpecialColumn) {
+    if (siblingsAmount === 2 && rowContainsOffsetColumn) {
+      width = 50;
+    }
+
     if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
       if (mainContainerWidth > main) {
         if (isLastRow) {
@@ -623,15 +640,6 @@ function createElement(type: string) {
   return element;
 }
 
-// create a that takes a number, and return true if the number is even or 1, false if the number is odd
-function isEvenOrOne(num: number) {
-  return num % 2 === 0 || num === 1;
-}
-
-function isOdd(number: number) {
-  return number % 2 !== 0;
-}
-
 //function to create the line between the nodes
 function createNodeLineClass(
   indexInRow: number,
@@ -649,11 +657,17 @@ function createNodeLineClass(
   if (siblingsAmount === 1) {
     if (alignment === "left") {
       className = " node-line-right";
+    } else if (alignment === "right") {
+      className = " node-line-left";
     }
     return className;
   }
 
-  if (siblingsAmount === 2) {
+  if (
+    siblingsAmount === 2 &&
+    alignment !== "offset-left" &&
+    alignment !== "offset-right"
+  ) {
     if (indexInRow === 1) {
       className = " node-line-right";
     } else {
@@ -748,6 +762,15 @@ function createNodeLineClass(
     className = "";
     return className;
   }
+}
+
+// create a that takes a number, and return true if the number is even or 1, false if the number is odd
+function isEvenOrOne(num: number) {
+  return num % 2 === 0 || num === 1;
+}
+
+function isOdd(number: number) {
+  return number % 2 !== 0;
 }
 
 function getBreakpointName(width: number) {
