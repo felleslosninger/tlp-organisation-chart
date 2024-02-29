@@ -1,61 +1,54 @@
 {
   "meta": {
-    "title": "Offset and alignment",
+    "title": "Test",
     "langcode": "no"
   },
   "toc": [
-    { "title": "Direktør", "color": "#0062BA" },
-    { "title": "Avdeling", "color": "#1e2b3c" },
-    { "title": "Seksjon", "color": "#D2D5D8" }
+    { "title": "Root", "color": "#0062BA" },
+    { "title": "Item", "color": "#1e2b3c" }
   ],
   "nodes": [
     {
-      "title": "Offset and alignment",
-      "id": "offset-and-alignment",
+      "title": "Root",
+      "id": "root",
       "backgroundColor": "#0062BA",
-      "textColor": "white"
-    },
-    {
-      "title": "Offset right",
-      "id": "offset-right",
-      "backgroundColor": "#95227D",
-      "textColor": "white"
-    },
-    {
-      "title": "Right",
-      "id": "right",
-      "backgroundColor": "#95227D",
-      "textColor": "white"
-    },
-    {
-      "title": "Center",
-      "id": "center",
-      "backgroundColor": "#95227D",
-      "textColor": "white"
-    },
-    {
-      "title": "Left",
-      "id": "left",
-      "backgroundColor": "#95227D",
-      "textColor": "white"
-    },
-    {
-      "title": "Offset left",
-      "id": "offset-left",
-      "backgroundColor": "#95227D",
-      "textColor": "white"
-    },
-    {
-      "title": "Normal Alignment",
-      "id": "normal",
-      "backgroundColor": "darkgrey",
-      "textColor": "white"
-    },
-    {
-      "title": "Child",
-      "id": "child",
-      "backgroundColor": "lightblue",
       "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Item 1 with url",
+      "id": "item1",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 2",
+      "id": "item2",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 3",
+      "id": "item3",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 4",
+      "id": "item4",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 5",
+      "id": "item5",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 6",
+      "id": "item6",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -64,17 +57,17 @@
         {
           "row": [
             {
-              "id": ["offset-and-alignment"],
+              "id": ["root"],
               "alignment": "center",
               "component": {
                 "type": "root",
                 "children": [
-                  "right",
-                  "center",
-                  "left",
-                  "offset-left",
-                  "offset-right",
-                  "normal"
+                  "item1",
+                  "item2",
+                  "item3",
+                  "item4",
+                  "item5",
+                  "item6"
                 ]
               }
             }
@@ -83,129 +76,22 @@
         {
           "row": [
             {
-              "id": ["offset-left"],
-              "alignment": "offset-left",
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
+              "id": ["item1"]
             },
             {
-              "id": ["offset-right"],
-              "alignment": "offset-right",
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["offset-left"],
-              "alignment": "offset-left",
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["offset-right"],
-              "alignment": "offset-right",
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["offset-left"],
-              "alignment": "offset-left",
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
+              "id": ["item2"]
             },
             {
-              "id": ["normal"],
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["normal"],
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
+              "id": ["item3"]
             },
             {
-              "id": ["normal"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["center"],
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["normal"]
+              "id": ["item4"]
             },
             {
-              "id": ["normal"],
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["normal"],
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
+              "id": ["item5"]
             },
             {
-              "id": ["offset-right"],
-              "alignment": "offset-right",
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["normal"],
-              "component": {
-                "type": "nodeList",
-                "children": ["child"]
-              }
+              "id": ["item6"]
             }
           ]
         }

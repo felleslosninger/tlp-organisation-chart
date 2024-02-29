@@ -9,6 +9,10 @@ import jsonData7 from "../../data/data7.json";
 import jsonData8 from "../../data/data8.json";
 import jsonData9 from "../../data/data9.json";
 import jsonData10 from "../../data/data10.json";
+import jsonDataSpecial1 from "../../data/dataSpecial1.json";
+import jsonDataSpecial2 from "../../data/dataSpecial2.json";
+import jsonDataOffset1 from "../../data/dataOffset1.json";
+import jsonDataOffset2 from "../../data/dataOffset2.json";
 import jsonDigdir1 from "../../data/digdir1.json";
 import jsonDigdir3 from "../../data/digdir3.json";
 import { generateOrgChart } from "../../function/generateOrgChartV2";
@@ -33,6 +37,10 @@ const Home = () => {
     data8: jsonData8,
     data9: jsonData9,
     data10: jsonData10,
+    special1: jsonDataSpecial1,
+    special2: jsonDataSpecial2,
+    offset1: jsonDataOffset1,
+    offset2: jsonDataOffset2,
   };
 
   useEffect(() => {
@@ -67,12 +75,20 @@ const Home = () => {
             </Combobox.Option>
             <Combobox.Option value="data2">Kun main layout</Combobox.Option>
             <Combobox.Option value="data3">Med tre layouts</Combobox.Option>
-            <Combobox.Option value="data5">Data 5</Combobox.Option>
-            <Combobox.Option value="data6">Data 6</Combobox.Option>
-            <Combobox.Option value="data7">Data 7</Combobox.Option>
-            <Combobox.Option value="data8">Data 8</Combobox.Option>
-            <Combobox.Option value="data9">Data 9</Combobox.Option>
-            <Combobox.Option value="data10">Data 10</Combobox.Option>
+            <Combobox.Option value="data5">Ender med 1 kol</Combobox.Option>
+            <Combobox.Option value="data6">Ender med 2 kol</Combobox.Option>
+            <Combobox.Option value="data7">Ender med 3 kol</Combobox.Option>
+            <Combobox.Option value="data8">Ender med 4 kol</Combobox.Option>
+            <Combobox.Option value="data9">Ender med 5 kol</Combobox.Option>
+            <Combobox.Option value="data10">Ender med 6 kol</Combobox.Option>
+            <Combobox.Option value="special1">
+              Med spesial-kolonne 1
+            </Combobox.Option>
+            <Combobox.Option value="special2">
+              Med spesial-kolonne 2
+            </Combobox.Option>
+            <Combobox.Option value="offset1">Offset 1</Combobox.Option>
+            <Combobox.Option value="offset2">Offset 2</Combobox.Option>
           </Combobox>
         </div>
         <div className={styles.menuRight}>
