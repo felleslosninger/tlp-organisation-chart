@@ -1,4 +1,4 @@
-import { OrgChartData, Layout, Node, Column, Row, Meta } from "../types/types";
+import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta } = data;
@@ -46,8 +46,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const childrenList = createElement("ul");
     childrenList.className = "node-children";
 
-    if (parentSiblingsAmount === 2) {
-      childrenList.style.maxWidth = "300px";
+    if (parentSiblingsAmount <= 2 && !isMobile) {
+      childrenList.style.width = "290px";
     }
 
     children.forEach((childId: string) => {
@@ -114,9 +114,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       nodeElement.appendChild(innerNode);
       nodeElement.className = "node ";
       nodeElement.tabIndex = 0;
+
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
-        nodeElement.style.maxWidth = "300px";
+        nodeElement.style.width = "290px";
       }
 
       if (!isMobile) {
@@ -126,6 +127,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           mainContainerWidth,
           allowedBreakpoints,
           isLastRow,
+          node.alignment ? node.alignment : undefined,
         );
       }
 
@@ -215,8 +217,19 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     isLastRow: boolean,
   ) {
     const columnElement = createElement("div");
-
     columnElement.className = "column";
+
+    //Allow alignment for columns in rows with 2 or less siblings
+    if (column.alignment && siblingsAmount <= 2 && !isMobile) {
+      columnElement.className += ` column-alignment-${siblingsAmount}-${column.alignment}`;
+      if (
+        siblingsAmount <= 2 &&
+        (column.alignment === "offset-left" ||
+          column.alignment === "offset-right")
+      ) {
+        columnElement.classList.add(`column-line-${column.alignment}`);
+      }
+    }
 
     if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
       columnElement.className += " column-flex-end";
@@ -231,7 +244,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       isLastRow,
     );
 
-    columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    if (!isMobile) {
+      columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    } else {
+      columnElement.style.width = "100%";
+    }
 
     if (innerColumn !== null) {
       columnElement.appendChild(innerColumn);
@@ -289,6 +306,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     rowElement.className = rowClass;
 
+    //find out if the row contains a column with alignment === offset-left or offset-right
+    let rowContainsOffsetColumn = false;
+    row.row.forEach((column: Column) => {
+      if (
+        column.alignment === "offset-left" ||
+        column.alignment === "offset-right"
+      ) {
+        rowContainsOffsetColumn = true;
+      }
+    });
+
     row.row.forEach((column: Column) => {
       count++;
 
@@ -300,6 +328,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         isLastRow,
         rowContainsSpecialColumns,
         indexToColumnsWithSpecialColumnList,
+        column.alignment,
+        rowContainsOffsetColumn,
       );
 
       if (!rowContainsSpecialColumns) {
@@ -472,6 +502,8 @@ function calculateColumnWidth(
   isLastRow: boolean,
   rowContainsSpecialColumn: boolean,
   indexToSpecialColumnList: number[],
+  alignment?: string | undefined,
+  rowContainsOffsetColumn?: boolean,
 ) {
   let additionalClass = "";
   let width = 100;
@@ -480,6 +512,10 @@ function calculateColumnWidth(
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
   if (!rowContainsSpecialColumn) {
+    if (siblingsAmount <= 2 && rowContainsOffsetColumn) {
+      width = 50;
+    }
+
     if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
       if (mainContainerWidth > main) {
         if (isLastRow) {
@@ -604,15 +640,6 @@ function createElement(type: string) {
   return element;
 }
 
-// create a that takes a number, and return true if the number is even or 1, false if the number is odd
-function isEvenOrOne(num: number) {
-  return num % 2 === 0 || num === 1;
-}
-
-function isOdd(number: number) {
-  return number % 2 !== 0;
-}
-
 //function to create the line between the nodes
 function createNodeLineClass(
   indexInRow: number,
@@ -620,12 +647,27 @@ function createNodeLineClass(
   mainContainerWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
+  alignment: string | undefined,
 ) {
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
 
   let className = "";
-  if (siblingsAmount === 2) {
+
+  if (siblingsAmount === 1) {
+    if (alignment === "left") {
+      className = " node-line-right";
+    } else if (alignment === "right") {
+      className = " node-line-left";
+    }
+    return className;
+  }
+
+  if (
+    siblingsAmount === 2 &&
+    alignment !== "offset-left" &&
+    alignment !== "offset-right"
+  ) {
     if (indexInRow === 1) {
       className = " node-line-right";
     } else {
@@ -720,6 +762,15 @@ function createNodeLineClass(
     className = "";
     return className;
   }
+}
+
+// create a that takes a number, and return true if the number is even or 1, false if the number is odd
+function isEvenOrOne(num: number) {
+  return num % 2 === 0 || num === 1;
+}
+
+function isOdd(number: number) {
+  return number % 2 !== 0;
 }
 
 function getBreakpointName(width: number) {

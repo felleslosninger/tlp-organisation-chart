@@ -128,6 +128,36 @@
       "title": "Brukaropplevning og datadeling",
       "id": "bod",
       "backgroundColor": "#1e2b3c",
+      "textColor": "#D2D5D8"
+    },
+    {
+      "title": "Strategi og forretningsutvikling",
+      "id": "str2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Utvikling",
+      "id": "utv2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Plattform og styring",
+      "id": "platt",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukerstøtte og service",
+      "id": "bru2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukaropplevning",
+      "id": "bruk",
+      "backgroundColor": "#D2D5D8",
       "textColor": "#1e2b3c"
     }
   ],
@@ -163,7 +193,7 @@
             },
             {
               "id": ["tuu"],
-              "alignment": "center"
+              "alignment": "offset-right"
             }
           ]
         },
@@ -203,6 +233,14 @@
               "component": {
                 "type": "nodeList",
                 "children": ["str", "utv", "mar", "bru", "dri"]
+              }
+            },
+            {
+              "id": ["bod"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["str2", "utv2", "platt", "bru2", "bruk"]
               }
             }
           ]

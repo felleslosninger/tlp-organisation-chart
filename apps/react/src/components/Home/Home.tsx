@@ -6,7 +6,9 @@ import React, { useEffect, useState } from "react";
 // import jsonData5 from "../../data/data5.json";
 // import jsonData6 from "../../data/data6.json";
 // import jsonData7 from "../../data/data7.json";
-import jsonData8 from "../../data/data8.json";
+// import jsonData8 from "../../data/data8.json";
+import jsonData9 from "../../data/data9.json";
+import jsonData10 from "../../data/data10.json";
 import jsonDigdir1 from "../../data/digdir1.json";
 import jsonDigdir2 from "../../data/digdir2.json";
 import jsonDigdir3 from "../../data/digdir3.json";
@@ -15,7 +17,7 @@ import { Button } from "@digdir/design-system-react";
 import styles from "./Home.module.css";
 
 const Home = () => {
-  const [data, setData] = useState(jsonDigdir1);
+  const [data, setData] = useState(jsonData10);
 
   useEffect(() => {
     generateOrgChart(data, "test");
@@ -28,6 +30,8 @@ const Home = () => {
         <Button onClick={() => setData(jsonDigdir1)}>Digdir 1</Button>
         <Button onClick={() => setData(jsonDigdir2)}>Digdir 2</Button>
         <Button onClick={() => setData(jsonDigdir3)}>Digdir 3</Button>
+        <Button onClick={() => setData(jsonData9)}>Data 9</Button>
+        <Button onClick={() => setData(jsonData10)}>Data 10</Button>
         {/* <Button onClick={() => setData(jsonData1)}>Data 1</Button> 
         <Button onClick={() => setData(jsonData2)}>Data 2</Button>
         <Button onClick={() => setData(jsonData3)}>Data 3</Button> 

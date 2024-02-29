@@ -7,10 +7,12 @@
     outline-offset: 2px;
 }
 
+
+/*Row styles*/
+
 .rows {
   display: flex;
   flex-direction: column;
-
 }
 
 .row-last-3::before,
@@ -95,7 +97,6 @@
   left: calc(50% - 1px);
 }
 
-
 .row {
   box-sizing: border-box;
   display: flex;
@@ -132,6 +133,8 @@
 }
 
 
+/*Column styles*/
+
 .column {
   display: flex;
   flex-direction: column;
@@ -151,6 +154,8 @@
   margin-right: 52px;
 }
 
+
+/*Node line styles*/
 .node {
   box-sizing: border-box;
   width: 100%;
@@ -167,6 +172,7 @@
 }
 
 .inner-node{
+  z-index: 100;
   padding: 0 20px;
 }
 
@@ -179,6 +185,10 @@
   width: 100%;
   list-style: none;
 }
+
+
+
+/*Node line styles*/
 
 .node-line-right::before{
     content: "";
@@ -198,8 +208,7 @@
     width: 2px;
     height: calc(50% + 40px);
     background-color: #68707C;
-    top: -40px;
-  
+    top: -40px;  
 }
 
  .node-line-left::before{
@@ -262,7 +271,6 @@
     background-color: #68707C;
     right: 50%;
     top: -40px;
-   
 }
 
 .node-line-up-left-half::after{
@@ -274,8 +282,31 @@
     background-color: #68707C;
     right: 50%;
     top: -40px;
-} 
+}
 
+.column-line-offset-right::after{
+  content: "";
+  position: absolute;
+  width: calc(100% + 52px + 12px - 290px);
+  height: 2px;
+  background-color: #68707C;
+  right: 290px;
+  top: 40px;
+}
+
+.column-line-offset-left::after{
+  content: "";
+  position: absolute;
+  width: calc(100% + 52px + 12px - 290px);
+  height: 2px;
+  background-color: #68707C;
+  left: 290px;
+  top: 40px;
+}
+
+
+
+/*Special column styles*/
 
 .column-special {
   display: flex;
@@ -317,3 +348,44 @@
   gap: 12px;
   width: 100%;
 }
+
+/** Alignment and offset*/
+
+.column-alignment-1-offset-left {
+  align-items: start;
+  margin-right: calc(50% + 64px);
+}
+
+.column-alignment-1-offset-right {
+  align-items: end;
+  margin-left: calc(50% + 64px);
+
+}
+
+.column-alignment-1-left {
+  margin-left: calc(50% - 290px - 52px - 12px);
+  margin-right: calc(50% + 52px + 12px);
+}
+
+.column-alignment-1-right {
+  margin-right: calc(50% - 290px - 52px - 12px);
+  margin-left: calc(50% + 52px + 12px);
+}
+
+.column-alignment-2-left {
+  margin-left: calc(50% - 290px - 52px - 12px);
+  margin-right: calc(50% + 52px + 12px);
+}
+
+.column-alignment-2-right {
+  margin-right: calc(50% - 290px - 52px - 12px);
+  margin-left: calc(50% + 52px + 12px);
+}
+
+.column-alignment-2-offset-right {
+  align-items: end;
+}
+
+.column-alignment-2-offset-left {
+  align-items: start;
+} 

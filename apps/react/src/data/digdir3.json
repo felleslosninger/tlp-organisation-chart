@@ -205,7 +205,7 @@
           "row": [
             {
               "id": ["tuu"],
-              "alignment": "center"
+              "alignment": "offset-right"
             }
           ]
         },
