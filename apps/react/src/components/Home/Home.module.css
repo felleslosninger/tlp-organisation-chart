@@ -1,5 +1,5 @@
 .test {
-  max-width: 1800px;
+  border: 2px solid #1c1c1c;
   margin: 0 auto;
 }
 
@@ -10,4 +10,25 @@
   width: 100%;
   align-items: center;
   border-bottom: 1px solid #000;
+}
+
+.menu{
+  margin: 10px auto 60px auto;
+  max-width: 1800px;
+  display: flex;
+  width: 100%;
+}
+
+.menuLeft{
+  display: flex;
+  gap: 20px;
+  width: 50%;
+  justify-content: flex-start;
+}
+
+.menuRight{
+  display: flex;
+  gap: 20px;
+  width: 50%;
+  justify-content: flex-end;
 }

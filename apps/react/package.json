@@ -4,7 +4,7 @@
   "homepage": "http://felleslosninger.github.io/tlp-organization-chart",
   "private": true,
   "dependencies": {
-    "@digdir/design-system-react": "^0.33.0",
+    "@digdir/design-system-react": "^0.51.1",
     "@digdir/design-system-tokens": "^0.8.1",
     "@navikt/aksel-icons": "^5.7.6",
     "@testing-library/jest-dom": "^5.17.0",
