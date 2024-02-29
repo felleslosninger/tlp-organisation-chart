@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "Test",
+    "langcode": "no"
+  },
+  "toc": [
+    { "title": "Root", "color": "#0062BA" },
+    { "title": "Item", "color": "#1e2b3c" },
+    { "title": "children", "color": "#68707c" }
+  ],
+  "nodes": [
+    {
+      "title": "Root",
+      "id": "root",
+      "backgroundColor": "#0062BA",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Item 1",
+      "id": "item1",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 1",
+      "id": "child1",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "rows": [
+        {
+          "row": [
+            {
+              "id": ["root"],
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": ["item1"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item1"],
+              "component": {
+                "type": "node-list",
+                "children": ["child1"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
