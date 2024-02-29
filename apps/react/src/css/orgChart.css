@@ -15,6 +15,28 @@
   flex-direction: column;
 }
 
+.row-last-1::before
+{
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 50%;
+  background-color: #68707C;
+  top: 0;
+  left: calc(50% - 1px);
+}
+
+.row-last-2::before
+{
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: calc(50% + 20px);
+  background-color: #68707C;
+  top: 0;
+  left: calc(50% - 1px);
+}
+
 .row-last-3::before,
 .row-last-3-tablet::before,
 .row-last-3-laptop::before

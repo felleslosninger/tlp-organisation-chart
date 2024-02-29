@@ -359,7 +359,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     });
 
     !isMobile && !isLastRow && rowElement.classList.add("row-line");
-    !isMain && rowElement.classList.add("wrap");
+    !isMain && row.row.length > 2 && rowElement.classList.add("wrap");
+    isMobile && row.row.length === 2 && rowElement.classList.add("wrap");
     !isMobile &&
       isLastRow &&
       rowElement.style.setProperty(
@@ -823,8 +824,10 @@ function getLastRowClass(
     rowLength += indexToColumnsWithSpecialColumnList.length;
   }
 
-  if (rowLength >= 3 && !isMobile) {
+  if (!isMobile && rowLength > 2) {
     return `row row-last-${rowLength}${isLaptop ? "-laptop" : isTablet ? "-tablet" : ""}`;
+  } else if (!isMobile && rowLength < 3) {
+    return `row row-last-${rowLength}`;
   } else {
     return "row";
   }
