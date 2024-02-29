@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Test",
+    "langcode": "no"
+  },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
     { "title": "Avdeling", "color": "#1e2b3c" },
@@ -135,11 +139,7 @@
             {
               "id": ["kom"],
               "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -147,8 +147,6 @@
           "row": [
             {
               "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
               "component": {
                 "type": "nodeList",
                 "children": ["id1", "id2"]
@@ -156,8 +154,6 @@
             },
             {
               "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
               "component": {
                 "type": "nodeList",
                 "children": ["id1", "id2"]

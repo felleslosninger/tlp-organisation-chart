@@ -59,10 +59,14 @@ const Home = () => {
               Avdelinger og seksjoner
             </Combobox.Option>
             <Combobox.Option value="digdir3">Leveranseområder</Combobox.Option>¨
-            <Combobox.Option value="data1">Data 1</Combobox.Option>
-            <Combobox.Option value="data2">Data 2</Combobox.Option>
-            <Combobox.Option value="data3">Data 3</Combobox.Option>
-            <Combobox.Option value="data4">Data 4</Combobox.Option>
+            <Combobox.Option value="data1">
+              Kombinasjoner uten barn
+            </Combobox.Option>
+            <Combobox.Option value="data4">
+              Kombinasjoner med barn
+            </Combobox.Option>
+            <Combobox.Option value="data2">Kun main layout</Combobox.Option>
+            <Combobox.Option value="data3">Med tre layouts</Combobox.Option>
             <Combobox.Option value="data5">Data 5</Combobox.Option>
             <Combobox.Option value="data6">Data 6</Combobox.Option>
             <Combobox.Option value="data7">Data 7</Combobox.Option>
@@ -73,9 +77,9 @@ const Home = () => {
         </div>
         <div className={styles.menuRight}>
           <Button onClick={() => setWrapperWidth("1800px")}>Desktop</Button>
-          <Button onClick={() => setWrapperWidth("1500px")}>Laptop</Button>
-          <Button onClick={() => setWrapperWidth("992px")}>Tablet</Button>
-          <Button onClick={() => setWrapperWidth("768px")}>Mobil</Button>
+          <Button onClick={() => setWrapperWidth("1400px")}>Laptop</Button>
+          <Button onClick={() => setWrapperWidth("900px")}>Tablet</Button>
+          <Button onClick={() => setWrapperWidth("760px")}>Mobil</Button>
         </div>
       </div>
       <h2>Aktiv max-bredde: {wrapperWidth}</h2>
