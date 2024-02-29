@@ -9,6 +9,12 @@ import jsonData7 from "../../data/data7.json";
 import jsonData8 from "../../data/data8.json";
 import jsonData9 from "../../data/data9.json";
 import jsonData10 from "../../data/data10.json";
+import jsonData11 from "../../data/data11.json";
+import jsonData12 from "../../data/data12.json";
+import jsonData13 from "../../data/data13.json";
+import jsonData14 from "../../data/data14.json";
+import jsonData15 from "../../data/data15.json";
+import jsonData16 from "../../data/data16.json";
 import jsonDataSpecial1 from "../../data/dataSpecial1.json";
 import jsonDataSpecial2 from "../../data/dataSpecial2.json";
 import jsonDataOffset1 from "../../data/dataOffset1.json";
@@ -37,6 +43,12 @@ const Home = () => {
     data8: jsonData8,
     data9: jsonData9,
     data10: jsonData10,
+    data11: jsonData11,
+    data12: jsonData12,
+    data13: jsonData13,
+    data14: jsonData14,
+    data15: jsonData15,
+    data16: jsonData16,
     special1: jsonDataSpecial1,
     special2: jsonDataSpecial2,
     offset1: jsonDataOffset1,
@@ -81,6 +93,24 @@ const Home = () => {
             <Combobox.Option value="data8">Ender med 4 kol</Combobox.Option>
             <Combobox.Option value="data9">Ender med 5 kol</Combobox.Option>
             <Combobox.Option value="data10">Ender med 6 kol</Combobox.Option>
+            <Combobox.Option value="data11">
+              Ender med 1 kol & barn
+            </Combobox.Option>
+            <Combobox.Option value="data12">
+              Ender med 2 kol & barn
+            </Combobox.Option>
+            <Combobox.Option value="data13">
+              Ender med 3 kol & barn
+            </Combobox.Option>
+            <Combobox.Option value="data14">
+              Ender med 4 kol & barn
+            </Combobox.Option>
+            <Combobox.Option value="data15">
+              Ender med 5 kol & barn
+            </Combobox.Option>
+            <Combobox.Option value="data16">
+              Ender med 6 kol & barn
+            </Combobox.Option>
             <Combobox.Option value="special1">
               Med spesial-kolonne 1
             </Combobox.Option>
