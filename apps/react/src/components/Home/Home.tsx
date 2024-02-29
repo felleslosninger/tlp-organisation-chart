@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className={styles.layout}>
       <h1>Lag organisasjonskart</h1>
       <div className={styles.menu}>
         <div className={styles.menuLeft}>
@@ -73,11 +73,12 @@ const Home = () => {
         </div>
         <div className={styles.menuRight}>
           <Button onClick={() => setWrapperWidth("1800px")}>Desktop</Button>
-          <Button onClick={() => setWrapperWidth("1400px")}>Laptop</Button>
-          <Button onClick={() => setWrapperWidth("912px")}>Tablet</Button>
-          <Button onClick={() => setWrapperWidth("718px")}>Mobile</Button>
+          <Button onClick={() => setWrapperWidth("1500px")}>Laptop</Button>
+          <Button onClick={() => setWrapperWidth("992px")}>Tablet</Button>
+          <Button onClick={() => setWrapperWidth("768px")}>Mobil</Button>
         </div>
       </div>
+      <h2>Aktiv max-bredde: {wrapperWidth}</h2>
       <div
         style={{ maxWidth: wrapperWidth }}
         className={styles.test}
