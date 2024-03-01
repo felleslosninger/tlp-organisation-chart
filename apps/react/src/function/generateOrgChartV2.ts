@@ -151,12 +151,20 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       ? (columnElement.style.width = "100%")
       : (columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`);
 
+    function createSpecialColumnLines() {
+      return "test";
+    }
+
     //if column.id is an array, create a special column
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement("div");
-      isMobile
-        ? (nodesWrapper.className = "nodes-wrapper-mobile")
-        : (nodesWrapper.className = "nodes-wrapper");
+      isMobile || isTablet
+        ? (nodesWrapper.className = "nodes-container-wrap")
+        : (nodesWrapper.className = "nodes-container");
+
+      if (!isMobile) {
+        nodesWrapper.classList.add(createSpecialColumnLines());
+      }
 
       column.id.forEach((nodeId: string) => {
         const nodeData = findNodeById(nodeId);
@@ -328,7 +336,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         isLastRow,
         rowContainsSpecialColumns,
         indexToColumnsWithSpecialColumnList,
-        column.alignment,
         rowContainsOffsetColumn,
       );
 
@@ -503,7 +510,6 @@ function calculateColumnWidth(
   isLastRow: boolean,
   rowContainsSpecialColumn: boolean,
   indexToSpecialColumnList: number[],
-  alignment?: string | undefined,
   rowContainsOffsetColumn?: boolean,
 ) {
   let additionalClass = "";
@@ -603,12 +609,29 @@ function calculateColumnWidth(
         width = 50;
         additionalWidth = -12;
       } else if (siblingsAmount === 4) {
-        if (indexToSpecialColumnList.includes(indexInRow)) {
-          width = 50;
-          additionalWidth = -18;
-        } else {
-          width = 25;
-          additionalWidth = -18;
+        if (siblingsAmount === 4) {
+          if (indexToSpecialColumnList.length < 2) {
+            if (indexToSpecialColumnList.includes(2)) {
+              if (indexInRow === 1) {
+                width = 50;
+                additionalWidth = -12;
+              } else {
+                width = 25;
+                additionalWidth = -18;
+              }
+            } else {
+              if (indexToSpecialColumnList.includes(indexInRow)) {
+                width = 50;
+                additionalWidth = -24;
+              } else {
+                width = 25;
+                additionalWidth = -24;
+              }
+            }
+          } else {
+            width = 50;
+            additionalWidth = -12;
+          }
         }
       }
     } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
@@ -616,12 +639,22 @@ function calculateColumnWidth(
         width = 50;
         additionalWidth = -12;
       } else if (siblingsAmount === 4) {
-        if (indexToSpecialColumnList.includes(indexInRow)) {
-          width = 50;
-          additionalWidth = -18;
+        if (indexToSpecialColumnList.includes(2)) {
+          if (indexInRow === 3) {
+            width = 50;
+            additionalWidth = -12;
+          } else {
+            width = 25;
+            additionalWidth = -12;
+          }
         } else {
-          width = 25;
-          additionalWidth = -18;
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = 50;
+            additionalWidth = -18;
+          } else {
+            width = 25;
+            additionalWidth = -18;
+          }
         }
       }
     } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {

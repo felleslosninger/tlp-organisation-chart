@@ -104,7 +104,7 @@
   display: flex;
   position: relative;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
   row-gap: 80px;
   column-gap: 24px;
   padding: 40px 0;
@@ -323,14 +323,14 @@
   width: 100%;
 }
 
-.nodes-wrapper{
+.nodes-container{
   display: flex;
   flex-direction: row;
   gap: 24px;
   width: 100%;
 }
 
-.nodes-wrapper .node::before {
+.nodes-container .node::before {
     content: "";
     position: absolute;
     z-index: -1;
@@ -340,7 +340,7 @@
     top: -40px;
 }
 
-.nodes-wrapper .node:last-child:after {
+.nodes-container .node:last-child:after {
     content: "";
     z-index: -1;
     position: absolute;
@@ -351,7 +351,7 @@
     top: -40px;
 }
 
-.nodes-wrapper-mobile {
+.nodes-container-wrap {
   display: flex;
   flex-direction: column;
   gap: 12px;
