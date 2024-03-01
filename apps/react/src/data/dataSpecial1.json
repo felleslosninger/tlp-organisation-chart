@@ -4,59 +4,256 @@
     "langcode": "no"
   },
   "toc": [
-    { "title": "Direktør", "color": "#0062BA" },
-    { "title": "Avdeling", "color": "#1e2b3c" },
-    { "title": "Seksjon", "color": "#68707c" }
+    { "title": "Root", "color": "#0062BA" },
+    { "title": "Item", "color": "#1e2b3c" },
+    { "title": "children", "color": "#68707c" }
   ],
   "nodes": [
     {
-      "title": "Direktør",
-      "id": "dir",
+      "title": "Root",
+      "id": "root",
       "backgroundColor": "#0062BA",
       "textColor": "#1e2b3c"
     },
     {
-      "title": "HR",
-      "id": "hr",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white",
-      "url": "https://www.digdir.no/"
-    },
-    {
-      "title": "IT",
-      "id": "it",
+      "title": "Item 1",
+      "id": "item1",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Markedsføring",
-      "id": "markedsforing",
+      "title": "Item 2",
+      "id": "item2",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Kommunikasjon",
-      "id": "kom",
+      "title": "Item 3",
+      "id": "item3",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Fellesløsninger",
-      "id": "fel",
+      "title": "Item 4",
+      "id": "item4",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Bod",
-      "id": "bod",
+      "title": "Item 5",
+      "id": "item5",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Test",
-      "id": "test",
+      "title": "Item 6",
+      "id": "item6",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 7",
+      "id": "item7",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 8",
+      "id": "item8",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 9",
+      "id": "item9",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 10",
+      "id": "item10",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 11",
+      "id": "item11",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 12",
+      "id": "item12",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 13",
+      "id": "item13",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 14",
+      "id": "item14",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 15",
+      "id": "item15",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 16",
+      "id": "item16",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 17",
+      "id": "item17",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 18",
+      "id": "item18",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 19",
+      "id": "item19",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 20",
+      "id": "item20",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 1",
+      "id": "child1",
       "backgroundColor": "#68707c",
-      "textColor": "#1e2b3c"
+      "textColor": "white"
+    },
+    {
+      "title": "Child 2",
+      "id": "child2",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 3",
+      "id": "child3",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 4",
+      "id": "child4",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 5",
+      "id": "child5",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 6",
+      "id": "child6",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 7",
+      "id": "child7",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 8",
+      "id": "child8",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 9",
+      "id": "child9",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 10",
+      "id": "child10",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 11",
+      "id": "child11",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 12",
+      "id": "child12",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 13",
+      "id": "child13",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 14",
+      "id": "child14",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 15",
+      "id": "child15",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 16",
+      "id": "child16",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 17",
+      "id": "child17",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 18",
+      "id": "child18",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 19",
+      "id": "child19",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 20",
+      "id": "child20",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -65,20 +262,32 @@
         {
           "row": [
             {
-              "id": ["dir"],
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["hr", "kom"],
-              "parent": "dir",
+              "id": ["root"],
               "alignment": "center",
               "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "fel"]
+                "type": "root",
+                "children": [
+                  "item1",
+                  "item2",
+                  "item3",
+                  "item4",
+                  "item5",
+                  "item6",
+                  "item7",
+                  "item8",
+                  "item9",
+                  "item10",
+                  "item11",
+                  "item12",
+                  "item13",
+                  "item14",
+                  "item15",
+                  "item16",
+                  "item17",
+                  "item18",
+                  "item19",
+                  "item20"
+                ]
               }
             }
           ]
@@ -86,35 +295,10 @@
         {
           "row": [
             {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
+              "id": ["item1", "item2"],
               "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
+                "type": "node-list",
+                "children": ["child1", "child2"]
               }
             }
           ]
@@ -122,21 +306,17 @@
         {
           "row": [
             {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
+              "id": ["item3", "item4"],
               "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
+                "type": "node-list",
+                "children": ["child3", "child4"]
               }
             },
             {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
+              "id": ["item5", "item6"],
               "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
+                "type": "node-list",
+                "children": ["child5", "child6"]
               }
             }
           ]
@@ -144,26 +324,24 @@
         {
           "row": [
             {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
+              "id": ["item7", "item8"],
               "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
+                "type": "node-list",
+                "children": ["child7", "child8"]
               }
             },
             {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
+              "id": ["item9", "item10"],
+              "component": {
+                "type": "node-list",
+                "children": ["child9", "child10"]
+              }
             },
             {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
+              "id": ["item11", "item12"],
               "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
+                "type": "node-list",
+                "children": ["child11", "child12"]
               }
             }
           ]
@@ -171,175 +349,10 @@
         {
           "row": [
             {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
+              "id": ["item13"],
               "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["id1", "id2"]
-              }
-            },
-            {
-              "id": ["fel"],
-              "parent": "dir",
-              "alignment": "center"
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
-              }
-            },
-            {
-              "id": ["kom", "fel"],
-              "parent": "dir",
-              "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["it", "markedsforing", "hr"]
+                "type": "node-list",
+                "children": ["child13"]
               }
             }
           ]

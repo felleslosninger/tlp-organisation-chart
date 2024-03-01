@@ -130,12 +130,15 @@
     background-color: var(--line-color);
     top: 0;
     left: calc(50% - 1px);
-}   
-
+}
 
 .row-center {
   flex-wrap: nowrap;
   justify-content: center;
+}
+
+.special-row-1-column{
+  justify-content: flex-start;
 }
 
 

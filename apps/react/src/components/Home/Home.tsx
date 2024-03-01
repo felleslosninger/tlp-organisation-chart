@@ -28,7 +28,7 @@ import styles from "./Home.module.css";
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState("1800px");
 
-  const [data, setData] = useState(jsonDigdir1);
+  const [data, setData] = useState(jsonDataSpecial1);
 
   const datasets: { [key: string]: any } = {
     digdir1: jsonDigdir1,
@@ -75,6 +75,12 @@ const Home = () => {
             size="medium"
           >
             <Combobox.Empty>Fant ingen treff</Combobox.Empty>
+            <Combobox.Option value="special1">
+              Med spesial-kolonne 1
+            </Combobox.Option>
+            <Combobox.Option value="special2">
+              Med spesial-kolonne 2
+            </Combobox.Option>
             <Combobox.Option value="data11">
               Ender med 1 kol & barn
             </Combobox.Option>
@@ -134,12 +140,6 @@ const Home = () => {
             </Combobox.Option>
             <Combobox.Option value="data16">
               Ender med 6 kol & barn
-            </Combobox.Option>
-            <Combobox.Option value="special1">
-              Med spesial-kolonne 1
-            </Combobox.Option>
-            <Combobox.Option value="special2">
-              Med spesial-kolonne 2
             </Combobox.Option>
             <Combobox.Option value="offset1">Offset 1</Combobox.Option>
             <Combobox.Option value="offset2">Offset 2</Combobox.Option>

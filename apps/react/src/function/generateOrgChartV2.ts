@@ -591,7 +591,13 @@ function calculateColumnWidth(
     additionalClass = " special-row";
     //if row contains special column add the length of the special column to the siblingsAmount, because the special column takes up double node space
     siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
-
+    if (siblingsAmount === 2) {
+      width = 50;
+      if (!isLastRow) {
+        additionalWidth = -24;
+        additionalClass += " special-row-1-column";
+      }
+    }
     if (mainContainerWidth > main) {
       if (siblingsAmount === 3) {
         width = 50;
