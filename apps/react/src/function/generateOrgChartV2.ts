@@ -144,6 +144,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     additionalWidth: number,
     indexInRow: number,
     isLastRow: boolean,
+    wrapNodesContainer: boolean,
   ) {
     const columnElement = createElement("div");
     columnElement.className = "column";
@@ -158,9 +159,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     //if column.id is an array, create a special column
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement("div");
+
       isMobile || isTablet
         ? (nodesWrapper.className = "nodes-container-wrap")
         : (nodesWrapper.className = "nodes-container");
+
+      wrapNodesContainer === true &&
+        nodesWrapper.classList.add("nodes-container-wrap");
 
       if (!isMobile) {
         nodesWrapper.classList.add(createSpecialColumnLines());
@@ -359,6 +364,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             columnWidth.additionalWidth,
             count,
             isLastRow,
+            columnWidth.wrapNodesWrapper,
           ),
         );
       }
@@ -515,6 +521,7 @@ function calculateColumnWidth(
   let additionalClass = "";
   let width = 100;
   let additionalWidth = 0;
+  let wrapNodesWrapper = false;
 
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
@@ -609,28 +616,165 @@ function calculateColumnWidth(
         width = 50;
         additionalWidth = -12;
       } else if (siblingsAmount === 4) {
-        if (siblingsAmount === 4) {
-          if (indexToSpecialColumnList.length < 2) {
-            if (indexToSpecialColumnList.includes(2)) {
-              if (indexInRow === 1) {
-                width = 50;
-                additionalWidth = -12;
-              } else {
-                width = 25;
-                additionalWidth = -18;
-              }
+        if (indexToSpecialColumnList.length < 2) {
+          if (indexToSpecialColumnList.includes(2)) {
+            if (indexInRow === 1) {
+              width = 50;
+              additionalWidth = -24;
             } else {
-              if (indexToSpecialColumnList.includes(indexInRow)) {
-                width = 50;
+              if (indexInRow === 2) {
+                width = (50 / 3) * 2;
+                additionalWidth = -24;
+              } else if (indexInRow === 3) {
+                width = 50 / 3;
                 additionalWidth = -24;
               } else {
-                width = 25;
+                width = 50;
                 additionalWidth = -24;
               }
             }
           } else {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -24;
+            } else {
+              width = 25;
+              additionalWidth = -24;
+            }
+          }
+        } else {
+          width = 50;
+          additionalWidth = -12;
+        }
+      } else if (siblingsAmount === 5) {
+        if (indexToSpecialColumnList.length === 2) {
+          if (!indexToSpecialColumnList.includes(1)) {
+            if (indexInRow === 1) {
+              width = 50 / 3;
+              additionalWidth = -24;
+            } else if (indexInRow === 2) {
+              width = (50 / 3) * 2;
+              additionalWidth = -24;
+            } else {
+              width = 50;
+              additionalWidth = -24;
+            }
+          } else if (!indexToSpecialColumnList.includes(2)) {
+            if (indexInRow === 1) {
+              width = (50 / 3) * 2;
+              additionalWidth = -24;
+            } else if (indexInRow === 2) {
+              width = 50 / 3;
+              additionalWidth = -24;
+            } else {
+              width = 50;
+              additionalWidth = -24;
+            }
+          } else if (!indexToSpecialColumnList.includes(3)) {
+            if (indexInRow === 1) {
+              width = 50;
+              additionalWidth = -24;
+            } else if (indexInRow === 2) {
+              width = (50 / 3) * 2;
+              additionalWidth = -24;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -24;
+            }
+          }
+        } else {
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = (50 / 3) * 2;
+            additionalWidth = -24;
+          } else if (indexToSpecialColumnList[0] >= 3) {
+            if (indexInRow < 3) {
+              width = 25;
+              additionalWidth = -24;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -24;
+            }
+          } else if (indexToSpecialColumnList[0] <= 2) {
+            if (indexInRow > 2) {
+              width = 25;
+              additionalWidth = -24;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -24;
+            }
+          }
+        }
+      } else if (siblingsAmount === 6) {
+        if (indexToSpecialColumnList.length === 3) {
+          if (indexInRow === 1) {
             width = 50;
-            additionalWidth = -12;
+            additionalWidth = -24;
+          } else if (indexInRow === 2) {
+            width = (50 / 3) * 2;
+            additionalWidth = -24;
+          } else {
+            width = 50 / 3;
+            additionalWidth = -24;
+            wrapNodesWrapper = true;
+          }
+        } else if (indexToSpecialColumnList.length === 2) {
+          if (
+            indexToSpecialColumnList.includes(1) &&
+            indexToSpecialColumnList.includes(2)
+          ) {
+            if (indexInRow === 1) {
+              width = (50 / 3) * 2;
+              additionalWidth = -24;
+            } else if (indexInRow === 2) {
+              width = 50 / 3;
+              additionalWidth = -24;
+              wrapNodesWrapper = true;
+            } else {
+              width = 25;
+              additionalWidth = -24;
+            }
+          } else if (
+            indexToSpecialColumnList.includes(3) &&
+            indexToSpecialColumnList.includes(4)
+          ) {
+            if (indexInRow <= 2) {
+              width = 25;
+              additionalWidth = -24;
+            } else if (indexInRow === 3) {
+              width = (50 / 3) * 2;
+              additionalWidth = -24;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -24;
+              wrapNodesWrapper = true;
+            }
+          } else {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = (50 / 3) * 2;
+              additionalWidth = -24;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -24;
+            }
+          }
+        } else {
+          if (!indexToSpecialColumnList.includes(3)) {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = (50 / 3) * 2;
+              additionalWidth = -24;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -24;
+            }
+          } else {
+            if (indexInRow <= 2) {
+              width = 25;
+              additionalWidth = -24;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -24;
+              wrapNodesWrapper = true;
+            }
           }
         }
       }
@@ -672,7 +816,7 @@ function calculateColumnWidth(
     }
   }
 
-  return { width, additionalWidth, additionalClass };
+  return { width, additionalWidth, additionalClass, wrapNodesWrapper };
 }
 
 function createElement(type: string) {

@@ -108,6 +108,7 @@
   row-gap: 80px;
   column-gap: 24px;
   padding: 40px 0;
+  border-bottom: 2px solid red;
  }
 
 .wrap {
@@ -398,3 +399,13 @@
 .column-alignment-2-offset-left {
   align-items: start;
 } 
+
+*::after{display: none;}
+*::before{display: none;}
+
+/* .special-nodes-wrapper.column.nodes-container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 100%;
+} */
