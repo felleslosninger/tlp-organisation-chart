@@ -1,4 +1,6 @@
-import { generateOrgChart } from "./generateOrgChartV2";
+import "../src/orgChart.css";
+
+import { generateOrgChart } from "./orgChart";
 
 (function (window, document, undefined) {
   window.orgChart = generateOrgChart;
