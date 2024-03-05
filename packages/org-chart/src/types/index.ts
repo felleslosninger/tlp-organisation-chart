@@ -1,3 +1,8 @@
+export type Meta = {
+  title: string;
+  langcode: string;
+};
+
 export type TableOfContentsItem = {
   title: string;
   color: string;
@@ -9,18 +14,18 @@ export type Node = {
   backgroundColor: string;
   textColor: string;
   url?: string; // Optional
-  border?: "dotted" | "solid" | "dashed"; // Optional
+  border?: string; // Optional
+  opacity?: string;
 };
 
 export type Component = {
-  type: string;
-  children: string[];
+  type?: string;
+  children?: string[];
 };
 
 export type Column = {
   id: string | string[];
-  alignment: string;
-  parent?: string; // Optional
+  alignment?: string; // Optional
   component?: Component; // Optional
 };
 
@@ -39,13 +44,8 @@ export type Layouts = {
 };
 
 export type OrgChartData = {
+  meta: Meta;
   toc: TableOfContentsItem[];
   nodes: Node[];
   layouts: Layouts;
 };
-
-declare global {
-  interface Window {
-    orgChart: any;
-  }
-}
