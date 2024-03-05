@@ -4,6 +4,7 @@
 
 node_modules/
 dist
+tsc-build
 
 # dependencies
 /node_modules
