@@ -24,7 +24,7 @@ import jsonDigdir3 from "../../data/digdir3.json";
 import { Button, Combobox } from "@digdir/design-system-react";
 import styles from "./Home.module.css";
 
-import { generateOrgChart } from "@digdir/organization-chart/dist";
+import { generateOrgChart } from "@digdir/organization-chart/src";
 
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState("1800px");
