@@ -1,6 +1,6 @@
 {
   "name": "@digdir/organization-chart",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Organization chart generator",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
