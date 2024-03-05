@@ -768,9 +768,11 @@ function calculateColumnWidth(
           } else {
             if (indexInRow <= 2) {
               width = 25;
+              additionalWidth = -18;
             } else {
               width = 50 / 3;
               wrapNodesWrapper = true;
+              additionalWidth = -20;
             }
           }
         }
