@@ -607,7 +607,7 @@ function calculateColumnWidth(
     if (siblingsAmount === 2) {
       width = 50;
       if (!isLastRow) {
-        additionalWidth = -24;
+        additionalWidth = -12;
         additionalClass += " special-row-1-column";
       }
     }
@@ -708,13 +708,13 @@ function calculateColumnWidth(
         if (indexToSpecialColumnList.length === 3) {
           if (indexInRow === 1) {
             width = 50;
-            additionalWidth = -24;
+            additionalWidth = -12;
           } else if (indexInRow === 2) {
             width = (50 / 3) * 2;
-            additionalWidth = -24;
+            additionalWidth = -18;
           } else {
             width = 50 / 3;
-            additionalWidth = -24;
+            additionalWidth = -18;
             wrapNodesWrapper = true;
           }
         } else if (indexToSpecialColumnList.length === 2) {
@@ -724,14 +724,12 @@ function calculateColumnWidth(
           ) {
             if (indexInRow === 1) {
               width = (50 / 3) * 2;
-              additionalWidth = -24;
             } else if (indexInRow === 2) {
               width = 50 / 3;
-              additionalWidth = -24;
+
               wrapNodesWrapper = true;
             } else {
               width = 25;
-              additionalWidth = -24;
             }
           } else if (
             indexToSpecialColumnList.includes(3) &&
@@ -739,40 +737,32 @@ function calculateColumnWidth(
           ) {
             if (indexInRow <= 2) {
               width = 25;
-              additionalWidth = -24;
             } else if (indexInRow === 3) {
               width = (50 / 3) * 2;
-              additionalWidth = -24;
             } else {
               width = 50 / 3;
-              additionalWidth = -24;
               wrapNodesWrapper = true;
             }
           } else {
             if (indexToSpecialColumnList.includes(indexInRow)) {
               width = (50 / 3) * 2;
-              additionalWidth = -24;
             } else {
               width = 50 / 3;
-              additionalWidth = -24;
             }
           }
         } else {
           if (!indexToSpecialColumnList.includes(3)) {
             if (indexToSpecialColumnList.includes(indexInRow)) {
               width = (50 / 3) * 2;
-              additionalWidth = -24;
+              additionalWidth = 26;
             } else {
               width = 50 / 3;
-              additionalWidth = -24;
             }
           } else {
             if (indexInRow <= 2) {
               width = 25;
-              additionalWidth = -24;
             } else {
               width = 50 / 3;
-              additionalWidth = -24;
               wrapNodesWrapper = true;
             }
           }
@@ -826,13 +816,57 @@ function calculateColumnWidth(
         }
       } else if (siblingsAmount === 6) {
         if (indexToSpecialColumnList.length === 3) {
-          if (indexInRow === 1) {
+          width = 50;
+          additionalWidth = -12;
+        } else if (indexToSpecialColumnList.length === 2) {
+          if (
+            (indexToSpecialColumnList.includes(1) &&
+              indexToSpecialColumnList.includes(2)) ||
+            (indexToSpecialColumnList.includes(3) &&
+              indexToSpecialColumnList.includes(4))
+          ) {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          } else {
             width = 50;
             additionalWidth = -12;
+          }
+        } else {
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = 50;
+            additionalWidth = -12;
+          } else if (indexToSpecialColumnList[0] <= 2) {
+            if (indexInRow <= 2) {
+              width = 50;
+              additionalWidth = -12;
+            } else if (indexInRow === 5) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          } else if (indexToSpecialColumnList[0] === 4) {
+            if (indexInRow >= 3) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
           } else {
-            width = 25;
-            additionalWidth = -18;
-            wrapNodesWrapper = true;
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
           }
         }
       }
