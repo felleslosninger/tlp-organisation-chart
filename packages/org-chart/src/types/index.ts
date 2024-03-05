@@ -49,3 +49,9 @@ export type OrgChartData = {
   nodes: Node[];
   layouts: Layouts;
 };
+
+declare global {
+  interface Window {
+    orgChart: any;
+  }
+}
