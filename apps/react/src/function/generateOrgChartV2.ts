@@ -174,7 +174,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement("div");
 
-      isMobile || isTablet
+      isMobile || (isTablet && !isLastRow)
         ? (nodesWrapper.className = "nodes-container-wrap")
         : (nodesWrapper.className = "nodes-container");
 
@@ -890,8 +890,16 @@ function calculateColumnWidth(
         }
       }
     } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      width = 50;
-      additionalWidth = -12;
+      if (
+        isLastRow &&
+        indexToSpecialColumnList.includes(3) &&
+        indexInRow === 3
+      ) {
+        width = 100;
+      } else {
+        width = 50;
+        additionalWidth = -12;
+      }
     }
   }
 
