@@ -1,4 +1,4 @@
-import "../src/orgChart.css";
+import "./orgChart.css";
 
 import { generateOrgChart } from "./orgChart";
 

@@ -21,9 +21,10 @@ import jsonDataOffset1 from "../../data/dataOffset1.json";
 import jsonDataOffset2 from "../../data/dataOffset2.json";
 import jsonDigdir1 from "../../data/digdir1.json";
 import jsonDigdir3 from "../../data/digdir3.json";
-import { generateOrgChart } from "../../function/generateOrgChartV2";
 import { Button, Combobox } from "@digdir/design-system-react";
 import styles from "./Home.module.css";
+
+import { generateOrgChart } from "@digdir/organization-chart/dist";
 
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState("1800px");

@@ -5,7 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "@digdir/design-system-tokens/brand/digdir/tokens.css";
 //import "bootstrap/dist/css/bootstrap.min.css";
-import "./css/orgChart.css";
+/* import "./css/orgChart.css"; */
+import "@digdir/organization-chart/src/orgChart.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
