@@ -70,7 +70,6 @@ const Home = () => {
         <div className={styles.menuLeft}>
           <Combobox
             label="Velg ett datasett til organisasjonskart"
-            inputValue=""
             onValueChange={(value) => handleDatasetChange(value[0])}
             size="medium"
           >
