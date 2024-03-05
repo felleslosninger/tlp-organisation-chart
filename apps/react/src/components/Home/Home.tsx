@@ -28,7 +28,7 @@ import styles from "./Home.module.css";
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState("1800px");
 
-  const [data, setData] = useState(jsonDataSpecial1);
+  const [data, setData] = useState(jsonDigdir3);
 
   const datasets: { [key: string]: any } = {
     digdir1: jsonDigdir1,

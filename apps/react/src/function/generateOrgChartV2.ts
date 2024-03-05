@@ -1,7 +1,14 @@
-import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
+import {
+  OrgChartData,
+  Layout,
+  Node,
+  Column,
+  Row,
+  TableOfContentsItem,
+} from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
-  const { nodes, layouts, meta } = data;
+  const { nodes, layouts, meta, toc } = data;
 
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let mainContainerWidth = 0;
@@ -448,6 +455,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       mainContainerWidth > allowedBreakpoints.tablet;
     isMain = mainContainerWidth > allowedBreakpoints.main;
 
+    orgChart.appendChild(createTOC(toc, isMobile));
+
     // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
@@ -481,6 +490,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
         // Clear and re-insert the org chart into the container
         orgChart.innerHTML = "";
+        orgChart.appendChild(createTOC(toc, isMobile));
         orgChart.appendChild(createRowsWrapper(currentLayout));
       }
     };
@@ -1140,4 +1150,25 @@ function findHighestChildrenAmountInRow(
   }
 
   return highest;
+}
+
+function createTOC(toc: TableOfContentsItem[], isMobile?: boolean) {
+  const tocBox = createElement("ul");
+  tocBox.classList.add("toc-box");
+  isMobile && tocBox.classList.add("toc-box-mobile");
+
+  toc.forEach((tocItem) => {
+    const tocItemElement = createElement("li");
+    tocItemElement.className = "toc-item";
+    const tocItemColor = createElement("span");
+    tocItemColor.className = "toc-item-color";
+    tocItemColor.style.background = tocItem.color;
+    tocItemElement.appendChild(tocItemColor);
+    const tocItemTitle = createElement("span");
+    tocItemTitle.innerHTML = tocItem.title;
+    tocItemElement.appendChild(tocItemTitle);
+    tocBox.appendChild(tocItemElement);
+  });
+
+  return tocBox;
 }
