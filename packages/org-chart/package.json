@@ -4,7 +4,6 @@
   "description": "Organization chart generator",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
-  "private": false,
   "files": [
     "dist/**"
   ],
