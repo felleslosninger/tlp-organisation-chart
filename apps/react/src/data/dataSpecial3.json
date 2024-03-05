@@ -6,7 +6,7 @@
   "toc": [
     { "title": "Root", "color": "#0062BA" },
     { "title": "Item", "color": "#1e2b3c" },
-    { "title": "Child", "color": "#68707c" }
+    { "title": "children", "color": "#68707c" }
   ],
   "nodes": [
     {
@@ -16,11 +16,10 @@
       "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 1 with url",
+      "title": "Item 1",
       "id": "item1",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white",
-      "url": "https://www.digdir.no/"
+      "textColor": "white"
     },
     {
       "title": "Item 2",
@@ -137,39 +136,123 @@
       "textColor": "white"
     },
     {
-      "title": "Item 21",
-      "id": "item21",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 1",
+      "id": "child1",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 22",
-      "id": "item22",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 2",
+      "id": "child2",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 23",
-      "id": "item23",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 3",
+      "id": "child3",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 24",
-      "id": "item24",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 4",
+      "id": "child4",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 25",
-      "id": "item25",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 5",
+      "id": "child5",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 26",
-      "id": "item26",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 6",
+      "id": "child6",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 7",
+      "id": "child7",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 8",
+      "id": "child8",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 9",
+      "id": "child9",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 10",
+      "id": "child10",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 11",
+      "id": "child11",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 12",
+      "id": "child12",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 13",
+      "id": "child13",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 14",
+      "id": "child14",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 15",
+      "id": "child15",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 16",
+      "id": "child16",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 17",
+      "id": "child17",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 18",
+      "id": "child18",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 19",
+      "id": "child19",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 20",
+      "id": "child20",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     }
   ],
@@ -185,7 +268,6 @@
                 "type": "root",
                 "children": [
                   "item1",
-                  "item2",
                   "item3",
                   "item4",
                   "item5",
@@ -203,13 +285,7 @@
                   "item17",
                   "item18",
                   "item19",
-                  "item20",
-                  "item21",
-                  "item22",
-                  "item23",
-                  "item24",
-                  "item25",
-                  "item26"
+                  "item20"
                 ]
               }
             }
@@ -218,107 +294,65 @@
         {
           "row": [
             {
-              "id": ["item1"],
-              "alignment": "center"
+              "id": ["item1", "item2"],
+              "component": {
+                "type": "node-list",
+                "children": ["child1", "child2"]
+              }
             }
           ]
         },
         {
           "row": [
             {
-              "id": ["item2"]
+              "id": ["item3", "item4"],
+              "component": {
+                "type": "node-list",
+                "children": ["child3", "child4"]
+              }
             },
             {
-              "id": ["item3"]
+              "id": ["item5", "item6"],
+              "component": {
+                "type": "node-list",
+                "children": ["child5", "child6"]
+              }
             }
           ]
         },
         {
           "row": [
             {
-              "id": ["item4"]
+              "id": ["item7", "item8"],
+              "component": {
+                "type": "node-list",
+                "children": ["child7", "child8"]
+              }
             },
             {
-              "id": ["item5"]
+              "id": ["item9", "item10"],
+              "component": {
+                "type": "node-list",
+                "children": ["child9", "child10"]
+              }
             },
             {
-              "id": ["item6"]
+              "id": ["item11", "item12"],
+              "component": {
+                "type": "node-list",
+                "children": ["child11", "child12"]
+              }
             }
           ]
         },
         {
           "row": [
             {
-              "id": ["item7"]
-            },
-            {
-              "id": ["item8"]
-            },
-            {
-              "id": ["item9"]
-            },
-            {
-              "id": ["item10"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item11"]
-            },
-            {
-              "id": ["item12"]
-            },
-            {
-              "id": ["item13"]
-            },
-            {
-              "id": ["item14"]
-            },
-            {
-              "id": ["item15"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item16"]
-            },
-            {
-              "id": ["item17"]
-            },
-            {
-              "id": ["item18"]
-            },
-            {
-              "id": ["item19"]
-            },
-            {
-              "id": ["item20"]
-            },
-            {
-              "id": ["item21"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item22"]
-            },
-            {
-              "id": ["item23"]
-            },
-            {
-              "id": ["item24"]
-            },
-            {
-              "id": ["item25"]
-            },
-            {
-              "id": ["item26"]
+              "id": ["item13"],
+              "component": {
+                "type": "node-list",
+                "children": ["child13"]
+              }
             }
           ]
         }

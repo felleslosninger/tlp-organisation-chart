@@ -5,7 +5,8 @@
   },
   "toc": [
     { "title": "Root", "color": "#0062BA" },
-    { "title": "Item", "color": "#1e2b3c" }
+    { "title": "Item", "color": "#1e2b3c" },
+    { "title": "children", "color": "#68707c" }
   ],
   "nodes": [
     {
@@ -37,6 +38,30 @@
       "id": "item4",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
+    },
+    {
+      "title": "Child 1",
+      "id": "child1",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 2",
+      "id": "child2",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 3",
+      "id": "child3",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 4",
+      "id": "child4",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -57,16 +82,32 @@
         {
           "row": [
             {
-              "id": ["item1"]
+              "id": ["item1"],
+              "component": {
+                "type": "node-list",
+                "children": ["child1"]
+              }
             },
             {
-              "id": ["item2"]
+              "id": ["item2"],
+              "component": {
+                "type": "node-list",
+                "children": ["child2"]
+              }
             },
             {
-              "id": ["item3"]
+              "id": ["item3"],
+              "component": {
+                "type": "node-list",
+                "children": ["child3"]
+              }
             },
             {
-              "id": ["item4"]
+              "id": ["item4"],
+              "component": {
+                "type": "node-list",
+                "children": ["child4"]
+              }
             }
           ]
         }

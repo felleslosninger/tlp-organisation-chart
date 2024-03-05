@@ -6,7 +6,8 @@
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
     { "title": "Avdeling", "color": "#1e2b3c" },
-    { "title": "Seksjon", "color": "#D2D5D8" }
+    { "title": "Leveranseområde", "color": "#f28b82" },
+    { "title": "Produktgruppe", "color": "#aecbfa" }
   ],
   "nodes": [
     {
