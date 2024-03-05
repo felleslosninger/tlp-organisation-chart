@@ -60,6 +60,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         const innerChild = childData.url
           ? createElement("a")
           : createElement("div");
+
+        //if nodeElement is anchor, provide href
+        if (childData.url && innerChild instanceof HTMLAnchorElement) {
+          innerChild.href = childData.url;
+          innerChild.classList.add("node-child-anchor");
+        }
+
         innerChild.tabIndex = 0;
         innerChild.innerHTML = childData.title;
         innerChild.className = "node node-child";
@@ -81,7 +88,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   ) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
-      const nodeElement = document.createElement(nodeData.url ? "a" : "div");
+      const nodeElement = createElement("div");
 
       //give nodeElement id
       nodeElement.id = nodeData.id;
@@ -96,15 +103,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       //give role treeitem to nodeElement
       nodeElement.setAttribute("role", "treeitem");
 
-      const innerNode = createElement("div");
+      const innerNode = document.createElement(nodeData.url ? "a" : "div");
       //if nodeData has border, provide border
       if (nodeData.border) {
         innerNode.style.border = `2px ${nodeData.border} #000`;
       }
 
       //if nodeElement is anchor, provide href
-      if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
-        nodeElement.href = nodeData.url;
+      if (nodeData.url && innerNode instanceof HTMLAnchorElement) {
+        innerNode.href = nodeData.url;
       }
       innerNode.style.backgroundColor = nodeData.backgroundColor;
       innerNode.style.color = nodeData.textColor;
@@ -113,7 +120,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.className = "node inner-node";
       nodeElement.appendChild(innerNode);
       nodeElement.className = "node ";
-      nodeElement.tabIndex = 0;
+      innerNode.tabIndex = 0;
 
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
