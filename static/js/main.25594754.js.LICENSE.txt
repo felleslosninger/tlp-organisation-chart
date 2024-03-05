@@ -1,7 +1,6 @@
 /*!
-	Copyright (c) 2018 Jed Watson.
-	Licensed under the MIT License (MIT), see
-	http://jedwatson.github.io/classnames
+* tabbable 6.1.1
+* @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
 */
 
 /**
@@ -42,4 +41,26 @@
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
+ */
+
+/**
+ * react-virtual
+ *
+ * Copyright (c) TanStack
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * virtual-core
+ *
+ * Copyright (c) TanStack
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
  */
