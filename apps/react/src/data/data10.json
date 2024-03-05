@@ -15,7 +15,7 @@
       "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 1",
+      "title": "Item 1 with url",
       "id": "item1",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
@@ -37,6 +37,18 @@
       "id": "item4",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
+    },
+    {
+      "title": "Item 5",
+      "id": "item5",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 6",
+      "id": "item6",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -49,7 +61,14 @@
               "alignment": "center",
               "component": {
                 "type": "root",
-                "children": ["item1", "item2", "item3", "item4"]
+                "children": [
+                  "item1",
+                  "item2",
+                  "item3",
+                  "item4",
+                  "item5",
+                  "item6"
+                ]
               }
             }
           ]
@@ -67,6 +86,12 @@
             },
             {
               "id": ["item4"]
+            },
+            {
+              "id": ["item5"]
+            },
+            {
+              "id": ["item6"]
             }
           ]
         }

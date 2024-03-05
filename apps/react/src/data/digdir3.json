@@ -1,8 +1,13 @@
 {
+  "meta": {
+    "title": "Leveranseområder",
+    "langcode": "no"
+  },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
     { "title": "Avdeling", "color": "#1e2b3c" },
-    { "title": "Seksjon", "color": "#D2D5D8" }
+    { "title": "Leveranseområde", "color": "#f28b82" },
+    { "title": "Produktgruppe", "color": "#aecbfa" }
   ],
   "nodes": [
     {
@@ -189,7 +194,11 @@
           "row": [
             {
               "id": ["dir"],
-              "alignment": "center"
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": ["kom", "tuu", "verk", "hr", "tverr"]
+              }
             }
           ]
         },
@@ -197,8 +206,7 @@
           "row": [
             {
               "id": ["tuu"],
-              "parent": "dir",
-              "alignment": "center"
+              "alignment": "offset-right"
             }
           ]
         },
@@ -206,12 +214,10 @@
           "row": [
             {
               "id": ["kom"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["hr"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -220,12 +226,10 @@
           "row": [
             {
               "id": ["verk"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["tverr"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -234,7 +238,6 @@
           "row": [
             {
               "id": ["sam"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -243,7 +246,6 @@
             },
             {
               "id": ["digss"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -259,7 +261,6 @@
             },
             {
               "id": ["fel", "bod"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",

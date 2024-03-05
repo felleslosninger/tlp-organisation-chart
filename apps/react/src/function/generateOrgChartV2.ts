@@ -1,7 +1,14 @@
-import { OrgChartData, Layout, Node, Column, Row } from "../types/types";
+import {
+  OrgChartData,
+  Layout,
+  Node,
+  Column,
+  Row,
+  TableOfContentsItem,
+} from "../types/types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
-  const { nodes, layouts } = data;
+  const { nodes, layouts, meta, toc } = data;
 
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let mainContainerWidth = 0;
@@ -46,17 +53,27 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const childrenList = createElement("ul");
     childrenList.className = "node-children";
 
-    if (parentSiblingsAmount === 2) {
-      childrenList.style.maxWidth = "300px";
+    if (parentSiblingsAmount <= 2 && !isMobile) {
+      childrenList.style.width = "290px";
     }
 
     children.forEach((childId: string) => {
       const childData = findNodeById(childId);
       if (childData) {
         const childElement = createElement("li");
+        childElement.id = childData.id;
+        childElement.setAttribute("role", "treeitem");
+
         const innerChild = childData.url
           ? createElement("a")
           : createElement("div");
+
+        //if nodeElement is anchor, provide href
+        if (childData.url && innerChild instanceof HTMLAnchorElement) {
+          innerChild.href = childData.url;
+          innerChild.classList.add("node-child-anchor");
+        }
+
         innerChild.tabIndex = 0;
         innerChild.innerHTML = childData.title;
         innerChild.className = "node node-child";
@@ -78,17 +95,30 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   ) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
-      const nodeElement = document.createElement(nodeData.url ? "a" : "div");
-      const innerNode = createElement("div");
+      const nodeElement = createElement("div");
 
+      //give nodeElement id
+      nodeElement.id = nodeData.id;
+
+      if (node.component?.children) {
+        nodeElement.setAttribute(
+          "aria-owns",
+          node.component.children.join(" "),
+        );
+      }
+
+      //give role treeitem to nodeElement
+      nodeElement.setAttribute("role", "treeitem");
+
+      const innerNode = document.createElement(nodeData.url ? "a" : "div");
       //if nodeData has border, provide border
       if (nodeData.border) {
         innerNode.style.border = `2px ${nodeData.border} #000`;
       }
 
       //if nodeElement is anchor, provide href
-      if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
-        nodeElement.href = nodeData.url;
+      if (nodeData.url && innerNode instanceof HTMLAnchorElement) {
+        innerNode.href = nodeData.url;
       }
       innerNode.style.backgroundColor = nodeData.backgroundColor;
       innerNode.style.color = nodeData.textColor;
@@ -97,10 +127,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.className = "node inner-node";
       nodeElement.appendChild(innerNode);
       nodeElement.className = "node ";
-      nodeElement.tabIndex = 0;
+      innerNode.tabIndex = 0;
+
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
-        nodeElement.style.maxWidth = "300px";
+        nodeElement.style.width = "290px";
       }
 
       if (!isMobile) {
@@ -110,6 +141,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           mainContainerWidth,
           allowedBreakpoints,
           isLastRow,
+          node.alignment ? node.alignment : undefined,
         );
       }
 
@@ -126,6 +158,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     additionalWidth: number,
     indexInRow: number,
     isLastRow: boolean,
+    wrapNodesContainer: boolean,
   ) {
     const columnElement = createElement("div");
     columnElement.className = "column";
@@ -133,12 +166,24 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       ? (columnElement.style.width = "100%")
       : (columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`);
 
+    function createSpecialColumnLines() {
+      return "test";
+    }
+
     //if column.id is an array, create a special column
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement("div");
-      isMobile
-        ? (nodesWrapper.className = "nodes-wrapper-mobile")
-        : (nodesWrapper.className = "nodes-wrapper");
+
+      isMobile || (isTablet && !isLastRow)
+        ? (nodesWrapper.className = "nodes-container-wrap")
+        : (nodesWrapper.className = "nodes-container");
+
+      wrapNodesContainer === true &&
+        nodesWrapper.classList.add("nodes-container-wrap");
+
+      if (!isMobile) {
+        nodesWrapper.classList.add(createSpecialColumnLines());
+      }
 
       column.id.forEach((nodeId: string) => {
         const nodeData = findNodeById(nodeId);
@@ -178,7 +223,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
     }
 
-    if (column.component?.children) {
+    if (column.component?.children && column.component.type !== "root") {
       columnElement.appendChild(
         createChildren(
           3,
@@ -199,8 +244,19 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     isLastRow: boolean,
   ) {
     const columnElement = createElement("div");
-
     columnElement.className = "column";
+
+    //Allow alignment for columns in rows with 2 or less siblings
+    if (column.alignment && siblingsAmount <= 2 && !isMobile) {
+      columnElement.className += ` column-alignment-${siblingsAmount}-${column.alignment}`;
+      if (
+        siblingsAmount <= 2 &&
+        (column.alignment === "offset-left" ||
+          column.alignment === "offset-right")
+      ) {
+        columnElement.classList.add(`column-line-${column.alignment}`);
+      }
+    }
 
     if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
       columnElement.className += " column-flex-end";
@@ -215,13 +271,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       isLastRow,
     );
 
-    columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    if (!isMobile) {
+      columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
+    } else {
+      columnElement.style.width = "100%";
+    }
 
     if (innerColumn !== null) {
       columnElement.appendChild(innerColumn);
     }
 
-    if (column.component?.children) {
+    if (column.component?.children && column.component.type !== "root") {
       columnElement.appendChild(
         createChildren(siblingsAmount, column.component.children),
       );
@@ -273,6 +333,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     rowElement.className = rowClass;
 
+    //find out if the row contains a column with alignment === offset-left or offset-right
+    let rowContainsOffsetColumn = false;
+    row.row.forEach((column: Column) => {
+      if (
+        column.alignment === "offset-left" ||
+        column.alignment === "offset-right"
+      ) {
+        rowContainsOffsetColumn = true;
+      }
+    });
+
     row.row.forEach((column: Column) => {
       count++;
 
@@ -284,6 +355,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         isLastRow,
         rowContainsSpecialColumns,
         indexToColumnsWithSpecialColumnList,
+        rowContainsOffsetColumn,
       );
 
       if (!rowContainsSpecialColumns) {
@@ -306,6 +378,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             columnWidth.additionalWidth,
             count,
             isLastRow,
+            columnWidth.wrapNodesWrapper,
           ),
         );
       }
@@ -313,7 +386,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     });
 
     !isMobile && !isLastRow && rowElement.classList.add("row-line");
-    !isMain && rowElement.classList.add("wrap");
+    !isMain && row.row.length > 2 && rowElement.classList.add("wrap");
+    isMobile && row.row.length === 2 && rowElement.classList.add("wrap");
     !isMobile &&
       isLastRow &&
       rowElement.style.setProperty(
@@ -364,10 +438,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   if (mainContainer) {
     // Create element to hold the org chart
     const orgChart = document.createElement("div");
-
     orgChart.className = provideLayoutClass(mainContainerWidth);
-
     orgChart.role = "tree";
+    orgChart.setAttribute("lang", meta.langcode);
+    orgChart.setAttribute("aria-label", meta.title);
 
     // Initial setup based on mainContainer's current width
     mainContainerWidth = mainContainer.offsetWidth;
@@ -380,6 +454,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       mainContainerWidth < allowedBreakpoints.laptop &&
       mainContainerWidth > allowedBreakpoints.tablet;
     isMain = mainContainerWidth > allowedBreakpoints.main;
+
+    orgChart.appendChild(createTOC(toc, isMobile));
 
     // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
@@ -414,6 +490,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
         // Clear and re-insert the org chart into the container
         orgChart.innerHTML = "";
+        orgChart.appendChild(createTOC(toc, isMobile));
         orgChart.appendChild(createRowsWrapper(currentLayout));
       }
     };
@@ -456,14 +533,20 @@ function calculateColumnWidth(
   isLastRow: boolean,
   rowContainsSpecialColumn: boolean,
   indexToSpecialColumnList: number[],
+  rowContainsOffsetColumn?: boolean,
 ) {
   let additionalClass = "";
   let width = 100;
   let additionalWidth = 0;
+  let wrapNodesWrapper = false;
 
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
   if (!rowContainsSpecialColumn) {
+    if (siblingsAmount <= 2 && rowContainsOffsetColumn) {
+      width = 50;
+    }
+
     if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
       if (mainContainerWidth > main) {
         if (isLastRow) {
@@ -538,63 +621,294 @@ function calculateColumnWidth(
     additionalClass = " special-row";
     //if row contains special column add the length of the special column to the siblingsAmount, because the special column takes up double node space
     siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
-
+    if (siblingsAmount === 2) {
+      width = 50;
+      if (!isLastRow) {
+        additionalWidth = -12;
+        additionalClass += " special-row-1-column";
+      }
+    }
     if (mainContainerWidth > main) {
       if (siblingsAmount === 3) {
         width = 50;
         additionalWidth = -12;
       } else if (siblingsAmount === 4) {
-        if (indexToSpecialColumnList.includes(indexInRow)) {
-          width = 50;
-          additionalWidth = -18;
+        if (indexToSpecialColumnList.length < 2) {
+          if (indexToSpecialColumnList.includes(2)) {
+            if (indexInRow === 1) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              if (indexInRow === 2) {
+                width = (50 / 3) * 2;
+                additionalWidth = -18;
+              } else if (indexInRow === 3) {
+                width = 50 / 3;
+                additionalWidth = -18;
+              } else {
+                width = 50;
+                additionalWidth = -24;
+              }
+            }
+          } else {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          }
         } else {
-          width = 25;
-          additionalWidth = -18;
+          width = 50;
+          additionalWidth = -12;
+        }
+      } else if (siblingsAmount === 5) {
+        if (indexToSpecialColumnList.length === 2) {
+          if (!indexToSpecialColumnList.includes(1)) {
+            if (indexInRow === 1) {
+              width = 50 / 3;
+              additionalWidth = -18;
+            } else if (indexInRow === 2) {
+              width = (50 / 3) * 2;
+              additionalWidth = -18;
+            } else {
+              width = 50;
+              additionalWidth = -12;
+            }
+          } else if (!indexToSpecialColumnList.includes(2)) {
+            if (indexInRow === 1) {
+              width = (50 / 3) * 2;
+              additionalWidth = -18;
+            } else if (indexInRow === 2) {
+              width = 50 / 3;
+              additionalWidth = -18;
+            } else {
+              width = 50;
+              additionalWidth = -12;
+            }
+          } else if (!indexToSpecialColumnList.includes(3)) {
+            if (indexInRow === 1) {
+              width = 50;
+              additionalWidth = -12;
+            } else if (indexInRow === 2) {
+              width = (50 / 3) * 2;
+              additionalWidth = -18;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -18;
+            }
+          }
+        } else {
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = (50 / 3) * 2;
+            additionalWidth = -24;
+          } else if (indexToSpecialColumnList[0] >= 3) {
+            if (indexInRow < 3) {
+              width = 25;
+              additionalWidth = -18;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -12;
+            }
+          } else if (indexToSpecialColumnList[0] <= 2) {
+            if (indexInRow > 2) {
+              width = 25;
+              additionalWidth = -18;
+            } else {
+              width = 50 / 3;
+              additionalWidth = -12;
+            }
+          }
+        }
+      } else if (siblingsAmount === 6) {
+        if (indexToSpecialColumnList.length === 3) {
+          if (indexInRow === 1) {
+            width = 50;
+            additionalWidth = -12;
+          } else if (indexInRow === 2) {
+            width = (50 / 3) * 2;
+            additionalWidth = -18;
+          } else {
+            width = 50 / 3;
+            additionalWidth = -18;
+            wrapNodesWrapper = true;
+          }
+        } else if (indexToSpecialColumnList.length === 2) {
+          if (
+            indexToSpecialColumnList.includes(1) &&
+            indexToSpecialColumnList.includes(2)
+          ) {
+            if (indexInRow === 1) {
+              width = (50 / 3) * 2;
+            } else if (indexInRow === 2) {
+              width = 50 / 3;
+
+              wrapNodesWrapper = true;
+            } else {
+              width = 25;
+            }
+          } else if (
+            indexToSpecialColumnList.includes(3) &&
+            indexToSpecialColumnList.includes(4)
+          ) {
+            if (indexInRow <= 2) {
+              width = 25;
+            } else if (indexInRow === 3) {
+              width = (50 / 3) * 2;
+            } else {
+              width = 50 / 3;
+              wrapNodesWrapper = true;
+            }
+          } else {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = (50 / 3) * 2;
+            } else {
+              width = 50 / 3;
+            }
+          }
+        } else {
+          if (!indexToSpecialColumnList.includes(3)) {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = (50 / 3) * 2;
+              additionalWidth = 26;
+            } else {
+              width = 50 / 3;
+            }
+          } else {
+            if (indexInRow <= 2) {
+              width = 25;
+              additionalWidth = -18;
+            } else {
+              width = 50 / 3;
+              wrapNodesWrapper = true;
+              additionalWidth = -20;
+            }
+          }
         }
       }
     } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       if (siblingsAmount === 3) {
         width = 50;
-        additionalWidth = -12;
       } else if (siblingsAmount === 4) {
-        if (indexToSpecialColumnList.includes(indexInRow)) {
+        if (indexToSpecialColumnList.length === 2) {
           width = 50;
-          additionalWidth = -18;
         } else {
-          width = 25;
-          additionalWidth = -18;
+          if (indexToSpecialColumnList.includes(2)) {
+            if (indexInRow === 3) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+              wrapNodesWrapper = true;
+            }
+          } else {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          }
+        }
+      } else if (siblingsAmount === 5) {
+        if (indexToSpecialColumnList.length === 2) {
+          width = 50;
+          additionalWidth = -12;
+        } else {
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = 50;
+            additionalWidth = -12;
+          } else if (
+            indexInRow === 1 ||
+            indexToSpecialColumnList.includes(3) ||
+            indexToSpecialColumnList.includes(1)
+          ) {
+            width = 50;
+            additionalWidth = -12;
+          } else {
+            width = 25;
+            additionalWidth = -18;
+          }
+        }
+      } else if (siblingsAmount === 6) {
+        if (indexToSpecialColumnList.length === 3) {
+          width = 50;
+          additionalWidth = -12;
+        } else if (indexToSpecialColumnList.length === 2) {
+          if (
+            (indexToSpecialColumnList.includes(1) &&
+              indexToSpecialColumnList.includes(2)) ||
+            (indexToSpecialColumnList.includes(3) &&
+              indexToSpecialColumnList.includes(4))
+          ) {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          } else {
+            width = 50;
+            additionalWidth = -12;
+          }
+        } else {
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = 50;
+            additionalWidth = -12;
+          } else if (indexToSpecialColumnList[0] <= 2) {
+            if (indexInRow <= 2) {
+              width = 50;
+              additionalWidth = -12;
+            } else if (indexInRow === 5) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          } else if (indexToSpecialColumnList[0] === 4) {
+            if (indexInRow >= 3) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          } else {
+            if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -12;
+            } else {
+              width = 25;
+              additionalWidth = -18;
+            }
+          }
         }
       }
     } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      if (siblingsAmount === 3) {
+      if (
+        isLastRow &&
+        indexToSpecialColumnList.includes(3) &&
+        indexInRow === 3
+      ) {
         width = 100;
+      } else {
+        width = 50;
         additionalWidth = -12;
-      } else if (siblingsAmount === 4) {
-        if (indexToSpecialColumnList.includes(indexInRow)) {
-          width = 100;
-        } else {
-          width = 50;
-          additionalWidth = -12;
-        }
       }
     }
   }
 
-  return { width, additionalWidth, additionalClass };
+  return { width, additionalWidth, additionalClass, wrapNodesWrapper };
 }
 
 function createElement(type: string) {
   const element = document.createElement(type);
   return element;
-}
-
-// create a that takes a number, and return true if the number is even or 1, false if the number is odd
-function isEvenOrOne(num: number) {
-  return num % 2 === 0 || num === 1;
-}
-
-function isOdd(number: number) {
-  return number % 2 !== 0;
 }
 
 //function to create the line between the nodes
@@ -604,12 +918,27 @@ function createNodeLineClass(
   mainContainerWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
+  alignment: string | undefined,
 ) {
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
 
   let className = "";
-  if (siblingsAmount === 2) {
+
+  if (siblingsAmount === 1) {
+    if (alignment === "left") {
+      className = " node-line-right";
+    } else if (alignment === "right") {
+      className = " node-line-left";
+    }
+    return className;
+  }
+
+  if (
+    siblingsAmount === 2 &&
+    alignment !== "offset-left" &&
+    alignment !== "offset-right"
+  ) {
     if (indexInRow === 1) {
       className = " node-line-right";
     } else {
@@ -706,6 +1035,15 @@ function createNodeLineClass(
   }
 }
 
+// create a that takes a number, and return true if the number is even or 1, false if the number is odd
+function isEvenOrOne(num: number) {
+  return num % 2 === 0 || num === 1;
+}
+
+function isOdd(number: number) {
+  return number % 2 !== 0;
+}
+
 function getBreakpointName(width: number) {
   let breakpointName =
     width > 1500
@@ -756,8 +1094,12 @@ function getLastRowClass(
     rowLength += indexToColumnsWithSpecialColumnList.length;
   }
 
-  if (rowLength >= 3 && !isMobile) {
+  if (!isMobile && rowLength >= 5) {
     return `row row-last-${rowLength}${isLaptop ? "-laptop" : isTablet ? "-tablet" : ""}`;
+  } else if (!isMobile && rowLength >= 2) {
+    return `row row-last-${rowLength}${isTablet ? "-tablet" : ""}`;
+  } else if (!isMobile && rowLength <= 2) {
+    return `row row-last-${rowLength}`;
   } else {
     return "row";
   }
@@ -770,22 +1112,31 @@ function calculateChildrenDifferenceInRow(
   isTablet: boolean,
 ) {
   let diff = 0;
-  // if (isLaptop) {
-  //   if (siblingsAmount === 6) {
-  //     let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 2);
-  //     let lowerHalfHighest = findLowestChildrenAmountInRow(row, 3, 4);
-  //   }
-  // }
+  if (isLaptop) {
+    if (siblingsAmount === 5) {
+      let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
+      diff = upperThirdHighest;
+    }
+    if (siblingsAmount === 6) {
+      let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 2);
+      diff = upperThirdHighest;
+    }
+  }
   if (isTablet) {
+    if (siblingsAmount >= 5) {
+      let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
+      let middleThirdHighest = findHighestChildrenAmountInRow(row, 2, 3);
+      diff = upperThirdHighest + middleThirdHighest;
+    }
     if (siblingsAmount === 4) {
       let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
       let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
-      return upperHalfHighest - lowerHalfHighest;
+      diff = upperHalfHighest - lowerHalfHighest;
     }
     if (siblingsAmount === 3) {
       let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
       let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 2);
-      return upperHalfHighest - lowerHalfHighest;
+      diff = upperHalfHighest - lowerHalfHighest;
     }
   } else {
   }
@@ -807,4 +1158,25 @@ function findHighestChildrenAmountInRow(
   }
 
   return highest;
+}
+
+function createTOC(toc: TableOfContentsItem[], isMobile?: boolean) {
+  const tocBox = createElement("ul");
+  tocBox.classList.add("toc-box");
+  isMobile && tocBox.classList.add("toc-box-mobile");
+
+  toc.forEach((tocItem) => {
+    const tocItemElement = createElement("li");
+    tocItemElement.className = "toc-item";
+    const tocItemColor = createElement("span");
+    tocItemColor.className = "toc-item-color";
+    tocItemColor.style.background = tocItem.color;
+    tocItemElement.appendChild(tocItemColor);
+    const tocItemTitle = createElement("span");
+    tocItemTitle.innerHTML = tocItem.title;
+    tocItemElement.appendChild(tocItemTitle);
+    tocBox.appendChild(tocItemElement);
+  });
+
+  return tocBox;
 }

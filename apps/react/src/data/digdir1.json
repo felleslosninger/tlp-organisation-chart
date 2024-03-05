@@ -1,4 +1,8 @@
 {
+  "meta": {
+    "title": "Avdelinger og seksjoner",
+    "langcode": "no"
+  },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
     { "title": "Avdeling", "color": "#1e2b3c" },
@@ -124,6 +128,36 @@
       "title": "Brukaropplevning og datadeling",
       "id": "bod",
       "backgroundColor": "#1e2b3c",
+      "textColor": "#D2D5D8"
+    },
+    {
+      "title": "Strategi og forretningsutvikling",
+      "id": "str2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Utvikling",
+      "id": "utv2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Plattform og styring",
+      "id": "platt",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukerstøtte og service",
+      "id": "bru2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukaropplevning",
+      "id": "bruk",
+      "backgroundColor": "#D2D5D8",
       "textColor": "#1e2b3c"
     }
   ],
@@ -134,7 +168,20 @@
           "row": [
             {
               "id": ["dir"],
-              "alignment": "center"
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": [
+                  "kom",
+                  "tuu",
+                  "verk",
+                  "hr",
+                  "sam",
+                  "dig",
+                  "fel",
+                  "bod"
+                ]
+              }
             }
           ]
         },
@@ -142,13 +189,11 @@
           "row": [
             {
               "id": ["kom"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["tuu"],
-              "parent": "dir",
-              "alignment": "center"
+              "alignment": "offset-right"
             }
           ]
         },
@@ -156,12 +201,10 @@
           "row": [
             {
               "id": ["verk"],
-              "parent": "dir",
               "alignment": "center"
             },
             {
               "id": ["hr"],
-              "parent": "dir",
               "alignment": "center"
             }
           ]
@@ -170,7 +213,6 @@
           "row": [
             {
               "id": ["sam"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -179,7 +221,6 @@
             },
             {
               "id": ["dig"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -188,7 +229,6 @@
             },
             {
               "id": ["fel"],
-              "parent": "dir",
               "alignment": "center",
               "component": {
                 "type": "nodeList",
@@ -196,12 +236,11 @@
               }
             },
             {
-              "id": ["fel"],
-              "parent": "dir",
+              "id": ["bod"],
               "alignment": "center",
               "component": {
                 "type": "nodeList",
-                "children": ["str", "utv", "mar", "bru", "dri"]
+                "children": ["str2", "utv2", "platt", "bru2", "bruk"]
               }
             }
           ]

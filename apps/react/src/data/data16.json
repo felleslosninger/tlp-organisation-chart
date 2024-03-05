@@ -6,7 +6,7 @@
   "toc": [
     { "title": "Root", "color": "#0062BA" },
     { "title": "Item", "color": "#1e2b3c" },
-    { "title": "Child", "color": "#68707c" }
+    { "title": "children", "color": "#68707c" }
   ],
   "nodes": [
     {
@@ -16,11 +16,10 @@
       "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 1 with url",
+      "title": "Item 1",
       "id": "item1",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white",
-      "url": "https://www.digdir.no/"
+      "textColor": "white"
     },
     {
       "title": "Item 2",
@@ -53,27 +52,39 @@
       "textColor": "white"
     },
     {
-      "title": "Item 7",
-      "id": "item7",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 1",
+      "id": "child1",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 8",
-      "id": "item8",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 2",
+      "id": "child2",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 9",
-      "id": "item9",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 3",
+      "id": "child3",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     },
     {
-      "title": "Item 10",
-      "id": "item10",
-      "backgroundColor": "#1e2b3c",
+      "title": "Child 4",
+      "id": "child4",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 5",
+      "id": "child5",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 6",
+      "id": "child6",
+      "backgroundColor": "#68707c",
       "textColor": "white"
     }
   ],
@@ -93,11 +104,7 @@
                   "item3",
                   "item4",
                   "item5",
-                  "item6",
-                  "item7",
-                  "item8",
-                  "item9",
-                  "item10"
+                  "item6"
                 ]
               }
             }
@@ -107,42 +114,45 @@
           "row": [
             {
               "id": ["item1"],
-              "alignment": "center"
+              "component": {
+                "type": "node-list",
+                "children": ["child1"]
+              }
             },
             {
-              "id": ["item2"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item3"]
+              "id": ["item2"],
+              "component": {
+                "type": "node-list",
+                "children": ["child2"]
+              }
             },
             {
-              "id": ["item4"]
+              "id": ["item3"],
+              "component": {
+                "type": "node-list",
+                "children": ["child3"]
+              }
             },
             {
-              "id": ["item5"]
+              "id": ["item4"],
+              "component": {
+                "type": "node-list",
+                "children": ["child4"]
+              }
             },
             {
-              "id": ["item6"]
+              "id": ["item5"],
+              "component": {
+                "type": "node-list",
+                "children": ["child5"]
+              }
             },
             {
-              "id": ["item7"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item8"]
-            },
-            {
-              "id": ["item9"]
-            },
-            {
-              "id": ["item10"]
+              "id": ["item6"],
+              "component": {
+                "type": "node-list",
+                "children": ["child6"]
+              }
             }
           ]
         }
