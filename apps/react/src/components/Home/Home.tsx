@@ -107,12 +107,6 @@ const Home = () => {
             <Combobox.Option value="data8">Ender med 4 kol</Combobox.Option>
             <Combobox.Option value="data9">Ender med 5 kol</Combobox.Option>
             <Combobox.Option value="data10">Ender med 6 kol</Combobox.Option>
-            <Combobox.Option value="special1">
-              Med spesial-kolonne 1
-            </Combobox.Option>
-            <Combobox.Option value="special2">
-              Med spesial-kolonne 2
-            </Combobox.Option>
             <Combobox.Option value="digdir1">
               Avdelinger og seksjoner
             </Combobox.Option>
@@ -122,24 +116,6 @@ const Home = () => {
             </Combobox.Option>
             <Combobox.Option value="data4">
               Kombinasjoner med barn
-            </Combobox.Option>
-            <Combobox.Option value="data11">
-              Ender med 1 kol & barn
-            </Combobox.Option>
-            <Combobox.Option value="data12">
-              Ender med 2 kol & barn
-            </Combobox.Option>
-            <Combobox.Option value="data13">
-              Ender med 3 kol & barn
-            </Combobox.Option>
-            <Combobox.Option value="data14">
-              Ender med 4 kol & barn
-            </Combobox.Option>
-            <Combobox.Option value="data15">
-              Ender med 5 kol & barn
-            </Combobox.Option>
-            <Combobox.Option value="data16">
-              Ender med 6 kol & barn
             </Combobox.Option>
             <Combobox.Option value="offset1">Offset 1</Combobox.Option>
             <Combobox.Option value="offset2">Offset 2</Combobox.Option>
