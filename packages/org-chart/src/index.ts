@@ -1,5 +1,3 @@
-import "./orgChart.css";
-
 import { generateOrgChart } from "./orgChart";
 
 (function (window, document, undefined) {

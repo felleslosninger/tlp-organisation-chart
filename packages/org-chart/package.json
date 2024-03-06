@@ -9,9 +9,10 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "pnpm run clean && tsc -p tsconfig.json && rollup -c --bundleConfigAsCjs",
+    "build": "pnpm run clean && tsc -p tsconfig.json && rollup -c --bundleConfigAsCjs --watch",
     "clean": "rimraf dist && rimraf tsc-build",
-    "test": "jest"
+    "test": "jest",
+    "watch": "tsc -w"
   },
   "devDependencies": {
     "jest": "^29.7.0"
