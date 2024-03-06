@@ -1,9 +1,12 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["./src"],
-  "rootDir": "./src",
   "compilerOptions": {
     "outDir": "./tsc-build",
-    "noEmit": false
-  }
+    "noEmit": false,
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "composite": true
+  },
+  "include": ["./src"],
+  "rootDir": "./src",
 }
