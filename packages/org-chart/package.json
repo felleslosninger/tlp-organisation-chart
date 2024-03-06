@@ -9,7 +9,7 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "pnpm run clean && tsc -p tsconfig.json && rollup -c --bundleConfigAsCjs",
+    "build": "pnpm run clean && tsc -p tsconfig.json && rollup -c",
     "clean": "rimraf dist && rimraf tsc-build",
     "test": "jest",
     "watch": "chokidar \"src/**/*\" -c \"pnpm run build\""
