@@ -116,7 +116,7 @@ const Home = () => {
             <Combobox.Option value="digdir1">
               Avdelinger og seksjoner
             </Combobox.Option>
-            <Combobox.Option value="digdir3">Leveranseområder</Combobox.Option>¨
+            <Combobox.Option value="digdir3">Leveranseområder</Combobox.Option>
             <Combobox.Option value="data1">
               Kombinasjoner uten barn
             </Combobox.Option>

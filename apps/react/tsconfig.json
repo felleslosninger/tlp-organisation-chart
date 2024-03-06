@@ -1,11 +1,4 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src"],
-  "compilerOptions": {
-    "baseUrl": "src",
-    "paths": {
-      "@digdir/organization-chart": ["./node_modules/@digdir/organization-chart/src"],
-      "@digdir/organization-chart/*": ["./node_modules/@digdir/organization-chart/src/*"]
-    }
-  }
+  "include": ["src"]
 }
