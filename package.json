@@ -8,9 +8,11 @@
   ],
   "scripts": {
     "test org-chart": "cd packages/org-chart && npm test",
-    "start-react": "cd apps/react && npm start",
+    "start:react": "cd apps/react && npm start",
     "deploy": "cd apps/react && npm run predeploy && npm run deploy",
-    "build": "cd packages/org-chart && npm run build"
+    "build:chart": "cd packages/org-chart && npm run build",
+    "run:dev": "concurrently --kill-others \"npm run start:react\" \"npm run watch:chart\"",
+    "watch:chart": "cd packages/org-chart && npm run watch"
   },
   "dependencies": {
     "@babel/core": "^7.23.9",
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "3.2.5"

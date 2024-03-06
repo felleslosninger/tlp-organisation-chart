@@ -21,9 +21,10 @@ import jsonDataOffset1 from "../../data/dataOffset1.json";
 import jsonDataOffset2 from "../../data/dataOffset2.json";
 import jsonDigdir1 from "../../data/digdir1.json";
 import jsonDigdir3 from "../../data/digdir3.json";
-import { generateOrgChart } from "../../function/generateOrgChartV2";
 import { Button, Combobox } from "@digdir/design-system-react";
 import styles from "./Home.module.css";
+
+import { generateOrgChart } from "@digdir/organization-chart/tsc-build";
 
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState("1800px");
@@ -115,7 +116,7 @@ const Home = () => {
             <Combobox.Option value="digdir1">
               Avdelinger og seksjoner
             </Combobox.Option>
-            <Combobox.Option value="digdir3">Leveranseområder</Combobox.Option>¨
+            <Combobox.Option value="digdir3">Leveranseområder</Combobox.Option>
             <Combobox.Option value="data1">
               Kombinasjoner uten barn
             </Combobox.Option>
