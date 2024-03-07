@@ -541,24 +541,74 @@ function createSpecialColumnLines(
 ) {
   let className = "special-column";
 
+  let initialSiblingsAmount = siblingsAmount;
+  siblingsAmount += indexToColumnsWithSpecialColumnList.length;
   // siblins are only special columns
-  if (
-    siblingsAmount === indexToColumnsWithSpecialColumnList.length ||
-    indexInRow === 1
-  ) {
-    className += `-${indexInRow}`;
+  if (!isWrapped) {
+    if (
+      initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length ||
+      indexInRow === 1
+    ) {
+      className += `-${indexInRow}`;
+    } else if (siblingsAmount === 3) {
+      className += `-${indexInRow}`;
+    } else if (siblingsAmount === 4) {
+      if (indexToColumnsWithSpecialColumnList.length === 1) {
+        if (
+          indexToColumnsWithSpecialColumnList.includes(1) &&
+          indexInRow === 1
+        ) {
+          className += `-1`;
+        } else {
+          className += `-2`;
+        }
+      }
+    } else if (siblingsAmount === 5) {
+      if (indexToColumnsWithSpecialColumnList.length === 2) {
+        if (
+          indexToColumnsWithSpecialColumnList.includes(2) &&
+          !indexToColumnsWithSpecialColumnList.includes(1) &&
+          indexInRow === 2
+        ) {
+          className += `-1`;
+        } else {
+          className += `-2`;
+        }
+      } else {
+        if (
+          indexToColumnsWithSpecialColumnList.includes(1) ||
+          indexToColumnsWithSpecialColumnList.includes(2)
+        ) {
+          className += `-1`;
+        } else {
+          className += `-2`;
+        }
+      }
+    } else if (siblingsAmount === 6) {
+      if (indexToColumnsWithSpecialColumnList.length === 2) {
+        if (
+          indexToColumnsWithSpecialColumnList.includes(2) &&
+          !indexToColumnsWithSpecialColumnList.includes(1) &&
+          indexInRow === 2
+        ) {
+          className += `-1`;
+        } else {
+          className += `-2`;
+        }
+      } else {
+        if (
+          indexToColumnsWithSpecialColumnList.includes(1) ||
+          indexToColumnsWithSpecialColumnList.includes(2)
+        ) {
+          className += `-1`;
+        } else {
+          className += `-2`;
+        }
+      }
+    }
+  } else {
+    className += `-3`;
   }
-  // else if (siblingsAmount === 2) {
-  //   className += `-${indexInRow}`;
-  // } else if (siblingsAmount === 3) {
-  //   if (indexToColumnsWithSpecialColumnList) {
-  //   }
-  //   className += `-${indexInRow}`;
-  // } else if (indexInRow >= siblingsAmount / 2) {
-  //   className += `-2`;
-  // } else if (indexInRow <= siblingsAmount / 2) {
-  //   className += `-2`;
-  // }
 
   return className;
 }
