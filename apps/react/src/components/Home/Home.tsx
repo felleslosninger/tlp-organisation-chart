@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Button, Combobox } from '@digdir/design-system-react';
+import { generateOrgChart } from '@digdir/organization-chart';
+
 import jsonData1 from '../../data/data1.json';
 import jsonData2 from '../../data/data2.json';
 import jsonData3 from '../../data/data3.json';
@@ -21,40 +24,38 @@ import jsonDataOffset1 from '../../data/dataOffset1.json';
 import jsonDataOffset2 from '../../data/dataOffset2.json';
 import jsonDigdir1 from '../../data/digdir1.json';
 import jsonDigdir3 from '../../data/digdir3.json';
-import { Button, Combobox } from '@digdir/design-system-react';
+
 import styles from './Home.module.css';
 
-import { generateOrgChart } from '@digdir/organization-chart';
+const datasets: { [key: string]: any } = {
+  digdir1: jsonDigdir1,
+  digdir3: jsonDigdir3,
+  data1: jsonData1,
+  data2: jsonData2,
+  data3: jsonData3,
+  data4: jsonData4,
+  data5: jsonData5,
+  data6: jsonData6,
+  data7: jsonData7,
+  data8: jsonData8,
+  data9: jsonData9,
+  data10: jsonData10,
+  data11: jsonData11,
+  data12: jsonData12,
+  data13: jsonData13,
+  data14: jsonData14,
+  data15: jsonData15,
+  data16: jsonData16,
+  special1: jsonDataSpecial1,
+  special2: jsonDataSpecial2,
+  offset1: jsonDataOffset1,
+  offset2: jsonDataOffset2,
+};
 
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState('1800px');
 
   const [data, setData] = useState(jsonDigdir3);
-
-  const datasets: { [key: string]: any } = {
-    digdir1: jsonDigdir1,
-    digdir3: jsonDigdir3,
-    data1: jsonData1,
-    data2: jsonData2,
-    data3: jsonData3,
-    data4: jsonData4,
-    data5: jsonData5,
-    data6: jsonData6,
-    data7: jsonData7,
-    data8: jsonData8,
-    data9: jsonData9,
-    data10: jsonData10,
-    data11: jsonData11,
-    data12: jsonData12,
-    data13: jsonData13,
-    data14: jsonData14,
-    data15: jsonData15,
-    data16: jsonData16,
-    special1: jsonDataSpecial1,
-    special2: jsonDataSpecial2,
-    offset1: jsonDataOffset1,
-    offset2: jsonDataOffset2,
-  };
 
   useEffect(() => {
     generateOrgChart(data, 'test');
@@ -75,12 +76,6 @@ const Home = () => {
             size='medium'
           >
             <Combobox.Empty>Fant ingen treff</Combobox.Empty>
-            <Combobox.Option value='special1'>
-              Med spesial-kolonne 1
-            </Combobox.Option>
-            <Combobox.Option value='special2'>
-              Med spesial-kolonne 2
-            </Combobox.Option>
             <Combobox.Option value='data11'>
               Ender med 1 kol & barn
             </Combobox.Option>
