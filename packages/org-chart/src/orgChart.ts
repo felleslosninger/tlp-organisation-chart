@@ -5,7 +5,7 @@ import {
   Column,
   Row,
   TableOfContentsItem,
-} from './types';
+} from "./types";
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta, toc } = data;
@@ -92,6 +92,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     siblingsAmount: number,
     indexInRow: number,
     isLastRow: boolean,
+    specialColumnAmount?: number,
   ) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
@@ -142,6 +143,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           allowedBreakpoints,
           isLastRow,
           node.alignment ? node.alignment : undefined,
+          specialColumnAmount ? specialColumnAmount : 0,
         );
       }
 
@@ -159,16 +161,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     indexInRow: number,
     isLastRow: boolean,
     wrapNodesContainer: boolean,
+    indexToColumnsWithSpecialColumnList: number[],
   ) {
     const columnElement = createElement("div");
     columnElement.className = "column";
     isMobile
       ? (columnElement.style.width = "100%")
       : (columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`);
-
-    function createSpecialColumnLines() {
-      return "test";
-    }
 
     //if column.id is an array, create a special column
     if (Array.isArray(column.id) && column.id.length > 1) {
@@ -182,7 +181,14 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodesWrapper.classList.add("nodes-container-wrap");
 
       if (!isMobile) {
-        nodesWrapper.classList.add(createSpecialColumnLines());
+        nodesWrapper.classList.add(
+          createSpecialColumnLines(
+            indexToColumnsWithSpecialColumnList,
+            indexInRow,
+            siblingsAmount,
+            wrapNodesContainer,
+          ),
+        );
       }
 
       column.id.forEach((nodeId: string) => {
@@ -242,6 +248,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     additionalWidth: number,
     indexInRow: number,
     isLastRow: boolean,
+    specialColumnAmount?: number,
   ) {
     const columnElement = createElement("div");
     columnElement.className = "column";
@@ -269,6 +276,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       siblingsAmount,
       indexInRow,
       isLastRow,
+      specialColumnAmount ? specialColumnAmount : 0,
     );
 
     if (!isMobile) {
@@ -367,6 +375,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             columnWidth.additionalWidth,
             count,
             isLastRow,
+            indexToColumnsWithSpecialColumnList.length,
           ),
         );
       } else {
@@ -379,6 +388,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             count,
             isLastRow,
             columnWidth.wrapNodesWrapper,
+            indexToColumnsWithSpecialColumnList,
           ),
         );
       }
@@ -521,6 +531,36 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   return null;
+}
+
+function createSpecialColumnLines(
+  indexToColumnsWithSpecialColumnList: number[],
+  indexInRow: number,
+  siblingsAmount: number,
+  isWrapped: boolean,
+) {
+  let className = "special-column";
+
+  // siblins are only special columns
+  if (
+    siblingsAmount === indexToColumnsWithSpecialColumnList.length ||
+    indexInRow === 1
+  ) {
+    className += `-${indexInRow}`;
+  }
+  // else if (siblingsAmount === 2) {
+  //   className += `-${indexInRow}`;
+  // } else if (siblingsAmount === 3) {
+  //   if (indexToColumnsWithSpecialColumnList) {
+  //   }
+  //   className += `-${indexInRow}`;
+  // } else if (indexInRow >= siblingsAmount / 2) {
+  //   className += `-2`;
+  // } else if (indexInRow <= siblingsAmount / 2) {
+  //   className += `-2`;
+  // }
+
+  return className;
 }
 
 //function to calculate the width of the columns
@@ -919,9 +959,12 @@ function createNodeLineClass(
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
   alignment: string | undefined,
+  specialColumnAmount: number,
 ) {
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
+
+  siblingsAmount += specialColumnAmount;
 
   let className = "";
 
