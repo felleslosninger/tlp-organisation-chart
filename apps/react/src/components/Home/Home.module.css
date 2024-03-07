@@ -1,5 +1,5 @@
 .layout {
- padding: 0 0 20px 0;
+  padding: 0 0 20px 0;
 }
 
 .test {
@@ -7,7 +7,7 @@
   margin: 0 auto;
 }
 
-.wrapper{
+.wrapper {
   margin: 50px 0;
   display: flex;
   gap: 50px;
@@ -16,7 +16,7 @@
   border-bottom: 1px solid #000;
 }
 
-.menu{
+.menu {
   margin: 10px auto 60px auto;
   max-width: 1800px;
   display: flex;
@@ -26,12 +26,12 @@
   gap: 20px;
 }
 
-.menuLeft{
+.menuLeft {
   display: flex;
   gap: 20px;
 }
 
-.menuRight{
+.menuRight {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
