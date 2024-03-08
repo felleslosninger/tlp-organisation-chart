@@ -1,9 +1,9 @@
-name: Deploy OrgChart to GitHub Pages
+name: Deploy storefront to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - feat/storefront
 
 jobs:
   build-and-deploy:
