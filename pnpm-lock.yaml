@@ -45,9 +45,6 @@ importers:
       '@digdir/design-system-tokens':
         specifier: ^0.8.1
         version: 0.8.1
-      '@digdir/organisation-chart':
-        specifier: link:..\..\packages\org-chart
-        version: link:../../packages/org-chart
       '@navikt/aksel-icons':
         specifier: ^5.7.6
         version: 5.18.3
@@ -102,6 +99,10 @@ importers:
       web-vitals:
         specifier: ^2.1.4
         version: 2.1.4
+    devDependencies:
+      '@digdir/organisation-chart':
+        specifier: link:..\..\packages\org-chart
+        version: link:../../packages/org-chart
 
   packages/org-chart:
     dependencies:
