@@ -9,27 +9,27 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        persist-credentials: false
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: |
-        cd apps/react
-        npm install
+      - name: Install dependencies
+        run: |
+          cd apps/storefront
+          npm install
 
-    - name: Build React app
-      run: |
-        cd apps/react
-        npm run build
+      - name: Build Storefront
+        run: |
+          cd apps/storefront
+          npm run build
 
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@4.1.4
-      with:
-        branch: gh-pages # Branchen du vil deploye til
-        folder: apps/react/build # Mappen som inneholder bygget ditt
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages # Branchen du vil deploye til
+          folder: apps/storefront/build # Mappen som inneholder bygget ditt
