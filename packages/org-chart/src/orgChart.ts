@@ -547,7 +547,7 @@ function createSpecialColumnLines(
   if (!isWrapped) {
     if (
       initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length ||
-      indexInRow === 1
+      (indexInRow === 1 && siblingsAmount <= 4)
     ) {
       className += `-${indexInRow}`;
     } else if (siblingsAmount === 3) {
@@ -566,20 +566,45 @@ function createSpecialColumnLines(
     } else if (siblingsAmount === 5) {
       if (indexToColumnsWithSpecialColumnList.length === 2) {
         if (
-          indexToColumnsWithSpecialColumnList.includes(2) &&
-          !indexToColumnsWithSpecialColumnList.includes(1) &&
-          indexInRow === 2
+          indexToColumnsWithSpecialColumnList.includes(1) &&
+          indexToColumnsWithSpecialColumnList.includes(2)
         ) {
-          className += `-1`;
-        } else {
-          className += `-2`;
+          className += `-${indexInRow}`;
+        } else if (
+          indexToColumnsWithSpecialColumnList.includes(2) &&
+          indexToColumnsWithSpecialColumnList.includes(3)
+        ) {
+          if (indexInRow === 2) {
+            {
+              className += `-1`;
+            }
+          } else {
+            className += `-2`;
+          }
+        } else if (
+          indexToColumnsWithSpecialColumnList.includes(1) &&
+          indexToColumnsWithSpecialColumnList.includes(3)
+        ) {
+          if (indexInRow === 1) {
+            {
+              className += `-1-long`;
+            }
+          } else {
+            className += `-2`;
+          }
         }
       } else {
         if (
           indexToColumnsWithSpecialColumnList.includes(1) ||
           indexToColumnsWithSpecialColumnList.includes(2)
         ) {
-          className += `-1`;
+          if (!indexToColumnsWithSpecialColumnList.includes(2)) {
+            className += `-1-long`;
+          } else {
+            className += `-1`;
+          }
+        } else if (indexToColumnsWithSpecialColumnList.includes(4)) {
+          className += `-2-long`;
         } else {
           className += `-2`;
         }
@@ -587,27 +612,36 @@ function createSpecialColumnLines(
     } else if (siblingsAmount === 6) {
       if (indexToColumnsWithSpecialColumnList.length === 2) {
         if (
+          indexToColumnsWithSpecialColumnList.includes(1) &&
+          indexInRow === 1
+        ) {
+          className += `-1-long`;
+        } else if (
           indexToColumnsWithSpecialColumnList.includes(2) &&
           !indexToColumnsWithSpecialColumnList.includes(1) &&
           indexInRow === 2
         ) {
           className += `-1`;
+        } else if (
+          indexToColumnsWithSpecialColumnList.includes(4) &&
+          indexInRow === 4
+        ) {
+          className += `-2-long`;
+        } else if (indexToColumnsWithSpecialColumnList.includes(3)) {
+          className += `-2`;
         } else {
           className += `-2`;
         }
       } else {
-        if (
-          indexToColumnsWithSpecialColumnList.includes(1) ||
-          indexToColumnsWithSpecialColumnList.includes(2)
-        ) {
-          className += `-1`;
+        if (indexInRow <= 2) {
+          className += `-${indexInRow === 1 ? "1-long" : "1"}`;
         } else {
-          className += `-2`;
+          className += `-${indexInRow === 4 ? "2" : "2-long"}`;
         }
       }
     }
   } else {
-    className += `-3`;
+    // className += `-3`;
   }
 
   return className;
