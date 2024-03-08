@@ -187,6 +187,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             indexInRow,
             siblingsAmount,
             wrapNodesContainer,
+            isLaptop,
           ),
         );
       }
@@ -538,6 +539,7 @@ function createSpecialColumnLines(
   indexInRow: number,
   siblingsAmount: number,
   isWrapped: boolean,
+  isLaptop: boolean,
 ) {
   let className = "special-column";
 
@@ -563,7 +565,7 @@ function createSpecialColumnLines(
           className += `-2`;
         }
       }
-    } else if (siblingsAmount === 5) {
+    } else if (siblingsAmount === 5 && !isLaptop) {
       if (indexToColumnsWithSpecialColumnList.length === 2) {
         if (
           indexToColumnsWithSpecialColumnList.includes(1) &&
@@ -609,7 +611,7 @@ function createSpecialColumnLines(
           className += `-2`;
         }
       }
-    } else if (siblingsAmount === 6) {
+    } else if (siblingsAmount === 6 && !isLaptop) {
       if (indexToColumnsWithSpecialColumnList.length === 2) {
         if (
           indexToColumnsWithSpecialColumnList.includes(1) &&
