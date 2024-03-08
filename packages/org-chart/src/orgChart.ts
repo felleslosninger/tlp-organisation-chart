@@ -727,18 +727,19 @@ function createSpecialColumnLines(
       }
     }
   } else {
-    className += `-3-`;
+    let direction = '';
     if (isTablet) {
       if (
         initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length
       ) {
         if (isOdd(indexInRow) || indexInRow === 1) {
-          className += `right-short`;
+          direction = `right`;
         } else {
-          className += `left-short`;
+          direction += `left`;
         }
       }
     }
+    className += `-3-${direction}-short`;
   }
 
   return className;
