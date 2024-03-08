@@ -9,7 +9,7 @@
   "scripts": {
     "test org-chart": "cd packages/org-chart && npm test",
     "start:react": "cd apps/react && npm start",
-    "deploy": "cd apps/react && npm run predeploy && npm run deploy",
+    "deploy": "cd apps/storefront && npm run predeploy && npm run deploy",
     "build:storefront": "cd packages/storefront && npm run build",
     "dev:storefront": "cd packages/storefront && npm run dev",
     "build:chart": "cd packages/org-chart && npm run build",
