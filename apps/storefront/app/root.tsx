@@ -10,6 +10,8 @@ import {
 } from '@remix-run/react';
 
 import '@digdir/organisation-chart/dist/index.css';
+import '@digdir/designsystemet-css/dist/react-components.css';
+import '@digdir/designsystemet-theme/brand/digdir/tokens.css';
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),

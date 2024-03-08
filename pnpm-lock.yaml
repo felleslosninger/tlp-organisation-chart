@@ -103,6 +103,15 @@ importers:
 
   apps/storefront:
     dependencies:
+      '@digdir/designsystemet-css':
+        specifier: 0.1.1-alpha.0
+        version: 0.1.1-alpha.0
+      '@digdir/designsystemet-react':
+        specifier: 0.52.0-alpha.0
+        version: 0.52.0-alpha.0(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0)
+      '@digdir/designsystemet-theme':
+        specifier: 0.13.1-alpha.0
+        version: 0.13.1-alpha.0
       '@digdir/organisation-chart':
         specifier: ^0.2.0
         version: link:../../packages/org-chart
@@ -1992,6 +2001,31 @@ packages:
 
   /@digdir/design-system-tokens@0.8.1:
     resolution: {integrity: sha512-OREcL4qeEmrysgLdZ9USZHOJkFMhzK0iC5bD4FkIAE/lMN/xiJ0eFcI9+hmjHh1xyyj20fjLxk2Gxxo1cByArA==}
+    dev: false
+
+  /@digdir/designsystemet-css@0.1.1-alpha.0:
+    resolution: {integrity: sha512-1oqCS24OVjbRn7ulM7vBOMffSfX5rWlM39GucqqIdEX7KA8Ed7oulDmJsmbVPmt7Bj4Dvnr2FsHBiCneeRJfGA==}
+    dev: false
+
+  /@digdir/designsystemet-react@0.52.0-alpha.0(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-gOO3NlsQV/wyvkZNo6SqTmpg08ajnHpoBqB+Oz7j2K+dd8sEie39cIctj0GHI2vRkz169mwOtX3qdcAJE9/fnQ==}
+    peerDependencies:
+      react: '>=18.2.0'
+      react-dom: '>=18.2.0'
+    dependencies:
+      '@digdir/designsystemet-theme': 0.13.1-alpha.0
+      '@floating-ui/react': 0.26.4(react-dom@18.2.0)(react@18.2.0)
+      '@navikt/aksel-icons': 5.18.3
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.2.60)(react@18.2.0)
+      '@tanstack/react-virtual': 3.1.3(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
+  /@digdir/designsystemet-theme@0.13.1-alpha.0:
+    resolution: {integrity: sha512-NgbcDqYf/3niVq98zteoRMbDERYhetoN6WPRcPtlpwJbOyUH1bsN6kFVpaNe9iiDb7JEqxCQXpUgMKi863IiTA==}
     dev: false
 
   /@emotion/hash@0.9.1:
