@@ -6,7 +6,7 @@
   "dependencies": {
     "@digdir/design-system-react": "^0.51.1",
     "@digdir/design-system-tokens": "^0.8.1",
-    "@digdir/organization-chart": "link:..\\..\\packages\\org-chart",
+    "@digdir/organisation-chart": "link:..\\..\\packages\\org-chart",
     "@navikt/aksel-icons": "^5.7.6",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
