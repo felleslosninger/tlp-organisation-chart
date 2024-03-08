@@ -188,6 +188,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             siblingsAmount,
             wrapNodesContainer,
             isLaptop,
+            isTablet,
           ),
         );
       }
@@ -540,18 +541,27 @@ function createSpecialColumnLines(
   siblingsAmount: number,
   isWrapped: boolean,
   isLaptop: boolean,
+  isTablet: boolean,
 ) {
   let className = 'special-column';
 
   let initialSiblingsAmount = siblingsAmount;
   siblingsAmount += indexToColumnsWithSpecialColumnList.length;
   // siblins are only special columns
-  if (!isWrapped) {
+  if (!isWrapped && !isTablet) {
     if (
       initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length ||
       (indexInRow === 1 && siblingsAmount <= 4)
     ) {
-      className += `-${indexInRow}`;
+      if (
+        isLaptop &&
+        indexToColumnsWithSpecialColumnList.includes(3) &&
+        indexInRow === 3
+      ) {
+        className += `-1`;
+      } else {
+        className += `-${indexInRow}`;
+      }
     } else if (siblingsAmount === 3) {
       className += `-${indexInRow}`;
     } else if (siblingsAmount === 4) {
@@ -631,39 +641,104 @@ function createSpecialColumnLines(
           }
         }
       }
-    } else if (siblingsAmount === 6 && !isLaptop) {
-      if (indexToColumnsWithSpecialColumnList.length === 2) {
-        if (
-          indexToColumnsWithSpecialColumnList.includes(1) &&
-          indexInRow === 1
-        ) {
-          className += `-1-long`;
-        } else if (
-          indexToColumnsWithSpecialColumnList.includes(2) &&
-          !indexToColumnsWithSpecialColumnList.includes(1) &&
-          indexInRow === 2
-        ) {
-          className += `-1`;
-        } else if (
-          indexToColumnsWithSpecialColumnList.includes(4) &&
-          indexInRow === 4
-        ) {
-          className += `-2-long`;
-        } else if (indexToColumnsWithSpecialColumnList.includes(3)) {
-          className += `-2`;
+    } else if (siblingsAmount === 6) {
+      if (!isLaptop) {
+        if (indexToColumnsWithSpecialColumnList.length === 2) {
+          if (
+            indexToColumnsWithSpecialColumnList.includes(1) &&
+            indexInRow === 1
+          ) {
+            className += `-1-long`;
+          } else if (
+            indexToColumnsWithSpecialColumnList.includes(2) &&
+            !indexToColumnsWithSpecialColumnList.includes(1) &&
+            indexInRow === 2
+          ) {
+            className += `-1`;
+          } else if (
+            indexToColumnsWithSpecialColumnList.includes(4) &&
+            indexInRow === 4
+          ) {
+            className += `-2-long`;
+          } else if (indexToColumnsWithSpecialColumnList.includes(3)) {
+            className += `-2`;
+          } else {
+            className += `-2`;
+          }
         } else {
-          className += `-2`;
+          if (indexInRow <= 2) {
+            className += `-${indexInRow === 1 ? '1-long' : '1'}`;
+          } else {
+            className += `-${indexInRow === 4 ? '2' : '2-long'}`;
+          }
         }
       } else {
-        if (indexInRow <= 2) {
-          className += `-${indexInRow === 1 ? '1-long' : '1'}`;
+        if (indexToColumnsWithSpecialColumnList.length === 2) {
+          if (
+            indexToColumnsWithSpecialColumnList.includes(2) &&
+            indexToColumnsWithSpecialColumnList.includes(1)
+          ) {
+            if (indexInRow === 1) {
+              className += `-1`;
+            } else {
+              className += `-2`;
+            }
+          } else if (
+            indexToColumnsWithSpecialColumnList.includes(2) &&
+            indexToColumnsWithSpecialColumnList.includes(3)
+          ) {
+            if (indexInRow === 2) {
+              className += `-2`;
+            } else {
+              className += `-1`;
+            }
+          } else if (
+            indexToColumnsWithSpecialColumnList.includes(3) &&
+            indexToColumnsWithSpecialColumnList.includes(4)
+          ) {
+            if (indexInRow === 3) {
+              className += `-2`;
+            } else {
+              className += `-1`;
+            }
+          } else if (
+            indexToColumnsWithSpecialColumnList.includes(2) &&
+            indexToColumnsWithSpecialColumnList.includes(4)
+          ) {
+            className += `-2`;
+          } else if (
+            indexToColumnsWithSpecialColumnList.includes(1) &&
+            indexToColumnsWithSpecialColumnList.includes(3)
+          ) {
+            className += `-1`;
+          } else if (
+            indexToColumnsWithSpecialColumnList.includes(1) &&
+            indexToColumnsWithSpecialColumnList.includes(4)
+          ) {
+            className += `-${indexInRow === 1 ? '1' : '2'}`;
+          }
         } else {
-          className += `-${indexInRow === 4 ? '2' : '2-long'}`;
+          if (indexInRow === 1 || indexInRow === 4 || indexInRow === 5) {
+            className += `-1`;
+          } else {
+            className += `-2`;
+          }
         }
       }
     }
   } else {
-    // className += `-3`;
+    className += `-3-`;
+    if (isTablet) {
+      if (
+        initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length
+      ) {
+        if (isOdd(indexInRow) || indexInRow === 1) {
+          className += `right-short`;
+        } else {
+          className += `left-short`;
+        }
+      }
+    }
   }
 
   return className;

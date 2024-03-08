@@ -429,19 +429,6 @@
 
 /* Special column Lines */
 
-/* .special-column-1 .node::before, 
-.special-column-2 .node::before,
-.special-column-3 .node:first-child:before,
-.special-column-left-wrappet .node:first-child:before{
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 2px;
-    height: calc(50% + 40px);
-    background-color: var(--line-color);
-    top: -40px;
-}  */
-
 .special-column-1 .node::before,
 .special-column-2 .node::before,
 .special-column-3 .node:first-child:before,
@@ -454,9 +441,10 @@
 .special-column-2-short .node:last-child:after,
 .special-column-2-long .node:last-child:after,
 .special-column-2-long .node::before,
-.special-column-3 .node:first-child:after,
-.special-column-3-short .node:first-child:after,
-.special-column-3-long .node:first-child:after {
+.special-column-3-right-short .node:first-child:after,
+.special-column-3-right-short .node:first-child:before,
+.special-column-3-left-short .node:first-child:after,
+.special-column-3-left-short .node:first-child:before {
   content: '';
   position: absolute;
   z-index: -1;
@@ -468,7 +456,9 @@
 .special-column-2 .node::before,
 .special-column-3 .node:first-child:before,
 .special-column-1-long .node::before,
-.special-column-2-long .node::before {
+.special-column-2-long .node::before,
+.special-column-3-right-short .node:first-child:before,
+.special-column-3-left-short .node:first-child:before {
   width: 2px;
   height: calc(50% + 40px);
 }
@@ -497,32 +487,20 @@
   right: 50%;
 }
 
-.special-column-2-short .node:last-child:after {
-  width: calc(150% + 24px + 12px);
-  height: 2px;
-  right: 50%;
-}
-
 .special-column-2-long .node:last-child:after {
   width: calc(200% + 24px + 24px + 6px);
   height: 2px;
   right: 50%;
 }
 
-.special-column-3 .node:first-child:after {
-  width: calc(150% + 24px + 12px);
+.special-column-3-right-short .node:first-child:after {
+  width: calc(50% + 12px);
   height: 2px;
-  right: 50%;
+  left: 50%;
 }
 
-.special-column-3-short .node:first-child:after {
-  width: calc(150% + 24px + 12px);
-  height: 2px;
-  right: 50%;
-}
-
-.special-column-3-long .node:first-child:after {
-  width: calc(150% + 24px + 12px);
+.special-column-3-left-short .node:first-child:after {
+  width: calc(50% + 12px);
   height: 2px;
   right: 50%;
 }
