@@ -11,8 +11,8 @@
     "start:react": "cd apps/react && npm start",
     "deploy": "cd apps/react && npm run predeploy && npm run deploy",
     "build:chart": "cd packages/org-chart && npm run build",
-    "run:dev": "concurrently --kill-others \"npm run start:react\" \"npm run watch:chart\"",
-    "watch:chart": "cd packages/org-chart && npm run watch"
+    "watch:chart": "cd packages/org-chart && npm run watch",
+    "run:dev": "concurrently --kill-others \"npm run start:react\" \"npm run watch:chart\""
   },
   "dependencies": {
     "@babel/core": "^7.23.9",

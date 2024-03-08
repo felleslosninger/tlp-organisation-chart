@@ -1,22 +1,23 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import postcss from "rollup-plugin-postcss";
-import path from "path";
+import copy from 'rollup-plugin-copy';
+import terser from '@rollup/plugin-terser';
 
-export default {
-  input: "./tsc-build/index.js",
-  output: {
-    file: "dist/index.js",
-    format: "es",
+export default [
+  {
+    input: './tsc-build/index.js',
+    output: {
+      file: 'dist/index.js',
+      format: 'es',
+      plugins: [terser()],
+    },
+    plugins: [
+      copy({
+        targets: [
+          {
+            src: 'src/index.css',
+            dest: 'dist',
+          },
+        ],
+      }),
+    ],
   },
-  plugins: [
-    postcss({
-      extract: path.resolve("dist/style.css"),
-      minimize: true,
-    }),
-    peerDepsExternal(),
-    resolve(),
-    commonjs(),
-  ],
-};
+];

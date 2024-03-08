@@ -8,18 +8,10 @@ Run `pnpm install` in the root directory.
 
 To make use of the package in our react testing application, we need to link the packages locally.
 
-Go into the pakcage, and then tell npm we want to link this package
+Go into the root folder and run
 
 ```console
-cd packages/org-chart
-npm link
+pnpm run:dev
 ```
 
-Then we need to create the link in the react app
-
-```console
-cd ../../apps/react
-npm link @digdir/organization-chart
-```
-
-Everything should now be set up for you to run `pnpm run:dev` in the root of the project.
+Everything should work fine, and it watches for changes done in `packages/org-chart`, and rebuilds the package to be used in react.

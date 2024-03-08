@@ -6,7 +6,6 @@
   "dependencies": {
     "@digdir/design-system-react": "^0.51.3-alpha.0",
     "@digdir/design-system-tokens": "^0.8.1",
-    "@digdir/organization-chart": "^0.1.0",
     "@navikt/aksel-icons": "^5.7.6",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -25,6 +24,9 @@
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@digdir/organisation-chart": "link:..\\..\\packages\\org-chart"
   },
   "scripts": {
     "start": "react-scripts start",
