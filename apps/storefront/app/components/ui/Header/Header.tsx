@@ -1,17 +1,25 @@
 import { Container } from '../Container/Container';
 
+import { Link } from '@digdir/designsystemet-react';
+
 import classes from './Header.module.css';
-import { Heading } from '@digdir/designsystemet-react';
 
 export const Header = () => {
   return (
     <header className={classes.header}>
       <Container>
         <div className={classes.left}>
-          <Heading size='small'>Organisation Chart</Heading>
+          <Link href='/'>
+            <img
+              src='logo_dark.svg'
+              alt='Organisation Chart'
+            />
+          </Link>
         </div>
 
-        <div className={classes.right}></div>
+        <div className={classes.right}>
+          <Link href='/documentation'>Documentation</Link>
+        </div>
       </Container>
     </header>
   );
