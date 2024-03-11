@@ -52,9 +52,21 @@ const Footer = () => {
               level={2}
               size='xsmall'
               className={classes.text}
+              spacing
             >
               Kom i kontakt med oss
             </Heading>
+            <ul className={classes.links}>
+              <li>
+                <Link
+                  href='https://github.com/felleslosninger/tlp-organization-chart/issues/new'
+                  target='_blank'
+                  inverted
+                >
+                  Github issues
+                </Link>
+              </li>
+            </ul>
           </div>
         </Container>
       </div>
