@@ -8,7 +8,8 @@ import '@digdir/designsystemet-theme';
 
 startTransition(() => {
   hydrateRoot(
-    document,
+    // @ts-expect-error TS2345
+    document.querySelector('#app'),
     <StrictMode>
       <RemixBrowser />
     </StrictMode>,
