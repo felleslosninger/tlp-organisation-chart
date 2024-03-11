@@ -10,6 +10,7 @@ export default defineConfig({
   plugins: [
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+      providerImportSource: '@mdx-js/react',
     }),
     remix({
       ssr: false,

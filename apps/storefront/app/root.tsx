@@ -10,6 +10,7 @@ import { Header } from './components/ui/Header/Header';
 
 import { Spinner } from '@digdir/designsystemet-react';
 import { Footer } from './components/ui/Footer/Footer';
+import { MDX } from './components/ui/MDXProvider';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -41,7 +42,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               marginBottom: 'var(--fds-spacing-4)',
             }}
           >
-            {children}
+            <MDX>{children}</MDX>
           </Container>
         </main>
         <Footer />

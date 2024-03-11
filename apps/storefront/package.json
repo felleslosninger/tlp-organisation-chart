@@ -17,6 +17,7 @@
     "@digdir/designsystemet-react": "0.52.0-alpha.0",
     "@digdir/designsystemet-theme": "0.13.1-alpha.0",
     "@digdir/organisation-chart": "^0.2.0",
+    "@mdx-js/react": "^3.0.1",
     "@navikt/aksel-icons": "^5.7.6",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
