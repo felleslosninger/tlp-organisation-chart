@@ -174,9 +174,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement('div');
 
-      isMobile || (isTablet && !isLastRow)
-        ? (nodesWrapper.className = 'nodes-container-wrap')
-        : (nodesWrapper.className = 'nodes-container');
+      if (isMobile || isTablet) {
+        if (isLastRow && indexInRow === siblingsAmount && !isMobile) {
+          nodesWrapper.className = 'nodes-container';
+        } else {
+          nodesWrapper.className = 'nodes-container-wrap';
+        }
+      } else {
+        nodesWrapper.className = 'nodes-container';
+      }
 
       wrapNodesContainer === true &&
         nodesWrapper.classList.add('nodes-container-wrap');
@@ -1125,11 +1131,7 @@ function calculateColumnWidth(
         }
       }
     } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      if (
-        isLastRow &&
-        indexToSpecialColumnList.includes(3) &&
-        indexInRow === 3
-      ) {
+      if (isLastRow && siblingsAmount - 1 === indexInRow) {
         width = 100;
       } else {
         width = 50;
@@ -1157,9 +1159,6 @@ function createNodeLineClass(
   isTablet: boolean,
   isLaptop: boolean,
 ) {
-  //destructuring the breakpoints object
-  const { main, laptop, tablet } = breakpoints;
-
   let className = '';
 
   if (specialColumnsList.length <= 0) {
@@ -1272,7 +1271,11 @@ function createNodeLineClass(
     }
   } else {
     if (isTablet) {
-      className = ` node-line-up-${isOdd(indexInRow) ? 'right-half' : 'left-half'} node-line-up`;
+      if (isLastRow && indexInRow === siblingsAmount - 1 && isOdd(indexInRow)) {
+        className = ' node-line-up-long';
+      } else {
+        className = ` node-line-up-${isOdd(indexInRow) ? 'right-half' : 'left-half'} node-line-up`;
+      }
     } else {
       siblingsAmount += specialColumnsList.length - 1;
 

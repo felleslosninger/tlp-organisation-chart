@@ -260,6 +260,16 @@
   top: -40px;
 }
 
+.node-line-up-long::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 2px;
+  height: calc(200% + 40px);
+  background-color: var(--line-color);
+  top: -180px;
+}
+
 .node-line-left::before {
   content: '';
   z-index: -1;
