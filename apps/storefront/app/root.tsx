@@ -8,7 +8,6 @@ import {
 import { Container } from './components/ui/Container/Container';
 import { Header } from './components/ui/Header/Header';
 
-/* import classes from './root.module.css'; */
 import { Spinner } from '@digdir/designsystemet-react';
 import { Footer } from './components/ui/Footer/Footer';
 
