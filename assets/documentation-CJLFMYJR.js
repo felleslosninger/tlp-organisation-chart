@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime-DdyehQyT.js";const o=()=>[{title:"Organisation Chart - Documentation"},{name:"description",content:"Documentation for the Organisation Chart"}];function e(){return t.jsx("div",{children:"Documentation"})}export{e as default,o as meta};
