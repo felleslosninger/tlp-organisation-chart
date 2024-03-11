@@ -35,6 +35,16 @@ const Footer = () => {
                   <RemixLink to='/changelog'>Endringslogg</RemixLink>
                 </Link>
               </li>
+              <li>
+                <Link
+                  asChild
+                  inverted
+                >
+                  <RemixLink to='/privacy-policy'>
+                    Personvernerklæring
+                  </RemixLink>
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
