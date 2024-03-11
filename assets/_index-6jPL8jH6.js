@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime-DdyehQyT.js";const a=()=>[{title:"Organisation Chart"},{name:"description",content:"Display an accessible organisational chart on any website"}];function n(){return t.jsx("div",{children:"Homepage, display chart here.."})}export{n as default,a as meta};
