@@ -33,3 +33,4 @@ jobs:
         with:
           branch: gh-pages # Branchen du vil deploye til
           folder: apps/storefront/build/client # Mappen som inneholder bygget ditt
+          dotfiles: true
