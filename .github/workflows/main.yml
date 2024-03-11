@@ -32,4 +32,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages # Branchen du vil deploye til
-          folder: apps/storefront/build # Mappen som inneholder bygget ditt
+          folder: apps/storefront/build/client # Mappen som inneholder bygget ditt
