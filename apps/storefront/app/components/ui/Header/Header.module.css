@@ -21,6 +21,7 @@ body {
 .right {
   display: flex;
   align-items: center;
+  gap: var(--fds-spacing-4);
 }
 
 .link {
@@ -40,6 +41,6 @@ body {
   color: inherit;
 }
 
-.user {
-  margin-right: 16px;
+.github {
+  width: 25px;
 }

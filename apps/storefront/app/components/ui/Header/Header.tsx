@@ -19,6 +19,17 @@ export const Header = () => {
 
         <div className={classes.right}>
           <Link href='/documentation'>Documentation</Link>
+          <Link
+            href='https://github.com/felleslosninger/tlp-organization-chart'
+            target='_blank'
+            title='Github repository'
+          >
+            <img
+              className={classes.github}
+              src='github.svg'
+              alt='Github logo'
+            />
+          </Link>
         </div>
       </Container>
     </header>
