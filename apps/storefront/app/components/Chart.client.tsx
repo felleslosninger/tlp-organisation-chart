@@ -8,7 +8,6 @@ import data from '../data/data.json';
 export const Chart = () => {
   useEffect(() => {
     generateOrgChart(data, 'chart');
-    console.log('running');
   }, []);
 
   return (
