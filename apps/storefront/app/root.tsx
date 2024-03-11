@@ -34,15 +34,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Header />
-        <Container
-          style={{
-            minHeight: 'calc(100vh - 100px)',
-            marginTop: 'var(--fds-spacing-4)',
-            marginBottom: 'var(--fds-spacing-4)',
-          }}
-        >
-          {children}
-        </Container>
+        <main>
+          <Container
+            style={{
+              minHeight: 'calc(100vh - 100px)',
+              marginTop: 'var(--fds-spacing-4)',
+              marginBottom: 'var(--fds-spacing-4)',
+            }}
+          >
+            {children}
+          </Container>
+        </main>
         <Footer />
         <ScrollRestoration />
         <Scripts />

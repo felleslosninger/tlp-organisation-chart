@@ -8,7 +8,7 @@ import classes from './Header.module.css';
 export const Header = () => {
   return (
     <header className={classes.header}>
-      <Container>
+      <Container style={{ width: '100%' }}>
         <div className={classes.left}>
           <Link asChild>
             <RemixLink to='/'>

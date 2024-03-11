@@ -1,8 +1,7 @@
 .container {
-  max-width: 1300px;
+  max-width: 1380px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  width: 100%;
   padding: 0px 32px;
 }
