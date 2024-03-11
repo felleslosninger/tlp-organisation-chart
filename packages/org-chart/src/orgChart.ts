@@ -728,6 +728,16 @@ function createSpecialColumnLines(
         }
       }
     }
+  } else if (isWrapped && !isTablet) {
+    if (!isLaptop) {
+      if (indexInRow === 2) {
+        className += `-3-right-short`;
+      } else {
+        className += `-3-left-long`;
+      }
+    } else {
+      className += `-3-right-short`;
+    }
   } else {
     let direction = '';
     if (isTablet) {
@@ -1366,7 +1376,7 @@ function createNodeLineClass(
             if (isLaptop) {
               className = ` node-line-up-${indexInRow === 2 ? 'right-half' : 'right'} node-line-up`;
             } else {
-              className = ` node-line-up-${indexInRow === 1 ? 'right' : 'left'} node-line-up`;
+              className = ` node-line-up-${indexInRow === 1 ? 'right' : 'right-half'} node-line-up`;
             }
           } else if (
             specialColumnsList.includes(2) &&

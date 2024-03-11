@@ -4,8 +4,6 @@
   --line-color: #68707c;
   --row-padding-top: 40px;
   --row-column-gap: 80px;
-
-  padding: 34px;
 }
 
 /* TOC styles */
@@ -432,16 +430,17 @@
 .special-column-2-short .node:last-child:after,
 .special-column-2-long .node:last-child:after,
 .special-column-2-long .node::before,
-.special-column-3-right-short .node:first-child:after,
 .special-column-3-right-short .node:first-child:before,
+.special-column-3-right-short .node:first-child:after,
 .special-column-3-left-short .node:first-child:after,
-.special-column-3-left-short .node:first-child:before {
+.special-column-3-left-short .node:first-child:before,
+.special-column-3-left-long .node:first-child:before,
+.special-column-3-left-long .node:first-child:after {
   content: '';
   position: absolute;
   z-index: -1;
   background-color: var(--line-color);
   top: -40px;
-  display: none;
 }
 
 .special-column-1 .node::before,
@@ -450,57 +449,56 @@
 .special-column-1-long .node::before,
 .special-column-2-long .node::before,
 .special-column-3-right-short .node:first-child:before,
-.special-column-3-left-short .node:first-child:before {
+.special-column-3-left-short .node:first-child:before,
+.special-column-3-left-long .node:first-child:before {
   width: 2px;
   height: calc(50% + 40px);
-  display: none;
 }
 
 .special-column-1 .node:first-child:after {
   width: calc(150% + 24px + 12px);
   height: 2px;
   left: 50%;
-  display: none;
 }
 
 .special-column-1-short .node:first-child:after {
   width: calc(150% + 24px + 12px);
   height: 2px;
   left: 50%;
-  display: none;
 }
 
 .special-column-1-long .node:first-child:after {
   width: calc(200% + 24px + 24px + 6px);
   height: 2px;
   left: 50%;
-  display: none;
 }
 
 .special-column-2 .node:last-child:after {
   width: calc(150% + 24px + 12px);
   height: 2px;
   right: 50%;
-  display: none;
 }
 
 .special-column-2-long .node:last-child:after {
   width: calc(200% + 24px + 24px + 6px);
   height: 2px;
   right: 50%;
-  display: none;
 }
 
 .special-column-3-right-short .node:first-child:after {
   width: calc(50% + 12px);
   height: 2px;
   left: 50%;
-  display: none;
 }
 
 .special-column-3-left-short .node:first-child:after {
   width: calc(50% + 12px);
   height: 2px;
   right: 50%;
-  display: none;
+}
+
+.special-column-3-left-long .node:first-child:after {
+  width: calc(100% + 24px);
+  height: 2px;
+  right: 50%;
 }
