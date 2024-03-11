@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-DdyehQyT.js";const e=()=>[{title:"Organisation Chart"},{name:"description",content:"Display an accessible organisational chart on any website"}];function i(){return t.jsx("div",{style:{fontFamily:"system-ui, sans-serif",lineHeight:"1.8"},children:"Documentation"})}export{i as default,e as meta};
