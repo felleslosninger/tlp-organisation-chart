@@ -215,6 +215,7 @@
   text-decoration: none;
   line-height: 1.4em;
   position: relative;
+  background-color: white;
 }
 
 .node:focus-visible {
