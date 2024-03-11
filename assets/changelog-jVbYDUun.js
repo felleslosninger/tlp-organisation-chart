@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-DdyehQyT.js";const e=()=>[{title:"Organisation Chart - Changelog"},{name:"description",content:"Changelog for the Organisation Chart"}];function r(){return t.jsx("div",{children:"Chagelog"})}export{r as default,e as meta};
