@@ -1,5 +1,6 @@
 body {
   margin: 0;
-  font-family: sans-serif;
   background-color: var(--fds-semantic-background-subtle);
+  font-family: 'Inter', sans-serif;
+  font-feature-settings: 'cv05' 1 !important; /* Enable lowercase l with tail */
 }

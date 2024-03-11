@@ -9,7 +9,7 @@ import { Container } from './components/ui/Container/Container';
 import { Header } from './components/ui/Header/Header';
 
 /* import classes from './root.module.css'; */
-import { Heading, Spinner } from '@digdir/designsystemet-react';
+import { Spinner } from '@digdir/designsystemet-react';
 import { Footer } from './components/ui/Footer/Footer';
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -25,6 +25,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
           rel='stylesheet'
           href='/root.css'
         />
+        <link
+          rel='stylesheet'
+          href='https://altinncdn.no/fonts/inter/inter.css'
+        />
         <Meta />
         <Links />
       </head>
@@ -39,35 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         >
           {children}
         </Container>
-        <Footer>
-          <Footer.Column>
-            <Heading
-              level={2}
-              size='small'
-            >
-              Åpningstider
-            </Heading>
-          </Footer.Column>
-          <Footer.Column>
-            <Heading
-              level={2}
-              size='small'
-            >
-              E-post
-            </Heading>
-          </Footer.Column>
-          <Footer.Column>
-            <Heading
-              level={2}
-              size='small'
-            >
-              Viktige lenker
-            </Heading>
-          </Footer.Column>
-          <Footer.Bottom>
-            Tjenesten er levert av Digitaliseringsdirektoratet
-          </Footer.Bottom>
-        </Footer>
+        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>

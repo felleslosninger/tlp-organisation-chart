@@ -1,63 +1,65 @@
-import React from 'react';
-
 import { Container } from '../Container/Container';
 
 import classes from './Footer.module.css';
+import { Heading, Link, Paragraph } from '@digdir/designsystemet-react';
+import { Link as RemixLink } from '@remix-run/react';
 
-interface FooterProps {
-  children: React.ReactNode;
-}
-
-interface FooterColumnProps {
-  children: React.ReactNode;
-}
-
-interface FooterBottomProps {
-  children: React.ReactNode;
-}
-
-const Footer = ({ children }: FooterProps) => {
+const Footer = () => {
   return (
     <footer className={classes.footer}>
-      <Container className={classes.topContainer}>
-        <div className={classes.topContent}>
-          {React.Children.map(children, (child) => (
-            <>
-              {React.isValidElement(child) && child.type === Footer.Column
-                ? child
-                : ''}
-            </>
-          ))}
-        </div>
-      </Container>
-      <Container className={classes.bottomContainer}>
-        <div className={classes.bottomContent}>
-          {React.Children.map(children, (child) => (
-            <>
-              {React.isValidElement(child) && child.type === Footer.Bottom
-                ? child
-                : ''}
-            </>
-          ))}
-        </div>
-      </Container>
+      <div className={classes.top}>
+        <Container className={classes.container}>
+          <div>
+            <Heading
+              level={2}
+              size='xsmall'
+              className={classes.text}
+              spacing
+            >
+              Om nettstedet
+            </Heading>
+            <ul className={classes.links}>
+              <li>
+                <Link
+                  asChild
+                  inverted
+                >
+                  <RemixLink to='/documentation'>Dokumentasjon</RemixLink>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  asChild
+                  inverted
+                >
+                  <RemixLink to='/changelog'>Endringslogg</RemixLink>
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <Heading
+              level={2}
+              size='xsmall'
+              className={classes.text}
+            >
+              Kom i kontakt med oss
+            </Heading>
+          </div>
+        </Container>
+      </div>
+      <div className={classes.bottom}>
+        <Container>
+          <Paragraph
+            size='small'
+            className={classes.text}
+          >
+            Tjenesten er levert av Digitaliseringsdirektoratet
+          </Paragraph>
+        </Container>
+      </div>
     </footer>
   );
 };
 
-const FooterColumn = ({ children }: FooterColumnProps) => {
-  return <>{children}</>;
-};
-
-const FooterBottom = ({ children }: FooterBottomProps) => {
-  return <div className={classes.bottom2}>{children}</div>;
-};
-
-FooterColumn.displayName = 'Footer.Column';
-Footer.Column = FooterColumn;
-
-FooterBottom.displayName = 'Footer.Bottom';
-Footer.Bottom = FooterBottom;
-
 export { Footer };
-export type { FooterProps };
