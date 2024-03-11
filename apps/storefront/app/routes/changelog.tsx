@@ -1,17 +1,15 @@
 import type { MetaFunction } from '@remix-run/node';
 
-import { Chart } from '../components/Chart.client';
-
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Organisation Chart' },
+    { title: 'Organisation Chart - Changelog' },
     {
       name: 'description',
-      content: 'Display an accessible organisational chart on any website',
+      content: 'Changelog for the Organisation Chart',
     },
   ];
 };
 
 export default function Index() {
-  return <Chart />;
+  return <div>Chagelog</div>;
 }

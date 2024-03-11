@@ -1,21 +1,15 @@
 import type { MetaFunction } from '@remix-run/node';
 
-import { Header } from '../components/ui/Header/Header';
-
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Organisation Chart' },
+    { title: 'Organisation Chart - Documentation' },
     {
       name: 'description',
-      content: 'Display an accessible organisational chart on any website',
+      content: 'Documentation for the Organisation Chart',
     },
   ];
 };
 
 export default function Index() {
-  return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <Header />
-    </div>
-  );
+  return <div>Documentation</div>;
 }

@@ -5,6 +5,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+import { Container } from './components/ui/Container/Container';
+import { Header } from './components/ui/Header/Header';
+
+/* import classes from './root.module.css'; */
+import { Spinner } from '@digdir/designsystemet-react';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,11 +20,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
           name='viewport'
           content='width=device-width, initial-scale=1'
         />
+        <link
+          rel='stylesheet'
+          href='/root.css'
+        />
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
+        <Header />
+        <Container>{children}</Container>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -32,5 +42,9 @@ export default function App() {
 }
 
 export function HydrateFallback() {
-  return <p>Loading...</p>;
+  return (
+    <div>
+      <Spinner title='loading content' />
+    </div>
+  );
 }

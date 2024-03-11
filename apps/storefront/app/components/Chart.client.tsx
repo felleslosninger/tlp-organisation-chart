@@ -11,5 +11,10 @@ export const Chart = () => {
     console.log('running');
   }, []);
 
-  return <div id='chart'></div>;
+  return (
+    <div
+      id='chart'
+      style={{ width: '100%' }}
+    />
+  );
 };
