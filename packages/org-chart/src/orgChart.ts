@@ -729,15 +729,16 @@ function createSpecialColumnLines(
   } else {
     let direction = '';
     if (isTablet) {
-      if (
-        initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length
-      ) {
-        if (isOdd(indexInRow) || indexInRow === 1) {
-          direction = `right`;
-        } else {
-          direction += `left`;
-        }
+      // if (
+      //   initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length ||
+      //   initialSiblingsAmount <= 4
+      // ) {
+      if (isOdd(indexInRow) || indexInRow === 1) {
+        direction = `right`;
+      } else {
+        direction += `left`;
       }
+      // }
     }
     className += `-3-${direction}-short`;
   }
