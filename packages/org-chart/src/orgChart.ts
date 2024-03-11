@@ -92,7 +92,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     siblingsAmount: number,
     indexInRow: number,
     isLastRow: boolean,
-    specialColumnAmount?: number,
+    specialColumnList: number[],
   ) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
@@ -143,7 +143,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           allowedBreakpoints,
           isLastRow,
           node.alignment ? node.alignment : undefined,
-          specialColumnAmount ? specialColumnAmount : 0,
+          specialColumnList,
         );
       }
 
@@ -225,6 +225,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         siblingsAmount + 1,
         indexInRow,
         isLastRow,
+        indexToColumnsWithSpecialColumnList,
       );
       if (simpleNode !== null) {
         columnElement.appendChild(simpleNode);
@@ -250,7 +251,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     additionalWidth: number,
     indexInRow: number,
     isLastRow: boolean,
-    specialColumnAmount?: number,
+    specialColumnList: number[],
   ) {
     const columnElement = createElement('div');
     columnElement.className = 'column';
@@ -278,7 +279,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       siblingsAmount,
       indexInRow,
       isLastRow,
-      specialColumnAmount ? specialColumnAmount : 0,
+      specialColumnList,
     );
 
     if (!isMobile) {
@@ -377,7 +378,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             columnWidth.additionalWidth,
             count,
             isLastRow,
-            indexToColumnsWithSpecialColumnList.length,
+            indexToColumnsWithSpecialColumnList,
           ),
         );
       } else {
@@ -729,16 +730,11 @@ function createSpecialColumnLines(
   } else {
     let direction = '';
     if (isTablet) {
-      // if (
-      //   initialSiblingsAmount === indexToColumnsWithSpecialColumnList.length ||
-      //   initialSiblingsAmount <= 4
-      // ) {
       if (isOdd(indexInRow) || indexInRow === 1) {
         direction = `right`;
       } else {
         direction += `left`;
       }
-      // }
     }
     className += `-3-${direction}-short`;
   }
@@ -1142,122 +1138,143 @@ function createNodeLineClass(
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
   alignment: string | undefined,
-  specialColumnAmount: number,
+  specialColumnsList: number[],
 ) {
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
 
-  siblingsAmount += specialColumnAmount;
-
   let className = '';
 
-  if (siblingsAmount === 1) {
-    if (alignment === 'left') {
-      className = ' node-line-right';
-    } else if (alignment === 'right') {
-      className = ' node-line-left';
+  if (specialColumnsList.length <= 0) {
+    if (siblingsAmount === 1) {
+      if (alignment === 'left') {
+        className = ' node-line-right';
+      } else if (alignment === 'right') {
+        className = ' node-line-left';
+      }
+      return className;
     }
-    return className;
-  }
-
-  if (
-    siblingsAmount === 2 &&
-    alignment !== 'offset-left' &&
-    alignment !== 'offset-right'
-  ) {
-    if (indexInRow === 1) {
-      className = ' node-line-right';
-    } else {
-      className = ' node-line-left';
-    }
-    return className;
-  }
-
-  if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-    //if the window width is greater than 1500px
-    if (mainContainerWidth > main) {
-      let lowerHalf = (siblingsAmount - 1) / 2;
-      if (indexInRow <= lowerHalf) {
-        className = ' node-line-up-right node-line-up';
+    if (
+      siblingsAmount === 2 &&
+      alignment !== 'offset-left' &&
+      alignment !== 'offset-right'
+    ) {
+      if (indexInRow === 1) {
+        className = ' node-line-right';
       } else {
-        className = ' node-line-up-left node-line-up';
+        className = ' node-line-left';
       }
       return className;
     }
 
-    //if the window width is less than 1500px and greater than 992px
-    if (mainContainerWidth <= main && mainContainerWidth > laptop) {
-      let lowerHalf = (siblingsAmount - 1) / 2;
-      let upperHalf = siblingsAmount - lowerHalf;
-      if (isLastRow) {
-        if (
-          indexInRow === 1 ||
-          (isOdd(indexInRow) && indexInRow !== siblingsAmount)
-        ) {
-          className = ' node-line-up-right node-line-up';
-        } else {
-          className = ' node-line-up-left node-line-up';
-        }
-      } else {
+    if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
+      //if the window width is greater than 1500px
+      if (mainContainerWidth > main) {
+        let lowerHalf = (siblingsAmount - 1) / 2;
         if (indexInRow <= lowerHalf) {
           className = ' node-line-up-right node-line-up';
-        } else if (indexInRow > upperHalf && !isOdd(indexInRow)) {
-          className = ' node-line-up-left node-line-up';
-        } else if (indexInRow === siblingsAmount && siblingsAmount > 3) {
-          className = ' node-line-up-right-long node-line-up';
-        } else if (indexInRow === 3) {
-          className = ' node-line-up-left-half node-line-up';
         } else {
-          className = ' node-line-up-right-half node-line-up';
+          className = ' node-line-up-left node-line-up';
         }
+        return className;
       }
-      return className;
-    }
 
-    if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      if (isOdd(indexInRow)) {
-        className = ' node-line-up-right-half node-line-up';
-      } else {
-        className = ' node-line-up-left-half node-line-up';
+      //if the window width is less than 1500px and greater than 992px
+      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+        let lowerHalf = (siblingsAmount - 1) / 2;
+        let upperHalf = siblingsAmount - lowerHalf;
+        if (isLastRow) {
+          if (
+            indexInRow === 1 ||
+            (isOdd(indexInRow) && indexInRow !== siblingsAmount)
+          ) {
+            className = ' node-line-up-right node-line-up';
+          } else {
+            className = ' node-line-up-left node-line-up';
+          }
+        } else {
+          if (indexInRow <= lowerHalf) {
+            className = ' node-line-up-right node-line-up';
+          } else if (indexInRow > upperHalf && !isOdd(indexInRow)) {
+            className = ' node-line-up-left node-line-up';
+          } else if (indexInRow === siblingsAmount && siblingsAmount > 3) {
+            className = ' node-line-up-right-long node-line-up';
+          } else if (indexInRow === 3) {
+            className = ' node-line-up-left-half node-line-up';
+          } else {
+            className = ' node-line-up-right-half node-line-up';
+          }
+        }
+        return className;
       }
-      return className;
-    }
-  } else if (siblingsAmount > 2) {
-    if (mainContainerWidth > main) {
-      if (indexInRow <= siblingsAmount / 2) {
-        className = ' node-line-up-right node-line-up';
-      } else {
-        className = ' node-line-up-left node-line-up';
+
+      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+        if (isOdd(indexInRow)) {
+          className = ' node-line-up-right-half node-line-up';
+        } else {
+          className = ' node-line-up-left-half node-line-up';
+        }
+        return className;
       }
-      return className;
-    } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
-      if (siblingsAmount <= 4) {
+    } else if (siblingsAmount > 2) {
+      if (mainContainerWidth > main) {
         if (indexInRow <= siblingsAmount / 2) {
           className = ' node-line-up-right node-line-up';
         } else {
           className = ' node-line-up-left node-line-up';
         }
-      } else {
-        if (indexInRow === 1 || indexInRow === 5) {
-          className = ' node-line-up-right-long node-line-up';
-        } else if (indexInRow === siblingsAmount) {
+        return className;
+      } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+        if (siblingsAmount <= 4) {
+          if (indexInRow <= siblingsAmount / 2) {
+            className = ' node-line-up-right node-line-up';
+          } else {
+            className = ' node-line-up-left node-line-up';
+          }
+        } else {
+          if (indexInRow === 1 || indexInRow === 5) {
+            className = ' node-line-up-right-long node-line-up';
+          } else if (indexInRow === siblingsAmount) {
+            className = ' node-line-up-right-half node-line-up';
+          } else {
+            className = ' node-line-up-left node-line-up';
+          }
+        }
+        return className;
+      } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+        if (isOdd(indexInRow) || indexInRow === 1) {
+          className = ' node-line-up-right node-line-up';
+        } else {
+          className = ' node-line-up-left node-line-up';
+        }
+        return className;
+      }
+    } else {
+      className = '';
+      return className;
+    }
+  } else {
+    if (mainContainerWidth > main) {
+      console.log(siblingsAmount);
+      if (siblingsAmount === 3) {
+        if (indexInRow === 1) {
           className = ' node-line-up-right-half node-line-up';
+        } else {
+          className = ' node-line-up-left-half node-line-up';
+        }
+      } else if (siblingsAmount === 4) {
+        if (indexInRow === 1) {
+          className = ' node-line-up-right node-line-up';
+        } else if (indexInRow === 2) {
+          className = ' node-line-up-right-half node-line-up';
+        } else if (indexInRow === 3) {
+          className = ' node-line-up-left-half node-line-up';
         } else {
           className = ' node-line-up-left node-line-up';
         }
       }
       return className;
-    } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
-      if (isOdd(indexInRow) || indexInRow === 1) {
-        className = ' node-line-up-right node-line-up';
-      } else {
-        className = ' node-line-up-left node-line-up';
-      }
-      return className;
     }
-  } else {
-    className = '';
-    return className;
   }
 }
 
