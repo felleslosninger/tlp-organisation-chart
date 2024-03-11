@@ -1,18 +1,22 @@
 import type { MetaFunction } from '@remix-run/node';
 
 import { Chart } from '../components/Chart.client';
+import { Header } from '../components/ui/Header/Header';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'New Remix SPA' },
-    { name: 'description', content: 'Welcome to Remix (SPA Mode)!' },
+    { title: 'Organisation Chart' },
+    {
+      name: 'description',
+      content: 'Display an accessible organisational chart on any website',
+    },
   ];
 };
 
 export default function Index() {
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', lineHeight: '1.8' }}>
-      <h1>Welcome to Remix (SPA Mode)</h1>
+      <Header />
       <Chart />
     </div>
   );

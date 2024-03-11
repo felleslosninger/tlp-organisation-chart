@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Button } from '@digdir/designsystemet-react';
 
 import { generateOrgChart } from '@digdir/organisation-chart';
 import '@digdir/organisation-chart/dist/index.css';
@@ -12,10 +11,5 @@ export const Chart = () => {
     console.log('running');
   }, []);
 
-  return (
-    <>
-      <Button>Button</Button>
-      <div id='chart'></div>
-    </>
-  );
+  return <div id='chart'></div>;
 };

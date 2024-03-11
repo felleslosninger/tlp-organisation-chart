@@ -4,6 +4,7 @@ import { hydrateRoot } from 'react-dom/client';
 
 import '@digdir/designsystemet-css';
 import '@digdir/designsystemet-theme';
+/* import 'root.css'; */
 
 startTransition(() => {
   hydrateRoot(

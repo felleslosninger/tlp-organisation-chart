@@ -16,12 +16,14 @@
     "@digdir/designsystemet-css": "0.1.1-alpha.0",
     "@digdir/designsystemet-react": "0.52.0-alpha.0",
     "@digdir/designsystemet-theme": "0.13.1-alpha.0",
+    "@digdir/organisation-chart": "^0.2.0",
+    "@navikt/aksel-icons": "^5.7.6",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "clsx": "^2.1.0",
     "gh-pages": "^6.1.1",
-    "@digdir/organisation-chart": "^0.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.8.1",

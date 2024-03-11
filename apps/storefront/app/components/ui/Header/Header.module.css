@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: var(--fds-semantic-background-subtle);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  box-shadow: var(--fds-shadow-small);
+  border-bottom: 1px solid var(--fds-semantic-border-neutral-subtle);
+  background-color: white;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link svg {
+  margin-right: 2px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:visited {
+  color: inherit;
+}
+
+.user {
+  margin-right: 16px;
+}
