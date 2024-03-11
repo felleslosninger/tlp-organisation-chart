@@ -190,6 +190,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             wrapNodesContainer,
             isLaptop,
             isTablet,
+            isLastRow,
           ),
         );
       }
@@ -544,6 +545,7 @@ function createSpecialColumnLines(
   isWrapped: boolean,
   isLaptop: boolean,
   isTablet: boolean,
+  isLastRow: boolean,
 ) {
   let className = 'special-column';
 
@@ -739,15 +741,18 @@ function createSpecialColumnLines(
       className += `-3-right-short`;
     }
   } else {
-    let direction = '';
-    if (isTablet) {
+    if (isLastRow && indexInRow === siblingsAmount - 1) {
+      className += `-3-center`;
+    } else {
+      let direction = '';
       if (isOdd(indexInRow) || indexInRow === 1) {
         direction = `right`;
       } else {
         direction += `left`;
       }
+
+      className += `-3-${direction}-short`;
     }
-    className += `-3-${direction}-short`;
   }
 
   return className;
