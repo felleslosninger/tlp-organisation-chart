@@ -139,11 +139,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodeElement.className += createNodeLineClass(
           indexInRow,
           siblingsAmount,
-          mainContainerWidth,
           allowedBreakpoints,
           isLastRow,
           node.alignment ? node.alignment : undefined,
           specialColumnList,
+          isTablet,
+          isLaptop,
         );
       }
 
@@ -1134,11 +1135,12 @@ function createElement(type: string) {
 function createNodeLineClass(
   indexInRow: number,
   siblingsAmount: number,
-  mainContainerWidth: number,
   breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
   alignment: string | undefined,
   specialColumnsList: number[],
+  isTablet: boolean,
+  isLaptop: boolean,
 ) {
   //destructuring the breakpoints object
   const { main, laptop, tablet } = breakpoints;
@@ -1169,7 +1171,7 @@ function createNodeLineClass(
 
     if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
       //if the window width is greater than 1500px
-      if (mainContainerWidth > main) {
+      if (!isTablet && !isLaptop) {
         let lowerHalf = (siblingsAmount - 1) / 2;
         if (indexInRow <= lowerHalf) {
           className = ' node-line-up-right node-line-up';
@@ -1180,7 +1182,7 @@ function createNodeLineClass(
       }
 
       //if the window width is less than 1500px and greater than 992px
-      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+      if (isLaptop) {
         let lowerHalf = (siblingsAmount - 1) / 2;
         let upperHalf = siblingsAmount - lowerHalf;
         if (isLastRow) {
@@ -1208,7 +1210,7 @@ function createNodeLineClass(
         return className;
       }
 
-      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+      if (isTablet) {
         if (isOdd(indexInRow)) {
           className = ' node-line-up-right-half node-line-up';
         } else {
@@ -1217,14 +1219,14 @@ function createNodeLineClass(
         return className;
       }
     } else if (siblingsAmount > 2) {
-      if (mainContainerWidth > main) {
+      if (!isTablet && !isLaptop) {
         if (indexInRow <= siblingsAmount / 2) {
           className = ' node-line-up-right node-line-up';
         } else {
           className = ' node-line-up-left node-line-up';
         }
         return className;
-      } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+      } else if (isLaptop) {
         if (siblingsAmount <= 4) {
           if (indexInRow <= siblingsAmount / 2) {
             className = ' node-line-up-right node-line-up';
@@ -1241,7 +1243,7 @@ function createNodeLineClass(
           }
         }
         return className;
-      } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+      } else if (isTablet) {
         if (isOdd(indexInRow) || indexInRow === 1) {
           className = ' node-line-up-right node-line-up';
         } else {
@@ -1254,27 +1256,125 @@ function createNodeLineClass(
       return className;
     }
   } else {
-    if (mainContainerWidth > main) {
-      console.log(siblingsAmount);
-      if (siblingsAmount === 3) {
-        if (indexInRow === 1) {
-          className = ' node-line-up-right-half node-line-up';
-        } else {
-          className = ' node-line-up-left-half node-line-up';
-        }
-      } else if (siblingsAmount === 4) {
-        if (indexInRow === 1) {
-          className = ' node-line-up-right node-line-up';
-        } else if (indexInRow === 2) {
-          className = ' node-line-up-right-half node-line-up';
-        } else if (indexInRow === 3) {
+    siblingsAmount += specialColumnsList.length - 1;
+
+    if (siblingsAmount === 3) {
+      if (indexInRow === 1) {
+        className = ' node-line-up-right-half node-line-up';
+      } else {
+        className = ' node-line-up-left-half node-line-up';
+      }
+    } else if (siblingsAmount === 4) {
+      if (specialColumnsList.includes(1)) {
+        if (indexInRow === 2) {
           className = ' node-line-up-left-half node-line-up';
         } else {
           className = ' node-line-up-left node-line-up';
         }
+      } else if (specialColumnsList.includes(2)) {
+        if (indexInRow === 1) {
+          className = ' node-line-up-right-half node-line-up';
+        } else {
+          className = ' node-line-up-left node-line-up';
+        }
+      } else if (specialColumnsList.includes(3)) {
+        if (indexInRow === 1) {
+          className = ' node-line-up-right node-line-up';
+        } else {
+          className = ' node-line-up-right-half node-line-up';
+        }
       }
-      return className;
+    } else if (siblingsAmount === 5) {
+      if (specialColumnsList.length === 2) {
+        if (specialColumnsList.includes(1) && specialColumnsList.includes(2)) {
+          className = ' node-line-up-left node-line-up';
+        } else if (
+          specialColumnsList.includes(2) &&
+          specialColumnsList.includes(3)
+        ) {
+          className = ' node-line-up-right node-line-up';
+        } else if (
+          specialColumnsList.includes(1) &&
+          specialColumnsList.includes(3)
+        ) {
+          className = ' node-line-up-right-half node-line-up';
+        }
+      } else {
+        if (specialColumnsList.includes(1)) {
+          if (indexInRow === 2) {
+            className = ' node-line-up-right-half node-line-up';
+          } else if (indexInRow === 3) {
+            className = ' node-line-up-left-half node-line-up';
+          } else {
+            className = ' node-line-up-left node-line-up';
+          }
+        } else if (specialColumnsList.includes(2)) {
+          if (indexInRow === 1) {
+            className = ' node-line-up-right node-line-up';
+          } else if (indexInRow === 3) {
+            className = ' node-line-up-left-half node-line-up';
+          } else {
+            className = ' node-line-up-left node-line-up';
+          }
+        } else if (specialColumnsList.includes(3)) {
+          if (indexInRow === 1) {
+            className = ' node-line-up-right node-line-up';
+          } else if (indexInRow === 2) {
+            className = ' node-line-up-right-half node-line-up';
+          } else {
+            className = ' node-line-up-left node-line-up';
+          }
+        } else if (specialColumnsList.includes(4)) {
+          if (indexInRow === 1) {
+            className = ' node-line-up-right node-line-up';
+          } else if (indexInRow === 2) {
+            className = ' node-line-up-right-half node-line-up';
+          } else {
+            className = ' node-line-up-left node-line-up';
+          }
+        }
+      }
+    } else if (siblingsAmount === 6) {
+      if (specialColumnsList.length === 2) {
+        if (specialColumnsList.includes(1) && specialColumnsList.includes(2)) {
+          className = ` node-line-up-${indexInRow === 4 ? 'left' : 'left-half'} node-line-up`;
+        } else if (
+          specialColumnsList.includes(2) &&
+          specialColumnsList.includes(3)
+        ) {
+          className = ` node-line-up-${indexInRow === 1 ? 'right' : 'left'} node-line-up`;
+        } else if (
+          specialColumnsList.includes(2) &&
+          specialColumnsList.includes(4)
+        ) {
+          className = ` node-line-up-${indexInRow === 1 ? 'right' : 'left-half'} node-line-up`;
+        } else if (
+          specialColumnsList.includes(1) &&
+          specialColumnsList.includes(3)
+        ) {
+          className = ` node-line-up-${indexInRow === 2 ? 'right-half' : 'left'} node-line-up`;
+        } else if (
+          specialColumnsList.includes(1) &&
+          specialColumnsList.includes(4)
+        ) {
+          className = ` node-line-up-${indexInRow === 2 ? 'right-half' : 'left-half'} node-line-up`;
+        }
+      } else {
+        if (specialColumnsList.includes(1)) {
+          className = ` node-line-up-${indexInRow === 2 ? 'right-half' : indexInRow === 3 ? 'left-half' : 'left'} node-line-up`;
+        } else if (specialColumnsList.includes(2)) {
+          className = ` node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 3 ? 'left-half' : 'left'} node-line-up`;
+        } else if (specialColumnsList.includes(3)) {
+          className = ` node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left'} node-line-up`;
+        } else if (specialColumnsList.includes(4)) {
+          className = ` node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 5 ? 'left' : 'right'} node-line-up`;
+        } else if (specialColumnsList.includes(5)) {
+          className = ` node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 4 ? 'left-half' : 'right'} node-line-up`;
+        }
+      }
     }
+
+    return className;
   }
 }
 
