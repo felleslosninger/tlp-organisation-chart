@@ -3,7 +3,7 @@ name: Deploy storefront to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - build/github-pages
 
 jobs:
   build-and-deploy:
