@@ -68,12 +68,12 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           </List.Root>
         ),
         li: (props) => <List.Item {...props} />,
-        hr: (props) => <Divider {...props} />,
+        hr: (props) => <Divider {...props} color="default" ref={null} />,
         table: (props) => (
           <Table
             {...props}
-            zebra
-            style={{ width: '100%' }}
+            zebra={true}
+            size="small"
           />
         ),
         thead: (props) => (
