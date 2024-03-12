@@ -176,7 +176,31 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       if (isMobile || isTablet) {
         if (isLastRow && indexInRow === siblingsAmount && !isMobile) {
-          nodesWrapper.className = 'nodes-container';
+          if (indexToColumnsWithSpecialColumnList.length === 1) {
+            if (indexToColumnsWithSpecialColumnList.includes(4)) {
+              nodesWrapper.className = 'nodes-container-wrap';
+            } else if (
+              indexToColumnsWithSpecialColumnList.includes(2) &&
+              siblingsAmount === 2
+            ) {
+              nodesWrapper.className = 'nodes-container-wrap';
+            } else {
+              nodesWrapper.className = 'nodes-container';
+            }
+          } else if (
+            indexToColumnsWithSpecialColumnList.length === 2 &&
+            indexToColumnsWithSpecialColumnList.includes(4)
+          ) {
+            nodesWrapper.className = 'nodes-container-wrap';
+          } else if (
+            indexToColumnsWithSpecialColumnList.length === 2 &&
+            indexToColumnsWithSpecialColumnList.includes(2) &&
+            siblingsAmount === 2
+          ) {
+            nodesWrapper.className = 'nodes-container-wrap';
+          } else {
+            nodesWrapper.className = 'nodes-container';
+          }
         } else {
           nodesWrapper.className = 'nodes-container-wrap';
         }
@@ -418,6 +442,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           row.row.length,
           isLaptop,
           isTablet,
+          indexToColumnsWithSpecialColumnList,
         ).toString(),
       );
 
@@ -1132,6 +1157,29 @@ function calculateColumnWidth(
       }
     } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
       if (isLastRow && siblingsAmount - 1 === indexInRow) {
+        if (
+          (siblingsAmount === 5 &&
+            indexToSpecialColumnList.includes(siblingsAmount - 2)) ||
+          (siblingsAmount === 5 && indexToSpecialColumnList.length === 1) ||
+          (siblingsAmount === 3 && indexToSpecialColumnList.length === 1)
+        ) {
+          width = 50;
+          additionalWidth = -12;
+        } else {
+          width = 100;
+        }
+      } else if (
+        indexInRow === 3 &&
+        indexToSpecialColumnList.length === 3 &&
+        isLastRow
+      ) {
+        width = 100;
+      } else if (
+        indexToSpecialColumnList.length === 2 &&
+        siblingsAmount === 5 &&
+        indexInRow === 3 &&
+        isLastRow
+      ) {
         width = 100;
       } else {
         width = 50;
@@ -1515,16 +1563,25 @@ function getLastRowClass(
 
   if (rowContainsSpecialColumns && indexToColumnsWithSpecialColumnList) {
     rowLength += indexToColumnsWithSpecialColumnList.length;
-  }
-
-  if (!isMobile && rowLength >= 5) {
-    return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
-  } else if (!isMobile && rowLength >= 2) {
-    return `row row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
-  } else if (!isMobile && rowLength <= 2) {
-    return `row row-last-${rowLength}`;
+    if (!isMobile && rowLength >= 5) {
+      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
+    } else if (!isMobile && rowLength >= 2) {
+      return `row row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+    } else if (!isMobile && rowLength <= 2) {
+      return `row row-last-${rowLength}`;
+    } else {
+      return 'row';
+    }
   } else {
-    return 'row';
+    if (!isMobile && rowLength >= 5) {
+      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
+    } else if (!isMobile && rowLength >= 2) {
+      return `row row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+    } else if (!isMobile && rowLength <= 2) {
+      return `row row-last-${rowLength}`;
+    } else {
+      return 'row';
+    }
   }
 }
 
@@ -1533,35 +1590,49 @@ function calculateChildrenDifferenceInRow(
   siblingsAmount: number,
   isLaptop: boolean,
   isTablet: boolean,
+  specialColumnsList: number[],
 ) {
   let diff = 0;
-  if (isLaptop) {
-    if (siblingsAmount === 5) {
-      let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
-      diff = upperThirdHighest;
-    }
-    if (siblingsAmount === 6) {
-      let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 2);
-      diff = upperThirdHighest;
-    }
-  }
-  if (isTablet) {
-    if (siblingsAmount >= 5) {
-      let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
-      let middleThirdHighest = findHighestChildrenAmountInRow(row, 2, 3);
-      diff = upperThirdHighest + middleThirdHighest;
-    }
-    if (siblingsAmount === 4) {
-      let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
-      let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
-      diff = upperHalfHighest - lowerHalfHighest;
-    }
-    if (siblingsAmount === 3) {
-      let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
-      let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 2);
-      diff = upperHalfHighest - lowerHalfHighest;
+  if (specialColumnsList.length > 0) {
+    if (isLaptop) {
+      if (siblingsAmount === 4) {
+        let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        diff = upperHalfHighest;
+      }
+    } else if (isTablet) {
+      if (siblingsAmount === 4) {
+        let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        diff = upperHalfHighest - 2;
+      }
     }
   } else {
+    if (isLaptop) {
+      if (siblingsAmount === 5) {
+        let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        diff = upperThirdHighest;
+      }
+      if (siblingsAmount === 6) {
+        let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 2);
+        diff = upperThirdHighest;
+      }
+    }
+    if (isTablet) {
+      if (siblingsAmount >= 5) {
+        let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        let middleThirdHighest = findHighestChildrenAmountInRow(row, 2, 3);
+        diff = upperThirdHighest + middleThirdHighest;
+      }
+      if (siblingsAmount === 4) {
+        let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
+        diff = upperHalfHighest - lowerHalfHighest;
+      }
+      if (siblingsAmount === 3) {
+        let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 2);
+        diff = upperHalfHighest - lowerHalfHighest;
+      }
+    }
   }
   return diff.toString();
 }

@@ -138,6 +138,13 @@
   );
 }
 
+/* .row-last-6-tablet::before {
+  height: calc(
+    var(--col-height) + var(--row-column-gap) +
+      calc(var(--col-height) * var(--diff) + 12px * var(--diff)) + 1px
+  );
+} */
+
 .row {
   box-sizing: border-box;
   display: flex;
