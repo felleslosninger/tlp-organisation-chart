@@ -1,176 +1,164 @@
 {
   "meta": {
-    "title": "Test",
+    "title": "Avdelinger og seksjoner",
     "langcode": "no"
   },
   "toc": [
-    { "title": "Root", "color": "#0062BA" },
-    { "title": "Item", "color": "#1e2b3c" },
-    { "title": "Child", "color": "#68707c" }
+    { "title": "Direktør", "color": "#0062BA" },
+    { "title": "Avdeling", "color": "#1e2b3c" },
+    { "title": "Seksjon", "color": "#D2D5D8" }
   ],
   "nodes": [
     {
-      "title": "Root",
-      "id": "root",
+      "title": "Direktør",
+      "id": "dir",
       "backgroundColor": "#0062BA",
-      "textColor": "#1e2b3c"
+      "textColor": "white"
     },
     {
-      "title": "Item 1 with url",
-      "id": "item1",
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Tilsynet for universell utforming av ikt",
+      "id": "tuu",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Verksomhetsstyring",
+      "id": "verk",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "HR",
+      "id": "hr",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
       "url": "https://www.digdir.no/"
     },
     {
-      "title": "Item 2",
-      "id": "item2",
+      "title": "Samanhengande tjenester og livshendelser",
+      "id": "sam",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Item 3",
-      "id": "item3",
+      "title": "Seksjon 1",
+      "id": "sek1",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Seksjon 2",
+      "id": "sek2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Digital strategi og samhandling",
+      "id": "dig",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Item 4",
-      "id": "item4",
+      "title": "Nasjonal arkitektur",
+      "id": "ark",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Internasjonalt og analyse",
+      "id": "int",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Nasjonalt ressurssenter for deling og bruk av data",
+      "id": "nasjRes",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Statends kompetansemiljø for infomrasjonssikkerhet",
+      "id": "ski",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Fellesløsninger",
+      "id": "fel",
       "backgroundColor": "#1e2b3c",
       "textColor": "white"
     },
     {
-      "title": "Item 5",
-      "id": "item5",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Strategi og forretningsutvikling",
+      "id": "str",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 6",
-      "id": "item6",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Utvikling",
+      "id": "utv",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 7",
-      "id": "item7",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Marknad- og tjenesteoppfølgning",
+      "id": "mar",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 8",
-      "id": "item8",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Brukerstøtte og service",
+      "id": "bru",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 9",
-      "id": "item9",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Drift og sikkerhet",
+      "id": "dri",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 10",
-      "id": "item10",
+      "title": "Brukaropplevning og datadeling",
+      "id": "bod",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "#D2D5D8"
     },
     {
-      "title": "Item 11",
-      "id": "item11",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Strategi og forretningsutvikling",
+      "id": "str2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 12",
-      "id": "item12",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Utvikling",
+      "id": "utv2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 13",
-      "id": "item13",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Plattform og styring",
+      "id": "platt",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 14",
-      "id": "item14",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Brukerstøtte og service",
+      "id": "bru2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     },
     {
-      "title": "Item 15",
-      "id": "item15",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 16",
-      "id": "item16",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 17",
-      "id": "item17",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 18",
-      "id": "item18",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 19",
-      "id": "item19",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 20",
-      "id": "item20",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 21",
-      "id": "item21",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 22",
-      "id": "item22",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 23",
-      "id": "item23",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 24",
-      "id": "item24",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 25",
-      "id": "item25",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
-    },
-    {
-      "title": "Item 26",
-      "id": "item26",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "title": "Brukaropplevning",
+      "id": "bruk",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
     }
   ],
   "layouts": {
@@ -179,37 +167,19 @@
         {
           "row": [
             {
-              "id": ["root"],
+              "id": ["dir"],
               "alignment": "center",
               "component": {
                 "type": "root",
                 "children": [
-                  "item1",
-                  "item2",
-                  "item3",
-                  "item4",
-                  "item5",
-                  "item6",
-                  "item7",
-                  "item8",
-                  "item9",
-                  "item10",
-                  "item11",
-                  "item12",
-                  "item13",
-                  "item14",
-                  "item15",
-                  "item16",
-                  "item17",
-                  "item18",
-                  "item19",
-                  "item20",
-                  "item21",
-                  "item22",
-                  "item23",
-                  "item24",
-                  "item25",
-                  "item26"
+                  "kom",
+                  "tuu",
+                  "verk",
+                  "hr",
+                  "sam",
+                  "dig",
+                  "fel",
+                  "bod"
                 ]
               }
             }
@@ -218,7 +188,23 @@
         {
           "row": [
             {
-              "id": ["item1"],
+              "id": ["kom"],
+              "alignment": "center"
+            },
+            {
+              "id": ["tuu"],
+              "alignment": "offset-right"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["verk"],
+              "alignment": "center"
+            },
+            {
+              "id": ["hr"],
               "alignment": "center"
             }
           ]
@@ -226,99 +212,36 @@
         {
           "row": [
             {
-              "id": ["item2"]
+              "id": ["sam"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["sek1", "sek2"]
+              }
             },
             {
-              "id": ["item3"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item4"]
+              "id": ["dig"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["ark", "int", "nasjRes", "ski"]
+              }
             },
             {
-              "id": ["item5"]
+              "id": ["fel"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["str", "utv", "mar", "bru", "dri"]
+              }
             },
             {
-              "id": ["item6"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item7"]
-            },
-            {
-              "id": ["item8"]
-            },
-            {
-              "id": ["item9"]
-            },
-            {
-              "id": ["item10"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item11"]
-            },
-            {
-              "id": ["item12"]
-            },
-            {
-              "id": ["item13"]
-            },
-            {
-              "id": ["item14"]
-            },
-            {
-              "id": ["item15"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item16"]
-            },
-            {
-              "id": ["item17"]
-            },
-            {
-              "id": ["item18"]
-            },
-            {
-              "id": ["item19"]
-            },
-            {
-              "id": ["item20"]
-            },
-            {
-              "id": ["item21"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item22"]
-            },
-            {
-              "id": ["item23"]
-            },
-            {
-              "id": ["item24"]
-            },
-            {
-              "id": ["item25"]
-            },
-            {
-              "id": ["item26"]
+              "id": ["bod"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["str2", "utv2", "platt", "bru2", "bruk"]
+              }
             }
           ]
         }
