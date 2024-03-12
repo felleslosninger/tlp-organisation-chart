@@ -1,10 +1,6 @@
 # Organisation Chart
 
-[![](https://img.shields.io/npm/v/@digdir/organisation-chart?label=latest%20release&color=0051be)](https://www.npmjs.com/package/@digdir/organisation-chart)
-
 Display an accessible organisation chart. 
-
-![Image showing organisation chart](https://i.imgur.com/5IZXdii.png)
 
 ## Get started
 
@@ -40,22 +36,6 @@ generateOrgChart(data, 'chart');
 The first argument is your JSON data, read more about setting up your data HERE.
 The second argument is the id of the container where you want the chart to show.
 
-
-
-### Installing via `<link>`
-
-```html
-<link ...>
-```
-
-```html
-<script>
-  window.generateOrgChart(data, 'chart');
-</script>
-```
-
-
-
 ## Behaviour
 
 The chart is responsive on any device, and looks at the width of the parent container to check if it needs to change.
@@ -79,18 +59,3 @@ JENS FYLL INN HER
 By default the chart gets a `role="tree"`, and every child gets a `role="treeitem"`. This is done to make screenreaders be able to parse the content as a tree of connected nodes.
 
 You are free to choose the color of your boxes, however we don't check the contrast between background and foreground.
-
-
-
-## Development
-
-Run `pnpm install` in the root directory.
-
-We have two applications, one for development, and one that is deployed on github pages.
-When developing, you want to run the dev application:
-
-```sh
-pnpm run:dev
-```
-
-This links the package from the workspace, and watches for changes done in `packages/org-chart`, and rebuilds the package to be used in react.
