@@ -10,10 +10,5 @@ export const Chart = () => {
     generateOrgChart(data, 'chart');
   }, []);
 
-  return (
-    <div
-      id='chart'
-      style={{ width: '100%' }}
-    />
-  );
+  return <div id='chart' />;
 };

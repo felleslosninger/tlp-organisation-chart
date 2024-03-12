@@ -15,7 +15,11 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div>
+    <div
+      style={{
+        width: '100%',
+      }}
+    >
       <Heading
         level={1}
         spacing
