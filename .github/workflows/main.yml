@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd apps/storefront
-          npm install
+          pnpm install --no-link-workspace-packages
 
       - name: Build Storefront
         run: |

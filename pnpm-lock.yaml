@@ -112,8 +112,8 @@ importers:
         specifier: 0.13.1-alpha.0
         version: 0.13.1-alpha.0
       '@digdir/organisation-chart':
-        specifier: npm:@digdir/organisation-chart@0.2.0
-        version: 0.2.0
+        specifier: latest
+        version: link:../../packages/org-chart
       '@mdx-js/react':
         specifier: ^3.0.1
         version: 3.0.1(@types/react@18.2.60)(react@18.2.0)
@@ -2040,12 +2040,6 @@ packages:
 
   /@digdir/designsystemet-theme@0.13.1-alpha.0:
     resolution: {integrity: sha512-NgbcDqYf/3niVq98zteoRMbDERYhetoN6WPRcPtlpwJbOyUH1bsN6kFVpaNe9iiDb7JEqxCQXpUgMKi863IiTA==}
-    dev: false
-
-  /@digdir/organisation-chart@0.2.0:
-    resolution: {integrity: sha512-La2XKbY4d90J360mbkeAOZdxb/75Pqj7fQ8LvXNsblhqz7Dsjq8Ew0c943AFJupda6zHM3upK5lb/uVkDJjJog==}
-    dependencies:
-      typescript: 4.9.5
     dev: false
 
   /@emotion/hash@0.9.1:
