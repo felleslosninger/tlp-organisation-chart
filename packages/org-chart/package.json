@@ -2,6 +2,8 @@
   "name": "@digdir/organisation-chart",
   "version": "0.2.0",
   "description": "Organisation chart generator",
+  "homepage": "https://orgchart.digdir.no/",
+  "repository": "https://github.com/felleslosninger/tlp-organization-chart",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
   "main": "dist/index.js",

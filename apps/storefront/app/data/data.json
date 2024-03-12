@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "title": "Avdelinger og seksjoner",
+    "langcode": "no"
+  },
+  "toc": [
+    { "title": "Direktør", "color": "#0062BA" },
+    { "title": "Avdeling", "color": "#1e2b3c" },
+    { "title": "Seksjon", "color": "#D2D5D8" }
+  ],
+  "nodes": [
+    {
+      "title": "Direktør",
+      "id": "dir",
+      "backgroundColor": "#0062BA",
+      "textColor": "white"
+    },
+    {
+      "title": "Kommunikasjon",
+      "id": "kom",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Tilsynet for universell utforming av ikt",
+      "id": "tuu",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Verksomhetsstyring",
+      "id": "verk",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "HR",
+      "id": "hr",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Samanhengande tjenester og livshendelser",
+      "id": "sam",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Seksjon 1",
+      "id": "sek1",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Seksjon 2",
+      "id": "sek2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Digital strategi og samhandling",
+      "id": "dig",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Nasjonal arkitektur",
+      "id": "ark",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Internasjonalt og analyse",
+      "id": "int",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Nasjonalt ressurssenter for deling og bruk av data",
+      "id": "nasjRes",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Statends kompetansemiljø for infomrasjonssikkerhet",
+      "id": "ski",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Fellesløsninger",
+      "id": "fel",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Strategi og forretningsutvikling",
+      "id": "str",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Utvikling",
+      "id": "utv",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Marknad- og tjenesteoppfølgning",
+      "id": "mar",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukerstøtte og service",
+      "id": "bru",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Drift og sikkerhet",
+      "id": "dri",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukaropplevning og datadeling",
+      "id": "bod",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "#D2D5D8"
+    },
+    {
+      "title": "Strategi og forretningsutvikling",
+      "id": "str2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Utvikling",
+      "id": "utv2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Plattform og styring",
+      "id": "platt",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukerstøtte og service",
+      "id": "bru2",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Brukaropplevning",
+      "id": "bruk",
+      "backgroundColor": "#D2D5D8",
+      "textColor": "#1e2b3c"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "rows": [
+        {
+          "row": [
+            {
+              "id": ["dir"],
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": [
+                  "kom",
+                  "tuu",
+                  "verk",
+                  "hr",
+                  "sam",
+                  "dig",
+                  "fel",
+                  "bod"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["kom"],
+              "alignment": "center"
+            },
+            {
+              "id": ["tuu"],
+              "alignment": "offset-right"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["verk"],
+              "alignment": "center"
+            },
+            {
+              "id": ["hr"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["sam"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["sek1", "sek2"]
+              }
+            },
+            {
+              "id": ["dig"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["ark", "int", "nasjRes", "ski"]
+              }
+            },
+            {
+              "id": ["fel"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["str", "utv", "mar", "bru", "dri"]
+              }
+            },
+            {
+              "id": ["bod"],
+              "alignment": "center",
+              "component": {
+                "type": "nodeList",
+                "children": ["str2", "utv2", "platt", "bru2", "bruk"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  box-shadow: var(--fds-shadow-small);
+  border-bottom: 1px solid var(--fds-semantic-border-neutral-subtle);
+  background-color: white;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--fds-spacing-4);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link svg {
+  margin-right: 2px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.link:visited {
+  color: inherit;
+}
+
+.github {
+  width: 25px;
+}
