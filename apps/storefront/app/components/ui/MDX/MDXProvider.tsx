@@ -1,6 +1,8 @@
 import { MDXProvider } from '@mdx-js/react';
 
-import { Heading, Link, List, Paragraph } from '@digdir/designsystemet-react';
+import { Divider, Heading, Link, List, Paragraph, Table } from '@digdir/designsystemet-react';
+
+import classes from './mdx.module.css';
 
 export const MDX = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -66,9 +68,44 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           </List.Root>
         ),
         li: (props) => <List.Item {...props} />,
+        hr: (props) => <Divider {...props} />,
+        table: (props) => (
+          <Table
+            {...props}
+            zebra
+            style={{ width: '100%' }}
+          />
+        ),
+        thead: (props) => (
+          <Table.Head
+            {...props}
+          />
+        ),
+        tbody: (props) => (
+          <Table.Body
+            {...props}
+          />
+        ),
+        tr: (props) => (
+          <Table.Row
+            {...props}
+          />
+        ),
+        th: (props) => (
+          <Table.HeaderCell
+            {...props}
+          />
+        ),
+        td: (props) => (
+          <Table.Cell
+            {...props}
+          />
+        ),
       }}
     >
-      {children}
+      <div className={classes.content}>
+        {children}
+      </div>
     </MDXProvider>
   );
 };

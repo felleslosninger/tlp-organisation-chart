@@ -10,7 +10,7 @@ import { Header } from './components/ui/Header/Header';
 
 import { Spinner } from '@digdir/designsystemet-react';
 import { Footer } from './components/ui/Footer/Footer';
-import { MDX } from './components/ui/MDXProvider';
+import { MDX } from './components/ui/MDX/MDXProvider';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
