@@ -6,7 +6,9 @@ Display an accessible organisation chart.
 
 ![Image showing organisation chart](https://i.imgur.com/5IZXdii.png)
 
-## Get started
+---
+
+## 🚀 Get started
 
 The package exposes one javascript function that can be used on any website, or in any framework.
 Keep in mind that the function **always** attaches itself to `window`.
@@ -26,9 +28,7 @@ After the package is installed, we need to import the css, either globally or on
 import '@digdir/organisation-chart/dist/index.css'
 ```
 
-
 then import the function, and use it
-
 
 ```js
 import { generateOrgChart } from '@digdir/organisation-chart';
@@ -36,11 +36,8 @@ import { generateOrgChart } from '@digdir/organisation-chart';
 generateOrgChart(data, 'chart');
 ```
 
-
 The first argument is your JSON data, read more about setting up your data HERE.
 The second argument is the id of the container where you want the chart to show.
-
-
 
 ### Installing via `<link>`
 
@@ -54,7 +51,7 @@ The second argument is the id of the container where you want the chart to show.
 </script>
 ```
 
-
+---
 
 ## Behaviour
 
@@ -80,7 +77,7 @@ By default the chart gets a `role="tree"`, and every child gets a `role="treeite
 
 You are free to choose the color of your boxes, however we don't check the contrast between background and foreground.
 
-
+---
 
 ## Development
 
