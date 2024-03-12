@@ -24,7 +24,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@digdir/organisation-chart": "link:..\\..\\packages\\org-chart"
+    "@digdir/organisation-chart": "workspace:*"
   },
   "scripts": {
     "start": "react-scripts start",

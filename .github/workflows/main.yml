@@ -21,12 +21,12 @@ jobs:
       - name: Install dependencies
         run: |
           cd apps/storefront
-          pnpm install
+          npm install
 
       - name: Build Storefront
         run: |
           cd apps/storefront
-          pnpm run build
+          npm run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
