@@ -61,8 +61,9 @@ The second argument is the id of the container where you want the chart to show.
 The chart is responsive on any device, and looks at the width of the parent container to check if it needs to change.
 We use these breakpoints:
 
-| standard | >1500      |
+| device   | breakpoint |
 |----------|------------|
+| standard | >1500      |
 | laptop   | <1500 >992 |
 | tablet   | <992 >768  |
 | mobile   | <768       |
