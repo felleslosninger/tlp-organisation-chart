@@ -1,6 +1,10 @@
 # Organisation Chart
 
-Display an accessible organisation chart. 
+[![](https://img.shields.io/npm/v/@digdir/organisation-chart?label=latest%20release&color=0051be)](https://www.npmjs.com/package/@digdir/organisation-chart)
+
+Display an accessible organisation chart.
+
+![Image showing organisation chart](https://i.imgur.com/5IZXdii.png)
 
 ---
 
@@ -18,7 +22,7 @@ npm install @digdir/organisation-chart
 After the package is installed, we need to import the css, either globally or only on the page you are using the chart.
 
 ```js
-import '@digdir/organisation-chart/dist/index.css'
+import '@digdir/organisation-chart/dist/index.css';
 ```
 
 then import the function, and use it
@@ -29,31 +33,21 @@ import { generateOrgChart } from '@digdir/organisation-chart';
 generateOrgChart(data, 'chart');
 ```
 
-The first argument is your JSON data, read more about setting up your data HERE.
+The first argument is your JSON data, read more about setting up your data below.
 The second argument is the id of the container where you want the chart to show.
+
+### Installing via `<link>`
+
+```html
+<link ... />
+```
+
+```html
+<script>
+  window.generateOrgChart(data, 'chart');
+</script>
+```
 
 ---
 
-## Behaviour
-
-The chart is responsive on any device, and looks at the width of the parent container to check if it needs to change.
-We use these breakpoints:
-
-| device   | breakpoint |
-|----------|------------|
-| standard | >1500      |
-| laptop   | <1500 >992 |
-| tablet   | <992 >768  |
-| mobile   | <768       |
-
-
-### Rules
-
-JENS FYLL INN HER
-
-
-### A11y
-
-By default the chart gets a `role="tree"`, and every child gets a `role="treeitem"`. This is done to make screenreaders be able to parse the content as a tree of connected nodes.
-
-You are free to choose the color of your boxes, however we don't check the contrast between background and foreground.
+Please read the documentation on [orgchart.digdir.no](https://orgchart.digdir.no) for more information about behaviour and data structure.
