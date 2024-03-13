@@ -12,6 +12,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={1}
             spacing
+            size="xlarge"
             {...props}
           />
         ),
@@ -19,6 +20,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={2}
             spacing
+            size="large"
             {...props}
           />
         ),
@@ -26,6 +28,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={3}
             spacing
+            size="medium"
             {...props}
           />
         ),
@@ -33,6 +36,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={4}
             spacing
+            size="small"
             {...props}
           />
         ),
@@ -40,6 +44,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={5}
             spacing
+            size="xsmall"
             {...props}
           />
         ),
@@ -47,6 +52,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={6}
             spacing
+            size="xxsmall"
             {...props}
           />
         ),
@@ -77,7 +83,6 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
             {...props}
             zebra
             border
-            size="small"
           />
         ),
         thead: (props) => (

@@ -1,3 +1,5 @@
+import TextLayout from '../components/layouts/TextLayout';
+
 import JsonView from '../components/JsonView.client';
 import data from '../data/short.json';
 
@@ -10,6 +12,8 @@ export const meta = () => {
     },
   ];
 };
+
+export default ({ children }) => <TextLayout>{children}</TextLayout>;
 
 ## 🚀 Get started
 
