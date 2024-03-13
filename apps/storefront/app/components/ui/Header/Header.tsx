@@ -20,7 +20,7 @@ export const Header = () => {
           </Link>
         </div>
 
-        <div className={classes.right}>
+        <nav className={classes.right}>
           <Link asChild>
             <RemixLink to='/dokumentasjon'>Dokumentasjon</RemixLink>
           </Link>
@@ -38,7 +38,7 @@ export const Header = () => {
               alt='Github logo'
             />
           </Link>
-        </div>
+        </nav>
       </Container>
     </header>
   );

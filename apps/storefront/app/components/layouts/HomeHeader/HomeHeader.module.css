@@ -10,13 +10,13 @@
   color: white;
 }
 
-.heading span {
+.box .heading span {
   font-weight: bolder;
   color: var(--fds-brand-alt3-500);
 }
 
-.subheading {
-  margin-bottom: 0 !important;
+.box .subheading {
+  margin-bottom: 0;
   color: white;
 }
 
