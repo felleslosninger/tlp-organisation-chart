@@ -68,8 +68,7 @@ We use these breakpoints:
 
 ### Rules
 
-JENS FYLL INN HER
-
+Coming...
 
 ### A11y
 
@@ -176,6 +175,8 @@ The meta object is used to define a name, and the language code. This key is opt
 
 ## Development
 
+### Running locally
+
 Run `pnpm install` in the root directory.
 
 We have two applications, one for development, and one that is deployed on github pages.
@@ -186,3 +187,37 @@ pnpm run:dev
 ```
 
 This links the package from the workspace, and watches for changes done in `packages/org-chart`, and rebuilds the package to be used in react.
+
+### Building the package
+
+Run `pnpm build:chart` in the root directory.
+
+This will build everything into the `packages/org-chart/dist` folder. The folder container everything you need.
+
+If you need a copy of the code on your server, this is what you should copy over.
+
+### Publishing the package
+
+#### Versioning
+
+We use [changesets](https://github.com/changesets/changesets) for versioning and changelogs.
+
+This makes a PR before each version, and handles versioning based on changesets merged from other PRs.
+
+When you create a new PR for merging, changesets will automatically add a comment to prompt you to make a new changeset.
+You can do this at any time, but it is recommended to do this a soon as possible, and keep it updated with any changes you make.
+
+#### Publishing to NPM
+
+After we merge the PR with the new version, we have to publish the package to npm.
+
+First, **always** make sure you are in the `main` branch, with all changes pulled.
+
+Secondly, run `npm whoami` to make sure you are logged in to npm on an account that has access to the digdir organisation.
+
+Since the PR we merged contains a version changeset already, we only need to run the publish command.
+Now we are safe to publish the package. We will run this commands:
+
+```shell
+pnpm changeset publish
+```
