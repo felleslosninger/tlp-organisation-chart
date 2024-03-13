@@ -50,12 +50,16 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
             {...props}
           />
         ),
-        a: (props) => (
-          <Link
-            {...props}
-            target='_blank'
-          />
-        ),
+        a: (props) => {
+          console.log(props)
+          if (props && props.href && props.href.startsWith('http')) {
+            return <Link {...props} target='_blank' />
+          } 
+
+            return <Link
+              {...props}
+            />
+          },
         p: Paragraph,
         ol: (props) => (
           <List.Root>

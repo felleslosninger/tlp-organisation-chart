@@ -1,0 +1,33 @@
+import JsonView from '../components/JsonView.client';
+import data from '../data/short.json';
+
+export const meta = () => {
+  return [
+    { title: 'Setting up JSON - Organisation Chart' },
+    {
+      name: 'description',
+      content: 'Documentation for how to set up your json for the Organisation Chart',
+    },
+  ];
+};
+
+# JSON structure
+
+<JsonView src={data} />
+
+---
+
+The above JSON structure is the minimum required to generate a chart. Let's go through the different properties one by one:
+
+## Meta
+
+The meta object is used to define a name, and an optional language code. This key is optional
+
+```json
+{
+  "meta":{
+    "title": "Test",
+    "langcode": "no"
+  }
+}
+```
