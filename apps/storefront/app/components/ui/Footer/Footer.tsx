@@ -24,7 +24,7 @@ const Footer = () => {
                   asChild
                   inverted
                 >
-                  <RemixLink to='/documentation'>Dokumentasjon</RemixLink>
+                  <RemixLink to='/documentation'>Documentation</RemixLink>
                 </Link>
               </li>
               <li>
@@ -32,7 +32,7 @@ const Footer = () => {
                   asChild
                   inverted
                 >
-                  <RemixLink to='/changelog'>Endringslogg</RemixLink>
+                  <RemixLink to='/changelog'>Changelog</RemixLink>
                 </Link>
               </li>
               <li>

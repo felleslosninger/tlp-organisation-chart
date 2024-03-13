@@ -40,13 +40,13 @@ export default function HomeHeader() {
 
       <div className={classes.buttons}>
         <Button asChild>
-          <RemixLink to='/dokumentasjon'>Documentation</RemixLink>
+          <RemixLink to='/documentation'>Documentation</RemixLink>
         </Button>
         <Button
           asChild
           variant='secondary'
         >
-          <RemixLink to='/endringslogg'>Changelog</RemixLink>
+          <RemixLink to='/changelog'>Changelog</RemixLink>
         </Button>
       </div>
     </Box>

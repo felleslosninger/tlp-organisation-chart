@@ -22,10 +22,10 @@ export const Header = () => {
 
         <nav className={classes.right}>
           <Link asChild>
-            <RemixLink to='/dokumentasjon'>Dokumentasjon</RemixLink>
+            <RemixLink to='/documentation'>Documentation</RemixLink>
           </Link>
           <Link asChild>
-            <RemixLink to='/endringslogg'>Endringslogg</RemixLink>
+            <RemixLink to='/changelog'>Changelog</RemixLink>
           </Link>
           <Link
             href='https://github.com/felleslosninger/tlp-organization-chart'

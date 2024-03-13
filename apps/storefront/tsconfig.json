@@ -3,8 +3,8 @@
     "env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "app/routes/endringslogg.mdx",
-    "app/routes/dokumentasjon.mdx"
+    "app/routes/changelog.mdx",
+    "app/routes/documentation.mdx"
   ],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
