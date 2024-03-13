@@ -12,6 +12,9 @@ export default function JsonView({ src }: { src: object }) {
       style={{
         padding: 'var(--fds-spacing-4)',
         borderRadius: 'var(--fds-border_radius-medium)',
+        maxWidth: '800px',
+        margin: 'var(--fds-spacing-5) 0',
+        backgroundColor: 'rgb(1, 22, 39)',
       }}
     />
   )

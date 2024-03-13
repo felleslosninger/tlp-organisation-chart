@@ -51,7 +51,6 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           />
         ),
         a: (props) => {
-          console.log(props)
           if (props && props.href && props.href.startsWith('http')) {
             return <Link {...props} target='_blank' />
           } 

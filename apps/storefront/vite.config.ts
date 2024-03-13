@@ -7,12 +7,13 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
+import rehypeAutoLinkHeadings from 'rehype-autolink-headings';
 
 export default defineConfig({
   plugins: [
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm],
-      rehypePlugins: [rehypeHighlight],
+      rehypePlugins: [rehypeHighlight, rehypeAutoLinkHeadings],
       providerImportSource: '@mdx-js/react',
     }),
     remix({

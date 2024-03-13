@@ -128,7 +128,7 @@
   background-color: rgb(1, 22, 39);
   color: white;
   padding: var(--fds-spacing-5);
-  margin: var(--fds-spacing-7) 0;
+  margin: var(--fds-spacing-5) 0;
   border-radius: var(--fds-border_radius-medium);
 }
 
