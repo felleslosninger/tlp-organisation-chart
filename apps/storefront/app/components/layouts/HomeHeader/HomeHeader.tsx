@@ -45,6 +45,7 @@ export default function HomeHeader() {
         <Button
           asChild
           variant='secondary'
+          color='inverted'
         >
           <RemixLink to='/changelog'>Changelog</RemixLink>
         </Button>
