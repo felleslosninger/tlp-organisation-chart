@@ -1,0 +1,27 @@
+.box {
+  padding: var(--fds-spacing-14) var(--fds-spacing-8);
+  background-color: var(--fds-semantic-surface-neutral-inverted);
+}
+
+.box .heading {
+  max-width: 25ch;
+  font-weight: bold;
+  margin-top: 0;
+  color: white;
+}
+
+.heading span {
+  font-weight: bolder;
+  color: var(--fds-brand-alt3-500);
+}
+
+.subheading {
+  margin-bottom: 0 !important;
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
