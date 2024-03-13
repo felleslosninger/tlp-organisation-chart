@@ -75,7 +75,8 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
         table: (props) => (
           <Table
             {...props}
-            zebra={true}
+            zebra
+            border
             size="small"
           />
         ),

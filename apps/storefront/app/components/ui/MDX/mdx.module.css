@@ -138,25 +138,6 @@
   border-radius: var(--fds-border_radius-medium);
 }
 
-.content > table {
-  width: 100%;
-  max-width: 800px;
-  margin: var(--fds-spacing-7) 0;
-  border-collapse: collapse;
-}
-
-.content > table td,
-.content > table th {
-  padding: var(--fds-spacing-4);
-  border: 1px solid var(--fds-semantic-border-neutral-subtle);
-}
-
-.content > table th {
-  text-align: left;
-  background-color: var(--fds-semantic-background-subtle);
-  font-weight: 600;
-}
-
 .content p code {
   padding: 0.2em 0.5em;
   margin: 1px;
