@@ -86,11 +86,11 @@ body {
   .hljs-symbol,
   .hljs-type,
   .hljs-quote {
-        color: highlight;
-    }
+    color: highlight;
+  }
 
-    .hljs-keyword,
-    .hljs-selector-tag {
-        font-weight: bold;
-    }
+  .hljs-keyword,
+  .hljs-selector-tag {
+    font-weight: bold;
+  }
 }

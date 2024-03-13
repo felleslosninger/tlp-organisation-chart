@@ -20,6 +20,9 @@ export default ({ children }) => <TextLayout>{children}</TextLayout>;
 The package exposes one javascript function that can be used on any website, or in any framework.
 Keep in mind that the function **always** attaches itself to `window`.
 
+This documentation only covers the usage of the package, and not the development of it.
+If you want to read how to develop, please refer to the [README](https://github.com/felleslosninger/tlp-organization-chart).
+
 ### Installing via npm
 
 ```shell
@@ -29,7 +32,7 @@ npm install @digdir/organisation-chart
 After the package is installed, we need to import the css, either globally or only on the page you are using the chart.
 
 ```js
-import '@digdir/organisation-chart/dist/index.css'
+import '@digdir/organisation-chart/dist/index.css';
 ```
 
 then import the function, and use it
@@ -51,17 +54,15 @@ The chart is responsive on any device, and looks at the width of the parent cont
 We use these breakpoints:
 
 | Device   | Breakpoint  |
-|----------|-------------|
+| -------- | ----------- |
 | standard | > 1500      |
 | laptop   | < 1500 >992 |
 | tablet   | < 992 >768  |
 | mobile   | < 768       |
 
-
 ### Rules
 
 JENS FYLL INN HER
-
 
 ### A11y
 
@@ -92,7 +93,7 @@ Each node must always have an id and a title. Keep in mind that the id must be u
 You can send in more props, to further customize how the nodes look, and if it should be a link.
 
 | Key             | Type   |
-|-----------------|--------|
+| --------------- | ------ |
 | id              | string |
 | title           | string |
 | url             | string |
@@ -138,12 +139,12 @@ You can see examples on [Github](https://github.com/felleslosninger/tlp-organiza
 
 You can define a layout for each of our breakpoints, or you can use the same layout for all of them.
 
-We split the layout into rows, and each row can have multiple nodes. Refer to the REGLER HERE for more information 
+We split the layout into rows, and each row can have multiple nodes. Refer to the REGLER HERE for more information
 about limitations.
 
 ### TOC
 
-The TOC (Table of Contents) is a legend that shows what your different nodes are. 
+The TOC (Table of Contents) is a legend that shows what your different nodes are.
 This is optional, and can be turned off by not sending it in your data. It is, however, recommended to use it.
 
 ```json
@@ -161,7 +162,7 @@ The meta object is used to define a name, and the language code. This key is opt
 
 ```json
 {
-  "meta":{
+  "meta": {
     "title": "Test",
     "langcode": "no"
   }
