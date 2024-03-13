@@ -589,7 +589,15 @@ function createSpecialColumnLines(
       (indexInRow === 1 && siblingsAmount <= 4)
     ) {
       if (indexToColumnsWithSpecialColumnList.includes(3) && indexInRow === 3) {
-        className += isLaptop ? `-1` : isLastRow ? '-2-long' : '-3';
+        if (isLaptop) {
+          if (isLastRow) {
+            className += '-3-center';
+          } else {
+            className += '-1';
+          }
+        } else {
+          className += '-2-long';
+        }
       } else {
         className += `-${indexInRow}`;
       }
@@ -655,20 +663,42 @@ function createSpecialColumnLines(
         }
       } else {
         if (indexToColumnsWithSpecialColumnList.length === 2) {
-          if (indexInRow === 1) {
-            className += `-1`;
-          } else if (indexInRow === 2) {
-            className += `-2`;
+          if (isLastRow) {
+            if (indexInRow === 3) {
+              className += `-3-center`;
+            } else if (indexInRow === 1) {
+              className += `-1`;
+            } else {
+              className += `-2`;
+            }
           } else {
-            className += `-1`;
+            if (indexInRow === 1) {
+              className += `-1`;
+            } else if (indexInRow === 2) {
+              className += `-2`;
+            } else {
+              className += `-1`;
+            }
           }
         } else {
-          if (indexInRow === 1) {
-            className += `-1`;
-          } else if (indexInRow === 2) {
-            className += `-2`;
+          if (isLastRow) {
+            if (indexInRow >= 3) {
+              className += `-3-center`;
+            } else {
+              if (indexInRow === 1) {
+                className += `-1`;
+              } else {
+                className += `-2`;
+              }
+            }
           } else {
-            className += `-1`;
+            if (indexInRow === 1) {
+              className += `-1`;
+            } else if (indexInRow === 2) {
+              className += `-2`;
+            } else {
+              className += `-1`;
+            }
           }
         }
       }
@@ -704,55 +734,66 @@ function createSpecialColumnLines(
           }
         }
       } else {
-        if (indexToColumnsWithSpecialColumnList.length === 2) {
-          if (
-            indexToColumnsWithSpecialColumnList.includes(2) &&
-            indexToColumnsWithSpecialColumnList.includes(1)
-          ) {
-            if (indexInRow === 1) {
-              className += `-1`;
-            } else {
-              className += `-2`;
-            }
-          } else if (
-            indexToColumnsWithSpecialColumnList.includes(2) &&
-            indexToColumnsWithSpecialColumnList.includes(3)
-          ) {
-            if (indexInRow === 2) {
-              className += `-2`;
-            } else {
-              className += `-1`;
-            }
-          } else if (
-            indexToColumnsWithSpecialColumnList.includes(3) &&
-            indexToColumnsWithSpecialColumnList.includes(4)
-          ) {
-            if (indexInRow === 3) {
-              className += `-2`;
-            } else {
-              className += `-1`;
-            }
-          } else if (
-            indexToColumnsWithSpecialColumnList.includes(2) &&
-            indexToColumnsWithSpecialColumnList.includes(4)
-          ) {
-            className += `-2`;
-          } else if (
-            indexToColumnsWithSpecialColumnList.includes(1) &&
-            indexToColumnsWithSpecialColumnList.includes(3)
-          ) {
-            className += `-1`;
-          } else if (
-            indexToColumnsWithSpecialColumnList.includes(1) &&
-            indexToColumnsWithSpecialColumnList.includes(4)
-          ) {
-            className += `-${indexInRow === 1 ? '1' : '2'}`;
-          }
+        if (
+          (indexToColumnsWithSpecialColumnList.length === 2 &&
+            indexInRow === initialSiblingsAmount &&
+            isLastRow) ||
+          (indexToColumnsWithSpecialColumnList.length === 1 &&
+            indexInRow === initialSiblingsAmount &&
+            isLastRow)
+        ) {
+          className += `-3-center`;
         } else {
-          if (indexInRow === 1 || indexInRow === 4 || indexInRow === 5) {
-            className += `-1`;
+          if (indexToColumnsWithSpecialColumnList.length === 2) {
+            if (
+              indexToColumnsWithSpecialColumnList.includes(2) &&
+              indexToColumnsWithSpecialColumnList.includes(1)
+            ) {
+              if (indexInRow === 1) {
+                className += `-1`;
+              } else {
+                className += `-2`;
+              }
+            } else if (
+              indexToColumnsWithSpecialColumnList.includes(2) &&
+              indexToColumnsWithSpecialColumnList.includes(3)
+            ) {
+              if (indexInRow === 2) {
+                className += `-2`;
+              } else {
+                className += `-1`;
+              }
+            } else if (
+              indexToColumnsWithSpecialColumnList.includes(3) &&
+              indexToColumnsWithSpecialColumnList.includes(4)
+            ) {
+              if (indexInRow === 3) {
+                className += `-2`;
+              } else {
+                className += `-1`;
+              }
+            } else if (
+              indexToColumnsWithSpecialColumnList.includes(2) &&
+              indexToColumnsWithSpecialColumnList.includes(4)
+            ) {
+              className += `-2`;
+            } else if (
+              indexToColumnsWithSpecialColumnList.includes(1) &&
+              indexToColumnsWithSpecialColumnList.includes(3)
+            ) {
+              className += `-1`;
+            } else if (
+              indexToColumnsWithSpecialColumnList.includes(1) &&
+              indexToColumnsWithSpecialColumnList.includes(4)
+            ) {
+              className += `-${indexInRow === 1 ? '1' : '2'}`;
+            }
           } else {
-            className += `-2`;
+            if (indexInRow === 1 || indexInRow === 4 || indexInRow === 5) {
+              className += `-1`;
+            } else {
+              className += `-2`;
+            }
           }
         }
       }
@@ -776,10 +817,15 @@ function createSpecialColumnLines(
         (indexToColumnsWithSpecialColumnList.length === 1 &&
           indexToColumnsWithSpecialColumnList.includes(4)) ||
         (indexToColumnsWithSpecialColumnList.length === 1 &&
-          indexToColumnsWithSpecialColumnList.includes(2))
+          indexToColumnsWithSpecialColumnList.includes(2)) ||
+        (indexToColumnsWithSpecialColumnList.length === 2 &&
+          indexToColumnsWithSpecialColumnList.includes(4)) ||
+        (indexToColumnsWithSpecialColumnList.length === 2 &&
+          indexToColumnsWithSpecialColumnList.includes(2) &&
+          initialSiblingsAmount === 2 &&
+          indexInRow === 2)
       ) {
         className += `-3-left-short`;
-        console.log('test');
       } else {
         className += `-3-center`;
       }
@@ -898,6 +944,7 @@ function calculateColumnWidth(
     siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
     if (siblingsAmount === 2) {
       width = 50;
+      additionalWidth = -12;
       if (!isLastRow) {
         additionalWidth = -12;
         additionalClass += ' special-row-1-column';
@@ -1127,76 +1174,181 @@ function calculateColumnWidth(
       }
     } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
       if (siblingsAmount === 3) {
-        width = 50;
-      } else if (siblingsAmount === 4) {
-        if (indexToSpecialColumnList.length === 2) {
-          width = 50;
-        } else {
-          if (indexToSpecialColumnList.includes(2)) {
-            if (indexInRow === 3) {
-              width = 50;
-              additionalWidth = -12;
-            } else {
-              width = 25;
-              additionalWidth = -18;
-              wrapNodesWrapper = true;
-            }
+        if (isLastRow) {
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = (100 / 3) * 2;
+            additionalWidth = 24;
           } else {
-            if (indexToSpecialColumnList.includes(indexInRow)) {
-              width = 50;
-              additionalWidth = -12;
+            width = 100 / 3;
+          }
+        } else {
+          width = 50;
+        }
+      } else if (siblingsAmount === 4) {
+        if (isLastRow) {
+          if (indexToSpecialColumnList.includes(indexInRow)) {
+            width = (100 / 4) * 2;
+            additionalWidth = -12;
+          } else {
+            width = 100 / 4;
+            additionalWidth = -18;
+          }
+        } else {
+          if (indexToSpecialColumnList.length === 2) {
+            width = 50;
+          } else {
+            if (indexToSpecialColumnList.includes(2)) {
+              if (indexInRow === 3) {
+                width = 50;
+                additionalWidth = -12;
+              } else {
+                width = 25;
+                additionalWidth = -18;
+                wrapNodesWrapper = true;
+              }
             } else {
-              width = 25;
-              additionalWidth = -18;
+              if (indexToSpecialColumnList.includes(indexInRow)) {
+                width = 50;
+                additionalWidth = -12;
+              } else {
+                width = 25;
+                additionalWidth = -18;
+              }
             }
           }
         }
       } else if (siblingsAmount === 5) {
-        if (indexToSpecialColumnList.length === 2) {
-          width = 50;
-          additionalWidth = -12;
+        if (isLastRow) {
+          if (indexToSpecialColumnList.length === 1) {
+            if (
+              indexToSpecialColumnList.includes(3) ||
+              indexToSpecialColumnList.includes(4)
+            ) {
+              if (indexToSpecialColumnList.includes(indexInRow)) {
+                width = (100 / 3) * 2;
+                additionalWidth = -8;
+              } else if (indexInRow < 3) {
+                width = 50;
+                additionalWidth = -12;
+              } else {
+                width = 100 / 3;
+                additionalWidth = -16;
+              }
+            } else {
+              width = 50;
+              additionalWidth = -12;
+            }
+          } else {
+            if (indexInRow === 3) {
+              if (indexToSpecialColumnList.includes(indexInRow)) {
+                width = 100;
+              } else {
+                width = 50;
+                additionalWidth = -12;
+              }
+            } else {
+              width = 50;
+              additionalWidth = -12;
+            }
+          }
         } else {
-          if (indexToSpecialColumnList.includes(indexInRow)) {
-            width = 50;
-            additionalWidth = -12;
-          } else if (
-            indexInRow === 1 ||
-            indexToSpecialColumnList.includes(3) ||
-            indexToSpecialColumnList.includes(1)
-          ) {
+          if (indexToSpecialColumnList.length === 2) {
             width = 50;
             additionalWidth = -12;
           } else {
-            width = 25;
-            additionalWidth = -18;
-          }
-        }
-      } else if (siblingsAmount === 6) {
-        if (indexToSpecialColumnList.length === 3) {
-          width = 50;
-          additionalWidth = -12;
-        } else if (indexToSpecialColumnList.length === 2) {
-          if (
-            (indexToSpecialColumnList.includes(1) &&
-              indexToSpecialColumnList.includes(2)) ||
-            (indexToSpecialColumnList.includes(3) &&
-              indexToSpecialColumnList.includes(4))
-          ) {
             if (indexToSpecialColumnList.includes(indexInRow)) {
+              width = 50;
+              additionalWidth = -12;
+            } else if (
+              indexInRow === 1 ||
+              indexToSpecialColumnList.includes(3) ||
+              indexToSpecialColumnList.includes(1)
+            ) {
               width = 50;
               additionalWidth = -12;
             } else {
               width = 25;
               additionalWidth = -18;
             }
+          }
+        }
+      } else if (siblingsAmount === 6) {
+        if (indexToSpecialColumnList.length === 3) {
+          if (isLastRow && indexInRow === 3) {
+            width = 100;
           } else {
             width = 50;
             additionalWidth = -12;
           }
+        } else if (indexToSpecialColumnList.length === 2) {
+          if (isLastRow) {
+            if (
+              indexToSpecialColumnList.includes(1) &&
+              indexToSpecialColumnList.includes(2)
+            ) {
+              width = 50;
+              additionalWidth = -12;
+            } else if (
+              indexToSpecialColumnList.includes(3) &&
+              indexToSpecialColumnList.includes(4)
+            ) {
+              if (indexToSpecialColumnList.includes(indexInRow)) {
+                if (indexInRow === 3) {
+                  width = 50;
+                  additionalWidth = -12;
+                } else {
+                  width = 100;
+                }
+              } else {
+                width = 25;
+                additionalWidth = -18;
+              }
+            } else {
+              if (
+                (indexToSpecialColumnList.includes(1) &&
+                  !indexToSpecialColumnList.includes(2)) ||
+                (indexToSpecialColumnList.includes(2) &&
+                  !indexToSpecialColumnList.includes(1))
+              ) {
+                if (indexInRow <= 2) {
+                  width = 50;
+                  additionalWidth = -12;
+                } else if (indexToSpecialColumnList.includes(indexInRow)) {
+                  width = (100 / 3) * 2;
+                  additionalWidth = -8;
+                } else {
+                  width = 100 / 3;
+                  additionalWidth = -16;
+                }
+              }
+            }
+          } else {
+            if (
+              (indexToSpecialColumnList.includes(1) &&
+                indexToSpecialColumnList.includes(2)) ||
+              (indexToSpecialColumnList.includes(3) &&
+                indexToSpecialColumnList.includes(4))
+            ) {
+              if (indexToSpecialColumnList.includes(indexInRow)) {
+                width = 50;
+                additionalWidth = -12;
+              } else {
+                width = 25;
+                additionalWidth = -18;
+              }
+            } else {
+              width = 50;
+              additionalWidth = -12;
+            }
+          }
         } else {
           if (indexToSpecialColumnList.includes(indexInRow)) {
-            width = 50;
-            additionalWidth = -12;
+            if (indexInRow === 5 && isLastRow) {
+              width = 100;
+            } else {
+              width = 50;
+              additionalWidth = -12;
+            }
           } else if (indexToSpecialColumnList[0] <= 2) {
             if (indexInRow <= 2) {
               width = 50;
@@ -1406,31 +1558,39 @@ function createNodeLineClass(
           className = ' node-line-up-left-half node-line-up';
         }
       } else if (siblingsAmount === 4) {
-        if (specialColumnsList.includes(1)) {
-          if (indexInRow === 2) {
-            className = ' node-line-up-left-half node-line-up';
-          } else {
-            className = ' node-line-up-left node-line-up';
-          }
-        } else if (specialColumnsList.includes(2)) {
-          if (isLaptop) {
-            if (indexInRow === 1) {
-              className = ' node-line-up-right node-line-up';
-            } else {
-              className = ' node-line-up-left-half node-line-up';
-            }
-          } else {
-            if (indexInRow === 1) {
-              className = ' node-line-up-right-half node-line-up';
-            } else {
-              className = ' node-line-up-left node-line-up';
-            }
-          }
-        } else if (specialColumnsList.includes(3)) {
+        if (isLastRow && specialColumnsList.includes(2)) {
           if (indexInRow === 1) {
             className = ' node-line-up-right node-line-up';
           } else {
-            className = ' node-line-up-right-half node-line-up';
+            className = ' node-line-up-left node-line-up';
+          }
+        } else {
+          if (specialColumnsList.includes(1)) {
+            if (indexInRow === 2) {
+              className = ' node-line-up-left-half node-line-up';
+            } else {
+              className = ' node-line-up-left node-line-up';
+            }
+          } else if (specialColumnsList.includes(2)) {
+            if (isLaptop) {
+              if (indexInRow === 1) {
+                className = ' node-line-up-right node-line-up';
+              } else {
+                className = ' node-line-up-left-half node-line-up';
+              }
+            } else {
+              if (indexInRow === 1) {
+                className = ' node-line-up-right-half node-line-up';
+              } else {
+                className = ' node-line-up-left node-line-up';
+              }
+            }
+          } else if (specialColumnsList.includes(3)) {
+            if (indexInRow === 1) {
+              className = ' node-line-up-right node-line-up';
+            } else {
+              className = ' node-line-up-right-half node-line-up';
+            }
           }
         }
       } else if (siblingsAmount === 5) {
@@ -1452,7 +1612,20 @@ function createNodeLineClass(
             className = ` node-line-up-${isLaptop ? 'left-half' : 'right-half'} node-line-up`;
           }
         } else {
-          if (specialColumnsList.includes(1)) {
+          if (
+            (isLastRow && specialColumnsList.includes(4)) ||
+            (isLastRow && specialColumnsList.includes(3))
+          ) {
+            if (indexInRow === 1) {
+              className = ` node-line-up-right-half node-line-up`;
+            } else if (indexInRow === 2) {
+              className = ` node-line-up-left-half node-line-up`;
+            } else if (indexInRow === 3) {
+              className = ` node-line-up-right node-line-up`;
+            } else if (indexInRow === 4) {
+              className = ` node-line-up-left node-line-up`;
+            }
+          } else if (specialColumnsList.includes(1)) {
             if (indexInRow === 2) {
               className = ` node-line-up-${isLaptop ? 'left-half' : 'right-half'} node-line-up`;
             } else if (indexInRow === 3) {
@@ -1466,7 +1639,11 @@ function createNodeLineClass(
             } else if (indexInRow === 3) {
               className = ` node-line-up-${isLaptop ? 'right' : 'left-half'} node-line-up`;
             } else {
-              className = ` node-line-up-${isLaptop ? 'right-half' : 'left'} node-line-up`;
+              if (isLastRow) {
+                className = ` node-line-up-${isLaptop ? 'left-half' : 'left'} node-line-up`;
+              } else {
+                className = ` node-line-up-${isLaptop ? 'right-half' : 'left'} node-line-up`;
+              }
             }
           } else if (specialColumnsList.includes(3)) {
             if (indexInRow === 1) {
@@ -1493,7 +1670,11 @@ function createNodeLineClass(
             specialColumnsList.includes(2)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 4 ? 'right-half' : 'right'} node-line-up`;
+              if (isLastRow) {
+                className = ` node-line-up-${indexInRow === 3 ? 'right-half' : 'left-half'} node-line-up`;
+              } else {
+                className = ` node-line-up-${indexInRow === 3 ? 'right' : 'right-half'} node-line-up`;
+              }
             } else {
               className = ` node-line-up-left node-line-up`;
             }
@@ -1520,7 +1701,7 @@ function createNodeLineClass(
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-right-half node-line-up`;
+              className = ` node-line-up-${indexInRow === 1 ? 'right-half' : 'right'} node-line-up`;
             } else {
               className = ` node-line-up-${indexInRow === 1 ? 'right' : 'left-half'} node-line-up`;
             }
@@ -1538,7 +1719,7 @@ function createNodeLineClass(
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 2 ? 'left-half' : 'right-half'} node-line-up`;
+              className = ` node-line-up-${indexInRow === 2 ? 'left-half' : 'right'} node-line-up`;
             } else {
               className = ` node-line-up-${indexInRow === 2 ? 'right-half' : 'left-half'} node-line-up`;
             }
@@ -1629,31 +1810,35 @@ function getLastRowClass(
   isLaptop: boolean,
   isTablet: boolean,
   rowContainsSpecialColumns: boolean,
-  indexToColumnsWithSpecialColumnList?: number[],
+  specialColumnList: number[],
 ) {
   let rowLength = row.row.length;
 
-  if (rowContainsSpecialColumns && indexToColumnsWithSpecialColumnList) {
-    rowLength += indexToColumnsWithSpecialColumnList.length;
-    if (!isMobile && rowLength >= 5) {
-      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
-    } else if (!isMobile && rowLength >= 2) {
-      return `row row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
-    } else if (!isMobile && rowLength <= 2) {
-      return `row row-last-${rowLength}`;
+  if (rowContainsSpecialColumns && specialColumnList) {
+    rowLength += specialColumnList.length;
+  }
+
+  if (!isMobile && rowLength >= 5) {
+    if (specialColumnList.length >= 2 && isTablet) {
+      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-2-s-cols`;
+    } else if (rowLength === 5) {
+      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-1-s-cols`;
     } else {
-      return 'row';
+      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
     }
+  } else if (!isMobile && rowLength >= 2) {
+    if (
+      (specialColumnList.length && rowLength === 3 && isTablet) ||
+      (specialColumnList.length && rowLength === 3 && isLaptop)
+    ) {
+      return `row row-last-${rowLength}-1-s-cols`;
+    } else {
+      return `row row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+    }
+  } else if (!isMobile && rowLength <= 2) {
+    return `row row-last-${rowLength}`;
   } else {
-    if (!isMobile && rowLength >= 5) {
-      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
-    } else if (!isMobile && rowLength >= 2) {
-      return `row row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
-    } else if (!isMobile && rowLength <= 2) {
-      return `row row-last-${rowLength}`;
-    } else {
-      return 'row';
-    }
+    return 'row';
   }
 }
 
@@ -1666,15 +1851,107 @@ function calculateChildrenDifferenceInRow(
 ) {
   let diff = 0;
   if (specialColumnsList.length > 0) {
+    siblingsAmount += specialColumnsList.length;
     if (isLaptop) {
       if (siblingsAmount === 4) {
         let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        diff = upperHalfHighest;
+      } else if (siblingsAmount === 5) {
+        ///
+        ///
+        if (specialColumnsList.length === 1) {
+          let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+          let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
+          diff = upperHalfHighest - lowerHalfHighest;
+        } else {
+          let firstColumn = findHighestChildrenAmountInRow(row, 0, 0);
+          let secondColumn = findHighestChildrenAmountInRow(row, 1, 1);
+          let thirdColumn = findHighestChildrenAmountInRow(row, 2, 2);
+
+          diff = getHighestNumber(firstColumn, secondColumn) - thirdColumn;
+        }
+        //
+        ///
+      } else if (siblingsAmount === 6) {
+        let upperHalfHighest = 0;
+        if (
+          specialColumnsList.length >= 2 ||
+          specialColumnsList.includes(4) ||
+          specialColumnsList.includes(3)
+        ) {
+          upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 2);
+        } else if (
+          specialColumnsList.includes(2) ||
+          specialColumnsList.includes(1)
+        ) {
+          upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+        } else {
+          upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 3);
+        }
         diff = upperHalfHighest;
       }
     } else if (isTablet) {
       if (siblingsAmount === 4) {
         let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
         diff = upperHalfHighest - 2;
+      } else if (siblingsAmount === 5) {
+        ///
+        if (specialColumnsList.length === 1) {
+          let firstColumn = specialColumnsList.includes(1)
+            ? findHighestChildrenAmountInRow(row, 0, 0) + 1
+            : findHighestChildrenAmountInRow(row, 0, 0);
+          let secondColumn = specialColumnsList.includes(2)
+            ? findHighestChildrenAmountInRow(row, 1, 1) + 1
+            : findHighestChildrenAmountInRow(row, 1, 1);
+          let thirdColumn = specialColumnsList.includes(3)
+            ? findHighestChildrenAmountInRow(row, 2, 2) + 1
+            : findHighestChildrenAmountInRow(row, 2, 2);
+          let fourthColumn = specialColumnsList.includes(4)
+            ? findHighestChildrenAmountInRow(row, 3, 3) + 1
+            : findHighestChildrenAmountInRow(row, 3, 3);
+
+          diff =
+            getHighestNumber(firstColumn, secondColumn) -
+            getHighestNumber(thirdColumn, fourthColumn);
+        } else {
+          let firstColumn = specialColumnsList.includes(1)
+            ? findHighestChildrenAmountInRow(row, 0, 0) + 1
+            : findHighestChildrenAmountInRow(row, 0, 0);
+          let secondColumn = specialColumnsList.includes(2)
+            ? findHighestChildrenAmountInRow(row, 1, 1) + 1
+            : findHighestChildrenAmountInRow(row, 1, 1);
+          let thirdColumn = findHighestChildrenAmountInRow(row, 2, 2);
+
+          diff = getHighestNumber(firstColumn, secondColumn) - thirdColumn;
+        }
+        //
+      } else if (siblingsAmount === 6) {
+        if (specialColumnsList.length === 3) {
+          let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1) + 1;
+          let lowerHalf = findHighestChildrenAmountInRow(row, 2, 2);
+          diff = upperHalfHighest - lowerHalf;
+        } else if (specialColumnsList.length >= 2) {
+          let firstColumn = specialColumnsList.includes(1)
+            ? findHighestChildrenAmountInRow(row, 0, 0) + 1
+            : findHighestChildrenAmountInRow(row, 0, 0);
+          let secondColumn = specialColumnsList.includes(2)
+            ? findHighestChildrenAmountInRow(row, 1, 1) + 1
+            : findHighestChildrenAmountInRow(row, 1, 1);
+          let thirdColumn = specialColumnsList.includes(3)
+            ? findHighestChildrenAmountInRow(row, 2, 2) + 1
+            : findHighestChildrenAmountInRow(row, 2, 2);
+          let fourthColumn = specialColumnsList.includes(4)
+            ? findHighestChildrenAmountInRow(row, 3, 3) + 1
+            : findHighestChildrenAmountInRow(row, 3, 3);
+
+          diff =
+            getHighestNumber(firstColumn, secondColumn) -
+            getHighestNumber(thirdColumn, fourthColumn);
+        } else {
+          let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
+          let middleHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
+          diff = upperThirdHighest + middleHalfHighest;
+        }
       }
     }
   } else {
@@ -1707,6 +1984,10 @@ function calculateChildrenDifferenceInRow(
     }
   }
   return diff.toString();
+}
+
+function getHighestNumber(num1: number, num2: number) {
+  return num1 >= num2 ? num1 : num2;
 }
 
 function findHighestChildrenAmountInRow(
