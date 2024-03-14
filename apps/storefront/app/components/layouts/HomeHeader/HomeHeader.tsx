@@ -15,16 +15,17 @@ export default function HomeHeader() {
       borderRadius='xxlarge'
       className={classes.box}
     >
+      <div className={classes.betaTag}>Beta</div>
       <Heading
         className={classes.heading}
         size='3xlarge'
       >
-        An accessible <span>organisation chart</span> for any website
+        Tilgjengelige <span>organisasjonskart</span> på nett
       </Heading>
 
       <Paragraph className={classes.subheading}>
-        A lighweight, accessible javascript library for displaying an
-        organisation chart.
+        Et lett og tilgjengelig JavaScript bibliotek for å vise
+        organisasjonskart på nettsider.
       </Paragraph>
 
       <Link
@@ -39,15 +40,18 @@ export default function HomeHeader() {
       </Link>
 
       <div className={classes.buttons}>
-        <Button asChild>
-          <RemixLink to='/documentation'>Documentation</RemixLink>
+        <Button
+          asChild
+          className={classes.whiteButton}
+        >
+          <RemixLink to='/dokumentasjon'>Dokumentasjon</RemixLink>
         </Button>
         <Button
           asChild
           variant='secondary'
           color='inverted'
         >
-          <RemixLink to='/changelog'>Changelog</RemixLink>
+          <RemixLink to='/endringslogg'>Endringslogg</RemixLink>
         </Button>
       </div>
     </Box>

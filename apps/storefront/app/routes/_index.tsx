@@ -28,7 +28,7 @@ export default function Index() {
         size='medium'
         spacing
       >
-        Example of an organisation chart
+        Eksempel på et organisasjonskart
       </Heading>
 
       <Chart />

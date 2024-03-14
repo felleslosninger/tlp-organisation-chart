@@ -8,6 +8,8 @@
   font-weight: bold;
   margin-top: 0;
   color: white;
+  margin-top: var(--fds-spacing-8);
+  margin-bottom: var(--fds-spacing-4);
 }
 
 .box .heading span {
@@ -23,5 +25,24 @@
 .buttons {
   display: flex;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: var(--fds-spacing-4);
+}
+
+.buttons .whiteButton {
+  background-color: white;
+  color: black;
+}
+
+.buttons .whiteButton:hover {
+  background-color: #e7e7e7;
+}
+
+.betaTag {
+  width: fit-content;
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-0, 8px) var(--spacing-0, 16px) var(--spacing-0, 9px) var(--spacing-0, 15px);
+  border-radius: var(--border_radius-small, 2px);
+  background: #74c3ff;
+  font-weight: bold;
 }
