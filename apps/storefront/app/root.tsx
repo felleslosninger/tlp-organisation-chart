@@ -14,7 +14,7 @@ import { MDX } from './components/ui/MDX/MDXProvider';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en'>
+    <html lang='no'>
       <head>
         <meta charSet='utf-8' />
         <meta
