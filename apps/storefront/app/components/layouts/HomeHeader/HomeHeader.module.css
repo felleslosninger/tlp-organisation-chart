@@ -1,5 +1,5 @@
 .box {
-  padding: var(--fds-spacing-14) var(--fds-spacing-8);
+  padding: var(--fds-spacing-12) var(--fds-spacing-8);
   background-color: var(--fds-semantic-surface-neutral-inverted);
 }
 
