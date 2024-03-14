@@ -38,7 +38,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       providedLayout = layouts.laptop;
       layoutName = 'laptop';
     }
-    //if the window width is less than 992px, set the currentLayout to tablet
+    //if the window width is less than 992px, set the currentLayout to tablet.
     if (mainContainerWidth < laptop && layouts.tablet) {
       providedLayout = layouts.tablet;
       layoutName = 'tablet';
