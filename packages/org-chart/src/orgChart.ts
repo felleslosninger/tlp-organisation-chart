@@ -1819,9 +1819,9 @@ function getLastRowClass(
   }
 
   if (!isMobile && rowLength >= 5) {
-    if (specialColumnList.length >= 2 && isTablet) {
+    if (specialColumnList.length >= 2) {
       return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-2-s-cols`;
-    } else if (rowLength === 5) {
+    } else if (rowLength === 5 && specialColumnList.length >= 1) {
       return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-1-s-cols`;
     } else {
       return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
@@ -1855,10 +1855,9 @@ function calculateChildrenDifferenceInRow(
     if (isLaptop) {
       if (siblingsAmount === 4) {
         let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+
         diff = upperHalfHighest;
       } else if (siblingsAmount === 5) {
-        ///
-        ///
         if (specialColumnsList.length === 1) {
           let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
           let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
@@ -1870,8 +1869,6 @@ function calculateChildrenDifferenceInRow(
 
           diff = getHighestNumber(firstColumn, secondColumn) - thirdColumn;
         }
-        //
-        ///
       } else if (siblingsAmount === 6) {
         let upperHalfHighest = 0;
         if (
@@ -1893,7 +1890,8 @@ function calculateChildrenDifferenceInRow(
     } else if (isTablet) {
       if (siblingsAmount === 4) {
         let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
-        diff = upperHalfHighest - 2;
+        let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 2);
+        diff = upperHalfHighest - lowerHalfHighest;
       } else if (siblingsAmount === 5) {
         ///
         if (specialColumnsList.length === 1) {
