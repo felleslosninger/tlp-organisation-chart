@@ -7,6 +7,8 @@ import {
   TableOfContentsItem,
 } from './types';
 
+const prefix = 'och';
+
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta, toc } = data;
 
@@ -51,8 +53,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   function createChildren(parentSiblingsAmount: number, children: string[]) {
     const childrenList = createElement('ul');
-    childrenList.className = 'node-children';
-
+    childrenList.className = `${prefix}-node-children`;
     if (parentSiblingsAmount <= 2 && !isMobile) {
       childrenList.style.width = '290px';
     }
@@ -71,12 +72,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         //if nodeElement is anchor, provide href
         if (childData.url && innerChild instanceof HTMLAnchorElement) {
           innerChild.href = childData.url;
-          innerChild.classList.add('node-child-anchor');
+          innerChild.classList.add(`${prefix}-node-children-anchor`);
         }
 
         innerChild.tabIndex = 0;
         innerChild.innerHTML = childData.title;
-        innerChild.className = 'node node-child';
+        innerChild.className = `${prefix}-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
         innerChild.style.backgroundColor = childData.backgroundColor;
         childElement.appendChild(innerChild);
@@ -125,9 +126,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.style.color = nodeData.textColor;
       innerNode.innerHTML = nodeData.title;
       nodeData.opacity && (innerNode.style.opacity = nodeData.opacity + '%');
-      innerNode.className = 'node inner-node';
+      innerNode.className = `${prefix}-node ${prefix}-inner-node`;
       nodeElement.appendChild(innerNode);
-      nodeElement.className = 'node ';
+      nodeElement.className = `${prefix}-node `;
       innerNode.tabIndex = 0;
 
       //if siblingsAmount is less 2, set max-with to 300px
@@ -165,7 +166,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     indexToColumnsWithSpecialColumnList: number[],
   ) {
     const columnElement = createElement('div');
-    columnElement.className = 'column';
+    columnElement.className = `${prefix}-column`;
     isMobile
       ? (columnElement.style.width = '100%')
       : (columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`);
@@ -178,38 +179,38 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         if (isLastRow && indexInRow === siblingsAmount && !isMobile) {
           if (indexToColumnsWithSpecialColumnList.length === 1) {
             if (indexToColumnsWithSpecialColumnList.includes(4)) {
-              nodesWrapper.className = 'nodes-container-wrap';
+              nodesWrapper.className = `${prefix}-nodes-container-wrap`;
             } else if (
               indexToColumnsWithSpecialColumnList.includes(2) &&
               siblingsAmount === 2
             ) {
-              nodesWrapper.className = 'nodes-container-wrap';
+              nodesWrapper.className = `${prefix}-nodes-container-wrap`;
             } else {
-              nodesWrapper.className = 'nodes-container';
+              nodesWrapper.className = `${prefix}-nodes-container`;
             }
           } else if (
             indexToColumnsWithSpecialColumnList.length === 2 &&
             indexToColumnsWithSpecialColumnList.includes(4)
           ) {
-            nodesWrapper.className = 'nodes-container-wrap';
+            nodesWrapper.className = `${prefix}-nodes-container-wrap`;
           } else if (
             indexToColumnsWithSpecialColumnList.length === 2 &&
             indexToColumnsWithSpecialColumnList.includes(2) &&
             siblingsAmount === 2
           ) {
-            nodesWrapper.className = 'nodes-container-wrap';
+            nodesWrapper.className = `${prefix}-nodes-container-wrap`;
           } else {
-            nodesWrapper.className = 'nodes-container';
+            nodesWrapper.className = `${prefix}-nodes-container`;
           }
         } else {
-          nodesWrapper.className = 'nodes-container-wrap';
+          nodesWrapper.className = `${prefix}-nodes-container-wrap`;
         }
       } else {
-        nodesWrapper.className = 'nodes-container';
+        nodesWrapper.className = `${prefix}-nodes-container`;
       }
 
       wrapNodesContainer === true &&
-        nodesWrapper.classList.add('nodes-container-wrap');
+        nodesWrapper.classList.add(`${prefix}-nodes-container-wrap`);
 
       if (!isMobile) {
         nodesWrapper.classList.add(
@@ -241,7 +242,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
             nodeElement.href = nodeData.url;
           }
-          nodeElement.className = 'node ';
+          nodeElement.className = `${prefix}-node `;
           nodeElement.tabIndex = 0;
           nodeElement.style.backgroundColor = nodeData.backgroundColor;
           nodeElement.style.color = nodeData.textColor;
@@ -286,24 +287,26 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     specialColumnList: number[],
   ) {
     const columnElement = createElement('div');
-    columnElement.className = 'column';
+    columnElement.className = `${prefix}-column`;
 
     //Allow alignment for columns in rows with 2 or less siblings
     if (column.alignment && siblingsAmount <= 2 && !isMobile) {
-      columnElement.className += ` column-alignment-${siblingsAmount}-${column.alignment}`;
+      columnElement.className += ` ${prefix}-column-alignment-${siblingsAmount}-${column.alignment}`;
       if (
         siblingsAmount <= 2 &&
         (column.alignment === 'offset-left' ||
           column.alignment === 'offset-right')
       ) {
-        columnElement.classList.add(`column-line-${column.alignment}`);
+        columnElement.classList.add(
+          `${prefix}-column-line-${column.alignment}`,
+        );
       }
     }
 
     if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
-      columnElement.className += ' column-flex-end';
+      columnElement.className += ` ${prefix}-column-flex-end`;
     } else if (siblingsAmount === 2 && indexInRow === 2 && !isMobile) {
-      columnElement.className += ' column-flex-start';
+      columnElement.className += ` ${prefix}-column-flex-start`;
     }
 
     const innerColumn = createNode(
@@ -336,11 +339,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   function createRow(row: Row, isLastRow: boolean) {
     const rowElement = createElement('div');
 
-    let rowClass = 'row row-normal';
+    let rowClass = `${prefix}-row ${prefix}-row-normal`;
 
     if (isEvenOrOne(row.row.length) && !isMobile) {
       if (row.row.length <= 2) {
-        rowClass += ' row-center';
+        rowClass += ` ${prefix}-row-center`;
       }
     }
 
@@ -430,9 +433,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       rowElement.className += ' ' + columnWidth.additionalClass;
     });
 
-    !isMobile && !isLastRow && rowElement.classList.add('row-line');
-    !isMain && row.row.length > 2 && rowElement.classList.add('wrap');
-    isMobile && row.row.length === 2 && rowElement.classList.add('wrap');
+    !isMobile && !isLastRow && rowElement.classList.add(`${prefix}-row-line`);
+    !isMain && row.row.length > 2 && rowElement.classList.add(`${prefix}-wrap`);
+    isMobile &&
+      row.row.length === 2 &&
+      rowElement.classList.add(`${prefix}-wrap`);
     !isMobile &&
       isLastRow &&
       rowElement.style.setProperty(
@@ -451,7 +456,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   function createRowsWrapper(layout: Layout) {
     const rows = createElement('div');
-    rows.className = 'rows';
+    rows.className = `${prefix}-rows`;
 
     const numberOfRows = layout.rows.length;
     let isLastRow = false;
@@ -465,14 +470,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return rows;
   }
 
+  //TODO: Delete this function, not used
   function provideLayoutClass(mainContainerWidth: number) {
-    let layoutClass = ' org-chart main';
+    let layoutClass = `${prefix}-org-chart`;
 
     if (mainContainerWidth < allowedBreakpoints.main && layouts.laptop) {
-      layoutClass = 'org-chart laptop';
+      layoutClass = `${prefix}-org-chart`;
     }
     if (mainContainerWidth < allowedBreakpoints.laptop && layouts.tablet) {
-      layoutClass = 'org-chart tablet';
+      layoutClass = `${prefix}-org-chart`;
     }
 
     return layoutClass;
@@ -578,7 +584,7 @@ function createSpecialColumnLines(
   isTablet: boolean,
   isLastRow: boolean,
 ) {
-  let className = 'special-column';
+  let className = `${prefix}-special-column`;
 
   let initialSiblingsAmount = siblingsAmount;
   siblingsAmount += indexToColumnsWithSpecialColumnList.length;
@@ -939,7 +945,7 @@ function calculateColumnWidth(
       }
     }
   } else {
-    additionalClass = ' special-row';
+    additionalClass = ` ${prefix}-special-row`;
     //if row contains special column add the length of the special column to the siblingsAmount, because the special column takes up double node space
     siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
     if (siblingsAmount === 2) {
@@ -947,7 +953,7 @@ function calculateColumnWidth(
       additionalWidth = -12;
       if (!isLastRow) {
         additionalWidth = -12;
-        additionalClass += ' special-row-1-column';
+        additionalClass += ` ${prefix}-special-row-1-column`;
       }
     }
     if (mainContainerWidth > main) {
@@ -1432,13 +1438,14 @@ function createNodeLineClass(
   isLaptop: boolean,
 ) {
   let className = '';
+  const lineUp = `${prefix}-node-line-up`;
 
   if (specialColumnsList.length <= 0) {
     if (siblingsAmount === 1) {
       if (alignment === 'left') {
-        className = ' node-line-right';
+        className = ` ${prefix}-node-line-right`;
       } else if (alignment === 'right') {
-        className = ' node-line-left';
+        className = ` ${prefix}-node-line-left`;
       }
       return className;
     }
@@ -1448,9 +1455,9 @@ function createNodeLineClass(
       alignment !== 'offset-right'
     ) {
       if (indexInRow === 1) {
-        className = ' node-line-right';
+        className = ` ${prefix}-node-line-right`;
       } else {
-        className = ' node-line-left';
+        className = ` ${prefix}-node-line-left`;
       }
       return className;
     }
@@ -1460,9 +1467,9 @@ function createNodeLineClass(
       if (!isTablet && !isLaptop) {
         let lowerHalf = (siblingsAmount - 1) / 2;
         if (indexInRow <= lowerHalf) {
-          className = ' node-line-up-right node-line-up';
+          className = ` ${prefix}-node-line-up-right ${lineUp}`;
         } else {
-          className = ' node-line-up-left node-line-up';
+          className = ` ${prefix}-node-line-up-left ${lineUp}`;
         }
         return className;
       }
@@ -1476,21 +1483,21 @@ function createNodeLineClass(
             indexInRow === 1 ||
             (isOdd(indexInRow) && indexInRow !== siblingsAmount)
           ) {
-            className = ' node-line-up-right node-line-up';
+            className = ` ${prefix}-node-line-up-right ${lineUp}`;
           } else {
-            className = ' node-line-up-left node-line-up';
+            className = ` ${prefix}-node-line-up-left ${lineUp}`;
           }
         } else {
           if (indexInRow <= lowerHalf) {
-            className = ' node-line-up-right node-line-up';
+            className = ` ${prefix}-node-line-up-right ${lineUp}`;
           } else if (indexInRow > upperHalf && !isOdd(indexInRow)) {
-            className = ' node-line-up-left node-line-up';
+            className = ` ${prefix}-node-line-up-left ${lineUp}`;
           } else if (indexInRow === siblingsAmount && siblingsAmount > 3) {
-            className = ' node-line-up-right-long node-line-up';
+            className = ` ${prefix}-node-line-up-right-long ${lineUp}`;
           } else if (indexInRow === 3) {
-            className = ' node-line-up-left-half node-line-up';
+            className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
           } else {
-            className = ' node-line-up-right-half node-line-up';
+            className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
           }
         }
         return className;
@@ -1498,42 +1505,42 @@ function createNodeLineClass(
 
       if (isTablet) {
         if (isOdd(indexInRow)) {
-          className = ' node-line-up-right-half node-line-up';
+          className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
         } else {
-          className = ' node-line-up-left-half node-line-up';
+          className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
         }
         return className;
       }
     } else if (siblingsAmount > 2) {
       if (!isTablet && !isLaptop) {
         if (indexInRow <= siblingsAmount / 2) {
-          className = ' node-line-up-right node-line-up';
+          className = ` ${prefix}-node-line-up-right ${lineUp}`;
         } else {
-          className = ' node-line-up-left node-line-up';
+          className = ` ${prefix}-node-line-up-left ${lineUp}`;
         }
         return className;
       } else if (isLaptop) {
         if (siblingsAmount <= 4) {
           if (indexInRow <= siblingsAmount / 2) {
-            className = ' node-line-up-right node-line-up';
+            className = ` ${prefix}-node-line-up-right ${lineUp}`;
           } else {
-            className = ' node-line-up-left node-line-up';
+            className = ` ${prefix}-node-line-up-left ${lineUp}`;
           }
         } else {
           if (indexInRow === 1 || indexInRow === 5) {
-            className = ' node-line-up-right-long node-line-up';
+            className = ` ${prefix}-node-line-up-right-long ${lineUp}`;
           } else if (indexInRow === siblingsAmount) {
-            className = ' node-line-up-right-half node-line-up';
+            className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
           } else {
-            className = ' node-line-up-left node-line-up';
+            className = ` ${prefix}-node-line-up-left ${lineUp}`;
           }
         }
         return className;
       } else if (isTablet) {
         if (isOdd(indexInRow) || indexInRow === 1) {
-          className = ' node-line-up-right node-line-up';
+          className = ` ${prefix}-node-line-up-right ${lineUp}`;
         } else {
-          className = ' node-line-up-left node-line-up';
+          className = ` ${prefix}-node-line-up-left ${lineUp}`;
         }
         return className;
       }
@@ -1544,52 +1551,52 @@ function createNodeLineClass(
   } else {
     if (isTablet) {
       if (isLastRow && indexInRow === siblingsAmount - 1 && isOdd(indexInRow)) {
-        className = ' node-line-up-long';
+        className = ` ${lineUp}-long`;
       } else {
-        className = ` node-line-up-${isOdd(indexInRow) ? 'right-half' : 'left-half'} node-line-up`;
+        className = ` ${prefix}-node-line-up-${isOdd(indexInRow) ? 'right-half' : 'left-half'} ${lineUp}`;
       }
     } else {
       siblingsAmount += specialColumnsList.length - 1;
 
       if (siblingsAmount === 3) {
         if (indexInRow === 1) {
-          className = ' node-line-up-right-half node-line-up';
+          className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
         } else {
-          className = ' node-line-up-left-half node-line-up';
+          className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
         }
       } else if (siblingsAmount === 4) {
         if (isLastRow && specialColumnsList.includes(2)) {
           if (indexInRow === 1) {
-            className = ' node-line-up-right node-line-up';
+            className = ` ${prefix}-node-line-up-right ${lineUp}`;
           } else {
-            className = ' node-line-up-left node-line-up';
+            className = ` ${prefix}-node-line-up-left ${lineUp}`;
           }
         } else {
           if (specialColumnsList.includes(1)) {
             if (indexInRow === 2) {
-              className = ' node-line-up-left-half node-line-up';
+              className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
             } else {
-              className = ' node-line-up-left node-line-up';
+              className = ` ${prefix}-node-line-up-left ${lineUp}`;
             }
           } else if (specialColumnsList.includes(2)) {
             if (isLaptop) {
               if (indexInRow === 1) {
-                className = ' node-line-up-right node-line-up';
+                className = ` ${prefix}-node-line-up-right ${lineUp}`;
               } else {
-                className = ' node-line-up-left-half node-line-up';
+                className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
               }
             } else {
               if (indexInRow === 1) {
-                className = ' node-line-up-right-half node-line-up';
+                className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
               } else {
-                className = ' node-line-up-left node-line-up';
+                className = ` ${prefix}-node-line-up-left ${lineUp}`;
               }
             }
           } else if (specialColumnsList.includes(3)) {
             if (indexInRow === 1) {
-              className = ' node-line-up-right node-line-up';
+              className = ` ${prefix}-node-line-up-right ${lineUp}`;
             } else {
-              className = ' node-line-up-right-half node-line-up';
+              className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
             }
           }
         }
@@ -1599,17 +1606,17 @@ function createNodeLineClass(
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(2)
           ) {
-            className = ` node-line-up-${isLaptop ? 'right-half' : 'left'} node-line-up`;
+            className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
           } else if (
             specialColumnsList.includes(2) &&
             specialColumnsList.includes(3)
           ) {
-            className = ` node-line-up-${isLaptop ? 'right-half' : 'right'} node-line-up`;
+            className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
           } else if (
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(3)
           ) {
-            className = ` node-line-up-${isLaptop ? 'left-half' : 'right-half'} node-line-up`;
+            className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
           }
         } else {
           if (
@@ -1617,49 +1624,49 @@ function createNodeLineClass(
             (isLastRow && specialColumnsList.includes(3))
           ) {
             if (indexInRow === 1) {
-              className = ` node-line-up-right-half node-line-up`;
+              className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
             } else if (indexInRow === 2) {
-              className = ` node-line-up-left-half node-line-up`;
+              className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
             } else if (indexInRow === 3) {
-              className = ` node-line-up-right node-line-up`;
+              className = ` ${prefix}-node-line-up-right ${lineUp}`;
             } else if (indexInRow === 4) {
-              className = ` node-line-up-left node-line-up`;
+              className = ` ${prefix}-node-line-up-left ${lineUp}`;
             }
           } else if (specialColumnsList.includes(1)) {
             if (indexInRow === 2) {
-              className = ` node-line-up-${isLaptop ? 'left-half' : 'right-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
             } else if (indexInRow === 3) {
-              className = ` node-line-up-${isLaptop ? 'right-half' : 'left-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${isLaptop ? 'left-half' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(2)) {
             if (indexInRow === 1) {
-              className = ` node-line-up-${isLaptop ? 'right-half' : 'right'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 3) {
-              className = ` node-line-up-${isLaptop ? 'right' : 'left-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'right' : 'left-half'} ${lineUp}`;
             } else {
               if (isLastRow) {
-                className = ` node-line-up-${isLaptop ? 'left-half' : 'left'} node-line-up`;
+                className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
               } else {
-                className = ` node-line-up-${isLaptop ? 'right-half' : 'left'} node-line-up`;
+                className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
               }
             }
           } else if (specialColumnsList.includes(3)) {
             if (indexInRow === 1) {
-              className = ` node-line-up-${isLaptop ? 'right-half' : 'right'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 2) {
-              className = ` node-line-up-${isLaptop ? 'left-half' : 'right-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${isLaptop ? 'left-half' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(4)) {
             if (indexInRow === 1) {
-              className = ' node-line-up-right node-line-up';
+              className = ` ${prefix}-node-line-up-right ${lineUp}`;
             } else if (indexInRow === 2) {
-              className = ' node-line-up-right-half node-line-up';
+              className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
             } else {
-              className = ' node-line-up-left node-line-up';
+              className = ` ${prefix}-node-line-up-left ${lineUp}`;
             }
           }
         }
@@ -1671,86 +1678,86 @@ function createNodeLineClass(
           ) {
             if (isLaptop) {
               if (isLastRow) {
-                className = ` node-line-up-${indexInRow === 3 ? 'right-half' : 'left-half'} node-line-up`;
+                className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right-half' : 'left-half'} ${lineUp}`;
               } else {
-                className = ` node-line-up-${indexInRow === 3 ? 'right' : 'right-half'} node-line-up`;
+                className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right' : 'right-half'} ${lineUp}`;
               }
             } else {
-              className = ` node-line-up-left node-line-up`;
+              className = ` ${prefix}-node-line-up-left ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(3) &&
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 2 ? 'right-half' : 'right'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : 'right'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 1 ? 'right' : 'right-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : 'right-half'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(2) &&
             specialColumnsList.includes(3)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 1 ? 'right-half' : 'left-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right-half' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 1 ? 'right' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : 'left'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(2) &&
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 1 ? 'right-half' : 'right'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right-half' : 'right'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 1 ? 'right' : 'left-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : 'left-half'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(3)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-left-half node-line-up`;
+              className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 2 ? 'right-half' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 2 ? 'left-half' : 'right'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'left-half' : 'right'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 2 ? 'right-half' : 'left-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : 'left-half'} ${lineUp}`;
             }
           }
         } else {
           if (specialColumnsList.includes(1)) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 3 ? 'right' : indexInRow === 2 ? 'left-half' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right' : indexInRow === 2 ? 'left-half' : 'left'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 2 ? 'right-half' : indexInRow === 3 ? 'left-half' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(2)) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 1 || indexInRow === 4 ? 'right-half' : indexInRow === 3 ? 'right' : 'left-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 || indexInRow === 4 ? 'right-half' : indexInRow === 3 ? 'right' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 3 ? 'left-half' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(3)) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 1 || indexInRow === 4 ? 'right' : 'right-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 || indexInRow === 4 ? 'right' : 'right-half'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(4)) {
             if (isLaptop) {
-              className = ` node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left-half'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 5 ? 'left' : 'right'} node-line-up`;
+              className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 5 ? 'left' : 'right'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(5)) {
-            className = ` node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 4 ? 'left-half' : 'right'} node-line-up`;
+            className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 4 ? 'left-half' : 'right'} ${lineUp}`;
           }
         }
       }
@@ -1820,25 +1827,25 @@ function getLastRowClass(
 
   if (!isMobile && rowLength >= 5) {
     if (specialColumnList.length >= 2) {
-      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-2-s-cols`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-2-s-cols`;
     } else if (rowLength === 5 && specialColumnList.length >= 1) {
-      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-1-s-cols`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-1-s-cols`;
     } else {
-      return `row row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
     }
   } else if (!isMobile && rowLength >= 2) {
     if (
       (specialColumnList.length && rowLength === 3 && isTablet) ||
       (specialColumnList.length && rowLength === 3 && isLaptop)
     ) {
-      return `row row-last-${rowLength}-1-s-cols`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}-1-s-cols`;
     } else {
-      return `row row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
     }
   } else if (!isMobile && rowLength <= 2) {
-    return `row row-last-${rowLength}`;
+    return `${prefix}-row ${prefix}-row-last-${rowLength}`;
   } else {
-    return 'row';
+    return `${prefix}-row`;
   }
 }
 
@@ -2007,14 +2014,14 @@ function findHighestChildrenAmountInRow(
 
 function createTOC(toc: TableOfContentsItem[], isMobile?: boolean) {
   const tocBox = createElement('ul');
-  tocBox.classList.add('toc-box');
-  isMobile && tocBox.classList.add('toc-box-mobile');
+  tocBox.classList.add(`${prefix}-toc-box`);
+  isMobile && tocBox.classList.add(`${prefix}-toc-box-mobile`);
 
   toc.forEach((tocItem) => {
     const tocItemElement = createElement('li');
-    tocItemElement.className = 'toc-item';
+    tocItemElement.className = `${prefix}-toc-item`;
     const tocItemColor = createElement('span');
-    tocItemColor.className = 'toc-item-color';
+    tocItemColor.className = `${prefix}-toc-item-color`;
     tocItemColor.style.background = tocItem.color;
     tocItemElement.appendChild(tocItemColor);
     const tocItemTitle = createElement('span');
