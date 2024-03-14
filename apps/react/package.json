@@ -1,7 +1,6 @@
 {
   "name": "@root/react",
   "version": "0.1.0",
-  "homepage": "http://felleslosninger.github.io/tlp-organization-chart",
   "private": true,
   "dependencies": {
     "@digdir/design-system-react": "^0.51.3-alpha.0",
@@ -17,24 +16,19 @@
     "@uiw/react-textarea-code-editor": "^2.1.9",
     "bootstrap": "^5.3.2",
     "classnames": "^2.5.1",
-    "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "@digdir/organisation-chart": "link:..\\..\\packages\\org-chart"
+    "web-vitals": "^2.1.4",
+    "@digdir/organisation-chart": "workspace:*"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
