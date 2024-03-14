@@ -118,7 +118,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1(@types/react@18.2.60)(react@18.2.0)
       '@navikt/aksel-icons':
-        specifier: ^5.7.6
+        specifier: ^5.18.3
         version: 5.18.3
       '@remix-run/node':
         specifier: ^2.8.1
