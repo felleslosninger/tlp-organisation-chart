@@ -1384,17 +1384,6 @@
               }
             }
           ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item200"],
-              "component": {
-                "type": "node-list",
-                "children": ["child200"]
-              }
-            }
-          ]
         }
       ]
     }
