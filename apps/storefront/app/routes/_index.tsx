@@ -1,6 +1,6 @@
 import type { MetaFunction } from '@remix-run/node';
 
-import { Chart } from '../components/Chart.client';
+import { Chart } from '../components/Chart/Chart.client';
 import HomeHeader from '../components/layouts/HomeHeader';
 import { Heading } from '@digdir/designsystemet-react';
 

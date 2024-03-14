@@ -1,5 +1,6 @@
 .content {
   width: 100%;
+  margin-bottom: var(--fds-spacing-14);
 }
 
 .content p,
