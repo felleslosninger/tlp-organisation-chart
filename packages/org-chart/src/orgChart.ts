@@ -1467,9 +1467,9 @@ function createNodeLineClass(
       if (!isTablet && !isLaptop) {
         let lowerHalf = (siblingsAmount - 1) / 2;
         if (indexInRow <= lowerHalf) {
-          className = ` ${prefix}-node-line-up-right ${lineUp}`;
+          className = ` ${lineUp}-right ${lineUp}`;
         } else {
-          className = ` ${prefix}-node-line-up-left ${lineUp}`;
+          className = ` ${lineUp}-left ${lineUp}`;
         }
         return className;
       }
@@ -1483,21 +1483,21 @@ function createNodeLineClass(
             indexInRow === 1 ||
             (isOdd(indexInRow) && indexInRow !== siblingsAmount)
           ) {
-            className = ` ${prefix}-node-line-up-right ${lineUp}`;
+            className = ` ${lineUp}-right ${lineUp}`;
           } else {
-            className = ` ${prefix}-node-line-up-left ${lineUp}`;
+            className = ` ${lineUp}-left ${lineUp}`;
           }
         } else {
           if (indexInRow <= lowerHalf) {
-            className = ` ${prefix}-node-line-up-right ${lineUp}`;
+            className = ` ${lineUp}-right ${lineUp}`;
           } else if (indexInRow > upperHalf && !isOdd(indexInRow)) {
-            className = ` ${prefix}-node-line-up-left ${lineUp}`;
+            className = ` ${lineUp}-left ${lineUp}`;
           } else if (indexInRow === siblingsAmount && siblingsAmount > 3) {
-            className = ` ${prefix}-node-line-up-right-long ${lineUp}`;
+            className = ` ${lineUp}-right-long ${lineUp}`;
           } else if (indexInRow === 3) {
-            className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
+            className = ` ${lineUp}-left-half ${lineUp}`;
           } else {
-            className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+            className = ` ${lineUp}-right-half ${lineUp}`;
           }
         }
         return className;
@@ -1505,42 +1505,42 @@ function createNodeLineClass(
 
       if (isTablet) {
         if (isOdd(indexInRow)) {
-          className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+          className = ` ${lineUp}-right-half ${lineUp}`;
         } else {
-          className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
+          className = ` ${lineUp}-left-half ${lineUp}`;
         }
         return className;
       }
     } else if (siblingsAmount > 2) {
       if (!isTablet && !isLaptop) {
         if (indexInRow <= siblingsAmount / 2) {
-          className = ` ${prefix}-node-line-up-right ${lineUp}`;
+          className = ` ${lineUp}-right ${lineUp}`;
         } else {
-          className = ` ${prefix}-node-line-up-left ${lineUp}`;
+          className = ` ${lineUp}-left ${lineUp}`;
         }
         return className;
       } else if (isLaptop) {
         if (siblingsAmount <= 4) {
           if (indexInRow <= siblingsAmount / 2) {
-            className = ` ${prefix}-node-line-up-right ${lineUp}`;
+            className = ` ${lineUp}-right ${lineUp}`;
           } else {
-            className = ` ${prefix}-node-line-up-left ${lineUp}`;
+            className = ` ${lineUp}-left ${lineUp}`;
           }
         } else {
           if (indexInRow === 1 || indexInRow === 5) {
-            className = ` ${prefix}-node-line-up-right-long ${lineUp}`;
+            className = ` ${lineUp}-right-long ${lineUp}`;
           } else if (indexInRow === siblingsAmount) {
-            className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+            className = ` ${lineUp}-right-half ${lineUp}`;
           } else {
-            className = ` ${prefix}-node-line-up-left ${lineUp}`;
+            className = ` ${lineUp}-left ${lineUp}`;
           }
         }
         return className;
       } else if (isTablet) {
         if (isOdd(indexInRow) || indexInRow === 1) {
-          className = ` ${prefix}-node-line-up-right ${lineUp}`;
+          className = ` ${lineUp}-right ${lineUp}`;
         } else {
-          className = ` ${prefix}-node-line-up-left ${lineUp}`;
+          className = ` ${lineUp}-left ${lineUp}`;
         }
         return className;
       }
@@ -1553,50 +1553,50 @@ function createNodeLineClass(
       if (isLastRow && indexInRow === siblingsAmount - 1 && isOdd(indexInRow)) {
         className = ` ${lineUp}-long`;
       } else {
-        className = ` ${prefix}-node-line-up-${isOdd(indexInRow) ? 'right-half' : 'left-half'} ${lineUp}`;
+        className = ` ${lineUp}-${isOdd(indexInRow) ? 'right-half' : 'left-half'} ${lineUp}`;
       }
     } else {
       siblingsAmount += specialColumnsList.length - 1;
 
       if (siblingsAmount === 3) {
         if (indexInRow === 1) {
-          className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+          className = ` ${lineUp}-right-half ${lineUp}`;
         } else {
-          className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
+          className = ` ${lineUp}-left-half ${lineUp}`;
         }
       } else if (siblingsAmount === 4) {
         if (isLastRow && specialColumnsList.includes(2)) {
           if (indexInRow === 1) {
-            className = ` ${prefix}-node-line-up-right ${lineUp}`;
+            className = ` ${lineUp}-right ${lineUp}`;
           } else {
-            className = ` ${prefix}-node-line-up-left ${lineUp}`;
+            className = ` ${lineUp}-left ${lineUp}`;
           }
         } else {
           if (specialColumnsList.includes(1)) {
             if (indexInRow === 2) {
-              className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
+              className = ` ${lineUp}-left-half ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-left ${lineUp}`;
+              className = ` ${lineUp}-left ${lineUp}`;
             }
           } else if (specialColumnsList.includes(2)) {
             if (isLaptop) {
               if (indexInRow === 1) {
-                className = ` ${prefix}-node-line-up-right ${lineUp}`;
+                className = ` ${lineUp}-right ${lineUp}`;
               } else {
-                className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
+                className = ` ${lineUp}-left-half ${lineUp}`;
               }
             } else {
               if (indexInRow === 1) {
-                className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+                className = ` ${lineUp}-right-half ${lineUp}`;
               } else {
-                className = ` ${prefix}-node-line-up-left ${lineUp}`;
+                className = ` ${lineUp}-left ${lineUp}`;
               }
             }
           } else if (specialColumnsList.includes(3)) {
             if (indexInRow === 1) {
-              className = ` ${prefix}-node-line-up-right ${lineUp}`;
+              className = ` ${lineUp}-right ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+              className = ` ${lineUp}-right-half ${lineUp}`;
             }
           }
         }
@@ -1606,17 +1606,17 @@ function createNodeLineClass(
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(2)
           ) {
-            className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
+            className = ` ${lineUp}-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
           } else if (
             specialColumnsList.includes(2) &&
             specialColumnsList.includes(3)
           ) {
-            className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
+            className = ` ${lineUp}-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
           } else if (
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(3)
           ) {
-            className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
+            className = ` ${lineUp}-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
           }
         } else {
           if (
@@ -1624,49 +1624,49 @@ function createNodeLineClass(
             (isLastRow && specialColumnsList.includes(3))
           ) {
             if (indexInRow === 1) {
-              className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+              className = ` ${lineUp}-right-half ${lineUp}`;
             } else if (indexInRow === 2) {
-              className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
+              className = ` ${lineUp}-left-half ${lineUp}`;
             } else if (indexInRow === 3) {
-              className = ` ${prefix}-node-line-up-right ${lineUp}`;
+              className = ` ${lineUp}-right ${lineUp}`;
             } else if (indexInRow === 4) {
-              className = ` ${prefix}-node-line-up-left ${lineUp}`;
+              className = ` ${lineUp}-left ${lineUp}`;
             }
           } else if (specialColumnsList.includes(1)) {
             if (indexInRow === 2) {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
             } else if (indexInRow === 3) {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'left-half'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'right-half' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(2)) {
             if (indexInRow === 1) {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 3) {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'right' : 'left-half'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'right' : 'left-half'} ${lineUp}`;
             } else {
               if (isLastRow) {
-                className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
+                className = ` ${lineUp}-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
               } else {
-                className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
+                className = ` ${lineUp}-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
               }
             }
           } else if (specialColumnsList.includes(3)) {
             if (indexInRow === 1) {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 2) {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(4)) {
             if (indexInRow === 1) {
-              className = ` ${prefix}-node-line-up-right ${lineUp}`;
+              className = ` ${lineUp}-right ${lineUp}`;
             } else if (indexInRow === 2) {
-              className = ` ${prefix}-node-line-up-right-half ${lineUp}`;
+              className = ` ${lineUp}-right-half ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-left ${lineUp}`;
+              className = ` ${lineUp}-left ${lineUp}`;
             }
           }
         }
@@ -1678,86 +1678,86 @@ function createNodeLineClass(
           ) {
             if (isLaptop) {
               if (isLastRow) {
-                className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right-half' : 'left-half'} ${lineUp}`;
+                className = ` ${lineUp}-${indexInRow === 3 ? 'right-half' : 'left-half'} ${lineUp}`;
               } else {
-                className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right' : 'right-half'} ${lineUp}`;
+                className = ` ${lineUp}-${indexInRow === 3 ? 'right' : 'right-half'} ${lineUp}`;
               }
             } else {
-              className = ` ${prefix}-node-line-up-left ${lineUp}`;
+              className = ` ${lineUp}-left ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(3) &&
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : 'right'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 2 ? 'right-half' : 'right'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : 'right-half'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right' : 'right-half'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(2) &&
             specialColumnsList.includes(3)
           ) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right-half' : 'left-half'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right-half' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right' : 'left'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(2) &&
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right-half' : 'right'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right-half' : 'right'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : 'left-half'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right' : 'left-half'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(3)
           ) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-left-half ${lineUp}`;
+              className = ` ${lineUp}-left-half ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
             }
           } else if (
             specialColumnsList.includes(1) &&
             specialColumnsList.includes(4)
           ) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'left-half' : 'right'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 2 ? 'left-half' : 'right'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : 'left-half'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 2 ? 'right-half' : 'left-half'} ${lineUp}`;
             }
           }
         } else {
           if (specialColumnsList.includes(1)) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right' : indexInRow === 2 ? 'left-half' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 3 ? 'right' : indexInRow === 2 ? 'left-half' : 'left'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 2 ? 'right-half' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 2 ? 'right-half' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(2)) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 || indexInRow === 4 ? 'right-half' : indexInRow === 3 ? 'right' : 'left-half'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 || indexInRow === 4 ? 'right-half' : indexInRow === 3 ? 'right' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(3)) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 || indexInRow === 4 ? 'right' : 'right-half'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 || indexInRow === 4 ? 'right' : 'right-half'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(4)) {
             if (isLaptop) {
-              className = ` ${prefix}-node-line-up-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left-half'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left-half'} ${lineUp}`;
             } else {
-              className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 5 ? 'left' : 'right'} ${lineUp}`;
+              className = ` ${lineUp}-${indexInRow === 3 ? 'right-half' : indexInRow === 5 ? 'left' : 'right'} ${lineUp}`;
             }
           } else if (specialColumnsList.includes(5)) {
-            className = ` ${prefix}-node-line-up-${indexInRow === 3 ? 'right-half' : indexInRow === 4 ? 'left-half' : 'right'} ${lineUp}`;
+            className = ` ${lineUp}-${indexInRow === 3 ? 'right-half' : indexInRow === 4 ? 'left-half' : 'right'} ${lineUp}`;
           }
         }
       }
