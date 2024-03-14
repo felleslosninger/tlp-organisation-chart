@@ -26,6 +26,7 @@ export default function Index() {
       <Heading
         level={2}
         size='medium'
+        spacing
       >
         Example of an organisation chart
       </Heading>

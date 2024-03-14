@@ -15,7 +15,7 @@ Keep in mind that the function **always** attaches itself to `window`.
 
 ### Installing via npm
 
-```sh
+```shell
 npm install @digdir/organisation-chart
 ```
 

@@ -2,7 +2,7 @@
 
 [![](https://img.shields.io/npm/v/@digdir/organisation-chart?label=latest%20release&color=0051be)](https://www.npmjs.com/package/@digdir/organisation-chart)
 
-Display an accessible organisation chart. 
+Display an accessible organisation chart.
 
 ![Image showing organisation chart](https://i.imgur.com/5IZXdii.png)
 
@@ -15,17 +15,14 @@ Keep in mind that the function **always** attaches itself to `window`.
 
 ### Installing via npm
 
-
-```sh
+```shell
 npm install @digdir/organisation-chart
 ```
 
-
 After the package is installed, we need to import the css, either globally or only on the page you are using the chart.
 
-
 ```js
-import '@digdir/organisation-chart/dist/index.css'
+import '@digdir/organisation-chart/dist/index.css';
 ```
 
 then import the function, and use it
@@ -42,7 +39,7 @@ The second argument is the id of the container where you want the chart to show.
 ### Installing via `<link>`
 
 ```html
-<link ...>
+<link ... />
 ```
 
 ```html
@@ -59,12 +56,11 @@ The chart is responsive on any device, and looks at the width of the parent cont
 We use these breakpoints:
 
 | device   | breakpoint |
-|----------|------------|
+| -------- | ---------- |
 | standard | >1500      |
 | laptop   | <1500 >992 |
 | tablet   | <992 >768  |
 | mobile   | <768       |
-
 
 ### Rules
 
@@ -95,7 +91,7 @@ Each node must always have an id and a title. Keep in mind that the id must be u
 You can send in more props, to further customize how the nodes look, and if it should be a link.
 
 | Key             | Type   |
-|-----------------|--------|
+| --------------- | ------ |
 | id              | string |
 | title           | string |
 | url             | string |
@@ -141,12 +137,12 @@ You can see examples on [Github](https://github.com/felleslosninger/tlp-organiza
 
 You can define a layout for each of our breakpoints, or you can use the same layout for all of them.
 
-We split the layout into rows, and each row can have multiple nodes. Refer to the REGLER HERE for more information 
+We split the layout into rows, and each row can have multiple nodes. Refer to the REGLER HERE for more information
 about limitations.
 
 ### TOC
 
-The TOC (Table of Contents) is a legend that shows what your different nodes are. 
+The TOC (Table of Contents) is a legend that shows what your different nodes are.
 This is optional, and can be turned off by not sending it in your data. It is, however, recommended to use it.
 
 ```json
@@ -164,7 +160,7 @@ The meta object is used to define a name, and the language code. This key is opt
 
 ```json
 {
-  "meta":{
+  "meta": {
     "title": "Test",
     "langcode": "no"
   }
@@ -182,7 +178,7 @@ Run `pnpm install` in the root directory.
 We have two applications, one for development, and one that is deployed on github pages.
 When developing, you want to run the dev application:
 
-```sh
+```shell
 pnpm run:dev
 ```
 
@@ -221,3 +217,20 @@ Now we are safe to publish the package. We will run this commands:
 ```shell
 pnpm changeset publish
 ```
+
+This will create a tag we need to push to github.
+You need to make sure you have the correct permissions to the repository.
+
+To push the new tag, run
+
+```shell
+git push origin <tag_name>
+```
+
+or, if you are **certain** you only have one tag to push
+
+```shell
+git push --tags
+```
+
+_This is not recommended_
