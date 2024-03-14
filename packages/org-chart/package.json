@@ -1,6 +1,6 @@
 {
   "name": "@digdir/organisation-chart",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Organisation chart generator",
   "homepage": "https://orgchart.digdir.no/",
   "repository": "https://github.com/felleslosninger/tlp-organization-chart",

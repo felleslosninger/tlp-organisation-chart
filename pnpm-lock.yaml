@@ -40,8 +40,8 @@ importers:
   apps/react:
     dependencies:
       '@digdir/design-system-react':
-        specifier: ^0.51.1
-        version: 0.51.2(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.51.3-alpha.0
+        version: 0.51.3-alpha.0(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0)
       '@digdir/design-system-tokens':
         specifier: ^0.8.1
         version: 0.8.1
@@ -1999,8 +1999,8 @@ packages:
       postcss-selector-parser: 6.0.15
     dev: false
 
-  /@digdir/design-system-react@0.51.2(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-JhkjCV/oXWyqOeFR0bPyeRQBdI1FeyyxDQibdk+oCOeDZHMRoAPa/tl3T5wupLOXoBXWHQPqlutcCXn9KLL2Gw==}
+  /@digdir/design-system-react@0.51.3-alpha.0(@types/react@18.2.60)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mnlWJvbH2ERCFUGcUsHsPYmnI2NxsmFs8Kwu2i5E4lE9y4oB07IZRN/qju9m5nHoDqKCuCZ0Ms/iI1Jmid5u8w==}
     peerDependencies:
       react: '>=18.2.0'
       react-dom: '>=18.2.0'

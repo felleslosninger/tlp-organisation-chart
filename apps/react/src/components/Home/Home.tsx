@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Combobox } from '@digdir/design-system-react';
-import { generateOrgChart } from '@digdir/organization-chart';
+import { generateOrgChart } from '@digdir/organisation-chart';
 
 import jsonData1 from '../../data/data1.json';
 import jsonData2 from '../../data/data2.json';
