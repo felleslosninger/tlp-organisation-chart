@@ -52,7 +52,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   function createChildren(parentSiblingsAmount: number, children: string[]) {
-    const childrenList = createElement('ul');
+    const childrenList = createElement('div');
+
     childrenList.className = `${prefix}-node-children`;
     if (parentSiblingsAmount <= 2 && !isMobile) {
       childrenList.style.width = '290px';
@@ -61,7 +62,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     children.forEach((childId: string) => {
       const childData = findNodeById(childId);
       if (childData) {
-        const childElement = createElement('li');
+        const childElement = createElement('div');
         childElement.id = childData.id;
         childElement.setAttribute('role', 'treeitem');
         childElement.setAttribute('aria-level', '3');
@@ -177,6 +178,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     //if column.id is an array, create a special column
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement('div');
+      nodesWrapper.setAttribute('role', 'group');
 
       if (isMobile || isTablet) {
         if (isLastRow && indexInRow === siblingsAmount && !isMobile) {
@@ -250,6 +252,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           nodeElement.style.backgroundColor = nodeData.backgroundColor;
           nodeElement.style.color = nodeData.textColor;
           nodeElement.innerHTML = nodeData.title;
+          nodeElement.setAttribute('role', 'treeitem');
+          nodeElement.setAttribute('aria-level', '2');
+          console.log(column.component?.children);
+          if (column.component?.children) {
+            nodeElement.setAttribute(
+              'aria-owns',
+              column.component.children.join(' '),
+            );
+          }
           nodesWrapper.appendChild(nodeElement);
         }
       });
