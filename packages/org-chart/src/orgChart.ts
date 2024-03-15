@@ -64,6 +64,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         const childElement = createElement('li');
         childElement.id = childData.id;
         childElement.setAttribute('role', 'treeitem');
+        childElement.setAttribute('aria-level', '3');
 
         const innerChild = childData.url
           ? createElement('a')
