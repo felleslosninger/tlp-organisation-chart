@@ -8,6 +8,8 @@ import cl from 'clsx';
 import classes from './Header.module.css';
 import { useState } from 'react';
 
+import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons';
+
 export const Header = () => {
   const [open, setOpen] = useState(false);
 
@@ -34,8 +36,8 @@ export const Header = () => {
               setOpen(!open);
             }}
           >
-            {open && 'X'}
-            {!open && 'H'}
+            {open && <Cross1Icon />}
+            {!open && <HamburgerMenuIcon />}
           </button>
 
           <ul className={cl(classes.menu, { [classes.active]: open })}>
