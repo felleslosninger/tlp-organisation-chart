@@ -95,6 +95,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     indexInRow: number,
     isLastRow: boolean,
     specialColumnList: number[],
+    isRoot?: boolean | undefined,
   ) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
@@ -112,6 +113,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       //give role treeitem to nodeElement
       nodeElement.setAttribute('role', 'treeitem');
+      nodeElement.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
 
       const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
       //if nodeData has border, provide border
@@ -316,6 +318,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       indexInRow,
       isLastRow,
       specialColumnList,
+      column.component?.type === 'root',
     );
 
     if (!isMobile) {
