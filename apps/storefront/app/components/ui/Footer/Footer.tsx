@@ -9,11 +9,28 @@ const Footer = () => {
     <footer className={classes.footer}>
       <div className={classes.top}>
         <Container className={classes.container}>
+          <div className={classes.logos}>
+            <Link asChild>
+              <RemixLink to='/'>
+                <img
+                  src='logo_white.svg'
+                  alt='Organisation Chart'
+                />
+              </RemixLink>
+            </Link>
+            <Paragraph
+              size='small'
+              className={classes.text}
+            >
+              Et lett og tilgjengelig JavaScript bibliotek for å vise
+              organisasjonskart på nettsider.
+            </Paragraph>
+          </div>
           <div>
             <Heading
               level={2}
               size='xsmall'
-              className={classes.text}
+              className={classes.heading}
               spacing
             >
               Om nettstedet
@@ -24,7 +41,7 @@ const Footer = () => {
                   asChild
                   inverted
                 >
-                  <RemixLink to='/documentation'>Dokumentasjon</RemixLink>
+                  <RemixLink to='/dokumentasjon'>Dokumentasjon</RemixLink>
                 </Link>
               </li>
               <li>
@@ -32,7 +49,7 @@ const Footer = () => {
                   asChild
                   inverted
                 >
-                  <RemixLink to='/changelog'>Endringslogg</RemixLink>
+                  <RemixLink to='/endringslogg'>Endringslogg</RemixLink>
                 </Link>
               </li>
               <li>
@@ -40,7 +57,7 @@ const Footer = () => {
                   asChild
                   inverted
                 >
-                  <RemixLink to='/privacy-policy'>
+                  <RemixLink to='/personvernerklæring'>
                     Personvernerklæring
                   </RemixLink>
                 </Link>
@@ -51,7 +68,7 @@ const Footer = () => {
             <Heading
               level={2}
               size='xsmall'
-              className={classes.text}
+              className={classes.heading}
               spacing
             >
               Kom i kontakt med oss
@@ -68,16 +85,6 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-        </Container>
-      </div>
-      <div className={classes.bottom}>
-        <Container>
-          <Paragraph
-            size='small'
-            className={classes.text}
-          >
-            Tjenesten er levert av Digitaliseringsdirektoratet
-          </Paragraph>
         </Container>
       </div>
     </footer>

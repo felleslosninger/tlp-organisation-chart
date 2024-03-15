@@ -1,6 +1,15 @@
 import { MDXProvider } from '@mdx-js/react';
 
-import { Heading, Link, List, Paragraph } from '@digdir/designsystemet-react';
+import {
+  Divider,
+  Heading,
+  Link,
+  List,
+  Paragraph,
+  Table,
+} from '@digdir/designsystemet-react';
+
+import classes from './mdx.module.css';
 
 export const MDX = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,6 +19,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={1}
             spacing
+            size='xlarge'
             {...props}
           />
         ),
@@ -17,6 +27,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={2}
             spacing
+            size='large'
             {...props}
           />
         ),
@@ -24,6 +35,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={3}
             spacing
+            size='medium'
             {...props}
           />
         ),
@@ -31,6 +43,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={4}
             spacing
+            size='small'
             {...props}
           />
         ),
@@ -38,6 +51,7 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={5}
             spacing
+            size='xsmall'
             {...props}
           />
         ),
@@ -45,15 +59,22 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           <Heading
             level={6}
             spacing
+            size='xxsmall'
             {...props}
           />
         ),
-        a: (props) => (
-          <Link
-            {...props}
-            target='_blank'
-          />
-        ),
+        a: (props) => {
+          if (props && props.href && props.href.startsWith('http')) {
+            return (
+              <Link
+                {...props}
+                target='_blank'
+              />
+            );
+          }
+
+          return <Link {...props} />;
+        },
         p: Paragraph,
         ol: (props) => (
           <List.Root>
@@ -66,9 +87,28 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
           </List.Root>
         ),
         li: (props) => <List.Item {...props} />,
+        hr: (props) => (
+          <Divider
+            {...props}
+            color='default'
+            ref={null}
+          />
+        ),
+        table: (props) => (
+          <Table
+            {...props}
+            zebra
+            border
+          />
+        ),
+        thead: (props) => <Table.Head {...props} />,
+        tbody: (props) => <Table.Body {...props} />,
+        tr: (props) => <Table.Row {...props} />,
+        th: (props) => <Table.HeaderCell {...props} />,
+        td: (props) => <Table.Cell {...props} />,
       }}
     >
-      {children}
+      <div className={classes.content}>{children}</div>
     </MDXProvider>
   );
 };

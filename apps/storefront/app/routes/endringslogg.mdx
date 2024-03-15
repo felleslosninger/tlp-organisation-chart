@@ -1,24 +1,19 @@
----
-title: Changelog - Organisation Chart
-description: Changelog for the Organisation Chart
----
+import TextLayout from '../components/layouts/TextLayout';
 
 export const meta = () => {
   return [
-    { title: frontmatter.title },
+    { title: 'Endringslogg - Organisation Chart' },
     {
       name: 'description',
-      content: frontmatter.description,
+      content: 'Endringslogg for the Organisation Chart',
     },
   ];
 };
 
-<div>
+export default ({ children }) => <TextLayout>{children}</TextLayout>;
 
 [![](https://img.shields.io/npm/v/@digdir/organisation-chart?label=latest%20release&color=0051be)](https://www.npmjs.com/package/@digdir/organisation-chart)
 
-# Changelog
+# Endringslogg
 
-Changelog will come here..
-
-</div>
+Endringslogg will come here..
