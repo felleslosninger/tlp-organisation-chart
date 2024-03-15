@@ -79,7 +79,7 @@
 }
 
 .och-row-last-3-tablet::before {
-  height: calc(50% + 22px + calc(47och-45px * var(--diff)));
+  height: calc(50% + 22px + calc(47.45px * var(--diff)));
 }
 
 .och-row-last-4::before,
