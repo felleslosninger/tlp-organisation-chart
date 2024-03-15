@@ -96,15 +96,24 @@ We use these breakpoints:
 
 ### Rules
 
-Coming..
+To ensure the chart functions correctly, it is designed to adhere to a set of rules:
 
-#### Limitations
+#### Rules for columns:
 
-Coming..
+- A column can contain a node with children, or two nodes that share children.
+- A column containing two nodes that share children will take up twice as much space as a column with only one node. We refer to this type of column as a special column.
+- A node that is to have children can have as many children as the user desires.
 
-#### Gotchas
+#### Rules for Rows:
 
-Coming..
+- The first row must, and can only have one column.
+- A row must have at least one column, and can have up to six columns.
+- If a row contains columns with two nodes that share children, also known as a special column, this column will occupy the space of two columns.
+  - This means that if a row contains one special column, there is only room for four regular columns.
+  - If a row contains two special columns, there is only room for two regular columns.
+  - If a row contains three special columns,
+    then the row is full, and the user must start on a new row.
+- It is worth noting that the last row in the chart may behave a bit differently compared to the rest of the rows. It should be created in the same way as the other rows. The difference is that the last elements in the row will center themselves relative to the rest, the way this works depends on the number of columns in the row and how much space the row has.
 
 ---
 
