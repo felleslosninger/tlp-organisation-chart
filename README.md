@@ -38,8 +38,14 @@ The second argument is the id of the container where you want the chart to show.
 
 ### Installing via `<link>`
 
+We recommend to build your own copy of the package, and then add it to your website.
+You can read about how to do this below.
+
 ```html
-<link ... />
+<link
+  rel="preload"
+  src="path/to/orgchart"
+/>
 ```
 
 ```html
@@ -48,25 +54,48 @@ The second argument is the id of the container where you want the chart to show.
 </script>
 ```
 
+It it possible to use services like jsdelivr to get the package, but we recommend to build your own copy.
+
 ---
 
 ## Behaviour
 
 The chart is responsive on any device, and looks at the width of the parent container to check if it needs to change.
+This means that if your chart is in a small container, it will change to fit that container - no media queries needed.
+
 We use these breakpoints:
 
-| device   | breakpoint |
-| -------- | ---------- |
-| standard | >1500      |
-| laptop   | <1500 >992 |
-| tablet   | <992 >768  |
-| mobile   | <768       |
+| Name   | Breakpoint   |
+| ------ | ------------ |
+| main   | > 1500       |
+| laptop | < 1500 > 992 |
+| tablet | < 992 > 768  |
+| mobile | < 768        |
 
 ### Rules
 
-Coming...
+Coming..
 
-### A11y
+#### Limitations
+
+Coming..
+
+#### Gotchas
+
+Coming..
+
+---
+
+## Accessibility
+
+By default the chart gets a `role="tree"`, and every child gets a `role="treeitem"`. This is done to make screenreaders be able to parse the content as a tree of connected nodes.
+We automatically add levels to the nodes, and the screenreader will read out the level of the node.
+
+Some browsers or screenreaders might work differently, but this is a limitation with the programs, and not the chart.
+
+You are free to choose the color of your boxes, however we don't check the contrast between background and foreground.
+
+---
 
 By default the chart gets a `role="tree"`, and every child gets a `role="treeitem"`. This is done to make screenreaders be able to parse the content as a tree of connected nodes.
 
@@ -88,7 +117,8 @@ Each node must always have an id and a title. Keep in mind that the id must be u
 }
 ```
 
-You can send in more props, to further customize how the nodes look, and if it should be a link.
+You can send in more props, to further customize how the nodes look.
+For example, you can make the node a link.
 
 | Key             | Type   |
 | --------------- | ------ |
@@ -143,7 +173,7 @@ about limitations.
 ### TOC
 
 The TOC (Table of Contents) is a legend that shows what your different nodes are.
-This is optional, and can be turned off by not sending it in your data. It is, however, recommended to use it.
+We do not generate this, so make sure to keep this updated to be on par with your nodes.
 
 ```json
 {
@@ -166,8 +196,6 @@ The meta object is used to define a name, and the language code. This key is opt
   }
 }
 ```
-
----
 
 ## Development
 

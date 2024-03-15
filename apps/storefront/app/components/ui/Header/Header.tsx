@@ -7,7 +7,6 @@ import cl from 'clsx';
 
 import classes from './Header.module.css';
 import { useState } from 'react';
-import { MenuHamburgerIcon, XMarkIcon } from '@navikt/aksel-icons';
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
@@ -35,8 +34,8 @@ export const Header = () => {
               setOpen(!open);
             }}
           >
-            {open && '<XMarkIcon />'}
-            {!open && '<MenuHamburgerIcon />'}
+            {open && 'X'}
+            {!open && 'H'}
           </button>
 
           <ul className={cl(classes.menu, { [classes.active]: open })}>

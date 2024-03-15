@@ -36,18 +36,6 @@ generateOrgChart(data, 'chart');
 The first argument is your JSON data, read more about setting up your data below.
 The second argument is the id of the container where you want the chart to show.
 
-### Installing via `<link>`
-
-```html
-<link ... />
-```
-
-```html
-<script>
-  window.generateOrgChart(data, 'chart');
-</script>
-```
-
 ---
 
 Please read the documentation on [orgchart.digdir.no](https://orgchart.digdir.no) for more information about behaviour and data structure.
