@@ -461,6 +461,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   function createRowsWrapper(layout: Layout) {
     const rows = createElement('div');
     rows.className = `${prefix}-rows`;
+    rows.setAttribute('role', 'tree');
+    rows.setAttribute('aria-label', meta.title);
+    rows.role = 'tree';
 
     const numberOfRows = layout.rows.length;
     let isLastRow = false;
@@ -495,7 +498,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Create element to hold the org chart
     const orgChart = document.createElement('div');
     orgChart.className = provideLayoutClass(mainContainerWidth);
-    orgChart.role = 'tree';
     orgChart.setAttribute('lang', meta.langcode);
     orgChart.setAttribute('aria-label', meta.title);
 
