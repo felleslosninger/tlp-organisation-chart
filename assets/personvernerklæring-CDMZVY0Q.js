@@ -1,0 +1,4 @@
+import{j as n}from"./jsx-runtime-BgQc5Su6.js";import{T as t}from"./TextLayout-VvtZ8NZA.js";import{u as o}from"./index-D_pZd4SX.js";const h=()=>[{title:"Personvernerklæring - Organisation Chart"},{name:"description",content:"Dokumentasjon for the Organisation Chart"}],s=({children:e})=>n.jsx(t,{children:e});function i(e){const r={a:"a",h1:"h1",p:"p",...o(),...e.components};return n.jsxs(n.Fragment,{children:[n.jsx(r.h1,{children:"Personvernerklæring"}),`
+`,n.jsx(r.p,{children:"11.03.2024"}),`
+`,n.jsxs(r.p,{children:[`Denne nettsiden samler på dette tidspunktet ingen personopplysninger.
+Se ellers hvordan Digdir behandler personvernopplysninger `,n.jsx(r.a,{href:"https://www.digdir.no/digdir/personvernerklaering/706",children:"her"}),"."]})]})}function l(e={}){return n.jsx(s,{...e,children:n.jsx(i,{...e})})}export{l as default,h as meta};
