@@ -75,7 +75,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         innerChild.setAttribute('role', 'treeitem');
         innerChild.setAttribute('aria-level', '3');
 
-        innerChild.tabIndex = 0;
+        innerChild.tabIndex = -1;
+        if (!childData.url) {
+          innerChild.tabIndex = -1;
+        } else {
+          innerChild.tabIndex = 0;
+        }
         innerChild.innerHTML = childData.title;
         innerChild.className = `${prefix}-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
@@ -130,7 +135,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.className = `${prefix}-node ${prefix}-inner-node`;
       nodeElement.appendChild(innerNode);
       nodeElement.className = `${prefix}-node `;
-      innerNode.tabIndex = 0;
+
+      if (nodeData.url || isRoot) {
+        innerNode.tabIndex = 0;
+      } else {
+        innerNode.tabIndex = -1;
+      }
 
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
@@ -251,7 +261,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             nodeElement.href = nodeData.url;
           }
           nodeElement.className = `${prefix}-node `;
-          nodeElement.tabIndex = 0;
+
+          nodeData.url
+            ? (nodeElement.tabIndex = 0)
+            : (nodeElement.tabIndex = -1);
+
           nodeElement.style.backgroundColor = nodeData.backgroundColor;
           nodeElement.style.color = nodeData.textColor;
           nodeElement.innerHTML = nodeData.title;
@@ -526,25 +540,23 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
     ///-----------
-    document.addEventListener('keydown', function (event) {
-      const fokuserbareElementer = Array.from(
+    mainContainer.addEventListener('keydown', function (event) {
+      const focusableElements = Array.from(
         document.querySelectorAll(
           '.och-nodes-container .och-node, .och-node .och-inner-node, .och-node.och-node-child',
         ),
-      ) as HTMLElement[]; // Assert that the queried elements are indeed HTMLElements
-
-      const aktivtElement = document.activeElement;
-      const gjeldendeIndex = fokuserbareElementer.indexOf(
-        aktivtElement as HTMLElement,
       );
-      let nyIndex = gjeldendeIndex;
+      const activeElement = document.activeElement as Element;
+      const currentIndex = focusableElements.indexOf(activeElement);
+
+      let newIndex: number | undefined;
 
       switch (event.key) {
         case 'ArrowDown':
-          nyIndex++;
+          newIndex = currentIndex! + 1;
           break;
         case 'ArrowUp':
-          nyIndex--;
+          newIndex = currentIndex! - 1;
           break;
         case 'ArrowRight':
           // Optionally implement logic to navigate to the next element in the structure
@@ -553,16 +565,21 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           // Optionally implement logic to navigate to the previous element in the structure
           break;
         default:
-          // If another key is pressed, do nothing
+          // If any other key is pressed, do nothing
           return;
       }
 
-      // Check to keep the index within valid limits
-      if (nyIndex >= 0 && nyIndex < fokuserbareElementer.length) {
-        fokuserbareElementer[nyIndex].focus();
-        event.preventDefault(); // Prevent the default action, which could be scrolling
+      // Check to keep the index within valid bounds
+      if (
+        newIndex !== undefined &&
+        newIndex >= 0 &&
+        newIndex < focusableElements.length
+      ) {
+        (focusableElements[newIndex] as HTMLElement).focus();
+        event.preventDefault(); // Prevent default handling, such as scrolling
       }
     });
+
     ////////////----
 
     // Set the last breakpoint based on mainContainer's width
