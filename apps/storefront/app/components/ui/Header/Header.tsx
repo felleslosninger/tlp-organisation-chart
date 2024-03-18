@@ -1,15 +1,22 @@
-import { Container } from '../Container/Container';
-
 import { Link } from '@digdir/designsystemet-react';
 import { Link as RemixLink } from '@remix-run/react';
 
+import GithubLogo from '../../GithubLogo';
+
+import cl from 'clsx';
+
 import classes from './Header.module.css';
+import { useState } from 'react';
+
+import { HamburgerMenuIcon, Cross1Icon } from '@radix-ui/react-icons';
 
 export const Header = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className={classes.header}>
-      <Container style={{ width: '100%' }}>
-        <div className={classes.left}>
+      <div className={classes.container}>
+        <div>
           <Link asChild>
             <RemixLink to='/'>
               <img
@@ -20,26 +27,52 @@ export const Header = () => {
           </Link>
         </div>
 
-        <div className={classes.right}>
-          <Link asChild>
-            <RemixLink to='/dokumentasjon'>Dokumentasjon</RemixLink>
-          </Link>
-          <Link asChild>
-            <RemixLink to='/endringslogg'>Endringslogg</RemixLink>
-          </Link>
-          <Link
-            href='https://github.com/felleslosninger/tlp-organization-chart'
-            target='_blank'
-            title='Github repository'
+        <nav className={classes.right}>
+          <button
+            aria-expanded={open}
+            aria-label='Meny'
+            className={classes.toggle}
+            onClick={() => {
+              setOpen(!open);
+            }}
           >
-            <img
-              className={classes.github}
-              src='github.svg'
-              alt='Github logo'
-            />
-          </Link>
-        </div>
-      </Container>
+            {open && <Cross1Icon />}
+            {!open && <HamburgerMenuIcon />}
+          </button>
+
+          <ul className={cl(classes.menu, { [classes.active]: open })}>
+            <li className={classes.item}>
+              <RemixLink
+                className={cl(classes.link)}
+                to='/dokumentasjon'
+              >
+                Dokumentasjon
+              </RemixLink>
+            </li>
+            <li className={classes.item}>
+              <RemixLink
+                className={cl(classes.link)}
+                to='/endringslogg'
+              >
+                Endringslogg
+              </RemixLink>
+            </li>
+
+            <li
+              className={cl(classes.item, classes.itemIcon, classes.firstIcon)}
+            >
+              <Link
+                href='https://github.com/felleslosninger/tlp-organization-chart'
+                target='_blank'
+                title='Github repository'
+                className={cl(classes.linkIcon, classes.github)}
+              >
+                <GithubLogo />
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 };

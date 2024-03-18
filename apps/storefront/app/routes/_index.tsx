@@ -1,7 +1,8 @@
 import type { MetaFunction } from '@remix-run/node';
 
-import { Chart } from '../components/Chart.client';
-import { Link } from '@digdir/designsystemet-react';
+import { Chart } from '../components/Chart/Chart.client';
+import HomeHeader from '../components/layouts/HomeHeader';
+import { Heading } from '@digdir/designsystemet-react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -20,16 +21,16 @@ export default function Index() {
         width: '100%',
       }}
     >
-      <Link
-        href='https://www.npmjs.com/package/@digdir/organisation-chart'
-        target='_blank'
-        title='Latest release of npm package'
+      <HomeHeader />
+
+      <Heading
+        level={2}
+        size='large'
+        spacing
       >
-        <img
-          src='https://img.shields.io/npm/v/@digdir/organisation-chart?label=latest%20release&color=0051be'
-          alt='Latest release of npm package'
-        />
-      </Link>
+        Eksempel på et organisasjonskart
+      </Heading>
+
       <Chart />
     </div>
   );

@@ -1,0 +1,82 @@
+.content {
+  width: 100%;
+  margin-bottom: var(--fds-spacing-14);
+}
+
+.content p,
+.content h2,
+.content h3,
+.content h4 {
+  max-width: 70ch;
+}
+
+.content p {
+  font: var(--fds-typography-paragraph-medium);
+  margin-bottom: var(--fds-spacing-5);
+}
+
+/* A <p> tag that comes directly after <h1> will be treated as an ingress */
+.content h1 + p {
+  font: var(--fds-typography-ingress-medium);
+  margin-top: 0;
+  margin-bottom: var(--fds-spacing-8);
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  margin-top: var(--fds-spacing-10);
+}
+
+.content img {
+  width: 100%;
+  margin: var(--fds-spacing-5) 0;
+  border-radius: var(--fds-border_radius-medium);
+  box-shadow: var(--fds-shadow-medium);
+}
+
+.content strong {
+  display: inline-block;
+  margin-top: var(--fds-spacing-1);
+  font-weight: 500;
+}
+
+.content pre {
+  max-width: 800px;
+  background-color: rgb(1, 22, 39);
+  color: white;
+  padding: var(--fds-spacing-5);
+  margin: var(--fds-spacing-5) 0;
+  border-radius: var(--fds-border_radius-medium);
+  overflow-x: auto;
+}
+
+.content > iframe {
+  box-shadow: var(--fds-shadow-medium);
+  margin: var(--fds-spacing-5);
+  border-radius: var(--fds-border_radius-medium);
+}
+
+.content p code {
+  padding: 0.2em 0.5em;
+  margin: 1px;
+  font-size: 0.9em;
+  white-space: break-spaces;
+  background-color: var(--fds-semantic-surface-neutral-subtle-hover);
+  border-radius: var(--fds-border_radius-medium);
+}
+
+.content > *:first-child {
+  margin-top: 0;
+}
+
+.content > *:last-child {
+  margin-bottom: 0;
+}
+
+.content table {
+  margin: var(--fds-spacing-5) 0;
+}
