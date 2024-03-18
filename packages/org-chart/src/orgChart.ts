@@ -104,21 +104,26 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (nodeData) {
       const nodeElement = createElement('div');
 
+      const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
+
       //give nodeElement id
-      nodeElement.id = nodeData.id;
+      innerNode.id = nodeData.id;
 
       if (node.component?.children) {
-        nodeElement.setAttribute(
-          'aria-owns',
-          node.component.children.join(' '),
-        );
+        innerNode.setAttribute('aria-owns', node.component.children.join(' '));
       }
 
       //give role treeitem to nodeElement
-      nodeElement.setAttribute('role', 'treeitem');
-      nodeElement.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
+      innerNode.setAttribute('role', 'treeitem');
+      innerNode.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
 
-      const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
+      //tabIndex is 0 if nodeElement is anchor, else -1
+      if (nodeData.url || isRoot) {
+        innerNode.tabIndex = 0;
+      } else {
+        innerNode.tabIndex = -1;
+      }
+
       //if nodeData has border, provide border
       if (nodeData.border) {
         innerNode.style.border = `2px ${nodeData.border} #000`;
@@ -135,12 +140,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.className = `${prefix}-node ${prefix}-inner-node`;
       nodeElement.appendChild(innerNode);
       nodeElement.className = `${prefix}-node `;
-
-      if (nodeData.url || isRoot) {
-        innerNode.tabIndex = 0;
-      } else {
-        innerNode.tabIndex = -1;
-      }
 
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
@@ -539,7 +538,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
-    ///-----------
+    // Arrow key navigation
     mainContainer.addEventListener('keydown', function (event) {
       const focusableElements = Array.from(
         document.querySelectorAll(
@@ -559,10 +558,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           newIndex = currentIndex! - 1;
           break;
         case 'ArrowRight':
-          // Optionally implement logic to navigate to the next element in the structure
+          newIndex = currentIndex! + 1;
           break;
         case 'ArrowLeft':
-          // Optionally implement logic to navigate to the previous element in the structure
+          newIndex = currentIndex! - 1;
           break;
         default:
           // If any other key is pressed, do nothing
@@ -579,8 +578,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         event.preventDefault(); // Prevent default handling, such as scrolling
       }
     });
-
-    ////////////----
 
     // Set the last breakpoint based on mainContainer's width
     let lastBreakpoint = getBreakpointName(mainContainerWidth);
