@@ -512,6 +512,46 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
+    ///-----------
+    document.addEventListener('keydown', function (event) {
+      const fokuserbareElementer = Array.from(
+        document.querySelectorAll(
+          '.och-nodes-container .och-node, .och-node .och-inner-node, .och-node.och-node-child',
+        ),
+      ) as HTMLElement[]; // Assert that the queried elements are indeed HTMLElements
+
+      const aktivtElement = document.activeElement;
+      const gjeldendeIndex = fokuserbareElementer.indexOf(
+        aktivtElement as HTMLElement,
+      );
+      let nyIndex = gjeldendeIndex;
+
+      switch (event.key) {
+        case 'ArrowDown':
+          nyIndex++;
+          break;
+        case 'ArrowUp':
+          nyIndex--;
+          break;
+        case 'ArrowRight':
+          // Optionally implement logic to navigate to the next element in the structure
+          break;
+        case 'ArrowLeft':
+          // Optionally implement logic to navigate to the previous element in the structure
+          break;
+        default:
+          // If another key is pressed, do nothing
+          return;
+      }
+
+      // Check to keep the index within valid limits
+      if (nyIndex >= 0 && nyIndex < fokuserbareElementer.length) {
+        fokuserbareElementer[nyIndex].focus();
+        event.preventDefault(); // Prevent the default action, which could be scrolling
+      }
+    });
+    ////////////----
+
     // Set the last breakpoint based on mainContainer's width
     let lastBreakpoint = getBreakpointName(mainContainerWidth);
 
