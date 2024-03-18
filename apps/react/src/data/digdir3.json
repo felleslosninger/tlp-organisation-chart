@@ -197,7 +197,17 @@
               "alignment": "center",
               "component": {
                 "type": "root",
-                "children": ["kom", "tuu", "verk", "hr", "tverr"]
+                "children": [
+                  "kom",
+                  "tuu",
+                  "verk",
+                  "hr",
+                  "tverr",
+                  "brukeropplevelse",
+                  "fel",
+                  "sam",
+                  "digss"
+                ]
               }
             }
           ]
