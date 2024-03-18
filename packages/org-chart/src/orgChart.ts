@@ -62,11 +62,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     children.forEach((childId: string) => {
       const childData = findNodeById(childId);
       if (childData) {
-        const childElement = createElement('div');
-        childElement.id = childData.id;
-        childElement.setAttribute('role', 'treeitem');
-        childElement.setAttribute('aria-level', '3');
-
         const innerChild = childData.url
           ? createElement('a')
           : createElement('div');
@@ -76,14 +71,16 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           innerChild.href = childData.url;
           innerChild.classList.add(`${prefix}-node-children-anchor`);
         }
+        innerChild.id = childData.id;
+        innerChild.setAttribute('role', 'treeitem');
+        innerChild.setAttribute('aria-level', '3');
 
         innerChild.tabIndex = 0;
         innerChild.innerHTML = childData.title;
         innerChild.className = `${prefix}-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
         innerChild.style.backgroundColor = childData.backgroundColor;
-        childElement.appendChild(innerChild);
-        childrenList.appendChild(childElement);
+        childrenList.appendChild(innerChild);
       }
     });
 
@@ -179,6 +176,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement('div');
       nodesWrapper.setAttribute('role', 'group');
+      if (column.component?.children) {
+        nodesWrapper.setAttribute(
+          'aria-owns',
+          column.component.children.join(' '),
+        );
+      }
 
       if (isMobile || isTablet) {
         if (isLastRow && indexInRow === siblingsAmount && !isMobile) {
@@ -254,13 +257,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           nodeElement.innerHTML = nodeData.title;
           nodeElement.setAttribute('role', 'treeitem');
           nodeElement.setAttribute('aria-level', '2');
-          console.log(column.component?.children);
-          if (column.component?.children) {
-            nodeElement.setAttribute(
-              'aria-owns',
-              column.component.children.join(' '),
-            );
-          }
           nodesWrapper.appendChild(nodeElement);
         }
       });
