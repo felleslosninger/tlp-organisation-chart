@@ -52,7 +52,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   function createChildren(parentSiblingsAmount: number, children: string[]) {
-    const childrenList = createElement('ul');
+    const childrenList = createElement('div');
+
     childrenList.className = `${prefix}-node-children`;
     if (parentSiblingsAmount <= 2 && !isMobile) {
       childrenList.style.width = '290px';
@@ -61,10 +62,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     children.forEach((childId: string) => {
       const childData = findNodeById(childId);
       if (childData) {
-        const childElement = createElement('li');
-        childElement.id = childData.id;
-        childElement.setAttribute('role', 'treeitem');
-
         const innerChild = childData.url
           ? createElement('a')
           : createElement('div');
@@ -74,14 +71,16 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           innerChild.href = childData.url;
           innerChild.classList.add(`${prefix}-node-children-anchor`);
         }
+        innerChild.id = childData.id;
+        innerChild.setAttribute('role', 'treeitem');
+        innerChild.setAttribute('aria-level', '3');
 
         innerChild.tabIndex = 0;
         innerChild.innerHTML = childData.title;
         innerChild.className = `${prefix}-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
         innerChild.style.backgroundColor = childData.backgroundColor;
-        childElement.appendChild(innerChild);
-        childrenList.appendChild(childElement);
+        childrenList.appendChild(innerChild);
       }
     });
 
@@ -94,6 +93,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     indexInRow: number,
     isLastRow: boolean,
     specialColumnList: number[],
+    isRoot?: boolean | undefined,
   ) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
@@ -111,6 +111,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       //give role treeitem to nodeElement
       nodeElement.setAttribute('role', 'treeitem');
+      nodeElement.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
 
       const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
       //if nodeData has border, provide border
@@ -174,6 +175,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     //if column.id is an array, create a special column
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement('div');
+      nodesWrapper.setAttribute('role', 'group');
+      if (column.component?.children) {
+        nodesWrapper.setAttribute(
+          'aria-owns',
+          column.component.children.join(' '),
+        );
+      }
 
       if (isMobile || isTablet) {
         if (isLastRow && indexInRow === siblingsAmount && !isMobile) {
@@ -247,6 +255,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           nodeElement.style.backgroundColor = nodeData.backgroundColor;
           nodeElement.style.color = nodeData.textColor;
           nodeElement.innerHTML = nodeData.title;
+          nodeElement.setAttribute('role', 'treeitem');
+          nodeElement.setAttribute('aria-level', '2');
           nodesWrapper.appendChild(nodeElement);
         }
       });
@@ -315,6 +325,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       indexInRow,
       isLastRow,
       specialColumnList,
+      column.component?.type === 'root',
     );
 
     if (!isMobile) {
@@ -457,6 +468,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   function createRowsWrapper(layout: Layout) {
     const rows = createElement('div');
     rows.className = `${prefix}-rows`;
+    rows.setAttribute('role', 'tree');
+    rows.setAttribute('aria-label', meta.title);
+    rows.role = 'tree';
 
     const numberOfRows = layout.rows.length;
     let isLastRow = false;
@@ -491,7 +505,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Create element to hold the org chart
     const orgChart = document.createElement('div');
     orgChart.className = provideLayoutClass(mainContainerWidth);
-    orgChart.role = 'tree';
     orgChart.setAttribute('lang', meta.langcode);
     orgChart.setAttribute('aria-label', meta.title);
 
