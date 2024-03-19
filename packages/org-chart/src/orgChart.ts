@@ -554,43 +554,79 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
     // Arrow key navigation
+    // mainContainer.addEventListener('keydown', function (event) {
+    //   const focusableElements = Array.from(
+    //     document.querySelectorAll(
+    //       '.och-nodes-container .och-node, .och-node .och-inner-node, .och-node.och-node-child',
+    //     ),
+    //   );
+    //   const activeElement = document.activeElement as Element;
+    //   const currentIndex = focusableElements.indexOf(activeElement);
+
+    //   let newIndex: number | undefined;
+
+    //   switch (event.key) {
+    //     case 'ArrowDown':
+    //       newIndex = currentIndex! + 1;
+    //       break;
+    //     case 'ArrowUp':
+    //       newIndex = currentIndex! - 1;
+    //       break;
+    //     case 'ArrowRight':
+    //       newIndex = currentIndex! + 1;
+    //       break;
+    //     case 'ArrowLeft':
+    //       newIndex = currentIndex! - 1;
+    //       break;
+    //     default:
+    //       // If any other key is pressed, do nothing
+    //       return;
+    //   }
+
+    //   // Check to keep the index within valid bounds
+    //   if (
+    //     newIndex !== undefined &&
+    //     newIndex >= 0 &&
+    //     newIndex < focusableElements.length
+    //   ) {
+    //     (focusableElements[newIndex] as HTMLElement).focus();
+    //     event.preventDefault(); // Prevent default handling, such as scrolling
+    //   }
+    // });
+
     mainContainer.addEventListener('keydown', function (event) {
-      const focusableElements = Array.from(
-        document.querySelectorAll(
-          '.och-nodes-container .och-node, .och-node .och-inner-node, .och-node.och-node-child',
-        ),
-      );
-      const activeElement = document.activeElement as Element;
-      const currentIndex = focusableElements.indexOf(activeElement);
+      const activeElement = document.activeElement; // Det elementet som er fokusert på nåværende tidspunkt
 
-      let newIndex: number | undefined;
+      // Variabelen som vil holde ID-en til elementet som skal få fokus basert på tastetrykket
+      let targetElementId;
 
+      // Sjekker hvilken pil tast som er trykket og tilordner den relevante ID-en basert på 'data-arrow-*' attributtene
       switch (event.key) {
-        case 'ArrowDown':
-          newIndex = currentIndex! + 1;
-          break;
-        case 'ArrowUp':
-          newIndex = currentIndex! - 1;
-          break;
         case 'ArrowRight':
-          newIndex = currentIndex! + 1;
+          targetElementId = activeElement?.getAttribute('data-arrow-right');
+
           break;
         case 'ArrowLeft':
-          newIndex = currentIndex! - 1;
+          targetElementId = activeElement?.getAttribute('data-arrow-left');
+
           break;
-        default:
-          // If any other key is pressed, do nothing
-          return;
+        case 'ArrowDown':
+          targetElementId = activeElement?.getAttribute('data-arrow-down');
+
+          break;
+        case 'ArrowUp':
+          targetElementId = activeElement?.getAttribute('data-arrow-up');
+
+          break;
       }
 
-      // Check to keep the index within valid bounds
-      if (
-        newIndex !== undefined &&
-        newIndex >= 0 &&
-        newIndex < focusableElements.length
-      ) {
-        (focusableElements[newIndex] as HTMLElement).focus();
-        event.preventDefault(); // Prevent default handling, such as scrolling
+      // Sjekker om det ble funnet en gyldig ID for neste element
+      if (targetElementId) {
+        const nextElement = document.getElementById(targetElementId);
+        if (nextElement) {
+          nextElement.focus(); // Flytter fokus til det neste elementet basert på ID
+          event.preventDefault(); // Forhindrer standard handling (som scrolling)
+        }
       }
     });
 
