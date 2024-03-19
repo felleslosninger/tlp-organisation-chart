@@ -274,12 +274,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         );
       }
 
-      column.id.forEach((nodeId: string) => {
+      column.id.forEach((nodeId: string, index: number) => {
         const nodeData = findNodeById(nodeId);
         if (nodeData) {
           const nodeElement = document.createElement(
             nodeData.url ? 'a' : 'div',
           );
+          nodeElement.id = nodeId;
 
           //if nodeData has border, provide border
           if (nodeData.border) {
@@ -291,6 +292,32 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             nodeElement.href = nodeData.url;
           }
           nodeElement.className = `${prefix}-node `;
+
+          // console.log(
+          //   getArrowNavigaitonDataSpecialColum(
+          //     currentLayout,
+          //     indexInRow,
+          //     siblingsAmount,
+          //     currentRowIndex,
+          //     isLastRow,
+          //     column.component?.children ? column.component.children : null,
+          //     index,
+          //   ),
+          // );
+
+          const arrowNavigationAttributes = getArrowNavigaitonDataSpecialColum(
+            currentLayout,
+            indexInRow,
+            siblingsAmount,
+            currentRowIndex,
+            isLastRow,
+            column.component?.children ? column.component.children : null,
+            index,
+          );
+
+          arrowNavigationAttributes.forEach((dataAttribute) => {
+            nodeElement.setAttribute(dataAttribute.key, dataAttribute.id);
+          });
 
           nodeData.url
             ? (nodeElement.tabIndex = 0)
@@ -709,90 +736,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   return null;
-}
-
-function getArrowNavigaitonData(
-  layout: Layout,
-  isRoot: boolean,
-  indexInRow: number,
-  siblingsAmount: number,
-  currentRowIndex: number,
-  isLasRow: boolean,
-  children: string[] | null,
-) {
-  const dataAttributes = [];
-  let cri = currentRowIndex;
-
-  //if node has children, focus on first child when key-down is pressed
-  if (children) {
-    dataAttributes.push({
-      key: 'data-arrow-down',
-      id: children[0],
-    });
-  }
-
-  //if it is the root node, only arrow-right is an alternative
-  if (isRoot) {
-    dataAttributes.push({
-      key: 'data-arrow-right',
-      id: layout.rows[cri + 1].row[0].id[0],
-    });
-  } else {
-    if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
-      dataAttributes.push(
-        {
-          key: 'data-arrow-right',
-          id: layout.rows[cri].row[indexInRow].id[0],
-        },
-        {
-          key: 'data-arrow-left',
-          id: layout.rows[cri].row[indexInRow - 2].id[0],
-        },
-      );
-    } else if (indexInRow === 1) {
-      const previousRowLength = layout.rows[cri - 1].row.length;
-      const previousRowLastItem =
-        layout.rows[cri - 1].row[previousRowLength - 1].id[0];
-
-      if (siblingsAmount > 1) {
-        dataAttributes.push(
-          {
-            key: 'data-arrow-right',
-            id: layout.rows[cri].row[indexInRow].id[0],
-          },
-          {
-            key: 'data-arrow-left',
-            id: previousRowLastItem,
-          },
-        );
-      } else {
-        const nextRowFirstItem = layout.rows[cri + 1].row[0].id[0];
-        dataAttributes.push(
-          {
-            key: 'data-arrow-right',
-            id: nextRowFirstItem,
-          },
-          {
-            key: 'data-arrow-left',
-            id: previousRowLastItem,
-          },
-        );
-      }
-    } else if (indexInRow === siblingsAmount) {
-      dataAttributes.push({
-        key: 'data-arrow-left',
-        id: layout.rows[cri].row[indexInRow - 2].id[0],
-      });
-
-      if (!isLasRow) {
-        dataAttributes.push({
-          key: 'data-arrow-right',
-          id: layout.rows[cri + 1].row[0].id[0],
-        });
-      }
-    }
-  }
-  return dataAttributes;
 }
 
 function createSpecialColumnLines(
@@ -2253,13 +2196,164 @@ function createTOC(toc: TableOfContentsItem[], isMobile?: boolean) {
   return tocBox;
 }
 
+function getArrowNavigaitonDataSpecialColum(
+  layout: Layout,
+  indexInRow: number,
+  siblingsAmount: number,
+  currentRowIndex: number,
+  isLasRow: boolean,
+  children: string[] | null,
+  indexInColumn: number,
+) {
+  const dataAttributes = [];
+  let cri = currentRowIndex;
+
+  if (children) {
+    dataAttributes.push({
+      key: 'data-arrow-down',
+      id: children[0],
+    });
+  }
+
+  if (indexInColumn === 0) {
+    dataAttributes.push({
+      key: 'data-arrow-right',
+      id: layout.rows[cri].row[indexInRow - 1].id[1],
+    });
+
+    if (indexInRow === 1) {
+      const previousRowLength = layout.rows[cri - 1].row.length;
+      const previousRowLastItem =
+        layout.rows[cri - 1].row[previousRowLength - 1].id[0];
+      dataAttributes.push({
+        key: 'data-arrow-left',
+        id: previousRowLastItem,
+      });
+    } else {
+      dataAttributes.push({
+        key: 'data-arrow-left',
+        id: layout.rows[cri].row[indexInRow - 2].id[
+          layout.rows[cri].row[indexInRow - 2].id.length - 1
+        ],
+      });
+    }
+  } else {
+    dataAttributes.push({
+      key: 'data-arrow-left',
+      id: layout.rows[cri].row[indexInRow - 1].id[0],
+    });
+    if (siblingsAmount === indexInRow && isLasRow) {
+      dataAttributes.push({
+        key: 'data-arrow-right',
+        id: '',
+      });
+    } else if (siblingsAmount === indexInRow) {
+      const nextRowFirstItem = layout.rows[cri + 1].row[0].id[0];
+      dataAttributes.push({
+        key: 'data-arrow-right',
+        id: nextRowFirstItem,
+      });
+    } else {
+      dataAttributes.push({
+        key: 'data-arrow-right',
+        id: layout.rows[cri].row[indexInRow].id[0],
+      });
+    }
+  }
+
+  return dataAttributes;
+}
+
+function getArrowNavigaitonData(
+  layout: Layout,
+  isRoot: boolean,
+  indexInRow: number,
+  siblingsAmount: number,
+  currentRowIndex: number,
+  isLasRow: boolean,
+  children: string[] | null,
+) {
+  const dataAttributes = [];
+  let cri = currentRowIndex;
+
+  //if node has children, focus on first child when key-down is pressed
+  if (children) {
+    dataAttributes.push({
+      key: 'data-arrow-down',
+      id: children[0],
+    });
+  }
+
+  //if it is the root node, only arrow-right is an alternative
+  if (isRoot) {
+    dataAttributes.push({
+      key: 'data-arrow-right',
+      id: layout.rows[cri + 1].row[0].id[0],
+    });
+  } else {
+    if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
+      dataAttributes.push(
+        {
+          key: 'data-arrow-right',
+          id: layout.rows[cri].row[indexInRow].id[0],
+        },
+        {
+          key: 'data-arrow-left',
+          id: layout.rows[cri].row[indexInRow - 2].id[0],
+        },
+      );
+    } else if (indexInRow === 1) {
+      const previousRowLength = layout.rows[cri - 1].row.length;
+      const previousRowLastItem =
+        layout.rows[cri - 1].row[previousRowLength - 1].id[0];
+
+      if (siblingsAmount > 1) {
+        dataAttributes.push(
+          {
+            key: 'data-arrow-right',
+            id: layout.rows[cri].row[indexInRow].id[0],
+          },
+          {
+            key: 'data-arrow-left',
+            id: previousRowLastItem,
+          },
+        );
+      } else {
+        const nextRowFirstItem = layout.rows[cri + 1].row[0].id[0];
+        dataAttributes.push(
+          {
+            key: 'data-arrow-right',
+            id: nextRowFirstItem,
+          },
+          {
+            key: 'data-arrow-left',
+            id: previousRowLastItem,
+          },
+        );
+      }
+    } else if (indexInRow === siblingsAmount) {
+      dataAttributes.push({
+        key: 'data-arrow-left',
+        id: layout.rows[cri].row[indexInRow - 2].id[0],
+      });
+
+      if (!isLasRow) {
+        dataAttributes.push({
+          key: 'data-arrow-right',
+          id: layout.rows[cri + 1].row[0].id[0],
+        });
+      }
+    }
+  }
+  return dataAttributes;
+}
+
 function getChildArrowNavigation(
   index: number,
   children: string[],
   parentId: string[],
 ) {
   const dataAttributes = [];
-
   dataAttributes.push(
     {
       key: 'data-arrow-down',
