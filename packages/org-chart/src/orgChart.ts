@@ -293,18 +293,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           }
           nodeElement.className = `${prefix}-node `;
 
-          // console.log(
-          //   getArrowNavigaitonDataSpecialColum(
-          //     currentLayout,
-          //     indexInRow,
-          //     siblingsAmount,
-          //     currentRowIndex,
-          //     isLastRow,
-          //     column.component?.children ? column.component.children : null,
-          //     index,
-          //   ),
-          // );
-
           const arrowNavigationAttributes = getArrowNavigaitonDataSpecialColum(
             currentLayout,
             indexInRow,
@@ -2224,7 +2212,9 @@ function getArrowNavigaitonDataSpecialColum(
     if (indexInRow === 1) {
       const previousRowLength = layout.rows[cri - 1].row.length;
       const previousRowLastItem =
-        layout.rows[cri - 1].row[previousRowLength - 1].id[0];
+        layout.rows[cri - 1].row[previousRowLength - 1].id[
+          layout.rows[cri - 1].row[previousRowLength - 1].id.length - 1
+        ];
       dataAttributes.push({
         key: 'data-arrow-left',
         id: previousRowLastItem,
@@ -2299,13 +2289,17 @@ function getArrowNavigaitonData(
         },
         {
           key: 'data-arrow-left',
-          id: layout.rows[cri].row[indexInRow - 2].id[0],
+          id: layout.rows[cri].row[indexInRow - 2].id[
+            layout.rows[cri].row[indexInRow - 2].id.length - 1
+          ],
         },
       );
     } else if (indexInRow === 1) {
       const previousRowLength = layout.rows[cri - 1].row.length;
       const previousRowLastItem =
-        layout.rows[cri - 1].row[previousRowLength - 1].id[0];
+        layout.rows[cri - 1].row[previousRowLength - 1].id[
+          layout.rows[cri - 1].row[previousRowLength - 1].id.length - 1
+        ];
 
       if (siblingsAmount > 1) {
         dataAttributes.push(
@@ -2334,7 +2328,9 @@ function getArrowNavigaitonData(
     } else if (indexInRow === siblingsAmount) {
       dataAttributes.push({
         key: 'data-arrow-left',
-        id: layout.rows[cri].row[indexInRow - 2].id[0],
+        id: layout.rows[cri].row[indexInRow - 2].id[
+          layout.rows[cri].row[indexInRow - 2].id.length - 1
+        ],
       });
 
       if (!isLasRow) {
