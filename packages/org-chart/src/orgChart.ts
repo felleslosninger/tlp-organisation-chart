@@ -53,7 +53,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return nodes.find((node: Node) => node.id === id);
   }
 
-  function createChildren(parentSiblingsAmount: number, children: string[]) {
+  function createChildren(
+    parentSiblingsAmount: number,
+    children: string[],
+    parentId: string[],
+  ) {
     const childrenList = createElement('div');
 
     childrenList.className = `${prefix}-node-children`;
@@ -61,7 +65,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       childrenList.style.width = '290px';
     }
 
-    children.forEach((childId: string) => {
+    children.forEach((childId: string, index: number) => {
       const childData = findNodeById(childId);
       if (childData) {
         const innerChild = childData.url
@@ -87,6 +91,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         innerChild.className = `${prefix}-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
         innerChild.style.backgroundColor = childData.backgroundColor;
+
+        const arrowNavigationAttributes = getChildArrowNavigation(
+          index,
+          children,
+          parentId,
+        );
+
+        arrowNavigationAttributes.forEach((dataAttribute) => {
+          innerChild.setAttribute(dataAttribute.key, dataAttribute.id);
+        });
+
         childrenList.appendChild(innerChild);
       }
     });
@@ -125,6 +140,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         indexInRow,
         siblingsAmount,
         currentRowIndex,
+        isLastRow,
+        node.component?.children ? node.component.children : null,
       );
 
       arrowNavigationAttributes.forEach((dataAttribute) => {
@@ -307,6 +324,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         createChildren(
           3,
           column.component.children ? column.component.children : [],
+          column.id,
         ),
       );
     }
@@ -367,7 +385,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     if (column.component?.children && column.component.type !== 'root') {
       columnElement.appendChild(
-        createChildren(siblingsAmount, column.component.children),
+        createChildren(siblingsAmount, column.component.children, column.id),
       );
     }
 
@@ -699,10 +717,20 @@ function getArrowNavigaitonData(
   indexInRow: number,
   siblingsAmount: number,
   currentRowIndex: number,
+  isLasRow: boolean,
+  children: string[] | null,
 ) {
   const dataAttributes = [];
   let cri = currentRowIndex;
-  // console.log(layout.rows[cri].row[indexInRow].id[0]);
+
+  //if node has children, focus on first child when key-down is pressed
+  if (children) {
+    dataAttributes.push({
+      key: 'data-arrow-down',
+      id: children[0],
+    });
+  }
+
   //if it is the root node, only arrow-right is an alternative
   if (isRoot) {
     dataAttributes.push({
@@ -749,6 +777,18 @@ function getArrowNavigaitonData(
             id: previousRowLastItem,
           },
         );
+      }
+    } else if (indexInRow === siblingsAmount) {
+      dataAttributes.push({
+        key: 'data-arrow-left',
+        id: layout.rows[cri].row[indexInRow - 2].id[0],
+      });
+
+      if (!isLasRow) {
+        dataAttributes.push({
+          key: 'data-arrow-right',
+          id: layout.rows[cri + 1].row[0].id[0],
+        });
       }
     }
   }
@@ -2211,4 +2251,25 @@ function createTOC(toc: TableOfContentsItem[], isMobile?: boolean) {
   });
 
   return tocBox;
+}
+
+function getChildArrowNavigation(
+  index: number,
+  children: string[],
+  parentId: string[],
+) {
+  const dataAttributes = [];
+
+  dataAttributes.push(
+    {
+      key: 'data-arrow-down',
+      id: index + 1 === children.length ? '' : children[index + 1],
+    },
+    {
+      key: 'data-arrow-up',
+      id: index === 0 ? parentId[parentId.length - 1] : children[index - 1],
+    },
+  );
+
+  return dataAttributes;
 }
