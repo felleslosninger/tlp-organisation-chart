@@ -2184,163 +2184,196 @@ function createTOC(toc: TableOfContentsItem[], isMobile?: boolean) {
   return tocBox;
 }
 
+function addDataAttribute(
+  dataAttributes: { key: string; id: string }[],
+  key: string,
+  id: string,
+) {
+  dataAttributes.push({ key, id });
+}
+
+/**
+ * This function generates the arrow navigation data for nodes in a special column layout.
+ * @param layout - The org chart layout.
+ * @param indexInRow - The index of the node in the row.
+ * @param siblingsAmount - The total number of nodes in the row.
+ * @param currentRowIndex - The index of the current row.
+ * @param isLastRow - Indicates if the current row is the last row.
+ * @param children - The children of the node.
+ * @param indexInColumn - The index of the node in the column.
+ * @returns An array of data attributes for arrow navigation.
+ */
 function getArrowNavigaitonDataSpecialColum(
   layout: Layout,
   indexInRow: number,
   siblingsAmount: number,
   currentRowIndex: number,
-  isLasRow: boolean,
+  isLastRow: boolean,
   children: string[] | null,
   indexInColumn: number,
 ) {
-  const dataAttributes = [];
+  const dataAttributes: { key: string; id: string }[] = [];
   let cri = currentRowIndex;
 
+  // If the node has children, add data attribute for arrow down navigation
   if (children) {
-    dataAttributes.push({
-      key: 'data-arrow-down',
-      id: children[0],
-    });
+    addDataAttribute(dataAttributes, 'data-arrow-down', children[0]);
   }
 
   if (indexInColumn === 0) {
-    dataAttributes.push({
-      key: 'data-arrow-right',
-      id: layout.rows[cri].row[indexInRow - 1].id[1],
-    });
+    // If the node is the first node in the column, add data attribute for arrow right navigation
+    addDataAttribute(
+      dataAttributes,
+      'data-arrow-right',
+      layout.rows[cri].row[indexInRow - 1].id[1],
+    );
 
     if (indexInRow === 1) {
+      // If the node is the first node in the row, add data attribute for arrow left navigation to the last node in the previous row
       const previousRowLength = layout.rows[cri - 1].row.length;
       const previousRowLastItem =
         layout.rows[cri - 1].row[previousRowLength - 1].id[
           layout.rows[cri - 1].row[previousRowLength - 1].id.length - 1
         ];
-      dataAttributes.push({
-        key: 'data-arrow-left',
-        id: previousRowLastItem,
-      });
+      addDataAttribute(dataAttributes, 'data-arrow-left', previousRowLastItem);
     } else {
-      dataAttributes.push({
-        key: 'data-arrow-left',
-        id: layout.rows[cri].row[indexInRow - 2].id[
+      // If the node is not the first node in the row, add data attribute for arrow left navigation to the previous node in the same row
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-left',
+        layout.rows[cri].row[indexInRow - 2].id[
           layout.rows[cri].row[indexInRow - 2].id.length - 1
         ],
-      });
+      );
     }
   } else {
-    dataAttributes.push({
-      key: 'data-arrow-left',
-      id: layout.rows[cri].row[indexInRow - 1].id[0],
-    });
-    if (siblingsAmount === indexInRow && isLasRow) {
-      dataAttributes.push({
-        key: 'data-arrow-right',
-        id: '',
-      });
+    // If the node is not the first node in the column, add data attribute for arrow left navigation to the previous node in the same row
+    addDataAttribute(
+      dataAttributes,
+      'data-arrow-left',
+      layout.rows[cri].row[indexInRow - 1].id[0],
+    );
+
+    if (siblingsAmount === indexInRow && isLastRow) {
+      // If the node is the last node in the row and the last row, add data attribute for arrow right navigation to an empty value
+      addDataAttribute(dataAttributes, 'data-arrow-right', '');
     } else if (siblingsAmount === indexInRow) {
+      // If the node is the last node in the row, add data attribute for arrow right navigation to the first node in the next row
       const nextRowFirstItem = layout.rows[cri + 1].row[0].id[0];
-      dataAttributes.push({
-        key: 'data-arrow-right',
-        id: nextRowFirstItem,
-      });
+      addDataAttribute(dataAttributes, 'data-arrow-right', nextRowFirstItem);
     } else {
-      dataAttributes.push({
-        key: 'data-arrow-right',
-        id: layout.rows[cri].row[indexInRow].id[0],
-      });
+      // If the node is not the last node in the row, add data attribute for arrow right navigation to the next node in the same row
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-right',
+        layout.rows[cri].row[indexInRow].id[0],
+      );
     }
   }
 
   return dataAttributes;
 }
 
+/**
+ * This function generates the arrow navigation data for nodes in a general layout.
+ * @param layout - The org chart layout.
+ * @param isRoot - Indicates if the current node is the root node.
+ * @param indexInRow - The index of the node in the row.
+ * @param siblingsAmount - The total number of nodes in the row.
+ * @param currentRowIndex - The index of the current row.
+ * @param isLastRow - Indicates if the current row is the last row.
+ * @param children - The children of the node.
+ * @returns An array of data attributes for arrow navigation.
+ */
 function getArrowNavigaitonData(
   layout: Layout,
   isRoot: boolean,
   indexInRow: number,
   siblingsAmount: number,
   currentRowIndex: number,
-  isLasRow: boolean,
+  isLastRow: boolean,
   children: string[] | null,
 ) {
-  const dataAttributes = [];
-  let cri = currentRowIndex;
+  const dataAttributes: { key: string; id: string }[] = [];
 
-  //if node has children, focus on first child when key-down is pressed
+  // If the node has children, add data attribute for arrow down navigation
   if (children) {
-    dataAttributes.push({
-      key: 'data-arrow-down',
-      id: children[0],
-    });
+    addDataAttribute(dataAttributes, 'data-arrow-down', children[0]);
   }
 
-  //if it is the root node, only arrow-right is an alternative
+  // If it is the root node, only arrow-right is an alternative
   if (isRoot) {
-    dataAttributes.push({
-      key: 'data-arrow-right',
-      id: layout.rows[cri + 1].row[0].id[0],
-    });
+    addDataAttribute(
+      dataAttributes,
+      'data-arrow-right',
+      layout.rows[currentRowIndex + 1].row[0].id[0],
+    );
   } else {
     if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
-      dataAttributes.push(
-        {
-          key: 'data-arrow-right',
-          id: layout.rows[cri].row[indexInRow].id[0],
-        },
-        {
-          key: 'data-arrow-left',
-          id: layout.rows[cri].row[indexInRow - 2].id[
-            layout.rows[cri].row[indexInRow - 2].id.length - 1
-          ],
-        },
+      // If the node is not the first or last in the row, add data attributes for arrow right and left navigation
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-right',
+        layout.rows[currentRowIndex].row[indexInRow].id[0],
+      );
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-left',
+        layout.rows[currentRowIndex].row[indexInRow - 2].id[
+          layout.rows[currentRowIndex].row[indexInRow - 2].id.length - 1
+        ],
       );
     } else if (indexInRow === 1) {
-      const previousRowLength = layout.rows[cri - 1].row.length;
+      const previousRowLength = layout.rows[currentRowIndex - 1].row.length;
       const previousRowLastItem =
-        layout.rows[cri - 1].row[previousRowLength - 1].id[
-          layout.rows[cri - 1].row[previousRowLength - 1].id.length - 1
+        layout.rows[currentRowIndex - 1].row[previousRowLength - 1].id[
+          layout.rows[currentRowIndex - 1].row[previousRowLength - 1].id
+            .length - 1
         ];
 
       if (siblingsAmount > 1) {
-        dataAttributes.push(
-          {
-            key: 'data-arrow-right',
-            id: layout.rows[cri].row[indexInRow].id[0],
-          },
-          {
-            key: 'data-arrow-left',
-            id: previousRowLastItem,
-          },
+        // If the node is the first in the row and there are more than one sibling, add data attributes for arrow right and left navigation
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-right',
+          layout.rows[currentRowIndex].row[indexInRow].id[0],
+        );
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-left',
+          previousRowLastItem,
         );
       } else {
-        const nextRowFirstItem = layout.rows[cri + 1].row[0].id[0];
-        dataAttributes.push(
-          {
-            key: 'data-arrow-right',
-            id: nextRowFirstItem,
-          },
-          {
-            key: 'data-arrow-left',
-            id: previousRowLastItem,
-          },
+        const nextRowFirstItem = layout.rows[currentRowIndex + 1].row[0].id[0];
+        // If the node is the first in the row and there is only one sibling, add data attributes for arrow right and left navigation
+        addDataAttribute(dataAttributes, 'data-arrow-right', nextRowFirstItem);
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-left',
+          previousRowLastItem,
         );
       }
     } else if (indexInRow === siblingsAmount) {
-      dataAttributes.push({
-        key: 'data-arrow-left',
-        id: layout.rows[cri].row[indexInRow - 2].id[
-          layout.rows[cri].row[indexInRow - 2].id.length - 1
+      // If the node is the last in the row, add data attribute for arrow left navigation
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-left',
+        layout.rows[currentRowIndex].row[indexInRow - 2].id[
+          layout.rows[currentRowIndex].row[indexInRow - 2].id.length - 1
         ],
-      });
+      );
 
-      if (!isLasRow) {
-        dataAttributes.push({
-          key: 'data-arrow-right',
-          id: layout.rows[cri + 1].row[0].id[0],
-        });
+      if (!isLastRow) {
+        // If the node is not in the last row, add data attribute for arrow right navigation
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-right',
+          layout.rows[currentRowIndex + 1].row[0].id[0],
+        );
       }
     }
   }
+
   return dataAttributes;
 }
 
@@ -2349,16 +2382,20 @@ function getChildArrowNavigation(
   children: string[],
   parentId: string[],
 ) {
-  const dataAttributes = [];
-  dataAttributes.push(
-    {
-      key: 'data-arrow-down',
-      id: index + 1 === children.length ? '' : children[index + 1],
-    },
-    {
-      key: 'data-arrow-up',
-      id: index === 0 ? parentId[parentId.length - 1] : children[index - 1],
-    },
+  const dataAttributes: { key: string; id: string }[] = [];
+
+  // Add data attribute for arrow down navigation
+  addDataAttribute(
+    dataAttributes,
+    'data-arrow-down',
+    children[index + 1] || '',
+  );
+
+  // Add data attribute for arrow up navigation
+  addDataAttribute(
+    dataAttributes,
+    'data-arrow-up',
+    index === 0 ? parentId[parentId.length - 1] : children[index - 1],
   );
 
   return dataAttributes;
