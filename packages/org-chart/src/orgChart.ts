@@ -1,3 +1,4 @@
+import { ListFormat } from 'typescript';
 import {
   OrgChartData,
   Layout,
@@ -12,6 +13,7 @@ const prefix = 'och';
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta, toc } = data;
 
+  let currentRowIndex = 0;
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let mainContainerWidth = 0;
   let currentLayout = provideLayout(
@@ -116,6 +118,18 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       //give role treeitem to nodeElement
       innerNode.setAttribute('role', 'treeitem');
       innerNode.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
+
+      const arrowNavigationAttributes = getArrowNavigaitonData(
+        currentLayout,
+        isRoot ? true : false,
+        indexInRow,
+        siblingsAmount,
+        currentRowIndex,
+      );
+
+      arrowNavigationAttributes.forEach((dataAttribute) => {
+        innerNode.setAttribute(dataAttribute.key, dataAttribute.id);
+      });
 
       //tabIndex is 0 if nodeElement is anchor, else -1
       if (nodeData.url || isRoot) {
@@ -487,11 +501,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     const numberOfRows = layout.rows.length;
     let isLastRow = false;
-    layout.rows.forEach((row: Row, index: Number) => {
+    layout.rows.forEach((row: Row, index: number) => {
       if (index === numberOfRows - 1) {
         isLastRow = true;
       }
       rows.appendChild(createRow(row, isLastRow));
+      currentRowIndex = index + 1;
     });
 
     return rows;
@@ -640,6 +655,68 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   return null;
+}
+
+function getArrowNavigaitonData(
+  layout: Layout,
+  isRoot: boolean,
+  indexInRow: number,
+  siblingsAmount: number,
+  currentRowIndex: number,
+) {
+  const dataAttributes = [];
+  let cri = currentRowIndex;
+  // console.log(layout.rows[cri].row[indexInRow].id[0]);
+  //if it is the root node, only arrow-right is an alternative
+  if (isRoot) {
+    dataAttributes.push({
+      key: 'data-arrow-right',
+      id: layout.rows[cri + 1].row[0].id[0],
+    });
+  } else {
+    if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
+      dataAttributes.push(
+        {
+          key: 'data-arrow-right',
+          id: layout.rows[cri].row[indexInRow].id[0],
+        },
+        {
+          key: 'data-arrow-left',
+          id: layout.rows[cri].row[indexInRow - 2].id[0],
+        },
+      );
+    } else if (indexInRow === 1) {
+      const previousRowLength = layout.rows[cri - 1].row.length;
+      const previousRowLastItem =
+        layout.rows[cri - 1].row[previousRowLength - 1].id[0];
+
+      if (siblingsAmount > 1) {
+        dataAttributes.push(
+          {
+            key: 'data-arrow-right',
+            id: layout.rows[cri].row[indexInRow].id[0],
+          },
+          {
+            key: 'data-arrow-left',
+            id: previousRowLastItem,
+          },
+        );
+      } else {
+        const nextRowFirstItem = layout.rows[cri + 1].row[0].id[0];
+        dataAttributes.push(
+          {
+            key: 'data-arrow-right',
+            id: nextRowFirstItem,
+          },
+          {
+            key: 'data-arrow-left',
+            id: previousRowLastItem,
+          },
+        );
+      }
+    }
+  }
+  return dataAttributes;
 }
 
 function createSpecialColumnLines(
