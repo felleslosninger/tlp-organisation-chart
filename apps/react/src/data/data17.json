@@ -1,0 +1,569 @@
+{
+  "meta": {
+    "title": "Test",
+    "langcode": "no"
+  },
+  "toc": [
+    { "title": "Root", "color": "#0062BA" },
+    { "title": "Item", "color": "#1e2b3c" },
+    { "title": "Child", "color": "#68707c" }
+  ],
+  "nodes": [
+    {
+      "title": "Root",
+      "id": "rootElement",
+      "backgroundColor": "#0062BA",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Item 1 with url",
+      "id": "item1",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item 2",
+      "id": "item2",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 3",
+      "id": "item3",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 4",
+      "id": "item4",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 5",
+      "id": "item5",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 6",
+      "id": "item6",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 7",
+      "id": "item7",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 8",
+      "id": "item8",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 9",
+      "id": "item9",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 10",
+      "id": "item10",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 11",
+      "id": "item11",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 12",
+      "id": "item12",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 13",
+      "id": "item13",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 14",
+      "id": "item14",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 15",
+      "id": "item15",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 16",
+      "id": "item16",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 17",
+      "id": "item17",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 18",
+      "id": "item18",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 19",
+      "id": "item19",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 20",
+      "id": "item20",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 21",
+      "id": "item21",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 22",
+      "id": "item22",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 23",
+      "id": "item23",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 24",
+      "id": "item24",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 25",
+      "id": "item25",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item 26",
+      "id": "item26",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 1 With url",
+      "id": "child1",
+      "backgroundColor": "#68707c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Child 2",
+      "id": "child2",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 3",
+      "id": "child4",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 4",
+      "id": "child4",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 5",
+      "id": "child5",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 6",
+      "id": "child6",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 7",
+      "id": "child7",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 8",
+      "id": "child8",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 9",
+      "id": "child9",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 10",
+      "id": "child10",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 11",
+      "id": "child11",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 12",
+      "id": "child12",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 13",
+      "id": "child13",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 14",
+      "id": "child14",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 15",
+      "id": "child15",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 16",
+      "id": "child16",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 17",
+      "id": "child17",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 18",
+      "id": "child18",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 19",
+      "id": "child19",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 20",
+      "id": "child20",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 21",
+      "id": "child21",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 22",
+      "id": "child22",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 23",
+      "id": "child23",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 24",
+      "id": "child24",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 25",
+      "id": "child25",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child 26",
+      "id": "child26",
+      "backgroundColor": "#68707c",
+      "textColor": "white"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "rows": [
+        {
+          "row": [
+            {
+              "id": ["rootElement"],
+              "alignment": "center",
+              "component": {
+                "type": "root",
+                "children": [
+                  "item1",
+                  "item2",
+                  "item3",
+                  "item4",
+                  "item5",
+                  "item6",
+                  "item7",
+                  "item8",
+                  "item9",
+                  "item10",
+                  "item11",
+                  "item12",
+                  "item13",
+                  "item14",
+                  "item15",
+                  "item16",
+                  "item17",
+                  "item18",
+                  "item19",
+                  "item20",
+                  "item21",
+                  "item22",
+                  "item23",
+                  "item24",
+                  "item25",
+                  "item26"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item1"],
+              "alignment": "center",
+              "component": {
+                "type": "node-list",
+                "children": ["child1"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item2"],
+              "component": {
+                "type": "node-list",
+                "children": ["child2"]
+              }
+            },
+            {
+              "id": ["item3"],
+              "component": {
+                "type": "node-list",
+                "children": ["child3"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item4"],
+              "component": {
+                "type": "node-list",
+                "children": ["child4"]
+              }
+            },
+            {
+              "id": ["item5"],
+              "component": {
+                "type": "node-list",
+                "children": ["child5"]
+              }
+            },
+            {
+              "id": ["item6"],
+              "component": {
+                "type": "node-list",
+                "children": ["child6"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item7"],
+              "component": {
+                "type": "node-list",
+                "children": ["child7"]
+              }
+            },
+            {
+              "id": ["item8"],
+              "component": {
+                "type": "node-list",
+                "children": ["child8"]
+              }
+            },
+            {
+              "id": ["item9"],
+              "component": {
+                "type": "node-list",
+                "children": ["child9"]
+              }
+            },
+            {
+              "id": ["item10"],
+              "component": {
+                "type": "node-list",
+                "children": ["child10"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item11"],
+              "component": {
+                "type": "node-list",
+                "children": ["child11"]
+              }
+            },
+            {
+              "id": ["item12"],
+              "component": {
+                "type": "node-list",
+                "children": ["child12"]
+              }
+            },
+            {
+              "id": ["item13"],
+              "component": {
+                "type": "node-list",
+                "children": ["child13"]
+              }
+            },
+            {
+              "id": ["item14"],
+              "component": {
+                "type": "node-list",
+                "children": ["child14"]
+              }
+            },
+            {
+              "id": ["item15"],
+              "component": {
+                "type": "node-list",
+                "children": ["child15"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item16"],
+              "component": {
+                "type": "node-list",
+                "children": ["child16"]
+              }
+            },
+            {
+              "id": ["item17"],
+              "component": {
+                "type": "node-list",
+                "children": ["child17"]
+              }
+            },
+            {
+              "id": ["item18"],
+              "component": {
+                "type": "node-list",
+                "children": ["child18"]
+              }
+            },
+            {
+              "id": ["item19"],
+              "component": {
+                "type": "node-list",
+                "children": ["child19"]
+              }
+            },
+            {
+              "id": ["item20", "item21"],
+              "component": {
+                "type": "node-list",
+                "children": ["child20", "child21"]
+              }
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item22", "item23"],
+              "component": {
+                "type": "node-list",
+                "children": ["child22", "child23"]
+              }
+            },
+
+            {
+              "id": ["item24"],
+              "component": {
+                "type": "node-list",
+                "children": ["child24"]
+              }
+            },
+            {
+              "id": ["item25", "item26"],
+              "component": {
+                "type": "node-list",
+                "children": ["child25", "child26"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
