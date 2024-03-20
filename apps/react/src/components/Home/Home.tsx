@@ -18,6 +18,7 @@ import jsonData13 from '../../data/data13.json';
 import jsonData14 from '../../data/data14.json';
 import jsonData15 from '../../data/data15.json';
 import jsonData16 from '../../data/data16.json';
+import jsonData17 from '../../data/data17.json';
 import jsonDataSpecial1 from '../../data/dataSpecial1.json';
 import jsonDataSpecial2 from '../../data/dataSpecial2.json';
 import jsonDataOffset1 from '../../data/dataOffset1.json';
@@ -46,6 +47,7 @@ const datasets: { [key: string]: any } = {
   data14: jsonData14,
   data15: jsonData15,
   data16: jsonData16,
+  data17: jsonData17,
   special1: jsonDataSpecial1,
   special2: jsonDataSpecial2,
   offset1: jsonDataOffset1,
@@ -55,7 +57,7 @@ const datasets: { [key: string]: any } = {
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState('1800px');
 
-  const [data, setData] = useState(jsonDigdir3);
+  const [data, setData] = useState(jsonData17);
 
   useEffect(() => {
     generateOrgChart(data, 'test');
