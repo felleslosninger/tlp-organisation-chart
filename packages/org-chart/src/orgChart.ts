@@ -647,14 +647,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Add arrow key navigation to the main container
     addArrowKeyNavigation(mainContainer);
 
-    // Create a MutationObserver to observe changes in the mainContainer's DOM
-    const observer = new MutationObserver(() => {
-      // Stop listening to addArrowKeyNavigation
-      observer.disconnect();
-    });
-    // Start observing the mainContainer's DOM
-    observer.observe(mainContainer, { childList: true, subtree: true });
-
     return mainContainer;
   }
 
