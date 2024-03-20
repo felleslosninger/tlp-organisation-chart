@@ -589,8 +589,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Set the last breakpoint based on mainContainer's width
     let lastBreakpoint = getBreakpointName(mainContainerWidth);
 
-    addArrowKeyNavigation(mainContainer);
-
     // Function to update layout based on mainContainer's width
     const updateLayout = () => {
       // Update variables based on the current state
@@ -620,6 +618,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         orgChart.innerHTML = '';
         orgChart.appendChild(createTOC(toc, isMobile));
         orgChart.appendChild(createRowsWrapper(currentLayout));
+        addArrowKeyNavigation(mainContainer);
       }
     };
 
@@ -645,6 +644,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     mainContainer.innerHTML = '';
     mainContainer.appendChild(orgChart);
 
+    // Add arrow key navigation to the main container
+    addArrowKeyNavigation(mainContainer);
+
+    // Create a MutationObserver to observe changes in the mainContainer's DOM
+    const observer = new MutationObserver(() => {
+      // Stop listening to addArrowKeyNavigation
+      observer.disconnect();
+    });
+    // Start observing the mainContainer's DOM
+    observer.observe(mainContainer, { childList: true, subtree: true });
+
     return mainContainer;
   }
 
@@ -652,7 +662,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 }
 
 function addArrowKeyNavigation(mainContainer: HTMLElement) {
-  mainContainer.addEventListener('keydown', function (event) {
+  const observer = new MutationObserver(() => {
+    mainContainer.removeEventListener('keydown', handleKeyDown);
+  });
+
+  const handleKeyDown = (event: KeyboardEvent) => {
     const activeElement = document.activeElement; // The element that is currently focused
 
     // Variable that will hold the ID of the element to be focused based on the key press
@@ -686,7 +700,10 @@ function addArrowKeyNavigation(mainContainer: HTMLElement) {
         event.preventDefault(); // Prevent default behavior (such as scrolling)
       }
     }
-  });
+  };
+
+  mainContainer.addEventListener('keydown', handleKeyDown);
+  observer.observe(mainContainer, { childList: true, subtree: true });
 }
 
 function createSpecialColumnLines(
