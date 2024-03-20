@@ -1,3 +1,4 @@
+import { ListFormat } from 'typescript';
 import {
   OrgChartData,
   Layout,
@@ -12,6 +13,7 @@ const prefix = 'och';
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta, toc } = data;
 
+  let currentRowIndex = 0;
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let mainContainerWidth = 0;
   let currentLayout = provideLayout(
@@ -51,7 +53,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return nodes.find((node: Node) => node.id === id);
   }
 
-  function createChildren(parentSiblingsAmount: number, children: string[]) {
+  function createChildren(
+    parentSiblingsAmount: number,
+    children: string[],
+    parentId: string[],
+  ) {
     const childrenList = createElement('div');
 
     childrenList.className = `${prefix}-node-children`;
@@ -59,7 +65,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       childrenList.style.width = '290px';
     }
 
-    children.forEach((childId: string) => {
+    children.forEach((childId: string, index: number) => {
       const childData = findNodeById(childId);
       if (childData) {
         const innerChild = childData.url
@@ -75,11 +81,27 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         innerChild.setAttribute('role', 'treeitem');
         innerChild.setAttribute('aria-level', '3');
 
-        innerChild.tabIndex = 0;
+        innerChild.tabIndex = -1;
+        if (!childData.url) {
+          innerChild.tabIndex = -1;
+        } else {
+          innerChild.tabIndex = 0;
+        }
         innerChild.innerHTML = childData.title;
         innerChild.className = `${prefix}-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
         innerChild.style.backgroundColor = childData.backgroundColor;
+
+        const arrowNavigationAttributes = getChildArrowNavigation(
+          index,
+          children,
+          parentId,
+        );
+
+        arrowNavigationAttributes.forEach((dataAttribute) => {
+          innerChild.setAttribute(dataAttribute.key, dataAttribute.id);
+        });
+
         childrenList.appendChild(innerChild);
       }
     });
@@ -99,21 +121,40 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (nodeData) {
       const nodeElement = createElement('div');
 
+      const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
+
       //give nodeElement id
-      nodeElement.id = nodeData.id;
+      innerNode.id = nodeData.id;
 
       if (node.component?.children) {
-        nodeElement.setAttribute(
-          'aria-owns',
-          node.component.children.join(' '),
-        );
+        innerNode.setAttribute('aria-owns', node.component.children.join(' '));
       }
 
       //give role treeitem to nodeElement
-      nodeElement.setAttribute('role', 'treeitem');
-      nodeElement.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
+      innerNode.setAttribute('role', 'treeitem');
+      innerNode.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
 
-      const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
+      const arrowNavigationAttributes = getArrowNavigaitonData(
+        currentLayout,
+        isRoot ? true : false,
+        indexInRow,
+        siblingsAmount,
+        currentRowIndex,
+        isLastRow,
+        node.component?.children ? node.component.children : null,
+      );
+
+      arrowNavigationAttributes.forEach((dataAttribute) => {
+        innerNode.setAttribute(dataAttribute.key, dataAttribute.id);
+      });
+
+      //tabIndex is 0 if nodeElement is anchor, else -1
+      if (nodeData.url || isRoot) {
+        innerNode.tabIndex = 0;
+      } else {
+        innerNode.tabIndex = -1;
+      }
+
       //if nodeData has border, provide border
       if (nodeData.border) {
         innerNode.style.border = `2px ${nodeData.border} #000`;
@@ -130,7 +171,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.className = `${prefix}-node ${prefix}-inner-node`;
       nodeElement.appendChild(innerNode);
       nodeElement.className = `${prefix}-node `;
-      innerNode.tabIndex = 0;
 
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
@@ -234,12 +274,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         );
       }
 
-      column.id.forEach((nodeId: string) => {
+      column.id.forEach((nodeId: string, index: number) => {
         const nodeData = findNodeById(nodeId);
         if (nodeData) {
           const nodeElement = document.createElement(
             nodeData.url ? 'a' : 'div',
           );
+          nodeElement.id = nodeId;
 
           //if nodeData has border, provide border
           if (nodeData.border) {
@@ -251,7 +292,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             nodeElement.href = nodeData.url;
           }
           nodeElement.className = `${prefix}-node `;
-          nodeElement.tabIndex = 0;
+
+          const arrowNavigationAttributes = getArrowNavigaitonDataSpecialColum(
+            currentLayout,
+            indexInRow,
+            siblingsAmount,
+            currentRowIndex,
+            isLastRow,
+            column.component?.children ? column.component.children : null,
+            index,
+          );
+
+          arrowNavigationAttributes.forEach((dataAttribute) => {
+            nodeElement.setAttribute(dataAttribute.key, dataAttribute.id);
+          });
+
+          nodeData.url
+            ? (nodeElement.tabIndex = 0)
+            : (nodeElement.tabIndex = -1);
+
           nodeElement.style.backgroundColor = nodeData.backgroundColor;
           nodeElement.style.color = nodeData.textColor;
           nodeElement.innerHTML = nodeData.title;
@@ -280,6 +339,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         createChildren(
           3,
           column.component.children ? column.component.children : [],
+          column.id,
         ),
       );
     }
@@ -340,7 +400,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     if (column.component?.children && column.component.type !== 'root') {
       columnElement.appendChild(
-        createChildren(siblingsAmount, column.component.children),
+        createChildren(siblingsAmount, column.component.children, column.id),
       );
     }
 
@@ -474,11 +534,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     const numberOfRows = layout.rows.length;
     let isLastRow = false;
-    layout.rows.forEach((row: Row, index: Number) => {
+    layout.rows.forEach((row: Row, index: number) => {
       if (index === numberOfRows - 1) {
         isLastRow = true;
       }
       rows.appendChild(createRow(row, isLastRow));
+      currentRowIndex = index + 1;
     });
 
     return rows;
@@ -557,6 +618,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         orgChart.innerHTML = '';
         orgChart.appendChild(createTOC(toc, isMobile));
         orgChart.appendChild(createRowsWrapper(currentLayout));
+        addArrowKeyNavigation(mainContainer);
       }
     };
 
@@ -583,10 +645,58 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     mainContainer.appendChild(orgChart);
     mainContainer.className = `${prefix}-org-chart-main-container`;
 
+    // Add arrow key navigation to the main container
+    addArrowKeyNavigation(mainContainer);
+
     return mainContainer;
   }
 
   return null;
+}
+
+function addArrowKeyNavigation(mainContainer: HTMLElement) {
+  const observer = new MutationObserver(() => {
+    mainContainer.removeEventListener('keydown', handleKeyDown);
+  });
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    const activeElement = document.activeElement; // The element that is currently focused
+
+    // Variable that will hold the ID of the element to be focused based on the key press
+    let targetElementId;
+
+    // Check which arrow key is pressed and assign the relevant ID based on the 'data-arrow-*' attributes
+    switch (event.key) {
+      case 'ArrowRight':
+        targetElementId = activeElement?.getAttribute('data-arrow-right');
+
+        break;
+      case 'ArrowLeft':
+        targetElementId = activeElement?.getAttribute('data-arrow-left');
+
+        break;
+      case 'ArrowDown':
+        targetElementId = activeElement?.getAttribute('data-arrow-down');
+
+        break;
+      case 'ArrowUp':
+        targetElementId = activeElement?.getAttribute('data-arrow-up');
+
+        break;
+    }
+
+    // Check if a valid ID for the next element was found
+    if (targetElementId) {
+      const nextElement = document.getElementById(targetElementId);
+      if (nextElement) {
+        nextElement.focus(); // Move focus to the next element based on ID
+        event.preventDefault(); // Prevent default behavior (such as scrolling)
+      }
+    }
+  };
+
+  mainContainer.addEventListener('keydown', handleKeyDown);
+  observer.observe(mainContainer, { childList: true, subtree: true });
 }
 
 function createSpecialColumnLines(
@@ -2045,4 +2155,221 @@ function createTOC(toc: TableOfContentsItem[], isMobile?: boolean) {
   });
 
   return tocBox;
+}
+
+function addDataAttribute(
+  dataAttributes: { key: string; id: string }[],
+  key: string,
+  id: string,
+) {
+  dataAttributes.push({ key, id });
+}
+
+/**
+ * This function generates the arrow navigation data for nodes in a special column layout.
+ * @param layout - The org chart layout.
+ * @param indexInRow - The index of the node in the row.
+ * @param siblingsAmount - The total number of nodes in the row.
+ * @param currentRowIndex - The index of the current row.
+ * @param isLastRow - Indicates if the current row is the last row.
+ * @param children - The children of the node.
+ * @param indexInColumn - The index of the node in the column.
+ * @returns An array of data attributes for arrow navigation.
+ */
+function getArrowNavigaitonDataSpecialColum(
+  layout: Layout,
+  indexInRow: number,
+  siblingsAmount: number,
+  currentRowIndex: number,
+  isLastRow: boolean,
+  children: string[] | null,
+  indexInColumn: number,
+) {
+  const dataAttributes: { key: string; id: string }[] = [];
+  let cri = currentRowIndex;
+
+  // If the node has children, add data attribute for arrow down navigation
+  if (children) {
+    addDataAttribute(dataAttributes, 'data-arrow-down', children[0]);
+  }
+
+  if (indexInColumn === 0) {
+    // If the node is the first node in the column, add data attribute for arrow right navigation
+    addDataAttribute(
+      dataAttributes,
+      'data-arrow-right',
+      layout.rows[cri].row[indexInRow - 1].id[1],
+    );
+
+    if (indexInRow === 1) {
+      // If the node is the first node in the row, add data attribute for arrow left navigation to the last node in the previous row
+      const previousRowLength = layout.rows[cri - 1].row.length;
+      const previousRowLastItem =
+        layout.rows[cri - 1].row[previousRowLength - 1].id[
+          layout.rows[cri - 1].row[previousRowLength - 1].id.length - 1
+        ];
+      addDataAttribute(dataAttributes, 'data-arrow-left', previousRowLastItem);
+    } else {
+      // If the node is not the first node in the row, add data attribute for arrow left navigation to the previous node in the same row
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-left',
+        layout.rows[cri].row[indexInRow - 2].id[
+          layout.rows[cri].row[indexInRow - 2].id.length - 1
+        ],
+      );
+    }
+  } else {
+    // If the node is not the first node in the column, add data attribute for arrow left navigation to the previous node in the same row
+    addDataAttribute(
+      dataAttributes,
+      'data-arrow-left',
+      layout.rows[cri].row[indexInRow - 1].id[0],
+    );
+
+    if (siblingsAmount === indexInRow && isLastRow) {
+      // If the node is the last node in the row and the last row, add data attribute for arrow right navigation to an empty value
+      addDataAttribute(dataAttributes, 'data-arrow-right', '');
+    } else if (siblingsAmount === indexInRow) {
+      // If the node is the last node in the row, add data attribute for arrow right navigation to the first node in the next row
+      const nextRowFirstItem = layout.rows[cri + 1].row[0].id[0];
+      addDataAttribute(dataAttributes, 'data-arrow-right', nextRowFirstItem);
+    } else {
+      // If the node is not the last node in the row, add data attribute for arrow right navigation to the next node in the same row
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-right',
+        layout.rows[cri].row[indexInRow].id[0],
+      );
+    }
+  }
+
+  return dataAttributes;
+}
+
+/**
+ * This function generates the arrow navigation data for nodes in a general layout.
+ * @param layout - The org chart layout.
+ * @param isRoot - Indicates if the current node is the root node.
+ * @param indexInRow - The index of the node in the row.
+ * @param siblingsAmount - The total number of nodes in the row.
+ * @param currentRowIndex - The index of the current row.
+ * @param isLastRow - Indicates if the current row is the last row.
+ * @param children - The children of the node.
+ * @returns An array of data attributes for arrow navigation.
+ */
+function getArrowNavigaitonData(
+  layout: Layout,
+  isRoot: boolean,
+  indexInRow: number,
+  siblingsAmount: number,
+  currentRowIndex: number,
+  isLastRow: boolean,
+  children: string[] | null,
+) {
+  const dataAttributes: { key: string; id: string }[] = [];
+
+  // If the node has children, add data attribute for arrow down navigation
+  if (children && !isRoot) {
+    addDataAttribute(dataAttributes, 'data-arrow-down', children[0]);
+  }
+
+  // If it is the root node, only arrow-right is an alternative
+  if (isRoot) {
+    addDataAttribute(
+      dataAttributes,
+      'data-arrow-right',
+      layout.rows[1].row[0].id[0],
+    );
+  } else {
+    if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
+      // If the node is not the first or last in the row, add data attributes for arrow right and left navigation
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-right',
+        layout.rows[currentRowIndex].row[indexInRow].id[0],
+      );
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-left',
+        layout.rows[currentRowIndex].row[indexInRow - 2].id[
+          layout.rows[currentRowIndex].row[indexInRow - 2].id.length - 1
+        ],
+      );
+    } else if (indexInRow === 1) {
+      const previousRowLength = layout.rows[currentRowIndex - 1].row.length;
+      const previousRowLastItem =
+        layout.rows[currentRowIndex - 1].row[previousRowLength - 1].id[
+          layout.rows[currentRowIndex - 1].row[previousRowLength - 1].id
+            .length - 1
+        ];
+
+      if (siblingsAmount > 1) {
+        // If the node is the first in the row and there are more than one sibling, add data attributes for arrow right and left navigation
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-right',
+          layout.rows[currentRowIndex].row[indexInRow].id[0],
+        );
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-left',
+          previousRowLastItem,
+        );
+      } else {
+        const nextRowFirstItem = layout.rows[currentRowIndex + 1].row[0].id[0];
+        // If the node is the first in the row and there is only one sibling, add data attributes for arrow right and left navigation
+        addDataAttribute(dataAttributes, 'data-arrow-right', nextRowFirstItem);
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-left',
+          previousRowLastItem,
+        );
+      }
+    } else if (indexInRow === siblingsAmount) {
+      // If the node is the last in the row, add data attribute for arrow left navigation
+      addDataAttribute(
+        dataAttributes,
+        'data-arrow-left',
+        layout.rows[currentRowIndex].row[indexInRow - 2].id[
+          layout.rows[currentRowIndex].row[indexInRow - 2].id.length - 1
+        ],
+      );
+
+      if (!isLastRow) {
+        // If the node is not in the last row, add data attribute for arrow right navigation
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-right',
+          layout.rows[currentRowIndex + 1].row[0].id[0],
+        );
+      }
+    }
+  }
+
+  return dataAttributes;
+}
+
+function getChildArrowNavigation(
+  index: number,
+  children: string[],
+  parentId: string[],
+) {
+  const dataAttributes: { key: string; id: string }[] = [];
+
+  // Add data attribute for arrow down navigation
+  addDataAttribute(
+    dataAttributes,
+    'data-arrow-down',
+    children[index + 1] || '',
+  );
+
+  // Add data attribute for arrow up navigation
+  addDataAttribute(
+    dataAttributes,
+    'data-arrow-up',
+    index === 0 ? parentId[parentId.length - 1] : children[index - 1],
+  );
+
+  return dataAttributes;
 }

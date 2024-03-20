@@ -6,7 +6,7 @@
   "repository": "https://github.com/felleslosninger/tlp-organization-chart",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
-  "main": "dist/index.js",
+  "main": "dist/es/index.js",
   "type": "module",
   "publishConfig": {
     "access": "public"
