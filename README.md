@@ -38,7 +38,8 @@ The second argument is the id of the container where you want the chart to show.
 
 ### Installing via `<link>`
 
-We recommend to build your own copy of the package, and then add it to your website.
+We recommend to build your own copy of the package.
+Copy the `index.css` file and `cjs/index.js` file into the location you want to use it.
 You can read about how to do this below.
 
 ```html
