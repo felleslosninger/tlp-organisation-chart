@@ -2389,6 +2389,8 @@ function getRootChildren(currentLayout: Layout): string[] {
       rootChildren.push(...column.id);
     }
   }
+  // Remove the first id in the array, which is the root id
+  rootChildren.shift();
 
   return rootChildren;
 }
