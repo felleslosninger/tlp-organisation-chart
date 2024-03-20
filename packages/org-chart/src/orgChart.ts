@@ -586,85 +586,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Insert the org chart into the container
     orgChart.appendChild(createRowsWrapper(currentLayout));
 
-    // Arrow key navigation
-    // mainContainer.addEventListener('keydown', function (event) {
-    //   const focusableElements = Array.from(
-    //     document.querySelectorAll(
-    //       '.och-nodes-container .och-node, .och-node .och-inner-node, .och-node.och-node-child',
-    //     ),
-    //   );
-    //   const activeElement = document.activeElement as Element;
-    //   const currentIndex = focusableElements.indexOf(activeElement);
-
-    //   let newIndex: number | undefined;
-
-    //   switch (event.key) {
-    //     case 'ArrowDown':
-    //       newIndex = currentIndex! + 1;
-    //       break;
-    //     case 'ArrowUp':
-    //       newIndex = currentIndex! - 1;
-    //       break;
-    //     case 'ArrowRight':
-    //       newIndex = currentIndex! + 1;
-    //       break;
-    //     case 'ArrowLeft':
-    //       newIndex = currentIndex! - 1;
-    //       break;
-    //     default:
-    //       // If any other key is pressed, do nothing
-    //       return;
-    //   }
-
-    //   // Check to keep the index within valid bounds
-    //   if (
-    //     newIndex !== undefined &&
-    //     newIndex >= 0 &&
-    //     newIndex < focusableElements.length
-    //   ) {
-    //     (focusableElements[newIndex] as HTMLElement).focus();
-    //     event.preventDefault(); // Prevent default handling, such as scrolling
-    //   }
-    // });
-
-    mainContainer.addEventListener('keydown', function (event) {
-      const activeElement = document.activeElement; // Det elementet som er fokusert på nåværende tidspunkt
-
-      // Variabelen som vil holde ID-en til elementet som skal få fokus basert på tastetrykket
-      let targetElementId;
-
-      // Sjekker hvilken pil tast som er trykket og tilordner den relevante ID-en basert på 'data-arrow-*' attributtene
-      switch (event.key) {
-        case 'ArrowRight':
-          targetElementId = activeElement?.getAttribute('data-arrow-right');
-
-          break;
-        case 'ArrowLeft':
-          targetElementId = activeElement?.getAttribute('data-arrow-left');
-
-          break;
-        case 'ArrowDown':
-          targetElementId = activeElement?.getAttribute('data-arrow-down');
-
-          break;
-        case 'ArrowUp':
-          targetElementId = activeElement?.getAttribute('data-arrow-up');
-
-          break;
-      }
-
-      // Sjekker om det ble funnet en gyldig ID for neste element
-      if (targetElementId) {
-        const nextElement = document.getElementById(targetElementId);
-        if (nextElement) {
-          nextElement.focus(); // Flytter fokus til det neste elementet basert på ID
-          event.preventDefault(); // Forhindrer standard handling (som scrolling)
-        }
-      }
-    });
-
     // Set the last breakpoint based on mainContainer's width
     let lastBreakpoint = getBreakpointName(mainContainerWidth);
+
+    addArrowKeyNavigation(mainContainer);
 
     // Function to update layout based on mainContainer's width
     const updateLayout = () => {
@@ -724,6 +649,44 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   return null;
+}
+
+function addArrowKeyNavigation(mainContainer: HTMLElement) {
+  mainContainer.addEventListener('keydown', function (event) {
+    const activeElement = document.activeElement; // The element that is currently focused
+
+    // Variable that will hold the ID of the element to be focused based on the key press
+    let targetElementId;
+
+    // Check which arrow key is pressed and assign the relevant ID based on the 'data-arrow-*' attributes
+    switch (event.key) {
+      case 'ArrowRight':
+        targetElementId = activeElement?.getAttribute('data-arrow-right');
+
+        break;
+      case 'ArrowLeft':
+        targetElementId = activeElement?.getAttribute('data-arrow-left');
+
+        break;
+      case 'ArrowDown':
+        targetElementId = activeElement?.getAttribute('data-arrow-down');
+
+        break;
+      case 'ArrowUp':
+        targetElementId = activeElement?.getAttribute('data-arrow-up');
+
+        break;
+    }
+
+    // Check if a valid ID for the next element was found
+    if (targetElementId) {
+      const nextElement = document.getElementById(targetElementId);
+      if (nextElement) {
+        nextElement.focus(); // Move focus to the next element based on ID
+        event.preventDefault(); // Prevent default behavior (such as scrolling)
+      }
+    }
+  });
 }
 
 function createSpecialColumnLines(
@@ -2297,7 +2260,7 @@ function getArrowNavigaitonData(
   const dataAttributes: { key: string; id: string }[] = [];
 
   // If the node has children, add data attribute for arrow down navigation
-  if (children) {
+  if (children && !isRoot) {
     addDataAttribute(dataAttributes, 'data-arrow-down', children[0]);
   }
 
@@ -2306,7 +2269,7 @@ function getArrowNavigaitonData(
     addDataAttribute(
       dataAttributes,
       'data-arrow-right',
-      layout.rows[currentRowIndex + 1].row[0].id[0],
+      layout.rows[1].row[0].id[0],
     );
   } else {
     if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
