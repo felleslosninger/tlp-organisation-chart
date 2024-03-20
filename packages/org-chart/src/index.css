@@ -367,11 +367,14 @@
   top: 40px;
 }
 
+.och-column a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .och-column a:hover,
 .och-column a:focus-visible {
-  text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
 }
 
 /*Special column styles*/
