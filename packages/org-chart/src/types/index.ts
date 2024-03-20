@@ -24,7 +24,7 @@ export type Component = {
 };
 
 export type Column = {
-  id: string | string[];
+  id: string[];
   alignment?: string; // Optional
   component?: Component; // Optional
 };
