@@ -6,6 +6,11 @@
   --row-column-gap: 80px;
 }
 
+.och-org-chart-main-container {
+  position: relative;
+  z-index: 1;
+}
+
 /* TOC styles */
 .och-toc-box {
   font-size: 16px;
