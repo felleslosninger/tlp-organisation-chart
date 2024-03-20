@@ -370,6 +370,7 @@
 .och-column a {
   text-decoration: underline;
   text-underline-offset: 2px;
+  text-decoration-thickness: 2px;
 }
 
 .och-column a:hover,
