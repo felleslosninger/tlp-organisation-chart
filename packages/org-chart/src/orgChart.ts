@@ -643,6 +643,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Clear the container of all existing children and add the org chart
     mainContainer.innerHTML = '';
     mainContainer.appendChild(orgChart);
+    mainContainer.className = `${prefix}-org-chart-main-container`;
 
     // Add arrow key navigation to the main container
     addArrowKeyNavigation(mainContainer);
