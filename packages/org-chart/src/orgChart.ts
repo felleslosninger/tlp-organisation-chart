@@ -126,8 +126,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       //give nodeElement id
       innerNode.id = nodeData.id;
 
-      if (node.component?.children) {
+      if (node.component?.children && !isRoot) {
         innerNode.setAttribute('aria-owns', node.component.children.join(' '));
+      } else if (isRoot) {
+        innerNode.setAttribute(
+          'aria-owns',
+          getRootChildren(currentLayout).join(' '),
+        );
       }
 
       //give role treeitem to nodeElement
@@ -2387,4 +2392,20 @@ function getChildArrowNavigation(
   );
 
   return dataAttributes;
+}
+
+function getRootChildren(currentLayout: Layout): string[] {
+  const rootChildren: string[] = [];
+
+  // Iterate through the rows and columns in the layout
+  for (const row of currentLayout.rows) {
+    for (const column of row.row) {
+      // Add all the ids in the column to the rootChildren array
+      rootChildren.push(...column.id);
+    }
+  }
+  // Remove the first id in the array, which is the root id
+  rootChildren.shift();
+
+  return rootChildren;
 }
