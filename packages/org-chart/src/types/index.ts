@@ -1,6 +1,7 @@
 export type Meta = {
   title: string;
   langcode: string;
+  customIdPrefix?: string;
 };
 
 export type TableOfContentsItem = {
