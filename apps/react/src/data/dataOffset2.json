@@ -22,8 +22,14 @@
       "textColor": "white"
     },
     {
-      "title": "Right",
-      "id": "right",
+      "title": "Offset right",
+      "id": "offset-right2",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Offset right",
+      "id": "offset-right3",
       "backgroundColor": "#95227D",
       "textColor": "white"
     },
@@ -34,26 +40,128 @@
       "textColor": "white"
     },
     {
-      "title": "Left",
-      "id": "left",
-      "backgroundColor": "#95227D",
-      "textColor": "white"
-    },
-    {
       "title": "Offset left",
       "id": "offset-left",
       "backgroundColor": "#95227D",
       "textColor": "white"
     },
     {
+      "title": "Offset left",
+      "id": "offset-left2",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
+      "title": "Offset left",
+      "id": "offset-left3",
+      "backgroundColor": "#95227D",
+      "textColor": "white"
+    },
+    {
       "title": "Normal Alignment",
-      "id": "normal",
+      "id": "normal1",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal2",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal3",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal4",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal5",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal6",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal7",
       "backgroundColor": "darkgrey",
       "textColor": "white"
     },
     {
       "title": "Child",
-      "id": "child",
+      "id": "child1",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child2",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child3",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child4",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child5",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child6",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child7",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child8",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child9",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child10",
+      "backgroundColor": "lightblue",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Child",
+      "id": "child11",
       "backgroundColor": "lightblue",
       "textColor": "#1e2b3c"
     }
@@ -69,12 +177,20 @@
               "component": {
                 "type": "root",
                 "children": [
-                  "right",
-                  "center",
-                  "left",
-                  "offset-left",
                   "offset-right",
-                  "normal"
+                  "offset-right2",
+                  "offset-right3",
+                  "center",
+                  "offset-left",
+                  "offset-left2",
+                  "offset-left3",
+                  "normal1",
+                  "normal2",
+                  "normal3",
+                  "normal4",
+                  "normal5",
+                  "normal6",
+                  "normal7"
                 ]
               }
             }
@@ -87,7 +203,7 @@
               "alignment": "offset-left",
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child1"]
               }
             },
             {
@@ -95,7 +211,7 @@
               "alignment": "offset-right",
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child2"]
               }
             }
           ]
@@ -103,11 +219,11 @@
         {
           "row": [
             {
-              "id": ["offset-left"],
+              "id": ["offset-left2"],
               "alignment": "offset-left",
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child3"]
               }
             }
           ]
@@ -115,11 +231,11 @@
         {
           "row": [
             {
-              "id": ["offset-right"],
+              "id": ["offset-right2"],
               "alignment": "offset-right",
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child4"]
               }
             }
           ]
@@ -127,18 +243,18 @@
         {
           "row": [
             {
-              "id": ["offset-left"],
+              "id": ["offset-left3"],
               "alignment": "offset-left",
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child5"]
               }
             },
             {
-              "id": ["normal"],
+              "id": ["normal1"],
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child6"]
               }
             }
           ]
@@ -146,14 +262,14 @@
         {
           "row": [
             {
-              "id": ["normal"],
+              "id": ["normal2"],
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child7"]
               }
             },
             {
-              "id": ["normal"]
+              "id": ["normal3"]
             }
           ]
         },
@@ -168,13 +284,13 @@
         {
           "row": [
             {
-              "id": ["normal"]
+              "id": ["normal4"]
             },
             {
-              "id": ["normal"],
+              "id": ["normal5"],
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child8"]
               }
             }
           ]
@@ -182,18 +298,18 @@
         {
           "row": [
             {
-              "id": ["normal"],
+              "id": ["normal6"],
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child9"]
               }
             },
             {
-              "id": ["offset-right"],
+              "id": ["offset-right3"],
               "alignment": "offset-right",
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child10"]
               }
             }
           ]
@@ -201,10 +317,10 @@
         {
           "row": [
             {
-              "id": ["normal"],
+              "id": ["normal7"],
               "component": {
                 "type": "nodeList",
-                "children": ["child"]
+                "children": ["child11"]
               }
             }
           ]

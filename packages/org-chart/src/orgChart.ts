@@ -2307,6 +2307,7 @@ function getArrowNavigaitonData(
           layout.rows[currentRowIndex - 1].row[previousRowLength - 1].id
             .length - 1
         ];
+      //const nextRowFirstItem = layout.rows[currentRowIndex + 1].row[0].id[0];
 
       if (siblingsAmount > 1) {
         // If the node is the first in the row and there are more than one sibling, add data attributes for arrow right and left navigation
@@ -2314,6 +2315,17 @@ function getArrowNavigaitonData(
           dataAttributes,
           'data-arrow-right',
           layout.rows[currentRowIndex].row[indexInRow].id[0],
+        );
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-left',
+          previousRowLastItem,
+        );
+      } else if (siblingsAmount === 1 && !isRoot) {
+        addDataAttribute(
+          dataAttributes,
+          'data-arrow-right',
+          !isLastRow ? layout.rows[currentRowIndex + 1].row[0].id[0] : '',
         );
         addDataAttribute(
           dataAttributes,
