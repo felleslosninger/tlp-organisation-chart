@@ -1566,11 +1566,8 @@ function createNodeLineClass(
 
   if (specialColumnsList.length <= 0) {
     if (siblingsAmount === 1) {
-      if (alignment === 'left') {
-        className = ` ${prefix}-node-line-right`;
-      } else if (alignment === 'right') {
-        className = ` ${prefix}-node-line-left`;
-      }
+      className = ` ${prefix}-node-line-${alignment}`;
+
       return className;
     }
     if (

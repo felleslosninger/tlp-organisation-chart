@@ -62,6 +62,7 @@
   flex-direction: column;
 }
 
+.och-row-last-2::before,
 .och-row-last-1::before {
   content: '';
   position: absolute;
@@ -70,6 +71,10 @@
   background-color: var(--line-color);
   top: 0;
   left: calc(50% - 1px);
+}
+
+.och-row-last-2:before {
+  height: var(--row-column-gap);
 }
 
 .och-row-last-3::before,
