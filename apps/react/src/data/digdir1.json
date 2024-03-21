@@ -168,20 +168,7 @@
           "row": [
             {
               "id": ["dir"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": [
-                  "kom",
-                  "tuu",
-                  "verk",
-                  "hr",
-                  "sam",
-                  "dig",
-                  "fel",
-                  "bod"
-                ]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -214,34 +201,26 @@
             {
               "id": ["sam"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["sek1", "sek2"]
-              }
+
+              "children": ["sek1", "sek2"]
             },
             {
               "id": ["dig"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["ark", "int", "nasjRes", "ski"]
-              }
+
+              "children": ["ark", "int", "nasjRes", "ski"]
             },
             {
               "id": ["fel"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["str", "utv", "mar", "bru", "dri"]
-              }
+
+              "children": ["str", "utv", "mar", "bru", "dri"]
             },
             {
               "id": ["bod"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["str2", "utv2", "platt", "bru2", "bruk"]
-              }
+
+              "children": ["str2", "utv2", "platt", "bru2", "bruk"]
             }
           ]
         }
