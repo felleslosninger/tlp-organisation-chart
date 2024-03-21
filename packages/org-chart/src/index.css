@@ -380,12 +380,13 @@
 .och-column a {
   text-decoration: underline;
   text-underline-offset: 2px;
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 1px;
 }
 
 .och-column a:hover,
 .och-column a:focus-visible {
   text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 /*Special column styles*/
