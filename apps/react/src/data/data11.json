@@ -11,7 +11,7 @@
   "nodes": [
     {
       "title": "Root",
-      "id": "root",
+      "id": "rootElement",
       "backgroundColor": "#0062BA",
       "textColor": "#1e2b3c"
     },
@@ -34,7 +34,7 @@
         {
           "row": [
             {
-              "id": ["root"],
+              "id": ["rootElement"],
               "alignment": "center",
               "component": {
                 "type": "root",

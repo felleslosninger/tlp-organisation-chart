@@ -4,9 +4,9 @@
     "langcode": "no"
   },
   "toc": [
-    { "title": "Direktør", "color": "#0062BA" },
-    { "title": "Avdeling", "color": "#1e2b3c" },
-    { "title": "Seksjon", "color": "#D2D5D8" }
+    { "title": "Root", "color": "#0062BA" },
+    { "title": "Alignment", "color": "#95227D" },
+    { "title": "Normal", "color": "darkgrey" }
   ],
   "nodes": [
     {
@@ -47,7 +47,25 @@
     },
     {
       "title": "Normal Alignment",
-      "id": "normal",
+      "id": "normal1",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal2",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal3",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal4",
       "backgroundColor": "darkgrey",
       "textColor": "white"
     }
@@ -92,10 +110,10 @@
         {
           "row": [
             {
-              "id": ["normal"]
+              "id": ["normal1"]
             },
             {
-              "id": ["normal"]
+              "id": ["normal2"]
             }
           ]
         },
@@ -136,7 +154,11 @@
         {
           "row": [
             {
-              "id": ["normal"],
+              "id": ["normal3"],
+              "alignment": "center"
+            },
+            {
+              "id": ["normal4"],
               "alignment": "center"
             }
           ]
