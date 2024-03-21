@@ -78,7 +78,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           innerChild.href = childData.url;
           innerChild.classList.add(`${prefix}-node-children-anchor`);
         }
-        innerChild.id = childData.id;
+        innerChild.id = `${idPrefix}-${childData.id}`;
         innerChild.setAttribute('role', 'treeitem');
         innerChild.setAttribute('aria-level', '3');
 
@@ -100,7 +100,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         );
 
         arrowNavigationAttributes.forEach((dataAttribute) => {
-          innerChild.setAttribute(dataAttribute.key, dataAttribute.id);
+          innerChild.setAttribute(
+            dataAttribute.key,
+            `${idPrefix}-${dataAttribute.id}`,
+          );
         });
 
         childrenList.appendChild(innerChild);
@@ -125,7 +128,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
 
       //give nodeElement id
-      innerNode.id = nodeData.id;
+      innerNode.id = `${idPrefix}-${nodeData.id}`;
 
       if (node.component?.children && !isRoot) {
         innerNode.setAttribute('aria-owns', node.component.children.join(' '));
@@ -151,7 +154,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       );
 
       arrowNavigationAttributes.forEach((dataAttribute) => {
-        innerNode.setAttribute(dataAttribute.key, dataAttribute.id);
+        innerNode.setAttribute(
+          dataAttribute.key,
+          `${idPrefix}-${dataAttribute.id}`,
+        );
       });
 
       //tabIndex is 0 if nodeElement is anchor, else -1
@@ -286,7 +292,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           const nodeElement = document.createElement(
             nodeData.url ? 'a' : 'div',
           );
-          nodeElement.id = nodeId;
+          nodeElement.id = `${idPrefix}-${nodeId}`;
 
           //if nodeData has border, provide border
           if (nodeData.border) {
@@ -310,7 +316,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           );
 
           arrowNavigationAttributes.forEach((dataAttribute) => {
-            nodeElement.setAttribute(dataAttribute.key, dataAttribute.id);
+            nodeElement.setAttribute(
+              dataAttribute.key,
+              `${idPrefix}-${dataAttribute.id}`,
+            );
           });
 
           nodeData.url
