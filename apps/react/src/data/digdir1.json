@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Avdelinger og seksjoner",
-    "langcode": "no"
+    "langcode": "no",
+    "customIdPrefix": "digdir"
   },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },

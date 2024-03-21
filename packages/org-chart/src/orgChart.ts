@@ -12,6 +12,9 @@ const prefix = 'och';
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta, toc } = data;
 
+  //if meta.customIdPrefix is defined, set idPrefix to the value of meta.customIdPrefix
+  const idPrefix = meta.customIdPrefix ? meta.customIdPrefix : prefix;
+
   let currentRowIndex = 0;
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
   let mainContainerWidth = 0;
@@ -76,7 +79,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           innerChild.href = childData.url;
           innerChild.classList.add(`${prefix}-node-children-anchor`);
         }
-        innerChild.id = childData.id;
+        innerChild.id = `${idPrefix}-${childData.id}`;
         innerChild.setAttribute('role', 'treeitem');
         innerChild.setAttribute('aria-level', '3');
 
@@ -98,7 +101,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         );
 
         arrowNavigationAttributes.forEach((dataAttribute) => {
-          innerChild.setAttribute(dataAttribute.key, dataAttribute.id);
+          innerChild.setAttribute(
+            dataAttribute.key,
+            `${idPrefix}-${dataAttribute.id}`,
+          );
         });
 
         childrenList.appendChild(innerChild);
@@ -123,14 +129,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
 
       //give nodeElement id
-      innerNode.id = nodeData.id;
+      innerNode.id = `${idPrefix}-${nodeData.id}`;
 
       if (node.component?.children && !isRoot) {
-        innerNode.setAttribute('aria-owns', node.component.children.join(' '));
+        innerNode.setAttribute(
+          'aria-owns',
+          createChildrenList(node.component.children, idPrefix).join(' '),
+        );
       } else if (isRoot) {
         innerNode.setAttribute(
           'aria-owns',
-          getRootChildren(currentLayout).join(' '),
+          getRootChildren(currentLayout, idPrefix).join(' '),
         );
       }
 
@@ -149,7 +158,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       );
 
       arrowNavigationAttributes.forEach((dataAttribute) => {
-        innerNode.setAttribute(dataAttribute.key, dataAttribute.id);
+        innerNode.setAttribute(
+          dataAttribute.key,
+          `${idPrefix}-${dataAttribute.id}`,
+        );
       });
 
       //tabIndex is 0 if nodeElement is anchor, else -1
@@ -223,7 +235,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       if (column.component?.children) {
         nodesWrapper.setAttribute(
           'aria-owns',
-          column.component.children.join(' '),
+          createChildrenList(column.component.children, idPrefix).join(' '),
         );
       }
 
@@ -284,7 +296,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           const nodeElement = document.createElement(
             nodeData.url ? 'a' : 'div',
           );
-          nodeElement.id = nodeId;
+          nodeElement.id = `${idPrefix}-${nodeId}`;
 
           //if nodeData has border, provide border
           if (nodeData.border) {
@@ -308,7 +320,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           );
 
           arrowNavigationAttributes.forEach((dataAttribute) => {
-            nodeElement.setAttribute(dataAttribute.key, dataAttribute.id);
+            nodeElement.setAttribute(
+              dataAttribute.key,
+              `${idPrefix}-${dataAttribute.id}`,
+            );
           });
 
           nodeData.url
@@ -2390,18 +2405,26 @@ function getChildArrowNavigation(
   return dataAttributes;
 }
 
-function getRootChildren(currentLayout: Layout): string[] {
+function getRootChildren(currentLayout: Layout, idPrefix: string): string[] {
   const rootChildren: string[] = [];
 
   // Iterate through the rows and columns in the layout
   for (const row of currentLayout.rows) {
     for (const column of row.row) {
       // Add all the ids in the column to the rootChildren array
-      rootChildren.push(...column.id);
+      rootChildren.push(...column.id.map((id) => `${idPrefix}-${id}`));
     }
   }
   // Remove the first id in the array, which is the root id
   rootChildren.shift();
 
   return rootChildren;
+}
+
+function createChildrenList(children: string[], idPrefix: string) {
+  const childrenList: string[] = [];
+  children.forEach((childId: string) => {
+    childrenList.push(`${idPrefix}-${childId}`);
+  });
+  return childrenList;
 }
