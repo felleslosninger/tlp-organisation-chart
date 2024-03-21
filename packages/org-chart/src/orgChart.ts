@@ -9,6 +9,7 @@ import {
 } from './types';
 
 const prefix = 'och';
+let idPrefix = 'id-och';
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta, toc } = data;
