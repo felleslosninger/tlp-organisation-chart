@@ -9,13 +9,12 @@ import {
 } from './types';
 
 const prefix = 'och';
-let idPrefix = 'id-och';
 
 export function generateOrgChart(data: OrgChartData, containerId: string) {
   const { nodes, layouts, meta, toc } = data;
 
   //if meta.customIdPrefix is defined, set idPrefix to the value of meta.customIdPrefix
-  meta.customIdPrefix && (idPrefix = meta.customIdPrefix);
+  const idPrefix = meta.customIdPrefix ? meta.customIdPrefix : prefix;
 
   let currentRowIndex = 0;
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
