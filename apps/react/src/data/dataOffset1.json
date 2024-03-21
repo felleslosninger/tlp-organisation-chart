@@ -68,6 +68,12 @@
       "id": "normal4",
       "backgroundColor": "darkgrey",
       "textColor": "white"
+    },
+    {
+      "title": "Normal Alignment",
+      "id": "normal5",
+      "backgroundColor": "darkgrey",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -128,10 +134,10 @@
         {
           "row": [
             {
-              "id": ["normal"]
+              "id": ["normal3"]
             },
             {
-              "id": ["normal"]
+              "id": ["normal4"]
             }
           ]
         },
@@ -154,11 +160,7 @@
         {
           "row": [
             {
-              "id": ["normal3"],
-              "alignment": "center"
-            },
-            {
-              "id": ["normal4"],
+              "id": ["normal5"],
               "alignment": "center"
             }
           ]
