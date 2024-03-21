@@ -15,36 +15,40 @@
       "id": "dir",
       "backgroundColor": "#0062BA",
       "textColor": "white",
-      "opacity": "50"
+      "opacity": "50",
+      "url": "https://www.digdir.no/digdir/leiinga/928"
     },
     {
       "title": "Kommunikasjon",
       "id": "kom",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "50"
+      "opacity": "50",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=1"
     },
     {
       "title": "Tilsynet for universell utforming av ikt",
       "id": "tuu",
       "backgroundColor": "#95227D",
       "textColor": "white",
-      "opacity": "50"
+      "opacity": "50",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=4"
     },
     {
       "title": "Verksomhetsstyring",
       "id": "verk",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "50"
+      "opacity": "50",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=3"
     },
     {
       "title": "HR",
       "id": "hr",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "url": "https://www.digdir.no/",
-      "opacity": "50"
+      "opacity": "50",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=2"
     },
     {
       "title": "Tverrgåande tjenester",
@@ -58,7 +62,8 @@
       "title": "Samanhengande tjenester og livshendelser",
       "id": "sam",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=5"
     },
     {
       "title": "Livshendingar",
@@ -100,7 +105,8 @@
       "title": "Digital strategi og samhandling",
       "id": "digss",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=6"
     },
     {
       "title": "Fellessystem",
@@ -142,13 +148,15 @@
       "title": "Fellesløsninger",
       "id": "fel",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=7"
     },
     {
       "title": "Brukaropplevning og datadeling",
       "id": "bod",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=8"
     },
     {
       "title": "Tillitstjenester",
@@ -194,21 +202,7 @@
           "row": [
             {
               "id": ["dir"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": [
-                  "kom",
-                  "tuu",
-                  "verk",
-                  "hr",
-                  "tverr",
-                  "brukeropplevelse",
-                  "fel",
-                  "sam",
-                  "digss"
-                ]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -249,33 +243,20 @@
             {
               "id": ["sam"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["liv", "dig", "medf", "stim", "start", "inno"]
-              }
+
+              "children": ["liv", "dig", "medf", "stim", "start", "inno"]
             },
             {
               "id": ["digss"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": [
-                  "felles",
-                  "deling",
-                  "inter",
-                  "info",
-                  "kunn",
-                  "skate"
-                ]
-              }
+
+              "children": ["felles", "deling", "inter", "info", "kunn", "skate"]
             },
             {
               "id": ["fel", "bod"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["tillit", "data", "meld", "port", "tjen", "innsyn"]
-              }
+
+              "children": ["tillit", "data", "meld", "port", "tjen", "innsyn"]
             }
           ]
         }
