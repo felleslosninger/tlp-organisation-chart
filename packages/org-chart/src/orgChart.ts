@@ -2323,9 +2323,6 @@ function getArrowNavigaitonData(
           previousRowLastItem,
         );
       } else if (siblingsAmount === 1 && !isRoot) {
-        console.log(layout.rows[currentRowIndex]);
-        console.log('test');
-
         addDataAttribute(
           dataAttributes,
           'data-arrow-right',
