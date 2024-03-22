@@ -337,38 +337,7 @@
           "row": [
             {
               "id": ["rootElement"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": [
-                  "item1",
-                  "item2",
-                  "item3",
-                  "item4",
-                  "item5",
-                  "item6",
-                  "item7",
-                  "item8",
-                  "item9",
-                  "item10",
-                  "item11",
-                  "item12",
-                  "item13",
-                  "item14",
-                  "item15",
-                  "item16",
-                  "item17",
-                  "item18",
-                  "item19",
-                  "item20",
-                  "item21",
-                  "item22",
-                  "item23",
-                  "item24",
-                  "item25",
-                  "item26"
-                ]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -377,10 +346,8 @@
             {
               "id": ["item1"],
               "alignment": "center",
-              "component": {
-                "type": "node-list",
-                "children": ["child1"]
-              }
+
+              "children": ["child1"]
             }
           ]
         },
@@ -388,17 +355,13 @@
           "row": [
             {
               "id": ["item2"],
-              "component": {
-                "type": "node-list",
-                "children": ["child2"]
-              }
+
+              "children": ["child2"]
             },
             {
               "id": ["item3"],
-              "component": {
-                "type": "node-list",
-                "children": ["child3"]
-              }
+
+              "children": ["child3"]
             }
           ]
         },
@@ -406,24 +369,18 @@
           "row": [
             {
               "id": ["item4"],
-              "component": {
-                "type": "node-list",
-                "children": ["child4"]
-              }
+
+              "children": ["child4"]
             },
             {
               "id": ["item5"],
-              "component": {
-                "type": "node-list",
-                "children": ["child5"]
-              }
+
+              "children": ["child5"]
             },
             {
               "id": ["item6"],
-              "component": {
-                "type": "node-list",
-                "children": ["child6"]
-              }
+
+              "children": ["child6"]
             }
           ]
         },
@@ -431,31 +388,23 @@
           "row": [
             {
               "id": ["item7"],
-              "component": {
-                "type": "node-list",
-                "children": ["child7"]
-              }
+
+              "children": ["child7"]
             },
             {
               "id": ["item8"],
-              "component": {
-                "type": "node-list",
-                "children": ["child8"]
-              }
+
+              "children": ["child8"]
             },
             {
               "id": ["item9"],
-              "component": {
-                "type": "node-list",
-                "children": ["child9"]
-              }
+
+              "children": ["child9"]
             },
             {
               "id": ["item10"],
-              "component": {
-                "type": "node-list",
-                "children": ["child10"]
-              }
+
+              "children": ["child10"]
             }
           ]
         },
@@ -463,38 +412,28 @@
           "row": [
             {
               "id": ["item11"],
-              "component": {
-                "type": "node-list",
-                "children": ["child11"]
-              }
+
+              "children": ["child11"]
             },
             {
               "id": ["item12"],
-              "component": {
-                "type": "node-list",
-                "children": ["child12"]
-              }
+
+              "children": ["child12"]
             },
             {
               "id": ["item13"],
-              "component": {
-                "type": "node-list",
-                "children": ["child13"]
-              }
+
+              "children": ["child13"]
             },
             {
               "id": ["item14"],
-              "component": {
-                "type": "node-list",
-                "children": ["child14"]
-              }
+
+              "children": ["child14"]
             },
             {
               "id": ["item15"],
-              "component": {
-                "type": "node-list",
-                "children": ["child15"]
-              }
+
+              "children": ["child15"]
             }
           ]
         },
@@ -502,38 +441,28 @@
           "row": [
             {
               "id": ["item16"],
-              "component": {
-                "type": "node-list",
-                "children": ["child16"]
-              }
+
+              "children": ["child16"]
             },
             {
               "id": ["item17"],
-              "component": {
-                "type": "node-list",
-                "children": ["child17"]
-              }
+
+              "children": ["child17"]
             },
             {
               "id": ["item18"],
-              "component": {
-                "type": "node-list",
-                "children": ["child18"]
-              }
+
+              "children": ["child18"]
             },
             {
               "id": ["item19"],
-              "component": {
-                "type": "node-list",
-                "children": ["child19"]
-              }
+
+              "children": ["child19"]
             },
             {
               "id": ["item20", "item21"],
-              "component": {
-                "type": "node-list",
-                "children": ["child20", "child21"]
-              }
+
+              "children": ["child20", "child21"]
             }
           ]
         },
@@ -541,25 +470,19 @@
           "row": [
             {
               "id": ["item22", "item23"],
-              "component": {
-                "type": "node-list",
-                "children": ["child22", "child23"]
-              }
+
+              "children": ["child22", "child23"]
             },
 
             {
               "id": ["item24"],
-              "component": {
-                "type": "node-list",
-                "children": ["child24"]
-              }
+
+              "children": ["child24"]
             },
             {
               "id": ["item25", "item26"],
-              "component": {
-                "type": "node-list",
-                "children": ["child25", "child26"]
-              }
+
+              "children": ["child25", "child26"]
             }
           ]
         }

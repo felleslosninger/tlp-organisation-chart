@@ -35,11 +35,7 @@
           "row": [
             {
               "id": ["rootElement"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": ["item1"]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -47,10 +43,8 @@
           "row": [
             {
               "id": ["item1"],
-              "component": {
-                "type": "node-list",
-                "children": ["child1"]
-              }
+
+              "children": ["child1"]
             }
           ]
         }

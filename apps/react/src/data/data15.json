@@ -83,11 +83,7 @@
           "row": [
             {
               "id": ["root"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": ["item1", "item2", "item3", "item4", "item5"]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -95,45 +91,35 @@
           "row": [
             {
               "id": ["item1"],
-              "component": {
-                "type": "node-list",
-                "children": [
-                  "child1",
-                  "child5",
-                  "child5",
-                  "child5",
-                  "child5",
-                  "child5"
-                ]
-              }
+
+              "children": [
+                "child1",
+                "child5",
+                "child5",
+                "child5",
+                "child5",
+                "child5"
+              ]
             },
             {
               "id": ["item2"],
-              "component": {
-                "type": "node-list",
-                "children": ["child2"]
-              }
+
+              "children": ["child2"]
             },
             {
               "id": ["item3"],
-              "component": {
-                "type": "node-list",
-                "children": ["child3"]
-              }
+
+              "children": ["child3"]
             },
             {
               "id": ["item4"],
-              "component": {
-                "type": "node-list",
-                "children": ["child4"]
-              }
+
+              "children": ["child4"]
             },
             {
               "id": ["item5"],
-              "component": {
-                "type": "node-list",
-                "children": ["child5"]
-              }
+
+              "children": ["child5"]
             }
           ]
         }

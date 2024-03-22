@@ -41,10 +41,8 @@
             {
               "id": ["root"],
               "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": ["item1", "item2", "item3"]
-              }
+
+              "type": "root"
             }
           ]
         },

@@ -19,8 +19,6 @@ import jsonData14 from '../../data/data14.json';
 import jsonData15 from '../../data/data15.json';
 import jsonData16 from '../../data/data16.json';
 import jsonData17 from '../../data/data17.json';
-import jsonDataSpecial1 from '../../data/dataSpecial1.json';
-import jsonDataSpecial2 from '../../data/dataSpecial2.json';
 import jsonDataOffset1 from '../../data/dataOffset1.json';
 import jsonDataOffset2 from '../../data/dataOffset2.json';
 import jsonDigdir1 from '../../data/digdir1.json';
@@ -48,8 +46,6 @@ const datasets: { [key: string]: any } = {
   data15: jsonData15,
   data16: jsonData16,
   data17: jsonData17,
-  special1: jsonDataSpecial1,
-  special2: jsonDataSpecial2,
   offset1: jsonDataOffset1,
   offset2: jsonDataOffset2,
 };
@@ -104,12 +100,6 @@ const Home = () => {
             <Combobox.Option value='data8'>Ender med 4 kol</Combobox.Option>
             <Combobox.Option value='data9'>Ender med 5 kol</Combobox.Option>
             <Combobox.Option value='data10'>Ender med 6 kol</Combobox.Option>
-            <Combobox.Option value='special1'>
-              Med spesial-kolonne 1
-            </Combobox.Option>
-            <Combobox.Option value='special2'>
-              Med spesial-kolonne 2
-            </Combobox.Option>
             <Combobox.Option value='digdir1'>
               Avdelinger og seksjoner
             </Combobox.Option>
