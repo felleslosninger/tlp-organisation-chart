@@ -15,7 +15,7 @@
       "id": "dir",
       "backgroundColor": "#0062BA",
       "textColor": "white",
-      "opacity": "50",
+      "opacity": "70",
       "url": "https://www.digdir.no/digdir/leiinga/928"
     },
     {
@@ -23,7 +23,7 @@
       "id": "kom",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "50",
+      "opacity": "70",
       "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=1"
     },
     {
@@ -31,7 +31,7 @@
       "id": "tuu",
       "backgroundColor": "#95227D",
       "textColor": "white",
-      "opacity": "50",
+      "opacity": "70",
       "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=4"
     },
     {
@@ -39,7 +39,7 @@
       "id": "verk",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "50",
+      "opacity": "70",
       "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=3"
     },
     {
@@ -47,7 +47,7 @@
       "id": "hr",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "50",
+      "opacity": "70",
       "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=2"
     },
     {
@@ -55,8 +55,7 @@
       "id": "tverr",
       "backgroundColor": "white",
       "textColor": "#1e2b3c",
-      "border": "dashed",
-      "opacity": "50"
+      "border": "dashed"
     },
     {
       "title": "Samanhengande tjenester og livshendelser",
