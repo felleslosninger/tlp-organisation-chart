@@ -1,5 +1,5 @@
 ---
-"@digdir/organisation-chart": patch
+'@digdir/organisation-chart': patch
 ---
 
-fix: Correcting types and test data
+fix: Adjust types
