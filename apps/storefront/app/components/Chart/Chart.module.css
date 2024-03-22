@@ -5,3 +5,7 @@
   padding: var(--fds-spacing-8);
   border-radius: var(--fds-border_radius-large);
 }
+
+.select {
+  margin-bottom: var(--fds-spacing-6);
+}

@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Leveranseområder",
-    "langcode": "no"
+    "langcode": "no",
+    "customIdPrefix": "lev"
   },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
