@@ -2,7 +2,7 @@
   "meta": {
     "title": "Avdelinger og seksjoner",
     "langcode": "no",
-    "customIdPrefix": "digdir"
+    "customIdPrefix": "avdSek"
   },
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
@@ -14,38 +14,43 @@
       "title": "Direktør",
       "id": "dir",
       "backgroundColor": "#0062BA",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/leiinga/928"
     },
     {
       "title": "Kommunikasjon",
       "id": "kom",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=1"
     },
     {
       "title": "Tilsynet for universell utforming av ikt",
       "id": "tuu",
       "backgroundColor": "#95227D",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=4"
     },
     {
       "title": "Verksomhetsstyring",
       "id": "verk",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=3"
     },
     {
       "title": "HR",
       "id": "hr",
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "url": "https://www.digdir.no/"
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=2"
     },
     {
       "title": "Samanhengande tjenester og livshendelser",
       "id": "sam",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=5"
     },
     {
       "title": "Seksjon 1",
@@ -63,7 +68,8 @@
       "title": "Digital strategi og samhandling",
       "id": "dig",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=6"
     },
     {
       "title": "Nasjonal arkitektur",
@@ -93,7 +99,8 @@
       "title": "Fellesløsninger",
       "id": "fel",
       "backgroundColor": "#1e2b3c",
-      "textColor": "white"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=7"
     },
     {
       "title": "Strategi og forretningsutvikling",
@@ -103,7 +110,7 @@
     },
     {
       "title": "Utvikling",
-      "id": "utv",
+      "id": "utvlFel",
       "backgroundColor": "#D2D5D8",
       "textColor": "#1e2b3c"
     },
@@ -129,7 +136,8 @@
       "title": "Brukaropplevning og datadeling",
       "id": "bod",
       "backgroundColor": "#1e2b3c",
-      "textColor": "#D2D5D8"
+      "textColor": "white",
+      "url": "https://www.digdir.no/digdir/ansatte/942?combine=&field_department_value=8"
     },
     {
       "title": "Strategi og forretningsutvikling",
@@ -139,7 +147,7 @@
     },
     {
       "title": "Utvikling",
-      "id": "utv2",
+      "id": "utvBod",
       "backgroundColor": "#D2D5D8",
       "textColor": "#1e2b3c"
     },
@@ -151,7 +159,7 @@
     },
     {
       "title": "Brukerstøtte og service",
-      "id": "bru2",
+      "id": "bruSer",
       "backgroundColor": "#D2D5D8",
       "textColor": "#1e2b3c"
     },
@@ -169,20 +177,7 @@
           "row": [
             {
               "id": ["dir"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": [
-                  "kom",
-                  "tuu",
-                  "verk",
-                  "hr",
-                  "sam",
-                  "dig",
-                  "fel",
-                  "bod"
-                ]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -215,34 +210,26 @@
             {
               "id": ["sam"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["sek1", "sek2"]
-              }
+
+              "children": ["sek1", "sek2"]
             },
             {
               "id": ["dig"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["ark", "int", "nasjRes", "ski"]
-              }
+
+              "children": ["ark", "int", "nasjRes", "ski"]
             },
             {
               "id": ["fel"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["str", "utv", "mar", "bru", "dri"]
-              }
+
+              "children": ["str", "utvlFel", "mar", "bru", "dri"]
             },
             {
               "id": ["bod"],
               "alignment": "center",
-              "component": {
-                "type": "nodeList",
-                "children": ["str2", "utv2", "platt", "bru2", "bruk"]
-              }
+
+              "children": ["str2", "utvBod", "platt", "bruSer", "bruk"]
             }
           ]
         }

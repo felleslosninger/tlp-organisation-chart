@@ -59,11 +59,7 @@
           "row": [
             {
               "id": ["root"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": ["item1", "item2", "item3"]
-              }
+              "alignment": "center"
             }
           ]
         },
@@ -71,24 +67,18 @@
           "row": [
             {
               "id": ["item1"],
-              "component": {
-                "type": "node-list",
-                "children": ["child1"]
-              }
+
+              "children": ["child1"]
             },
             {
               "id": ["item2"],
-              "component": {
-                "type": "node-list",
-                "children": ["child2"]
-              }
+
+              "children": ["child2"]
             },
             {
               "id": ["item3"],
-              "component": {
-                "type": "node-list",
-                "children": ["child3"]
-              }
+
+              "children": ["child3"]
             }
           ]
         }

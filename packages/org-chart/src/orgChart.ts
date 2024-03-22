@@ -1,4 +1,3 @@
-import { ListFormat } from 'typescript';
 import {
   OrgChartData,
   Layout,
@@ -132,10 +131,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       //give nodeElement id
       innerNode.id = `${idPrefix}-${nodeData.id}`;
 
-      if (node.component?.children && !isRoot) {
+      if (node.children && !isRoot) {
         innerNode.setAttribute(
           'aria-owns',
-          createChildrenList(node.component.children, idPrefix).join(' '),
+          createChildrenList(node.children, idPrefix).join(' '),
         );
       } else if (isRoot) {
         innerNode.setAttribute(
@@ -155,7 +154,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         siblingsAmount,
         currentRowIndex,
         isLastRow,
-        node.component?.children ? node.component.children : null,
+        node.children ? node.children : null,
       );
 
       arrowNavigationAttributes.forEach((dataAttribute) => {
@@ -222,6 +221,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     isLastRow: boolean,
     wrapNodesContainer: boolean,
     indexToColumnsWithSpecialColumnList: number[],
+    isRoot: boolean,
   ) {
     const columnElement = createElement('div');
     columnElement.className = `${prefix}-column`;
@@ -233,10 +233,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (Array.isArray(column.id) && column.id.length > 1) {
       const nodesWrapper = createElement('div');
       nodesWrapper.setAttribute('role', 'group');
-      if (column.component?.children) {
+      if (column.children) {
         nodesWrapper.setAttribute(
           'aria-owns',
-          createChildrenList(column.component.children, idPrefix).join(' '),
+          createChildrenList(column.children, idPrefix).join(' '),
         );
       }
 
@@ -316,7 +316,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             siblingsAmount,
             currentRowIndex,
             isLastRow,
-            column.component?.children ? column.component.children : null,
+            column.children ? column.children : null,
             index,
           );
 
@@ -354,13 +354,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
     }
 
-    if (column.component?.children && column.component.type !== 'root') {
+    if (column.children && !isRoot) {
       columnElement.appendChild(
-        createChildren(
-          3,
-          column.component.children ? column.component.children : [],
-          column.id,
-        ),
+        createChildren(3, column.children ? column.children : [], column.id),
       );
     }
 
@@ -375,6 +371,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     indexInRow: number,
     isLastRow: boolean,
     specialColumnList: number[],
+    isRoot: boolean,
   ) {
     const columnElement = createElement('div');
     columnElement.className = `${prefix}-column`;
@@ -405,7 +402,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       indexInRow,
       isLastRow,
       specialColumnList,
-      column.component?.type === 'root',
+      isRoot,
     );
 
     if (!isMobile) {
@@ -418,16 +415,16 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       columnElement.appendChild(innerColumn);
     }
 
-    if (column.component?.children && column.component.type !== 'root') {
+    if (column.children && !isRoot) {
       columnElement.appendChild(
-        createChildren(siblingsAmount, column.component.children, column.id),
+        createChildren(siblingsAmount, column.children, column.id),
       );
     }
 
     return columnElement;
   }
 
-  function createRow(row: Row, isLastRow: boolean) {
+  function createRow(row: Row, isLastRow: boolean, isRoot: boolean) {
     const rowElement = createElement('div');
 
     let rowClass = `${prefix}-row ${prefix}-row-normal`;
@@ -505,6 +502,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             count,
             isLastRow,
             indexToColumnsWithSpecialColumnList,
+            isRoot,
           ),
         );
       } else {
@@ -518,6 +516,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             isLastRow,
             columnWidth.wrapNodesWrapper,
             indexToColumnsWithSpecialColumnList,
+            false,
           ),
         );
       }
@@ -554,11 +553,18 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     const numberOfRows = layout.rows.length;
     let isLastRow = false;
+    let isRoot = false;
     layout.rows.forEach((row: Row, index: number) => {
       if (index === numberOfRows - 1) {
         isLastRow = true;
       }
-      rows.appendChild(createRow(row, isLastRow));
+      if (index === 0) {
+        isRoot = true;
+      } else {
+        isRoot = false;
+      }
+
+      rows.appendChild(createRow(row, isLastRow, isRoot));
       currentRowIndex = index + 1;
     });
 
@@ -2147,7 +2153,7 @@ function findHighestChildrenAmountInRow(
   let highest = 0;
   for (let i = indexStart; i <= indexEnd; i++) {
     // Use optional chaining to safely access nested properties
-    const childrenLength = row.row[i]?.component?.children?.length ?? 0;
+    const childrenLength = row.row[i]?.children?.length ?? 0;
     if (childrenLength > highest) {
       highest = childrenLength;
     }

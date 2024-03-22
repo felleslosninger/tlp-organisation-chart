@@ -19,15 +19,10 @@ export type Node = {
   opacity?: string;
 };
 
-export type Component = {
-  type?: string;
-  children?: string[];
-};
-
 export type Column = {
   id: string[];
   alignment?: string; // Optional
-  component?: Component; // Optional
+  children?: string[]; // Optional
 };
 
 export type Row = {
