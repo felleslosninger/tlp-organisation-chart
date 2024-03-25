@@ -69,6 +69,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     children.forEach((childId: string, index: number) => {
       const childData = findNodeById(childId);
+      const childElement = createElement('div');
+      childElement.className = `${prefix}-node`;
+
       if (childData) {
         const innerChild = childData.url
           ? createElement('a')
@@ -90,7 +93,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           innerChild.tabIndex = 0;
         }
         innerChild.innerHTML = childData.title;
-        innerChild.className = `${prefix}-node ${prefix}-node-child`;
+        innerChild.className = `${prefix}-node ${prefix}-inner-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
         innerChild.style.backgroundColor = childData.backgroundColor;
 
@@ -101,13 +104,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         );
 
         arrowNavigationAttributes.forEach((dataAttribute) => {
-          innerChild.setAttribute(
+          childElement.setAttribute(
             dataAttribute.key,
             `${idPrefix}-${dataAttribute.id}`,
           );
         });
-
-        childrenList.appendChild(innerChild);
+        childElement.appendChild(innerChild);
+        childrenList.appendChild(childElement);
       }
     });
 
