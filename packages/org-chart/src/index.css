@@ -254,6 +254,7 @@
     text-decoration: none;
     width: 100%;
     height: var(--col-height);
+    padding: 0 20px;
   }
 
   .och-node-children {
