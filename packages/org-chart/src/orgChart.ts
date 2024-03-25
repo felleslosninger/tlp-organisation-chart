@@ -17,7 +17,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   let currentRowIndex = 0;
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
-  let mainContainerWidth = 0;
+  let mainContainerWidth =
+    document.getElementById(containerId)?.offsetWidth || 0;
   let currentLayout = provideLayout(
     mainContainerWidth,
     allowedBreakpoints,
