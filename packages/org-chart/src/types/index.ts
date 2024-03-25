@@ -48,6 +48,6 @@ export type OrgChartData = {
 
 declare global {
   interface Window {
-    orgChart: any;
+    generateOrgChart: any;
   }
 }
