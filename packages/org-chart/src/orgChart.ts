@@ -294,21 +294,21 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       column.id.forEach((nodeId: string, index: number) => {
         const nodeData = findNodeById(nodeId);
         if (nodeData) {
-          const nodeElement = document.createElement(
-            nodeData.url ? 'a' : 'div',
-          );
-          nodeElement.id = `${idPrefix}-${nodeId}`;
+          const nodeElement = createElement('div');
+          nodeElement.className = `${prefix}-node `;
+          const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
+          innerNode.className = `${prefix}-inner-node`;
+          innerNode.id = `${idPrefix}-${nodeId}`;
 
           //if nodeData has border, provide border
           if (nodeData.border) {
-            nodeElement.style.border = `2px ${nodeData.border} #000`;
+            innerNode.style.border = `2px ${nodeData.border} #000`;
           }
 
           //if nodeElement is anchor, provide href
-          if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
-            nodeElement.href = nodeData.url;
+          if (nodeData.url && innerNode instanceof HTMLAnchorElement) {
+            innerNode.href = nodeData.url;
           }
-          nodeElement.className = `${prefix}-node `;
 
           const arrowNavigationAttributes = getArrowNavigaitonDataSpecialColum(
             currentLayout,
@@ -321,21 +321,20 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           );
 
           arrowNavigationAttributes.forEach((dataAttribute) => {
-            nodeElement.setAttribute(
+            innerNode.setAttribute(
               dataAttribute.key,
               `${idPrefix}-${dataAttribute.id}`,
             );
           });
 
-          nodeData.url
-            ? (nodeElement.tabIndex = 0)
-            : (nodeElement.tabIndex = -1);
+          nodeData.url ? (innerNode.tabIndex = 0) : (innerNode.tabIndex = -1);
 
-          nodeElement.style.backgroundColor = nodeData.backgroundColor;
-          nodeElement.style.color = nodeData.textColor;
-          nodeElement.innerHTML = nodeData.title;
-          nodeElement.setAttribute('role', 'treeitem');
-          nodeElement.setAttribute('aria-level', '2');
+          innerNode.style.backgroundColor = nodeData.backgroundColor;
+          innerNode.style.color = nodeData.textColor;
+          innerNode.innerHTML = nodeData.title;
+          innerNode.setAttribute('role', 'treeitem');
+          innerNode.setAttribute('aria-level', '2');
+          nodeElement.appendChild(innerNode);
           nodesWrapper.appendChild(nodeElement);
         }
       });
