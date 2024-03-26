@@ -1,0 +1,36 @@
+# Runs conventional commit check on PR
+name: Tests
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'packages/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/**'
+jobs:
+  checks:
+    name: Tests code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Use node 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Test
+        run: yarn test
