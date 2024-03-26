@@ -15,6 +15,12 @@ export default [
         format: 'cjs',
         plugins: [terser()],
       },
+      {
+        file: 'dist/umd/index.js',
+        format: 'umd',
+        name: 'OrgChart',
+        plugins: [terser()],
+      },
     ],
     plugins: [
       copy({

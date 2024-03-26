@@ -36,16 +36,18 @@ generateOrgChart(data, 'chart');
 The first argument is your JSON data, read more about setting up your data below.
 The second argument is the id of the container where you want the chart to show.
 
-### Installing via `<link>`
+### Installing via `<script>`
 
 We recommend to build your own copy of the package.
-Copy the `index.css` file and `cjs/index.js` file into the location you want to use it.
+Copy the `index.css` file and `umd/index.js` file into the location you want to use it.
 You can read about how to do this below.
 
 ```html
+<script src="path/to/orgchart/index.js"></script>
 <link
-  rel="preload"
-  src="path/to/orgchart"
+  rel="stylesheet"
+  type="text/css"
+  href="path/to/orgchart/index.css"
 />
 ```
 
