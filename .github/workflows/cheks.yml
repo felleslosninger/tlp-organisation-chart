@@ -30,7 +30,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: pnpm install --immutable
+        run: pnpm install
 
       - name: Test
         run: pnpm test
