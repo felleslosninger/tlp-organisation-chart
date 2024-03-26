@@ -85,6 +85,54 @@
       "id": "I1",
       "backgroundColor": "#b2ebf2",
       "textColor": "black"
+    },
+    {
+      "title": "Kundesuksess-team",
+      "id": "KS1",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "Dataanalyse-team",
+      "id": "DA1",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "test",
+      "id": "test1",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "test",
+      "id": "test2",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "test",
+      "id": "test3",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "test",
+      "id": "test4",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "test",
+      "id": "test5",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "test",
+      "id": "test6",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
     }
   ],
   "layouts": {
@@ -118,7 +166,8 @@
             },
             {
               "id": ["IS"],
-              "alignment": "center"
+              "alignment": "center",
+              "children": ["test5", "test6"]
             }
           ]
         },
@@ -141,7 +190,12 @@
         {
           "row": [
             {
-              "id": ["O1", "I1"]
+              "id": ["O1", "I1"],
+              "children": ["KS1", "DA1"]
+            },
+            {
+              "id": ["test1", "test2"],
+              "children": ["test3", "test4"]
             }
           ]
         }

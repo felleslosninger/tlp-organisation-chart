@@ -105,7 +105,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         );
 
         arrowNavigationAttributes.forEach((dataAttribute) => {
-          childElement.setAttribute(
+          innerChild.setAttribute(
             dataAttribute.key,
             `${idPrefix}-${dataAttribute.id}`,
           );
