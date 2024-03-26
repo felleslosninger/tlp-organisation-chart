@@ -1,5 +1,11 @@
 # @digdir/organization-chart
 
+## 0.4.1
+
+### Patch Changes
+
+- ef5d94e: fix: multiple bux-fixes
+
 ## 0.4.0
 
 ### Minor Changes
