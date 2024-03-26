@@ -87,12 +87,10 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         innerChild.setAttribute('role', 'treeitem');
         innerChild.setAttribute('aria-level', '3');
 
-        innerChild.tabIndex = -1;
         if (!childData.url) {
           innerChild.tabIndex = -1;
-        } else {
-          innerChild.tabIndex = 0;
         }
+
         innerChild.innerHTML = childData.title;
         innerChild.className = `${prefix}-node ${prefix}-inner-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
@@ -169,9 +167,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       });
 
       //tabIndex is 0 if nodeElement is anchor, else -1
-      if (nodeData.url || isRoot) {
+      if (isRoot && !nodeData.url) {
         innerNode.tabIndex = 0;
-      } else {
+      } else if (!nodeData.url) {
         innerNode.tabIndex = -1;
       }
 
@@ -331,7 +329,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             );
           });
 
-          nodeData.url ? (innerNode.tabIndex = 0) : (innerNode.tabIndex = -1);
+          !nodeData.url && (innerNode.tabIndex = -1);
 
           innerNode.style.backgroundColor = nodeData.backgroundColor;
           innerNode.style.color = nodeData.textColor;

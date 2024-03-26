@@ -15,8 +15,7 @@
       "id": "GD",
       "backgroundColor": "#0047AB",
       "textColor": "white",
-      "opacity": "70",
-      "url": "https://example.com/gd"
+      "opacity": "70"
     },
     {
       "title": "Teknologi og Utvikling",
@@ -90,6 +89,7 @@
       "title": "Kundesuksess-team",
       "id": "KS1",
       "backgroundColor": "#b2ebf2",
+      "url": "https://example.com/ks1",
       "textColor": "black"
     },
     {
