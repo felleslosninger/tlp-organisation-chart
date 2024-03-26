@@ -1,8 +1,11 @@
 .wrapper {
   position: relative;
-  z-index: -1;
   background-color: white;
   box-shadow: var(--fds-shadow-small);
   padding: var(--fds-spacing-8);
   border-radius: var(--fds-border_radius-large);
+}
+
+.select {
+  margin-bottom: var(--fds-spacing-6);
 }
