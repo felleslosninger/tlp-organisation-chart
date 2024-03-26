@@ -228,10 +228,6 @@ importers:
         version: 4.3.1(typescript@5.4.2)(vite@5.1.6)
 
   packages/org-chart:
-    dependencies:
-      typescript:
-        specifier: ^4.9.5
-        version: 4.9.5
     devDependencies:
       '@rollup/plugin-terser':
         specifier: ^0.4.4
@@ -248,6 +244,9 @@ importers:
       rollup-plugin-copy:
         specifier: ^3.5.0
         version: 3.5.0
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
 
 packages:
 
@@ -15640,7 +15639,6 @@ packages:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: false
 
   /typescript@5.4.2:
     resolution: {integrity: sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==}
