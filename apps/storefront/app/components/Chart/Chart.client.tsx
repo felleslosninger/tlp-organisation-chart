@@ -9,7 +9,6 @@ import { charts } from './charts';
 import classes from './Chart.module.css';
 
 export const Chart = () => {
-  console.log(charts);
   const [data, setData] = useState(charts.avdelinger);
   useEffect(() => {
     generateOrgChart(data, 'chart');
