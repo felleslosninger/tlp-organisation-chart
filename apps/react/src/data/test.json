@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "title": "Organisasjonskart for NyTek Innovasjon",
+    "langcode": "no"
+  },
+  "toc": [
+    { "title": "Generell Direktør", "color": "#0047AB" },
+    { "title": "Sektor", "color": "#343a40" },
+    { "title": "Fagområde", "color": "#ff7043" },
+    { "title": "Team", "color": "#b2ebf2" }
+  ],
+  "nodes": [
+    {
+      "title": "Generell Direktør",
+      "id": "GD",
+      "backgroundColor": "#0047AB",
+      "textColor": "white",
+      "opacity": "70",
+      "url": "https://example.com/gd"
+    },
+    {
+      "title": "Teknologi og Utvikling",
+      "id": "TU",
+      "backgroundColor": "#343a40",
+      "textColor": "white",
+      "opacity": "70",
+      "url": "https://example.com/tu"
+    },
+    {
+      "title": "Markedsføring og Kommunikasjon",
+      "id": "MK",
+      "backgroundColor": "#343a40",
+      "textColor": "white",
+      "opacity": "70",
+      "url": "https://example.com/mk"
+    },
+    {
+      "title": "Operasjonell Effektivitet",
+      "id": "OE",
+      "backgroundColor": "#343a40",
+      "textColor": "white",
+      "opacity": "70",
+      "url": "https://example.com/oe"
+    },
+    {
+      "title": "Innovasjon og Strategi",
+      "id": "IS",
+      "backgroundColor": "#ff7043",
+      "textColor": "black",
+      "url": "https://example.com/is"
+    },
+    {
+      "title": "Kundesuksess",
+      "id": "KS",
+      "backgroundColor": "#ff7043",
+      "textColor": "black",
+      "url": "https://example.com/ks"
+    },
+    {
+      "title": "Dataanalyse og AI",
+      "id": "DA",
+      "backgroundColor": "#ff7043",
+      "textColor": "black",
+      "url": "https://example.com/da"
+    },
+    {
+      "title": "Utviklingsteam 1",
+      "id": "U1",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "Markedsføringsteam",
+      "id": "M1",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "Operasjonsteam",
+      "id": "O1",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    },
+    {
+      "title": "Innovasjonsteam",
+      "id": "I1",
+      "backgroundColor": "#b2ebf2",
+      "textColor": "black"
+    }
+  ],
+  "layouts": {
+    "main": {
+      "rows": [
+        {
+          "row": [
+            {
+              "id": ["GD"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["TU"],
+              "alignment": "center"
+            },
+            {
+              "id": ["MK"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["OE"],
+              "alignment": "center"
+            },
+            {
+              "id": ["IS"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["KS", "DA"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["U1", "M1"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["O1", "I1"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

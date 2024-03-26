@@ -1993,7 +1993,11 @@ function getLastRowClass(
     ) {
       return `${prefix}-row ${prefix}-row-last-${rowLength}-1-s-cols`;
     } else {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+      if (rowContainsSpecialColumns) {
+        return `${prefix}-row`;
+      } else {
+        return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+      }
     }
   } else if (!isMobile && rowLength <= 2) {
     return `${prefix}-row ${prefix}-row-last-${rowLength}`;
