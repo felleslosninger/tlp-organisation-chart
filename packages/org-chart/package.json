@@ -1,6 +1,6 @@
 {
   "name": "@digdir/organisation-chart",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Organisation chart generator",
   "homepage": "https://orgchart.digdir.no/",
   "repository": "https://github.com/felleslosninger/tlp-organization-chart",
@@ -28,6 +28,5 @@
     "rimraf": "^5.0.5",
     "typescript": "^4.9.5"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
