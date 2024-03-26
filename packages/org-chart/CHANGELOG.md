@@ -1,5 +1,18 @@
 # @digdir/organization-chart
 
+## 0.4.0
+
+### Minor Changes
+
+- 3ae5d7c: feat: Add prefix to id's
+
+### Patch Changes
+
+- 8a3bf9f: fix: Connect center line and node lines, on last row, when row conatins two columns
+- 13fd449: fix: Adjust types
+- 39a3850: build: Transpile to UMD
+- 1f7c03d: fix: collect root children
+
 ## 0.3.0
 
 ### Minor Changes
