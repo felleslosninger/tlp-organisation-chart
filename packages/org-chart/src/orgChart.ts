@@ -24,6 +24,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     allowedBreakpoints,
   ).providedLayout;
 
+  let rootElementId = `${idPrefix}-${nodes[0].id}`;
+  let lastElementId = findLastElementId(currentLayout);
+
   let isMobile = false;
   let isTablet = false;
   let isLaptop = false;
@@ -645,7 +648,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         orgChart.innerHTML = '';
         orgChart.appendChild(createTOC(toc, isMobile));
         orgChart.appendChild(createRowsWrapper(currentLayout));
-        addArrowKeyNavigation(mainContainer);
+        keyboardNavigationn(mainContainer, rootElementId, lastElementId);
       }
     };
 
@@ -673,7 +676,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     mainContainer.className = `${prefix}-org-chart-main-container`;
 
     // Add arrow key navigation to the main container
-    addArrowKeyNavigation(mainContainer);
+    keyboardNavigationn(mainContainer, rootElementId, lastElementId);
 
     return mainContainer;
   }
@@ -681,7 +684,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   return null;
 }
 
-function addArrowKeyNavigation(mainContainer: HTMLElement) {
+function findLastElementId(layout: Layout) {
+  let lastElementId = '';
+  let lastRow = layout.rows[layout.rows.length - 1];
+  let lastColumn = lastRow.row[lastRow.row.length - 1];
+  if (lastColumn.children) {
+    let lastNode = lastColumn.children[lastColumn.children.length - 1];
+    lastElementId = `${prefix}-${lastNode}`;
+  } else {
+    let lastNode = lastColumn.id[lastColumn.id.length - 1];
+    lastElementId = `${prefix}-${lastNode}`;
+  }
+  return lastElementId;
+}
+
+function keyboardNavigationn(
+  mainContainer: HTMLElement,
+  firstElementId: string,
+  lastElementId: string,
+) {
   const observer = new MutationObserver(() => {
     mainContainer.removeEventListener('keydown', handleKeyDown);
   });
@@ -691,9 +712,16 @@ function addArrowKeyNavigation(mainContainer: HTMLElement) {
 
     // Variable that will hold the ID of the element to be focused based on the key press
     let targetElementId;
-
     // Check which arrow key is pressed and assign the relevant ID based on the 'data-arrow-*' attributes
     switch (event.key) {
+      case 'Home':
+        targetElementId = firstElementId;
+
+        break;
+      case 'End':
+        targetElementId = lastElementId;
+
+        break;
       case 'ArrowRight':
         targetElementId = activeElement?.getAttribute('data-arrow-right');
 
