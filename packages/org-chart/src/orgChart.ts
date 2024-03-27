@@ -26,8 +26,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   let rootElementId = `${idPrefix}-${nodes[0].id}`;
   let lastElementId = findLastElementId(currentLayout);
-  console.log(lastElementId);
-  console.log(rootElementId);
 
   let isMobile = false;
   let isTablet = false;
