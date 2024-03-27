@@ -17,11 +17,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
   let currentRowIndex = 0;
   let allowedBreakpoints = { main: 1500, laptop: 992, tablet: 768 };
-  let mainContainerWidth = 0;
+  let mainContainerWidth =
+    document.getElementById(containerId)?.offsetWidth || 0;
   let currentLayout = provideLayout(
     mainContainerWidth,
     allowedBreakpoints,
   ).providedLayout;
+
+  let rootElementId = `${idPrefix}-${nodes[0].id}`;
+  let lastElementId = findLastElementId(currentLayout);
 
   let isMobile = false;
   let isTablet = false;
@@ -69,6 +73,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
     children.forEach((childId: string, index: number) => {
       const childData = findNodeById(childId);
+      const childElement = createElement('div');
+      childElement.className = `${prefix}-node`;
+
       if (childData) {
         const innerChild = childData.url
           ? createElement('a')
@@ -83,14 +90,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         innerChild.setAttribute('role', 'treeitem');
         innerChild.setAttribute('aria-level', '3');
 
-        innerChild.tabIndex = -1;
         if (!childData.url) {
           innerChild.tabIndex = -1;
-        } else {
-          innerChild.tabIndex = 0;
         }
+
         innerChild.innerHTML = childData.title;
-        innerChild.className = `${prefix}-node ${prefix}-node-child`;
+        innerChild.className = `${prefix}-node ${prefix}-inner-node ${prefix}-node-child`;
         innerChild.style.color = childData.textColor;
         innerChild.style.backgroundColor = childData.backgroundColor;
 
@@ -106,8 +111,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             `${idPrefix}-${dataAttribute.id}`,
           );
         });
-
-        childrenList.appendChild(innerChild);
+        childElement.appendChild(innerChild);
+        childrenList.appendChild(childElement);
       }
     });
 
@@ -165,9 +170,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       });
 
       //tabIndex is 0 if nodeElement is anchor, else -1
-      if (nodeData.url || isRoot) {
+      if (isRoot && !nodeData.url) {
         innerNode.tabIndex = 0;
-      } else {
+      } else if (!nodeData.url) {
         innerNode.tabIndex = -1;
       }
 
@@ -294,21 +299,21 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       column.id.forEach((nodeId: string, index: number) => {
         const nodeData = findNodeById(nodeId);
         if (nodeData) {
-          const nodeElement = document.createElement(
-            nodeData.url ? 'a' : 'div',
-          );
-          nodeElement.id = `${idPrefix}-${nodeId}`;
+          const nodeElement = createElement('div');
+          nodeElement.className = `${prefix}-node `;
+          const innerNode = document.createElement(nodeData.url ? 'a' : 'div');
+          innerNode.className = `${prefix}-inner-node`;
+          innerNode.id = `${idPrefix}-${nodeId}`;
 
           //if nodeData has border, provide border
           if (nodeData.border) {
-            nodeElement.style.border = `2px ${nodeData.border} #000`;
+            innerNode.style.border = `2px ${nodeData.border} #000`;
           }
 
           //if nodeElement is anchor, provide href
-          if (nodeData.url && nodeElement instanceof HTMLAnchorElement) {
-            nodeElement.href = nodeData.url;
+          if (nodeData.url && innerNode instanceof HTMLAnchorElement) {
+            innerNode.href = nodeData.url;
           }
-          nodeElement.className = `${prefix}-node `;
 
           const arrowNavigationAttributes = getArrowNavigaitonDataSpecialColum(
             currentLayout,
@@ -321,21 +326,20 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           );
 
           arrowNavigationAttributes.forEach((dataAttribute) => {
-            nodeElement.setAttribute(
+            innerNode.setAttribute(
               dataAttribute.key,
               `${idPrefix}-${dataAttribute.id}`,
             );
           });
 
-          nodeData.url
-            ? (nodeElement.tabIndex = 0)
-            : (nodeElement.tabIndex = -1);
+          !nodeData.url && (innerNode.tabIndex = -1);
 
-          nodeElement.style.backgroundColor = nodeData.backgroundColor;
-          nodeElement.style.color = nodeData.textColor;
-          nodeElement.innerHTML = nodeData.title;
-          nodeElement.setAttribute('role', 'treeitem');
-          nodeElement.setAttribute('aria-level', '2');
+          innerNode.style.backgroundColor = nodeData.backgroundColor;
+          innerNode.style.color = nodeData.textColor;
+          innerNode.innerHTML = nodeData.title;
+          innerNode.setAttribute('role', 'treeitem');
+          innerNode.setAttribute('aria-level', '2');
+          nodeElement.appendChild(innerNode);
           nodesWrapper.appendChild(nodeElement);
         }
       });
@@ -644,7 +648,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         orgChart.innerHTML = '';
         orgChart.appendChild(createTOC(toc, isMobile));
         orgChart.appendChild(createRowsWrapper(currentLayout));
-        addArrowKeyNavigation(mainContainer);
+        keyboardNavigationn(mainContainer, rootElementId, lastElementId);
       }
     };
 
@@ -672,7 +676,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     mainContainer.className = `${prefix}-org-chart-main-container`;
 
     // Add arrow key navigation to the main container
-    addArrowKeyNavigation(mainContainer);
+    keyboardNavigationn(mainContainer, rootElementId, lastElementId);
 
     return mainContainer;
   }
@@ -680,7 +684,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   return null;
 }
 
-function addArrowKeyNavigation(mainContainer: HTMLElement) {
+function findLastElementId(layout: Layout) {
+  let lastElementId = '';
+  let lastRow = layout.rows[layout.rows.length - 1];
+  let lastColumn = lastRow.row[lastRow.row.length - 1];
+  if (lastColumn.children) {
+    let lastNode = lastColumn.children[lastColumn.children.length - 1];
+    lastElementId = `${prefix}-${lastNode}`;
+  } else {
+    let lastNode = lastColumn.id[lastColumn.id.length - 1];
+    lastElementId = `${prefix}-${lastNode}`;
+  }
+  return lastElementId;
+}
+
+function keyboardNavigationn(
+  mainContainer: HTMLElement,
+  firstElementId: string,
+  lastElementId: string,
+) {
   const observer = new MutationObserver(() => {
     mainContainer.removeEventListener('keydown', handleKeyDown);
   });
@@ -690,9 +712,16 @@ function addArrowKeyNavigation(mainContainer: HTMLElement) {
 
     // Variable that will hold the ID of the element to be focused based on the key press
     let targetElementId;
-
     // Check which arrow key is pressed and assign the relevant ID based on the 'data-arrow-*' attributes
     switch (event.key) {
+      case 'Home':
+        targetElementId = firstElementId;
+
+        break;
+      case 'End':
+        targetElementId = lastElementId;
+
+        break;
       case 'ArrowRight':
         targetElementId = activeElement?.getAttribute('data-arrow-right');
 
@@ -1990,7 +2019,11 @@ function getLastRowClass(
     ) {
       return `${prefix}-row ${prefix}-row-last-${rowLength}-1-s-cols`;
     } else {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+      if (rowContainsSpecialColumns) {
+        return `${prefix}-row`;
+      } else {
+        return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+      }
     }
   } else if (!isMobile && rowLength <= 2) {
     return `${prefix}-row ${prefix}-row-last-${rowLength}`;

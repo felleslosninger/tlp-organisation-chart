@@ -2,4 +2,4 @@
 "@digdir/organisation-chart": patch
 ---
 
-fix: collect root children
+Fix/home navigation

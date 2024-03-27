@@ -1,5 +1,23 @@
 # @root/react
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [ef5d94e]
+  - @digdir/organisation-chart@0.4.1
+
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [8a3bf9f]
+- Updated dependencies [13fd449]
+- Updated dependencies [3ae5d7c]
+- Updated dependencies [39a3850]
+- Updated dependencies [1f7c03d]
+  - @digdir/organisation-chart@0.4.0
+
 ## 0.1.2
 
 ### Patch Changes

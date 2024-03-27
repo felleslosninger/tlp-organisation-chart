@@ -23,6 +23,7 @@ import jsonDataOffset1 from '../../data/dataOffset1.json';
 import jsonDataOffset2 from '../../data/dataOffset2.json';
 import jsonDigdir1 from '../../data/digdir1.json';
 import jsonDigdir3 from '../../data/digdir3.json';
+import test from '../../data/test.json';
 
 import styles from './Home.module.css';
 
@@ -48,12 +49,13 @@ const datasets: { [key: string]: any } = {
   data17: jsonData17,
   offset1: jsonDataOffset1,
   offset2: jsonDataOffset2,
+  test: test,
 };
 
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState('1800px');
 
-  const [data, setData] = useState(jsonDigdir1);
+  const [data, setData] = useState(test);
 
   useEffect(() => {
     generateOrgChart(data, 'test');

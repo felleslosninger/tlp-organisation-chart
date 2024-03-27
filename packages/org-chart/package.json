@@ -1,13 +1,23 @@
 {
   "name": "@digdir/organisation-chart",
-  "version": "0.3.0",
+  "version": "0.4.1",
   "description": "Organisation chart generator",
   "homepage": "https://orgchart.digdir.no/",
   "repository": "https://github.com/felleslosninger/tlp-organization-chart",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
   "main": "dist/es/index.js",
+  "browser": "dist/umd/index.js",
   "type": "module",
+  "keywords": [
+    "orgchart",
+    "organisation",
+    "chart",
+    "digdir"
+  ],
+  "bugs": {
+    "url": "https://github.com/felleslosninger/tlp-organization-chart/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -22,13 +32,11 @@
   },
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
-    "jest": "^29.7.0",
     "@rollup/plugin-terser": "^0.4.4",
     "rollup-plugin-copy": "^3.5.0",
     "postcss": "^8.4.35",
-    "rimraf": "^5.0.5"
-  },
-  "dependencies": {
+    "rimraf": "^5.0.5",
     "typescript": "^4.9.5"
-  }
+  },
+  "dependencies": {}
 }
