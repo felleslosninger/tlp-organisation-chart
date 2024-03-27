@@ -650,7 +650,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         orgChart.innerHTML = '';
         orgChart.appendChild(createTOC(toc, isMobile));
         orgChart.appendChild(createRowsWrapper(currentLayout));
-        addArrowKeyNavigation(mainContainer);
+        keyboardNavigationn(mainContainer, rootElementId, lastElementId);
       }
     };
 
@@ -678,7 +678,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     mainContainer.className = `${prefix}-org-chart-main-container`;
 
     // Add arrow key navigation to the main container
-    addArrowKeyNavigation(mainContainer);
+    keyboardNavigationn(mainContainer, rootElementId, lastElementId);
 
     return mainContainer;
   }
@@ -700,7 +700,11 @@ function findLastElementId(layout: Layout) {
   return lastElementId;
 }
 
-function addArrowKeyNavigation(mainContainer: HTMLElement) {
+function keyboardNavigationn(
+  mainContainer: HTMLElement,
+  firstElementId: string,
+  lastElementId: string,
+) {
   const observer = new MutationObserver(() => {
     mainContainer.removeEventListener('keydown', handleKeyDown);
   });
@@ -712,6 +716,14 @@ function addArrowKeyNavigation(mainContainer: HTMLElement) {
     let targetElementId;
     // Check which arrow key is pressed and assign the relevant ID based on the 'data-arrow-*' attributes
     switch (event.key) {
+      case 'Home':
+        targetElementId = firstElementId;
+
+        break;
+      case 'End':
+        targetElementId = lastElementId;
+
+        break;
       case 'ArrowRight':
         targetElementId = activeElement?.getAttribute('data-arrow-right');
 
