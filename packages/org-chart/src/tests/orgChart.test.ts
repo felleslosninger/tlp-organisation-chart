@@ -123,4 +123,15 @@ describe('generateOrgChart', () => {
       expect(document.activeElement).toBe(childNode);
     }, 0);
   });
+
+  // test that all classes are prefixd with och-
+  it('should prefix all classes with och-', () => {
+    const nodes = document.querySelectorAll('[class*="och-"]');
+    //find all classes that do not start with och-
+    const invalidClasses = Array.from(nodes).filter(
+      (node) => !node.className.startsWith('och-'),
+    );
+    expect(invalidClasses.length).toBe(0);
+    expect(nodes.length).toBeGreaterThan(0);
+  });
 });
