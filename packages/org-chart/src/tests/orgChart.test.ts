@@ -91,10 +91,9 @@ describe('generateOrgChart', () => {
     const root = document.getElementById('och-item1');
     root?.focus();
     root?.dispatchEvent(new KeyboardEvent('keyup', { key: 'Home' }));
-    setTimeout(() => {
-      const firstNode = document.getElementById('och-item1');
-      expect(document.activeElement).toBe(firstNode);
-    }, 0);
+
+    const firstNode = document.getElementById('och-item1');
+    expect(document.activeElement).toBe(firstNode);
   });
 
   it('should move the focus to the last node when end is pressed', () => {
@@ -112,8 +111,16 @@ describe('generateOrgChart', () => {
     const lastNode = document.getElementById('och-item6');
     lastNode?.focus();
     lastNode?.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
+    expect(document.activeElement).toBe(lastNode);
+  });
+
+  it('should navigate to child when key down is pressed', () => {
+    const parentNode = document.getElementById('och-item2');
+    parentNode?.focus();
+    parentNode?.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
     setTimeout(() => {
-      expect(document.activeElement).toBe(lastNode);
+      const childNode = document.getElementById('och-child3');
+      expect(document.activeElement).toBe(childNode);
     }, 0);
   });
 });
