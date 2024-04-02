@@ -29,6 +29,14 @@ describe('generateOrgChart', () => {
     expect(document.querySelector('[role="treeitem"]')).toBeDefined();
   });
 
+  //test if item 1 has aria-level 2
+  it('should generate the correct aria-level', () => {
+    const parentNode = document.getElementById('och-item1');
+    const childNode = document.getElementById('och-child1');
+    expect(parentNode?.getAttribute('aria-level')).toBe('2');
+    expect(childNode?.getAttribute('aria-level')).toBe('3');
+  });
+
   it('should generate the correct number of nodes', () => {
     const nodes = document.querySelectorAll('[role="treeitem"]');
     expect(nodes.length).toBe(10);
