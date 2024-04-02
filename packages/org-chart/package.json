@@ -30,12 +30,14 @@
     "watch": "chokidar \"src/**/*\" -c \"pnpm run build\""
   },
   "devDependencies": {
-    "chokidar-cli": "^3.0.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "rollup-plugin-copy": "^3.5.0",
+    "chokidar-cli": "^3.0.0",
     "postcss": "^8.4.35",
     "rimraf": "^5.0.5",
+    "rollup-plugin-copy": "^3.5.0",
     "typescript": "^4.9.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@testing-library/user-event": "^13.5.0"
+  }
 }

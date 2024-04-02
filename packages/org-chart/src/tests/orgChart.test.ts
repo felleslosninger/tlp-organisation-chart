@@ -1,6 +1,7 @@
 import { generateOrgChart } from '../';
 import data from './data.json';
 import ResizeObserver from 'resize-observer-polyfill';
+import userEvent from '@testing-library/user-event';
 
 global.ResizeObserver = ResizeObserver;
 
@@ -57,7 +58,8 @@ describe('generateOrgChart', () => {
   //test if the prefix is added to the node id
   it('should add the prefix to the node id', () => {
     const node = document.getElementById('och-root');
-    expect(node).toBeDefined();
+    expect(node?.id.startsWith('och-')).toBe(true);
+    expect(node?.id.startsWith('ch-')).toBe(false);
   });
 
   //och-item2 should have data property data-arrow-down="och-child3, data-arrow-left="och-item1", data-arrow-right="och-item3"
@@ -82,46 +84,7 @@ describe('generateOrgChart', () => {
   //special column child should have data property data-arrow-up="och-item5"
   it('should have the correct data properties for special column children', () => {
     const node = document.getElementById('och-child1');
-    expect(node).toBeDefined();
     expect(node?.getAttribute('data-arrow-up')).toBe('och-item5');
-  });
-
-  //testing if the focus moves correctly
-  it('should move the focus to the first node when home is pressed', () => {
-    const root = document.getElementById('och-item1');
-    root?.focus();
-    root?.dispatchEvent(new KeyboardEvent('keyup', { key: 'Home' }));
-
-    const firstNode = document.getElementById('och-item1');
-    expect(document.activeElement).toBe(firstNode);
-  });
-
-  it('should move the focus to the last node when end is pressed', () => {
-    const root = document.getElementById('och-root');
-    root?.focus();
-    root?.dispatchEvent(new KeyboardEvent('keyup', { key: 'End' }));
-    setTimeout(() => {
-      const lastNode = document.getElementById('och-item6');
-      expect(document.activeElement).toBe(lastNode);
-    }, 0);
-  });
-
-  //if the focus is on the last node, and arrow right is pressed, the focus should stay on the last node
-  it('should keep the focus on the last node when arrow right is pressed', () => {
-    const lastNode = document.getElementById('och-item6');
-    lastNode?.focus();
-    lastNode?.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowRight' }));
-    expect(document.activeElement).toBe(lastNode);
-  });
-
-  it('should navigate to child when key down is pressed', () => {
-    const parentNode = document.getElementById('och-item2');
-    parentNode?.focus();
-    parentNode?.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowDown' }));
-    setTimeout(() => {
-      const childNode = document.getElementById('och-child3');
-      expect(document.activeElement).toBe(childNode);
-    }, 0);
   });
 
   // test that all classes are prefixd with och-
@@ -133,5 +96,33 @@ describe('generateOrgChart', () => {
     );
     expect(invalidClasses.length).toBe(0);
     expect(nodes.length).toBeGreaterThan(0);
+  });
+
+  //Arrow navation tests
+  it('should navigate from root to last level 2 element', () => {
+    const root = document.getElementById('och-root');
+    const lastLevel2 = document.getElementById('och-item6');
+    const item2 = document.getElementById('och-item2');
+    const child3 = document.getElementById('och-child3');
+    root?.focus();
+    userEvent.keyboard('{ArrowRight>6/}');
+    expect(document.activeElement).toBe(lastLevel2);
+    userEvent.keyboard('{ArrowLeft>6/}');
+    expect(document.activeElement).toBe(root);
+    userEvent.keyboard('{ArrowRight>2/}{ArrowDown>1/}');
+    expect(document.activeElement).not.toBe(item2);
+    expect(document.activeElement).toBe(child3);
+    userEvent.keyboard('{ArrowUp>1/}');
+    expect(document.activeElement).toBe(item2);
+    userEvent.keyboard('{End}');
+    expect(document.activeElement).toBe(lastLevel2);
+    expect(document.activeElement).not.toBe(root);
+    userEvent.keyboard('{Home}');
+    expect(document.activeElement).toBe(root);
+    expect(document.activeElement).not.toBe(lastLevel2);
+    userEvent.keyboard('{ArrowLeft/}');
+    expect(document.activeElement).toBe(root);
+    userEvent.keyboard('{End}{ArrowRight/}');
+    expect(document.activeElement).toBe(lastLevel2);
   });
 });
