@@ -20,6 +20,59 @@
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
       "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item2",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item3",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item4",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item5",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item6",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Child",
+      "id": "child1",
+      "backgroundColor": "#2457",
+      "textColor": "white"
+    },
+    {
+      "title": "Child",
+      "id": "child2",
+      "backgroundColor": "#2457",
+      "textColor": "white"
+    },
+    {
+      "title": "Child",
+      "id": "child3",
+      "backgroundColor": "#2457",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -29,16 +82,37 @@
           "row": [
             {
               "id": ["root"],
-              "alignment": "center",
-
-              "children": ["item1"]
+              "alignment": "center"
             }
           ]
         },
         {
           "row": [
             {
-              "id": ["item1"]
+              "id": ["item1"],
+              "alignment": "offset-right"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item2"],
+              "children": ["child3"]
+            },
+            {
+              "id": ["item3"]
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item4", "item5"],
+              "children": ["child1", "child2"]
+            },
+            {
+              "id": ["item6"]
             }
           ]
         }

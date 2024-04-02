@@ -1,138 +1,78 @@
 {
   "meta": {
-    "title": "Organisasjonskart for NyTek Innovasjon",
+    "title": "Test",
     "langcode": "no"
   },
   "toc": [
-    { "title": "Generell Direktør", "color": "#0047AB" },
-    { "title": "Sektor", "color": "#343a40" },
-    { "title": "Fagområde", "color": "#ff7043" },
-    { "title": "Team", "color": "#b2ebf2" }
+    { "title": "Root", "color": "#0062BA" },
+    { "title": "Item", "color": "#1e2b3c" }
   ],
   "nodes": [
     {
-      "title": "Generell Direktør",
-      "id": "GD",
-      "backgroundColor": "#0047AB",
+      "title": "Root",
+      "id": "root",
+      "backgroundColor": "#0062BA",
+      "textColor": "#1e2b3c"
+    },
+    {
+      "title": "Item",
+      "id": "item1",
+      "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "70"
+      "url": "https://www.digdir.no/"
     },
     {
-      "title": "Teknologi og Utvikling",
-      "id": "TU",
-      "backgroundColor": "#343a40",
+      "title": "Item",
+      "id": "item2",
+      "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "70"
+      "url": "https://www.digdir.no/"
     },
     {
-      "title": "Markedsføring og Kommunikasjon",
-      "id": "MK",
-      "backgroundColor": "#343a40",
+      "title": "Item",
+      "id": "item3",
+      "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "70",
-      "url": "https://example.com/mk"
+      "url": "https://www.digdir.no/"
     },
     {
-      "title": "Operasjonell Effektivitet",
-      "id": "OE",
-      "backgroundColor": "#343a40",
+      "title": "Item",
+      "id": "item4",
+      "backgroundColor": "#1e2b3c",
       "textColor": "white",
-      "opacity": "70",
-      "url": "https://example.com/oe"
+      "url": "https://www.digdir.no/"
     },
     {
-      "title": "Innovasjon og Strategi",
-      "id": "IS",
-      "backgroundColor": "#ff7043",
-      "textColor": "black",
-      "url": "https://example.com/is"
+      "title": "Item",
+      "id": "item5",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
     },
     {
-      "title": "Kundesuksess",
-      "id": "KS",
-      "backgroundColor": "#ff7043",
-      "textColor": "black",
-      "url": "https://example.com/ks"
+      "title": "Item",
+      "id": "item6",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
     },
     {
-      "title": "Dataanalyse og AI",
-      "id": "DA",
-      "backgroundColor": "#ff7043",
-      "textColor": "black",
-      "url": "https://example.com/da"
+      "title": "Child",
+      "id": "child1",
+      "backgroundColor": "#2457",
+      "textColor": "white"
     },
     {
-      "title": "Utviklingsteam 1",
-      "id": "U1",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
+      "title": "Child",
+      "id": "child2",
+      "backgroundColor": "#2457",
+      "textColor": "white"
     },
     {
-      "title": "Markedsføringsteam",
-      "id": "M1",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "Operasjonsteam",
-      "id": "O1",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "Innovasjonsteam",
-      "id": "I1",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "Kundesuksess-team",
-      "id": "KS1",
-      "backgroundColor": "#b2ebf2",
-      "url": "https://example.com/ks1",
-      "textColor": "black"
-    },
-    {
-      "title": "Dataanalyse-team",
-      "id": "DA1",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "test",
-      "id": "test1",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "test",
-      "id": "test2",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "test",
-      "id": "test3",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "test",
-      "id": "test4",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "test",
-      "id": "test5",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
-    },
-    {
-      "title": "test",
-      "id": "test6",
-      "backgroundColor": "#b2ebf2",
-      "textColor": "black"
+      "title": "Child",
+      "id": "child3",
+      "backgroundColor": "#2457",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -141,7 +81,7 @@
         {
           "row": [
             {
-              "id": ["GD"],
+              "id": ["root"],
               "alignment": "center"
             }
           ]
@@ -149,53 +89,30 @@
         {
           "row": [
             {
-              "id": ["TU"],
-              "alignment": "center"
+              "id": ["item1"],
+              "alignment": "offset-right"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item2"],
+              "children": ["child3"]
             },
             {
-              "id": ["MK"],
-              "alignment": "center"
+              "id": ["item3"]
             }
           ]
         },
         {
           "row": [
             {
-              "id": ["OE"],
-              "alignment": "center"
+              "id": ["item4", "item5"],
+              "children": ["child1", "child2"]
             },
             {
-              "id": ["IS"],
-              "alignment": "center",
-              "children": ["test5", "test6"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["KS", "DA"],
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["U1", "M1"],
-              "alignment": "center"
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["O1", "I1"],
-              "children": ["KS1", "DA1"]
-            },
-            {
-              "id": ["test1", "test2"],
-              "children": ["test3", "test4"]
+              "id": ["item6"]
             }
           ]
         }
