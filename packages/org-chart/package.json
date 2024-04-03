@@ -3,7 +3,7 @@
   "version": "0.4.1",
   "description": "Organisation chart generator",
   "homepage": "https://orgchart.digdir.no/",
-  "repository": "https://github.com/felleslosninger/tlp-organization-chart",
+  "repository": "https://github.com/felleslosninger/tlp-organisation-chart",
   "license": "MIT",
   "types": "dist/types/index.d.ts",
   "main": "dist/es/index.js",
@@ -15,7 +15,7 @@
     "digdir"
   ],
   "bugs": {
-    "url": "https://github.com/felleslosninger/tlp-organization-chart/issues"
+    "url": "https://github.com/felleslosninger/tlp-organisation-chart/issues"
   },
   "publishConfig": {
     "access": "public"

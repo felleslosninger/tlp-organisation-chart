@@ -1,4 +1,4 @@
-# @digdir/organization-chart
+# @digdir/organisation-chart
 
 ## 0.4.1
 
