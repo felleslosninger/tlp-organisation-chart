@@ -575,27 +575,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return rows;
   }
 
-  //TODO: Delete this function, not used
-  function provideLayoutClass(mainContainerWidth: number) {
-    let layoutClass = `${prefix}-org-chart`;
-
-    if (mainContainerWidth < allowedBreakpoints.main && layouts.laptop) {
-      layoutClass = `${prefix}-org-chart`;
-    }
-    if (mainContainerWidth < allowedBreakpoints.laptop && layouts.tablet) {
-      layoutClass = `${prefix}-org-chart`;
-    }
-
-    return layoutClass;
-  }
-
   //find the main container
   const mainContainer = document.getElementById(containerId);
 
   if (mainContainer) {
     // Create element to hold the org chart
     const orgChart = document.createElement('div');
-    orgChart.className = provideLayoutClass(mainContainerWidth);
+    orgChart.className = `${prefix}-org-chart`;
     orgChart.setAttribute('lang', meta.langcode);
     orgChart.setAttribute('aria-label', meta.title);
 
@@ -642,7 +628,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         ).providedLayout;
 
         // Update org chart's class to reflect the current layout
-        orgChart.className = provideLayoutClass(mainContainerWidth);
+        orgChart.className = `${prefix}-org-chart`;
 
         // Clear and re-insert the org chart into the container
         orgChart.innerHTML = '';
