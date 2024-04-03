@@ -554,18 +554,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     rows.setAttribute('aria-label', meta.title);
     rows.role = 'tree';
 
-    const numberOfRows = layout.rows.length;
-    let isLastRow = false;
-    let isRoot = false;
     layout.rows.forEach((row: Row, index: number) => {
-      if (index === numberOfRows - 1) {
-        isLastRow = true;
-      }
-      if (index === 0) {
-        isRoot = true;
-      } else {
-        isRoot = false;
-      }
+      const isLastRow = index === layout.rows.length - 1;
+      const isRoot = index === 0 ? true : false;
 
       rows.appendChild(createRow(row, isLastRow, isRoot));
       currentRowIndex = index + 1;
@@ -637,7 +628,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         timeoutId = setTimeout(() => {
           updateLayout();
           timeoutId = null;
-        }, 100); // Vent 100ms før du kjører updateLayout igjen
+        }, 100); // Wait 100ms before running updateLayout again
       }
     };
 
