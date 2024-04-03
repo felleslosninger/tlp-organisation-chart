@@ -484,10 +484,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       count++;
 
       const columnWidth = calculateColumnWidth(
+        isMain,
+        isLaptop,
+        isTablet,
         row.row.length,
         count,
         mainContainerWidth,
-        allowedBreakpoints,
         isLastRow,
         rowContainsSpecialColumns,
         indexToColumnsWithSpecialColumnList,
@@ -1042,10 +1044,12 @@ function createSpecialColumnLines(
 //function to calculate the width of the columns
 //TODO: Refactor this function to make it more readable
 function calculateColumnWidth(
+  isMain: boolean,
+  isLaptop: boolean,
+  isTablet: boolean,
   siblingsAmount: number,
   indexInRow: number,
   mainContainerWidth: number,
-  breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
   rowContainsSpecialColumn: boolean,
   indexToSpecialColumnList: number[],
@@ -1056,15 +1060,13 @@ function calculateColumnWidth(
   let additionalWidth = 0;
   let wrapNodesWrapper = false;
 
-  //destructuring the breakpoints object
-  const { main, laptop, tablet } = breakpoints;
   if (!rowContainsSpecialColumn) {
     if (siblingsAmount <= 2 && rowContainsOffsetColumn) {
       width = 50;
     }
 
     if (siblingsAmount > 2 && isOdd(siblingsAmount)) {
-      if (mainContainerWidth > main) {
+      if (isMain) {
         if (isLastRow) {
           width = 100 / siblingsAmount;
         } else {
@@ -1076,7 +1078,7 @@ function calculateColumnWidth(
           }
         }
       }
-      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+      if (isLaptop) {
         if (isLastRow) {
           if (siblingsAmount > 3) {
             if (indexInRow <= 2) {
@@ -1106,7 +1108,7 @@ function calculateColumnWidth(
         }
       }
 
-      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+      if (isTablet) {
         if (siblingsAmount > 2) {
           width = 100 / 2;
           additionalWidth = -(24 / 2);
@@ -1121,14 +1123,14 @@ function calculateColumnWidth(
         }
       }
     } else if (siblingsAmount > 2) {
-      if (mainContainerWidth > tablet) {
+      if (!isTablet) {
         width = 100 / siblingsAmount;
       }
-      if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+      if (isLaptop) {
         width = 100 / 4;
         additionalWidth = -18;
       }
-      if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+      if (isTablet) {
         width = 100 / 2;
         additionalWidth = -12;
       }
@@ -1145,7 +1147,7 @@ function calculateColumnWidth(
         additionalClass += ` ${prefix}-special-row-1-column`;
       }
     }
-    if (mainContainerWidth > main) {
+    if (isMain) {
       if (siblingsAmount === 3) {
         if (isLastRow) {
           if (indexToSpecialColumnList.includes(indexInRow)) {
@@ -1367,7 +1369,7 @@ function calculateColumnWidth(
           }
         }
       }
-    } else if (mainContainerWidth <= main && mainContainerWidth > laptop) {
+    } else if (isLaptop) {
       if (siblingsAmount === 3) {
         if (isLastRow) {
           if (indexToSpecialColumnList.includes(indexInRow)) {
@@ -1574,7 +1576,7 @@ function calculateColumnWidth(
           }
         }
       }
-    } else if (mainContainerWidth <= laptop && mainContainerWidth > tablet) {
+    } else if (isTablet) {
       if (isLastRow && siblingsAmount - 1 === indexInRow) {
         if (
           (siblingsAmount === 5 &&
