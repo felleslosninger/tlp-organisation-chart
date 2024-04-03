@@ -202,7 +202,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         nodeElement.className += createNodeLineClass(
           indexInRow,
           siblingsAmount,
-          allowedBreakpoints,
           isLastRow,
           node.alignment ? node.alignment : undefined,
           specialColumnList,
@@ -1595,7 +1594,6 @@ function createElement(type: string) {
 function createNodeLineClass(
   indexInRow: number,
   siblingsAmount: number,
-  breakpoints: { main: number; laptop: number; tablet: number },
   isLastRow: boolean,
   alignment: string | undefined,
   specialColumnsList: number[],
