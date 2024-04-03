@@ -379,13 +379,14 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     const columnElement = createElement('div');
     columnElement.className = `${prefix}-column`;
 
-    //Allow alignment for columns in rows with 2 or less siblings
+    // Allow alignment for columns in rows with 2 or less siblings
     if (column.alignment && siblingsAmount <= 2 && !isMobile) {
-      columnElement.className += ` ${prefix}-column-alignment-${siblingsAmount}-${column.alignment}`;
+      columnElement.classList.add(
+        `${prefix}-column-alignment-${siblingsAmount}-${column.alignment}`,
+      );
       if (
-        siblingsAmount <= 2 &&
-        (column.alignment === 'offset-left' ||
-          column.alignment === 'offset-right')
+        column.alignment === 'offset-left' ||
+        column.alignment === 'offset-right'
       ) {
         columnElement.classList.add(
           `${prefix}-column-line-${column.alignment}`,
@@ -394,9 +395,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
 
     if (siblingsAmount === 2 && indexInRow === 1 && !isMobile) {
-      columnElement.className += ` ${prefix}-column-flex-end`;
+      columnElement.classList.add(`${prefix}-column-flex-end`);
     } else if (siblingsAmount === 2 && indexInRow === 2 && !isMobile) {
-      columnElement.className += ` ${prefix}-column-flex-start`;
+      columnElement.classList.add(`${prefix}-column-flex-start`);
     }
 
     const innerColumn = createNode(
@@ -408,11 +409,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       isRoot,
     );
 
-    if (!isMobile) {
-      columnElement.style.width = `calc(${columnWidth}% + ${additionalWidth}px)`;
-    } else {
-      columnElement.style.width = '100%';
-    }
+    columnElement.style.width = isMobile
+      ? '100%'
+      : `calc(${columnWidth}% + ${additionalWidth}px)`;
 
     if (innerColumn !== null) {
       columnElement.appendChild(innerColumn);
