@@ -145,7 +145,7 @@ For example, you can make the node a link.
 The layouts key is used to define how the nodes should connect to eachother.
 This is always required, and might be difficult to understand at first.
 
-You can see examples on [Github](https://github.com/felleslosninger/tlp-organization-chart/tree/main/apps/react/src/data).
+You can see examples on [Github](https://github.com/felleslosninger/tlp-organisation-chart/tree/main/apps/react/src/data).
 
 ```json
 {

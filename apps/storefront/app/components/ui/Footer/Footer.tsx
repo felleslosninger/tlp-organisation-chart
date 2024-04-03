@@ -76,7 +76,7 @@ const Footer = () => {
             <ul className={classes.links}>
               <li>
                 <Link
-                  href='https://github.com/felleslosninger/tlp-organization-chart/issues/new'
+                  href='https://github.com/felleslosninger/tlp-organisation-chart/issues/new'
                   target='_blank'
                   inverted
                 >

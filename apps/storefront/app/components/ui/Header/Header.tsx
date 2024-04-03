@@ -62,7 +62,7 @@ export const Header = () => {
               className={cl(classes.item, classes.itemIcon, classes.firstIcon)}
             >
               <Link
-                href='https://github.com/felleslosninger/tlp-organization-chart'
+                href='https://github.com/felleslosninger/tlp-organisation-chart'
                 target='_blank'
                 title='Github repository'
                 className={cl(classes.linkIcon, classes.github)}
