@@ -495,44 +495,50 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         rowContainsOffsetColumn,
       );
 
-      if (!rowContainsSpecialColumns) {
-        rowElement.appendChild(
-          createColumn(
-            column,
-            columnWidth.width,
-            row.row.length,
-            columnWidth.additionalWidth,
-            count,
-            isLastRow,
-            indexToColumnsWithSpecialColumnList,
-            isRoot,
-          ),
-        );
-      } else {
-        rowElement.appendChild(
-          createSpecialColumn(
-            column,
-            columnWidth.width,
-            row.row.length,
-            columnWidth.additionalWidth,
-            count,
-            isLastRow,
-            columnWidth.wrapNodesWrapper,
-            indexToColumnsWithSpecialColumnList,
-            false,
-          ),
-        );
+      switch (rowContainsSpecialColumns) {
+        case false:
+          rowElement.appendChild(
+            createColumn(
+              column,
+              columnWidth.width,
+              row.row.length,
+              columnWidth.additionalWidth,
+              count,
+              isLastRow,
+              indexToColumnsWithSpecialColumnList,
+              isRoot,
+            ),
+          );
+          break;
+        case true:
+          rowElement.appendChild(
+            createSpecialColumn(
+              column,
+              columnWidth.width,
+              row.row.length,
+              columnWidth.additionalWidth,
+              count,
+              isLastRow,
+              columnWidth.wrapNodesWrapper,
+              indexToColumnsWithSpecialColumnList,
+              false,
+            ),
+          );
+          break;
+        default:
+          break;
       }
       rowElement.className += ' ' + columnWidth.additionalClass;
     });
 
-    !isMobile && !isLastRow && rowElement.classList.add(`${prefix}-row-line`);
-    !isMain && row.row.length > 2 && rowElement.classList.add(`${prefix}-wrap`);
-    isMobile &&
-      row.row.length === 2 &&
+    if (!isMobile && !isLastRow) {
+      rowElement.classList.add(`${prefix}-row-line`);
+    }
+    if ((!isMain && row.row.length > 2) || (isMobile && row.row.length === 2)) {
       rowElement.classList.add(`${prefix}-wrap`);
-    !isMobile &&
-      isLastRow &&
+    }
+
+    if (!isMobile && isLastRow) {
       rowElement.style.setProperty(
         '--diff',
         calculateChildrenDifferenceInRow(
@@ -543,6 +549,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           indexToColumnsWithSpecialColumnList,
         ).toString(),
       );
+    }
 
     return rowElement;
   }
