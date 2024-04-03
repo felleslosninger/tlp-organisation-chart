@@ -587,14 +587,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Initial setup based on mainContainer's current width
     mainContainerWidth = mainContainer.offsetWidth;
 
-    isMobile = mainContainerWidth < allowedBreakpoints.tablet;
-    isLaptop =
-      mainContainerWidth < allowedBreakpoints.main &&
-      mainContainerWidth > allowedBreakpoints.laptop;
-    isTablet =
-      mainContainerWidth < allowedBreakpoints.laptop &&
-      mainContainerWidth > allowedBreakpoints.tablet;
-    isMain = mainContainerWidth > allowedBreakpoints.main;
+    const devise = getDevise(mainContainerWidth, allowedBreakpoints);
+    isMobile = devise.mobile;
+    isLaptop = devise.laptop;
+    isTablet = devise.tablet;
+    isMain = devise.main;
 
     orgChart.appendChild(createTOC(toc, isMobile));
 
@@ -609,14 +606,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       // Update variables based on the current state
       mainContainerWidth = mainContainer.offsetWidth;
 
-      isMobile = mainContainerWidth < allowedBreakpoints.tablet;
-      isLaptop =
-        mainContainerWidth < allowedBreakpoints.main &&
-        mainContainerWidth > allowedBreakpoints.laptop;
-      isTablet =
-        mainContainerWidth < allowedBreakpoints.laptop &&
-        mainContainerWidth > allowedBreakpoints.tablet;
-      isMain = mainContainerWidth > allowedBreakpoints.main;
+      const devise = getDevise(mainContainerWidth, allowedBreakpoints);
+      isMobile = devise.mobile;
+      isLaptop = devise.laptop;
+      isTablet = devise.tablet;
+      isMain = devise.main;
 
       if (provideNewBreakpoint(lastBreakpoint, mainContainerWidth)) {
         lastBreakpoint = getBreakpointName(mainContainerWidth);
@@ -667,6 +661,40 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   }
 
   return null;
+}
+
+function getDevise(
+  width: number,
+  breakpoints: { main: number; laptop: number; tablet: number },
+): {
+  mobile: boolean;
+  laptop: boolean;
+  tablet: boolean;
+  main: boolean;
+} {
+  let mobile: boolean = isMobile(width, breakpoints.tablet);
+  let laptop: boolean = isLaptop(width, breakpoints.main, breakpoints.laptop);
+  let tablet: boolean = isTablet(width, breakpoints.laptop, breakpoints.tablet);
+  let main: boolean = isMain(width, breakpoints.main);
+  return {
+    mobile,
+    laptop,
+    tablet,
+    main,
+  };
+}
+
+function isMobile(width: number, tabletSize: number) {
+  return width < tabletSize;
+}
+function isLaptop(width: number, mainSize: number, laptopSize: number) {
+  return width < mainSize && width > laptopSize;
+}
+function isTablet(width: number, laptopSize: number, tabletSize: number) {
+  return width < laptopSize && width > tabletSize;
+}
+function isMain(width: number, mainSize: number) {
+  return width > mainSize;
 }
 
 function findLastElementId(layout: Layout) {
