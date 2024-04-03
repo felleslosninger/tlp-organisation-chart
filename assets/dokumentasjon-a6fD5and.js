@@ -14,7 +14,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 `,i.jsxs(s.p,{children:[`The package exposes one javascript function that can be used on any website, or in any framework.
 Keep in mind that the function `,i.jsx(s.strong,{children:"always"})," attaches itself to ",i.jsx(s.code,{children:"window"}),"."]}),`
 `,i.jsxs(s.p,{children:[`This documentation only covers the usage of the package, and not the development of it.
-If you want to read how to develop, please refer to the `,i.jsx(s.a,{href:"https://github.com/felleslosninger/tlp-organization-chart",children:"README"}),"."]}),`
+If you want to read how to develop, please refer to the `,i.jsx(s.a,{href:"https://github.com/felleslosninger/tlp-organisation-chart",children:"README"}),"."]}),`
 `,i.jsx(s.h3,{children:"Installing via npm"}),`
 `,i.jsx(s.pre,{children:i.jsx(s.code,{className:"hljs language-shell",children:`npm install @digdir/organisation-chart
 `})}),`
@@ -98,7 +98,7 @@ For example, you can make the node a link.`}),`
 `,i.jsx(s.h3,{children:"Layouts"}),`
 `,i.jsx(s.p,{children:`The layouts key is used to define how the nodes should connect to eachother.
 This is always required, and might be difficult to understand at first.`}),`
-`,i.jsxs(s.p,{children:["You can see examples on ",i.jsx(s.a,{href:"https://github.com/felleslosninger/tlp-organization-chart/tree/main/apps/react/src/data",children:"Github"}),"."]}),`
+`,i.jsxs(s.p,{children:["You can see examples on ",i.jsx(s.a,{href:"https://github.com/felleslosninger/tlp-organisation-chart/tree/main/apps/react/src/data",children:"Github"}),"."]}),`
 `,i.jsx(s.pre,{children:i.jsxs(s.code,{className:"hljs language-json",children:[i.jsx(s.span,{className:"hljs-punctuation",children:"{"}),`
   `,i.jsx(s.span,{className:"hljs-attr",children:'"layouts"'}),i.jsx(s.span,{className:"hljs-punctuation",children:":"})," ",i.jsx(s.span,{className:"hljs-punctuation",children:"{"}),`
     `,i.jsx(s.span,{className:"hljs-attr",children:'"main"'}),i.jsx(s.span,{className:"hljs-punctuation",children:":"})," ",i.jsx(s.span,{className:"hljs-punctuation",children:"{"}),`
