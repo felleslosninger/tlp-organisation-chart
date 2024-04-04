@@ -120,6 +120,9 @@
   .och-row-last-6::before,
   .och-row-last-6-tablet::before,
   .och-row-last-6-tablet-2-s-cols::before,
+  .och-row-last-6-laptop-2-s-cols::before,
+  .och-row-last-6-laptop-3-s-cols::before,
+  .och-row-last-6-tablet-3-s-cols::before,
   .och-row-last-6-laptop::before {
     content: '';
     position: absolute;
@@ -141,6 +144,40 @@
 
   .och-row-last-6-tablet-2-s-cols::before {
     height: calc(50% + 22px + calc(47.45px * var(--diff)));
+  }
+
+  .och-row-last-6-laptop-2-s-cols::before {
+    height: calc(
+      var(--col-height) + var(--row-column-gap) +
+        calc(var(--col-height) * var(--diff) + 12px * var(--diff)) + 1px
+    );
+  }
+
+  .och-row-last-6-tablet-2-s-cols::before {
+    height: calc(
+      var(--col-height) + var(--row-column-gap) +
+        calc(
+          var(--col-height) + var(--col-height) * var(--diff) + 12px *
+            calc(var(--diff) + 1)
+        ) + 1px
+    );
+  }
+
+  .och-row-last-6-laptop-3-s-cols::before {
+    height: calc(
+      var(--col-height) + var(--row-column-gap) +
+        calc(var(--col-height) * var(--diff) + 12px * var(--diff)) + 1px
+    );
+  }
+
+  .och-row-last-6-tablet-3-s-cols::before {
+    height: calc(
+      var(--col-height) + var(--row-column-gap) +
+        calc(
+          var(--col-height) + var(--col-height) * var(--diff) + 12px *
+            calc(var(--diff) + 1)
+        ) + 1px
+    );
   }
 
   .och-row-last-5-laptop::before,

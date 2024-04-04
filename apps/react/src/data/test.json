@@ -73,6 +73,12 @@
       "id": "child3",
       "backgroundColor": "#2457",
       "textColor": "white"
+    },
+    {
+      "title": "Item",
+      "id": "item7",
+      "backgroundColor": "blue",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -86,26 +92,30 @@
             }
           ]
         },
-
         {
           "row": [
             {
-              "id": ["item1"],
-              "alignment": "offset-right"
+              "id": ["item7"],
+              "alignment": "center"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item1", "item2"],
+              "children": ["child1"]
             },
             {
-              "id": ["item2"],
-              "children": ["child3"]
-            },
-            {
-              "id": ["item3"]
-            },
-            {
-              "id": ["item6"]
+              "id": ["item6"],
+              "children": ["child3", "child1"]
             },
             {
               "id": ["item4", "item5"],
-              "children": ["child1", "child2"]
+              "children": ["child1"]
+            },
+            {
+              "id": ["item3"]
             }
           ]
         }

@@ -2015,7 +2015,7 @@ function getLastRowClass(
 
   if (!isMobile && rowLength >= 5) {
     if (specialColumnList.length >= 2) {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-2-s-cols`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-${specialColumnList.length}-s-cols`;
     } else if (rowLength === 5 && specialColumnList.length >= 1) {
       return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-1-s-cols`;
     } else {
@@ -2028,7 +2028,6 @@ function getLastRowClass(
     ) {
       return `${prefix}-row ${prefix}-row-last-${rowLength}-1-s-cols`;
     } else if (specialColumnList.length && rowLength === 4) {
-      console.log('hei');
       return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
     } else {
       if (rowContainsSpecialColumns) {
@@ -2074,7 +2073,7 @@ function calculateChildrenDifferenceInRow(
       } else if (siblingsAmount === 6) {
         let upperHalfHighest = 0;
         if (
-          specialColumnsList.length >= 2 ||
+          specialColumnsList.length > 2 ||
           specialColumnsList.includes(4) ||
           specialColumnsList.includes(3)
         ) {
@@ -2137,16 +2136,8 @@ function calculateChildrenDifferenceInRow(
           let secondColumn = specialColumnsList.includes(2)
             ? findHighestChildrenAmountInRow(row, 1, 1) + 1
             : findHighestChildrenAmountInRow(row, 1, 1);
-          let thirdColumn = specialColumnsList.includes(3)
-            ? findHighestChildrenAmountInRow(row, 2, 2) + 1
-            : findHighestChildrenAmountInRow(row, 2, 2);
-          let fourthColumn = specialColumnsList.includes(4)
-            ? findHighestChildrenAmountInRow(row, 3, 3) + 1
-            : findHighestChildrenAmountInRow(row, 3, 3);
 
-          diff =
-            getHighestNumber(firstColumn, secondColumn) -
-            getHighestNumber(thirdColumn, fourthColumn);
+          diff = getHighestNumber(firstColumn, secondColumn) - 1;
         } else {
           let upperThirdHighest = findHighestChildrenAmountInRow(row, 0, 1);
           let middleHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
