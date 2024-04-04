@@ -86,33 +86,26 @@
             }
           ]
         },
+
         {
           "row": [
             {
               "id": ["item1"],
               "alignment": "offset-right"
-            }
-          ]
-        },
-        {
-          "row": [
+            },
             {
               "id": ["item2"],
               "children": ["child3"]
             },
             {
               "id": ["item3"]
-            }
-          ]
-        },
-        {
-          "row": [
-            {
-              "id": ["item4", "item5"],
-              "children": ["child1", "child2"]
             },
             {
               "id": ["item6"]
+            },
+            {
+              "id": ["item4", "item5"],
+              "children": ["child1", "child2"]
             }
           ]
         }

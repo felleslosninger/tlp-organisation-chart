@@ -1812,9 +1812,9 @@ function createNodeLineClass(
             (isLastRow && specialColumnsList.includes(3))
           ) {
             if (indexInRow === 1) {
-              className = ` ${lineUp}-right-half ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop || isTablet ? 'right-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 2) {
-              className = ` ${lineUp}-left-half ${lineUp}`;
+              className = ` ${lineUp}-${isLaptop || isTablet ? 'left-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 3) {
               className = ` ${lineUp}-right ${lineUp}`;
             } else if (indexInRow === 4) {
@@ -2027,6 +2027,9 @@ function getLastRowClass(
       (specialColumnList.length && rowLength === 3 && isLaptop)
     ) {
       return `${prefix}-row ${prefix}-row-last-${rowLength}-1-s-cols`;
+    } else if (specialColumnList.length && rowLength === 4) {
+      console.log('hei');
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
     } else {
       if (rowContainsSpecialColumns) {
         return `${prefix}-row`;
