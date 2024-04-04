@@ -104,18 +104,11 @@
           "row": [
             {
               "id": ["item1", "item2"],
-              "children": ["child1"]
+              "children": ["child1", "child3", "child1"]
             },
             {
               "id": ["item6"],
               "children": ["child3", "child1"]
-            },
-            {
-              "id": ["item4", "item5"],
-              "children": ["child1"]
-            },
-            {
-              "id": ["item3"]
             }
           ]
         }

@@ -2028,7 +2028,11 @@ function getLastRowClass(
     ) {
       return `${prefix}-row ${prefix}-row-last-${rowLength}-1-s-cols`;
     } else if (specialColumnList.length && rowLength === 4) {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+      if (specialColumnList.length === 2) {
+        return `${prefix}-row ${prefix}-row-last-${rowLength}`;
+      } else {
+        return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+      }
     } else {
       if (rowContainsSpecialColumns) {
         return `${prefix}-row`;
