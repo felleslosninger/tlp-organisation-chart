@@ -455,11 +455,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   function createRow(row: Row, isLastRow: boolean, isRoot: boolean) {
     const rowElement = createElement('div');
 
-    let rowClass = `${prefix}-row ${prefix}-row-normal`;
+    rowElement.classList.add(`${prefix}-row`, `${prefix}-row-normal`);
 
     if (isEvenOrOne(row.row.length) && !isMobile) {
       if (row.row.length <= 2) {
-        rowClass += ` ${prefix}-row-center`;
+        rowElement.classList.add(`${prefix}-row-center`);
       }
     }
 
@@ -491,12 +491,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         rowContainsSpecialColumns,
         specialColumnList: indexToSpecialColumnList,
       });
-      console.log(lastRowClass);
-      if (lastRowClass) {
-        rowElement.classList.add(...lastRowClass);
-      }
-    } else {
-      rowElement.className = rowClass;
+      lastRowClass && rowElement.classList.add(...lastRowClass);
     }
 
     //find out if the row contains a column with alignment === offset-left or offset-right
@@ -558,7 +553,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         default:
           break;
       }
-      rowElement.className += ' ' + columnWidth.additionalClass;
+      rowElement.classList.add(...columnWidth.additionalClass);
     });
 
     if (!isMobile && !isLastRow) {
@@ -608,7 +603,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   if (mainContainer) {
     // Create element to hold the org chart
     const orgChart = document.createElement('div');
-    orgChart.className = `${prefix}-org-chart`;
+    orgChart.classList.add(`${prefix}-org-chart`);
     orgChart.setAttribute('lang', meta.langcode);
     orgChart.setAttribute('aria-label', meta.title);
 
@@ -649,7 +644,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         ).providedLayout;
 
         // Update org chart's class to reflect the current layout
-        orgChart.className = `${prefix}-org-chart`;
+        orgChart.classList.add(`${prefix}-org-chart`);
 
         // Clear and re-insert the org chart into the container
         orgChart.innerHTML = '';
@@ -680,7 +675,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Clear the container of all existing children and add the org chart
     mainContainer.innerHTML = '';
     mainContainer.appendChild(orgChart);
-    mainContainer.className = `${prefix}-org-chart-main-container`;
+    mainContainer.classList.add(`${prefix}-org-chart-main-container`);
 
     // Add arrow key navigation to the main container
     keyboardNavigationn(mainContainer, rootElementId, lastElementId);
@@ -2016,7 +2011,7 @@ function calculateColumnWidth({
   indexToSpecialColumnList: number[];
   rowContainsOffsetColumn?: boolean;
 }) {
-  let additionalClass = '';
+  let additionalClass: string[] = [];
   let width = 100;
   let additionalWidth = 0;
   let wrapNodesWrapper = false;
@@ -2065,7 +2060,7 @@ function calculateColumnWidthWithoutSpecialColumn({
   isLastRow: boolean;
   rowContainsOffsetColumn?: boolean;
 }) {
-  let additionalClass = '';
+  let additionalClass: string[] = [];
   let width = 100;
   let additionalWidth = 0;
   let wrapNodesWrapper = false;
@@ -2169,11 +2164,11 @@ function calculateColumnWidthWithSpecialColumn({
   indexToSpecialColumnList: number[];
   prefix: string;
 }) {
-  let additionalClass = '';
+  let additionalClass: string[] = [];
   let width = 100;
   let additionalWidth = 0;
   let wrapNodesWrapper = false;
-  additionalClass = ` ${prefix}-special-row`;
+  additionalClass.push(`${prefix}-special-row`);
   //if row contains special column add the length of the special column to the siblingsAmount, because the special column takes up double node space
   siblingsAmount = siblingsAmount + indexToSpecialColumnList.length;
   if (siblingsAmount === 2) {
@@ -2181,7 +2176,7 @@ function calculateColumnWidthWithSpecialColumn({
     additionalWidth = -12;
     if (!isLastRow) {
       additionalWidth = -12;
-      additionalClass += ` ${prefix}-special-row-1-column`;
+      additionalClass.push(`${prefix}-special-row-1-column`);
     }
   }
   if (isMain) {
