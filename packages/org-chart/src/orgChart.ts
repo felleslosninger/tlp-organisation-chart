@@ -446,12 +446,12 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
     });
 
-    let indexToColumnsWithSpecialColumnList: number[] = [];
+    let indexToSpecialColumnList: number[] = [];
 
     if (rowContainsSpecialColumns) {
       row.row.forEach((column: Column, index: number) => {
         if (column.id.length > 1) {
-          indexToColumnsWithSpecialColumnList.push(index + 1);
+          indexToSpecialColumnList.push(index + 1);
         }
       });
     }
@@ -463,7 +463,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         isLaptop,
         isTablet,
         rowContainsSpecialColumns,
-        indexToColumnsWithSpecialColumnList,
+        indexToSpecialColumnList,
       );
     }
 
@@ -483,17 +483,17 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     row.row.forEach((column: Column) => {
       count++;
 
-      const columnWidth = calculateColumnWidth(
+      const columnWidth = calculateColumnWidth({
         isMain,
         isLaptop,
         isTablet,
-        row.row.length,
-        count,
+        siblingsAmount: row.row.length,
+        indexInRow: count,
         isLastRow,
         rowContainsSpecialColumns,
-        indexToColumnsWithSpecialColumnList,
+        indexToSpecialColumnList,
         rowContainsOffsetColumn,
-      );
+      });
 
       switch (rowContainsSpecialColumns) {
         case false:
@@ -505,7 +505,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
               columnWidth.additionalWidth,
               count,
               isLastRow,
-              indexToColumnsWithSpecialColumnList,
+              indexToSpecialColumnList,
               isRoot,
             ),
           );
@@ -520,7 +520,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
               count,
               isLastRow,
               columnWidth.wrapNodesWrapper,
-              indexToColumnsWithSpecialColumnList,
+              indexToSpecialColumnList,
               false,
             ),
           );
@@ -546,7 +546,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           row.row.length,
           isLaptop,
           isTablet,
-          indexToColumnsWithSpecialColumnList,
+          indexToSpecialColumnList,
         ).toString(),
       );
     }
@@ -1913,23 +1913,33 @@ function createChildrenList(children: string[], idPrefix: string) {
   });
   return childrenList;
 }
-function calculateColumnWidth(
-  isMain: boolean,
-  isLaptop: boolean,
-  isTablet: boolean,
-  siblingsAmount: number,
-  indexInRow: number,
-  isLastRow: boolean,
-  rowContainsSpecialColumn: boolean,
-  indexToSpecialColumnList: number[],
-  rowContainsOffsetColumn?: boolean,
-) {
+function calculateColumnWidth({
+  isMain,
+  isLaptop,
+  isTablet,
+  siblingsAmount,
+  indexInRow,
+  isLastRow,
+  rowContainsSpecialColumns,
+  indexToSpecialColumnList,
+  rowContainsOffsetColumn,
+}: {
+  isMain: boolean;
+  isLaptop: boolean;
+  isTablet: boolean;
+  siblingsAmount: number;
+  indexInRow: number;
+  isLastRow: boolean;
+  rowContainsSpecialColumns: boolean;
+  indexToSpecialColumnList: number[];
+  rowContainsOffsetColumn?: boolean;
+}) {
   let additionalClass = '';
   let width = 100;
   let additionalWidth = 0;
   let wrapNodesWrapper = false;
 
-  switch (rowContainsSpecialColumn) {
+  switch (rowContainsSpecialColumns) {
     case true:
       return calculateColumnWidthWithSpecialColumn(
         isMain,
