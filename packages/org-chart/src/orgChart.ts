@@ -189,9 +189,9 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.style.color = nodeData.textColor;
       innerNode.innerHTML = nodeData.title;
       nodeData.opacity && (innerNode.style.opacity = nodeData.opacity + '%');
-      innerNode.className = `${prefix}-node ${prefix}-inner-node`;
+      innerNode.classList.add(`${prefix}-node`, `${prefix}-inner-node`);
       nodeElement.appendChild(innerNode);
-      nodeElement.className = `${prefix}-node `;
+      nodeElement.classList.add(`${prefix}-node`);
 
       //if siblingsAmount is less 2, set max-with to 300px
       if (siblingsAmount && siblingsAmount <= 2 && !isMobile) {
