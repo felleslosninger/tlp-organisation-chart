@@ -119,14 +119,21 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return childrenList;
   }
 
-  function createNode(
-    node: Column,
-    siblingsAmount: number,
-    indexInRow: number,
-    isLastRow: boolean,
-    specialColumnList: number[],
-    isRoot?: boolean | undefined,
-  ) {
+  function createNode({
+    node,
+    siblingsAmount,
+    indexInRow,
+    isLastRow,
+    specialColumnList,
+    isRoot,
+  }: {
+    node: Column;
+    siblingsAmount: number;
+    indexInRow: number;
+    isLastRow: boolean;
+    specialColumnList: number[];
+    isRoot?: boolean | undefined;
+  }) {
     const nodeData = findNodeById(node.id[0]);
     if (nodeData) {
       const nodeElement = createElement('div');
@@ -216,17 +223,27 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
   }
 
-  function createSpecialColumn(
-    column: Column,
-    columnWidth: number,
-    siblingsAmount: number,
-    additionalWidth: number,
-    indexInRow: number,
-    isLastRow: boolean,
-    wrapNodesContainer: boolean,
-    indexToColumnsWithSpecialColumnList: number[],
-    isRoot: boolean,
-  ) {
+  function createSpecialColumn({
+    column,
+    columnWidth,
+    siblingsAmount,
+    additionalWidth,
+    indexInRow,
+    isLastRow,
+    wrapNodesContainer,
+    indexToColumnsWithSpecialColumnList,
+    isRoot,
+  }: {
+    column: Column;
+    columnWidth: number;
+    siblingsAmount: number;
+    additionalWidth: number;
+    indexInRow: number;
+    isLastRow: boolean;
+    wrapNodesContainer: boolean;
+    indexToColumnsWithSpecialColumnList: number[];
+    isRoot: boolean;
+  }) {
     const columnElement = createElement('div');
     columnElement.className = `${prefix}-column`;
     isMobile
@@ -345,13 +362,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       columnElement.appendChild(nodesWrapper);
     } else {
-      const simpleNode = createNode(
-        column,
-        siblingsAmount + 1,
+      const simpleNode = createNode({
+        node: column,
+        siblingsAmount: siblingsAmount + 1,
         indexInRow,
         isLastRow,
-        indexToColumnsWithSpecialColumnList,
-      );
+        specialColumnList: indexToColumnsWithSpecialColumnList,
+      });
       if (simpleNode !== null) {
         columnElement.appendChild(simpleNode);
       }
@@ -366,16 +383,25 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     return columnElement;
   }
 
-  function createColumn(
-    column: Column,
-    columnWidth: number,
-    siblingsAmount: number,
-    additionalWidth: number,
-    indexInRow: number,
-    isLastRow: boolean,
-    specialColumnList: number[],
-    isRoot: boolean,
-  ) {
+  function createColumn({
+    column,
+    columnWidth,
+    siblingsAmount,
+    additionalWidth,
+    indexInRow,
+    isLastRow,
+    specialColumnList,
+    isRoot,
+  }: {
+    column: Column;
+    columnWidth: number;
+    siblingsAmount: number;
+    additionalWidth: number;
+    indexInRow: number;
+    isLastRow: boolean;
+    specialColumnList: number[];
+    isRoot: boolean;
+  }) {
     const columnElement = createElement('div');
     columnElement.className = `${prefix}-column`;
 
@@ -400,14 +426,14 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       columnElement.classList.add(`${prefix}-column-flex-start`);
     }
 
-    const innerColumn = createNode(
-      column,
+    const innerColumn = createNode({
+      node: column,
       siblingsAmount,
       indexInRow,
       isLastRow,
       specialColumnList,
       isRoot,
-    );
+    });
 
     columnElement.style.width = isMobile
       ? '100%'
@@ -498,31 +524,31 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       switch (rowContainsSpecialColumns) {
         case false:
           rowElement.appendChild(
-            createColumn(
+            createColumn({
               column,
-              columnWidth.width,
-              row.row.length,
-              columnWidth.additionalWidth,
-              count,
+              columnWidth: columnWidth.width,
+              siblingsAmount: row.row.length,
+              additionalWidth: columnWidth.additionalWidth,
+              indexInRow: count,
               isLastRow,
-              indexToSpecialColumnList,
+              specialColumnList: indexToSpecialColumnList,
               isRoot,
-            ),
+            }),
           );
           break;
         case true:
           rowElement.appendChild(
-            createSpecialColumn(
+            createSpecialColumn({
               column,
-              columnWidth.width,
-              row.row.length,
-              columnWidth.additionalWidth,
-              count,
+              columnWidth: columnWidth.width,
+              siblingsAmount: row.row.length,
+              additionalWidth: columnWidth.additionalWidth,
+              indexInRow: count,
               isLastRow,
-              columnWidth.wrapNodesWrapper,
-              indexToSpecialColumnList,
-              false,
-            ),
+              wrapNodesContainer: columnWidth.wrapNodesWrapper,
+              indexToColumnsWithSpecialColumnList: indexToSpecialColumnList,
+              isRoot: false,
+            }),
           );
           break;
         default:
