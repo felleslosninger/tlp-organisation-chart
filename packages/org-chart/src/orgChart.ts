@@ -314,15 +314,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
             innerNode.href = nodeData.url;
           }
 
-          const arrowNavigationAttributes = getArrowNavigaitonDataSpecialColum(
-            currentLayout,
+          const arrowNavigationAttributes = getArrowNavigaitonDataSpecialColum({
+            layout: currentLayout,
             indexInRow,
             siblingsAmount,
             currentRowIndex,
             isLastRow,
-            column.children ? column.children : null,
-            index,
-          );
+            children: column.children ? column.children : null,
+            indexInColumn: index,
+          });
 
           arrowNavigationAttributes.forEach((dataAttribute) => {
             innerNode.setAttribute(
@@ -1679,15 +1679,23 @@ function addDataAttribute(
  * @param indexInColumn - The index of the node in the column.
  * @returns An array of data attributes for arrow navigation.
  */
-function getArrowNavigaitonDataSpecialColum(
-  layout: Layout,
-  indexInRow: number,
-  siblingsAmount: number,
-  currentRowIndex: number,
-  isLastRow: boolean,
-  children: string[] | null,
-  indexInColumn: number,
-) {
+function getArrowNavigaitonDataSpecialColum({
+  layout,
+  indexInRow,
+  siblingsAmount,
+  currentRowIndex,
+  isLastRow,
+  children,
+  indexInColumn,
+}: {
+  layout: Layout;
+  indexInRow: number;
+  siblingsAmount: number;
+  currentRowIndex: number;
+  isLastRow: boolean;
+  children: string[] | null;
+  indexInColumn: number;
+}) {
   const dataAttributes: { key: string; id: string }[] = [];
   let cri = currentRowIndex;
 
