@@ -483,7 +483,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
 
     if (isLastRow) {
-      rowClass = getLastRowClass({
+      const lastRowClass = getLastRowClass({
         row,
         isMobile,
         isLaptop,
@@ -491,9 +491,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         rowContainsSpecialColumns,
         specialColumnList: indexToSpecialColumnList,
       });
+      console.log(lastRowClass);
+      if (lastRowClass) {
+        rowElement.classList.add(...lastRowClass);
+      }
+    } else {
+      rowElement.className = rowClass;
     }
-
-    rowElement.className = rowClass;
 
     //find out if the row contains a column with alignment === offset-left or offset-right
     let rowContainsOffsetColumn = false;
@@ -1490,6 +1494,7 @@ function getLastRowClass({
   let rowLength = row.row.length;
   const tabletClass = isTablet ? '-tablet' : '';
   const isLaptopOrTablet = isLaptop ? '-laptop' : isTablet ? '-tablet' : '';
+  const classList: string[] = [`${prefix}-row`];
 
   if (rowContainsSpecialColumns && specialColumnList) {
     rowLength += specialColumnList.length;
@@ -1497,35 +1502,45 @@ function getLastRowClass({
 
   if (!isMobile && rowLength >= 5) {
     if (specialColumnList.length >= 2) {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptopOrTablet}-${specialColumnList.length}-s-cols`;
+      classList.push(
+        `${prefix}-row-last-${rowLength}${isLaptopOrTablet}-${specialColumnList.length}-s-cols`,
+      );
+      return classList;
     } else if (rowLength === 5 && specialColumnList.length >= 1) {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptopOrTablet}-1-s-cols`;
+      classList.push(
+        `${prefix}-row-last-${rowLength}${isLaptopOrTablet}-1-s-cols`,
+      );
+      return classList;
     } else {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptopOrTablet}`;
+      classList.push(`${prefix}-row-last-${rowLength}${isLaptopOrTablet}`);
+      return classList;
     }
   } else if (!isMobile && rowLength >= 2) {
     if (
       (specialColumnList.length && rowLength === 3 && isTablet) ||
       (specialColumnList.length && rowLength === 3 && isLaptop)
     ) {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}-1-s-cols`;
+      classList.push(`${prefix}-row-last-${rowLength}-1-s-cols`);
+      return classList;
     } else if (specialColumnList.length && rowLength === 4) {
       if (specialColumnList.length === 2) {
-        return `${prefix}-row ${prefix}-row-last-${rowLength}`;
+        classList.push(`${prefix}-row-last-${rowLength}`);
+        return classList;
       } else {
-        return `${prefix}-row ${prefix}-row-last-${rowLength}${tabletClass}`;
+        classList.push(`${prefix}-row-last-${rowLength}${tabletClass}`);
+        return classList;
       }
     } else {
-      if (rowContainsSpecialColumns) {
-        return `${prefix}-row`;
-      } else {
-        return `${prefix}-row ${prefix}-row-last-${rowLength}${tabletClass}`;
+      if (!rowContainsSpecialColumns) {
+        classList.push(`${prefix}-row-last-${rowLength}${tabletClass}`);
+        return classList;
       }
     }
   } else if (!isMobile && rowLength <= 2) {
-    return `${prefix}-row ${prefix}-row-last-${rowLength}`;
+    classList.push(`${prefix}-row-last-${rowLength}`);
+    return classList;
   } else {
-    return `${prefix}-row`;
+    return classList;
   }
 }
 
