@@ -1941,7 +1941,7 @@ function calculateColumnWidth({
 
   switch (rowContainsSpecialColumns) {
     case true:
-      return calculateColumnWidthWithSpecialColumn(
+      return calculateColumnWidthWithSpecialColumn({
         isMain,
         isLaptop,
         isTablet,
@@ -1950,31 +1950,39 @@ function calculateColumnWidth({
         isLastRow,
         indexToSpecialColumnList,
         prefix,
-      );
+      });
     case false:
-      return calculateColumnWidthWithoutSpecialColumn(
+      return calculateColumnWidthWithoutSpecialColumn({
         isMain,
         isLaptop,
         isTablet,
         siblingsAmount,
         indexInRow,
         isLastRow,
-        rowContainsOffsetColumn ? true : false,
-      );
+        rowContainsOffsetColumn,
+      });
     default:
       return { width, additionalWidth, additionalClass, wrapNodesWrapper };
   }
 }
 
-function calculateColumnWidthWithoutSpecialColumn(
-  isMain: boolean,
-  isLaptop: boolean,
-  isTablet: boolean,
-  siblingsAmount: number,
-  indexInRow: number,
-  isLastRow: boolean,
-  rowContainsOffsetColumn?: boolean,
-) {
+function calculateColumnWidthWithoutSpecialColumn({
+  isMain,
+  isLaptop,
+  isTablet,
+  siblingsAmount,
+  indexInRow,
+  isLastRow,
+  rowContainsOffsetColumn,
+}: {
+  isMain: boolean;
+  isLaptop: boolean;
+  isTablet: boolean;
+  siblingsAmount: number;
+  indexInRow: number;
+  isLastRow: boolean;
+  rowContainsOffsetColumn?: boolean;
+}) {
   let additionalClass = '';
   let width = 100;
   let additionalWidth = 0;
@@ -2060,16 +2068,25 @@ function calculateColumnWidthWithoutSpecialColumn(
   return { width, additionalWidth, additionalClass, wrapNodesWrapper };
 }
 
-function calculateColumnWidthWithSpecialColumn(
-  isMain: boolean,
-  isLaptop: boolean,
-  isTablet: boolean,
-  siblingsAmount: number,
-  indexInRow: number,
-  isLastRow: boolean,
-  indexToSpecialColumnList: number[],
-  prefix: string,
-) {
+function calculateColumnWidthWithSpecialColumn({
+  isMain,
+  isLaptop,
+  isTablet,
+  siblingsAmount,
+  indexInRow,
+  isLastRow,
+  indexToSpecialColumnList,
+  prefix,
+}: {
+  isMain: boolean;
+  isLaptop: boolean;
+  isTablet: boolean;
+  siblingsAmount: number;
+  indexInRow: number;
+  isLastRow: boolean;
+  indexToSpecialColumnList: number[];
+  prefix: string;
+}) {
   let additionalClass = '';
   let width = 100;
   let additionalWidth = 0;
