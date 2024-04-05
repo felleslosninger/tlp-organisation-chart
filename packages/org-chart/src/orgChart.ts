@@ -283,15 +283,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
 
       if (!isMobile) {
         nodesWrapper.classList.add(
-          createSpecialColumnLines(
+          createSpecialColumnLines({
             indexToColumnsWithSpecialColumnList,
             indexInRow,
             siblingsAmount,
-            wrapNodesContainer,
+            isWrapped: wrapNodesContainer,
             isLaptop,
             isTablet,
             isLastRow,
-          ),
+          }),
         );
       }
 
@@ -765,15 +765,23 @@ function keyboardNavigationn(
   observer.observe(mainContainer, { childList: true, subtree: true });
 }
 
-function createSpecialColumnLines(
-  indexToColumnsWithSpecialColumnList: number[],
-  indexInRow: number,
-  siblingsAmount: number,
-  isWrapped: boolean,
-  isLaptop: boolean,
-  isTablet: boolean,
-  isLastRow: boolean,
-) {
+function createSpecialColumnLines({
+  indexToColumnsWithSpecialColumnList,
+  indexInRow,
+  siblingsAmount,
+  isWrapped,
+  isLaptop,
+  isTablet,
+  isLastRow,
+}: {
+  indexToColumnsWithSpecialColumnList: number[];
+  indexInRow: number;
+  siblingsAmount: number;
+  isWrapped: boolean;
+  isLaptop: boolean;
+  isTablet: boolean;
+  isLastRow: boolean;
+}) {
   let className = `${prefix}-special-column`;
 
   let initialSiblingsAmount = siblingsAmount;
