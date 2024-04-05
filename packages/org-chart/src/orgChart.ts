@@ -1488,6 +1488,8 @@ function getLastRowClass({
   specialColumnList: number[];
 }) {
   let rowLength = row.row.length;
+  const tabletClass = isTablet ? '-tablet' : '';
+  const isLaptopOrTablet = isLaptop ? '-laptop' : isTablet ? '-tablet' : '';
 
   if (rowContainsSpecialColumns && specialColumnList) {
     rowLength += specialColumnList.length;
@@ -1495,11 +1497,11 @@ function getLastRowClass({
 
   if (!isMobile && rowLength >= 5) {
     if (specialColumnList.length >= 2) {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-${specialColumnList.length}-s-cols`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptopOrTablet}-${specialColumnList.length}-s-cols`;
     } else if (rowLength === 5 && specialColumnList.length >= 1) {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}-1-s-cols`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptopOrTablet}-1-s-cols`;
     } else {
-      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptop ? '-laptop' : isTablet ? '-tablet' : ''}`;
+      return `${prefix}-row ${prefix}-row-last-${rowLength}${isLaptopOrTablet}`;
     }
   } else if (!isMobile && rowLength >= 2) {
     if (
@@ -1511,13 +1513,13 @@ function getLastRowClass({
       if (specialColumnList.length === 2) {
         return `${prefix}-row ${prefix}-row-last-${rowLength}`;
       } else {
-        return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+        return `${prefix}-row ${prefix}-row-last-${rowLength}${tabletClass}`;
       }
     } else {
       if (rowContainsSpecialColumns) {
         return `${prefix}-row`;
       } else {
-        return `${prefix}-row ${prefix}-row-last-${rowLength}${isTablet ? '-tablet' : ''}`;
+        return `${prefix}-row ${prefix}-row-last-${rowLength}${tabletClass}`;
       }
     }
   } else if (!isMobile && rowLength <= 2) {
