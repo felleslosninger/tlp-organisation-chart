@@ -152,15 +152,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       innerNode.setAttribute('role', 'treeitem');
       innerNode.setAttribute('aria-level', `${isRoot ? 1 : 2}`);
 
-      const arrowNavigationAttributes = getArrowNavigaitonData(
-        currentLayout,
-        isRoot ? true : false,
+      const arrowNavigationAttributes = getArrowNavigaitonData({
+        layout: currentLayout,
+        isRoot: isRoot ? true : false,
         indexInRow,
         siblingsAmount,
         currentRowIndex,
         isLastRow,
-        node.children ? node.children : null,
-      );
+        children: node.children ? node.children : null,
+      });
 
       arrowNavigationAttributes.forEach((dataAttribute) => {
         innerNode.setAttribute(
@@ -1761,15 +1761,23 @@ function getArrowNavigaitonDataSpecialColum(
  * @param children - The children of the node.
  * @returns An array of data attributes for arrow navigation.
  */
-function getArrowNavigaitonData(
-  layout: Layout,
-  isRoot: boolean,
-  indexInRow: number,
-  siblingsAmount: number,
-  currentRowIndex: number,
-  isLastRow: boolean,
-  children: string[] | null,
-) {
+function getArrowNavigaitonData({
+  layout,
+  isRoot,
+  indexInRow,
+  siblingsAmount,
+  currentRowIndex,
+  isLastRow,
+  children,
+}: {
+  layout: Layout;
+  isRoot: boolean;
+  indexInRow: number;
+  siblingsAmount: number;
+  currentRowIndex: number;
+  isLastRow: boolean;
+  children: string[] | null;
+}) {
   const dataAttributes: { key: string; id: string }[] = [];
 
   // If the node has children, add data attribute for arrow down navigation
