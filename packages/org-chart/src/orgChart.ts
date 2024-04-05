@@ -585,11 +585,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     // Initial setup based on mainContainer's current width
     mainContainerWidth = mainContainer.offsetWidth;
 
-    const devise = getDevise(mainContainerWidth, allowedBreakpoints);
-    isMobile = devise.mobile;
-    isLaptop = devise.laptop;
-    isTablet = devise.tablet;
-    isMain = devise.main;
+    const device = getDevice(mainContainerWidth, allowedBreakpoints);
+    isMobile = device.mobile;
+    isLaptop = device.laptop;
+    isTablet = device.tablet;
+    isMain = device.main;
 
     orgChart.appendChild(createTOC(toc, isMobile));
 
@@ -604,11 +604,11 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       // Update variables based on the current state
       mainContainerWidth = mainContainer.offsetWidth;
 
-      const devise = getDevise(mainContainerWidth, allowedBreakpoints);
-      isMobile = devise.mobile;
-      isLaptop = devise.laptop;
-      isTablet = devise.tablet;
-      isMain = devise.main;
+      const device = getDevice(mainContainerWidth, allowedBreakpoints);
+      isMobile = device.mobile;
+      isLaptop = device.laptop;
+      isTablet = device.tablet;
+      isMain = device.main;
 
       if (provideNewBreakpoint(lastBreakpoint, mainContainerWidth)) {
         lastBreakpoint = getBreakpointName(mainContainerWidth);
@@ -661,7 +661,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   return null;
 }
 
-function getDevise(
+function getDevice(
   width: number,
   breakpoints: { main: number; laptop: number; tablet: number },
 ): {
