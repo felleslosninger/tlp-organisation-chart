@@ -541,13 +541,13 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     if (!isMobile && isLastRow) {
       rowElement.style.setProperty(
         '--diff',
-        calculateChildrenDifferenceInRow(
+        calculateChildrenDifferenceInRow({
           row,
-          row.row.length,
+          siblingsAmount: row.row.length,
           isLaptop,
           isTablet,
-          indexToSpecialColumnList,
-        ).toString(),
+          specialColumnsList: indexToSpecialColumnList,
+        }).toString(),
       );
     }
 
@@ -1484,13 +1484,19 @@ function getLastRowClass(
   }
 }
 
-function calculateChildrenDifferenceInRow(
-  row: Row,
-  siblingsAmount: number,
-  isLaptop: boolean,
-  isTablet: boolean,
-  specialColumnsList: number[],
-) {
+function calculateChildrenDifferenceInRow({
+  row,
+  siblingsAmount,
+  isLaptop,
+  isTablet,
+  specialColumnsList,
+}: {
+  row: Row;
+  siblingsAmount: number;
+  isLaptop: boolean;
+  isTablet: boolean;
+  specialColumnsList: number[];
+}) {
   let diff = 0;
   if (specialColumnsList.length > 0) {
     siblingsAmount += specialColumnsList.length;
