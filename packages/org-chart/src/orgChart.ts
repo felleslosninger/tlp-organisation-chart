@@ -1394,14 +1394,21 @@ function isOdd(number: number) {
 }
 
 function getBreakpointName(width: number) {
-  let breakpointName =
-    width > 1500
-      ? 'main'
-      : width > 992
-        ? 'laptop'
-        : width > 768
-          ? 'tablet'
-          : 'mobile';
+  let breakpointName: string;
+  switch (true) {
+    case width > 1500:
+      breakpointName = 'main';
+      break;
+    case width > 992:
+      breakpointName = 'laptop';
+      break;
+    case width > 768:
+      breakpointName = 'tablet';
+      break;
+    default:
+      breakpointName = 'mobile';
+      break;
+  }
   return breakpointName;
 }
 
