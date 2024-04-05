@@ -199,15 +199,15 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
       }
 
       if (!isMobile) {
-        nodeElement.className += createNodeLineClass(
+        nodeElement.className += createNodeLineClass({
           indexInRow,
           siblingsAmount,
           isLastRow,
-          node.alignment ? node.alignment : undefined,
+          alignment: node.alignment ? node.alignment : undefined,
           specialColumnList,
           isTablet,
           isLaptop,
-        );
+        });
       }
 
       return nodeElement;
@@ -546,7 +546,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
           siblingsAmount: row.row.length,
           isLaptop,
           isTablet,
-          specialColumnsList: indexToSpecialColumnList,
+          specialColumnList: indexToSpecialColumnList,
         }).toString(),
       );
     }
@@ -1046,19 +1046,27 @@ function createElement(type: string) {
 }
 
 //function to create the line between the nodes
-function createNodeLineClass(
-  indexInRow: number,
-  siblingsAmount: number,
-  isLastRow: boolean,
-  alignment: string | undefined,
-  specialColumnsList: number[],
-  isTablet: boolean,
-  isLaptop: boolean,
-) {
+function createNodeLineClass({
+  indexInRow,
+  siblingsAmount,
+  isLastRow,
+  alignment,
+  specialColumnList,
+  isTablet,
+  isLaptop,
+}: {
+  indexInRow: number;
+  siblingsAmount: number;
+  isLastRow: boolean;
+  alignment: string | undefined;
+  specialColumnList: number[];
+  isTablet: boolean;
+  isLaptop: boolean;
+}) {
   let className = '';
   const lineUp = `${prefix}-node-line-up`;
 
-  if (specialColumnsList.length <= 0) {
+  if (specialColumnList.length <= 0) {
     if (siblingsAmount === 1) {
       if (alignment === 'left') {
         className = ` ${prefix}-node-line-right`;
@@ -1174,7 +1182,7 @@ function createNodeLineClass(
         className = ` ${lineUp}-${isOdd(indexInRow) ? 'right-half' : 'left-half'} ${lineUp}`;
       }
     } else {
-      siblingsAmount += specialColumnsList.length - 1;
+      siblingsAmount += specialColumnList.length - 1;
 
       if (siblingsAmount === 3) {
         if (indexInRow === 1) {
@@ -1183,20 +1191,20 @@ function createNodeLineClass(
           className = ` ${lineUp}-left-half ${lineUp}`;
         }
       } else if (siblingsAmount === 4) {
-        if (isLastRow && specialColumnsList.includes(2)) {
+        if (isLastRow && specialColumnList.includes(2)) {
           if (indexInRow === 1) {
             className = ` ${lineUp}-right ${lineUp}`;
           } else {
             className = ` ${lineUp}-left ${lineUp}`;
           }
         } else {
-          if (specialColumnsList.includes(1)) {
+          if (specialColumnList.includes(1)) {
             if (indexInRow === 2) {
               className = ` ${lineUp}-left-half ${lineUp}`;
             } else {
               className = ` ${lineUp}-left ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(2)) {
+          } else if (specialColumnList.includes(2)) {
             if (isLaptop) {
               if (indexInRow === 1) {
                 className = ` ${lineUp}-right ${lineUp}`;
@@ -1210,7 +1218,7 @@ function createNodeLineClass(
                 className = ` ${lineUp}-left ${lineUp}`;
               }
             }
-          } else if (specialColumnsList.includes(3)) {
+          } else if (specialColumnList.includes(3)) {
             if (indexInRow === 1) {
               className = ` ${lineUp}-right ${lineUp}`;
             } else {
@@ -1219,27 +1227,24 @@ function createNodeLineClass(
           }
         }
       } else if (siblingsAmount === 5) {
-        if (specialColumnsList.length === 2) {
-          if (
-            specialColumnsList.includes(1) &&
-            specialColumnsList.includes(2)
-          ) {
+        if (specialColumnList.length === 2) {
+          if (specialColumnList.includes(1) && specialColumnList.includes(2)) {
             className = ` ${lineUp}-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
           } else if (
-            specialColumnsList.includes(2) &&
-            specialColumnsList.includes(3)
+            specialColumnList.includes(2) &&
+            specialColumnList.includes(3)
           ) {
             className = ` ${lineUp}-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
           } else if (
-            specialColumnsList.includes(1) &&
-            specialColumnsList.includes(3)
+            specialColumnList.includes(1) &&
+            specialColumnList.includes(3)
           ) {
             className = ` ${lineUp}-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
           }
         } else {
           if (
-            (isLastRow && specialColumnsList.includes(4)) ||
-            (isLastRow && specialColumnsList.includes(3))
+            (isLastRow && specialColumnList.includes(4)) ||
+            (isLastRow && specialColumnList.includes(3))
           ) {
             if (indexInRow === 1) {
               className = ` ${lineUp}-${isLaptop || isTablet ? 'right-half' : 'right'} ${lineUp}`;
@@ -1250,7 +1255,7 @@ function createNodeLineClass(
             } else if (indexInRow === 4) {
               className = ` ${lineUp}-left ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(1)) {
+          } else if (specialColumnList.includes(1)) {
             if (indexInRow === 2) {
               className = ` ${lineUp}-${isLaptop ? 'left-half' : 'right-half'} ${lineUp}`;
             } else if (indexInRow === 3) {
@@ -1258,7 +1263,7 @@ function createNodeLineClass(
             } else {
               className = ` ${lineUp}-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(2)) {
+          } else if (specialColumnList.includes(2)) {
             if (indexInRow === 1) {
               className = ` ${lineUp}-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 3) {
@@ -1270,7 +1275,7 @@ function createNodeLineClass(
                 className = ` ${lineUp}-${isLaptop ? 'right-half' : 'left'} ${lineUp}`;
               }
             }
-          } else if (specialColumnsList.includes(3)) {
+          } else if (specialColumnList.includes(3)) {
             if (indexInRow === 1) {
               className = ` ${lineUp}-${isLaptop ? 'right-half' : 'right'} ${lineUp}`;
             } else if (indexInRow === 2) {
@@ -1278,7 +1283,7 @@ function createNodeLineClass(
             } else {
               className = ` ${lineUp}-${isLaptop ? 'left-half' : 'left'} ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(4)) {
+          } else if (specialColumnList.includes(4)) {
             if (indexInRow === 1) {
               className = ` ${lineUp}-right ${lineUp}`;
             } else if (indexInRow === 2) {
@@ -1289,11 +1294,8 @@ function createNodeLineClass(
           }
         }
       } else if (siblingsAmount === 6) {
-        if (specialColumnsList.length === 2) {
-          if (
-            specialColumnsList.includes(1) &&
-            specialColumnsList.includes(2)
-          ) {
+        if (specialColumnList.length === 2) {
+          if (specialColumnList.includes(1) && specialColumnList.includes(2)) {
             if (isLaptop) {
               if (isLastRow) {
                 className = ` ${lineUp}-${indexInRow === 3 ? 'right-half' : 'left-half'} ${lineUp}`;
@@ -1304,8 +1306,8 @@ function createNodeLineClass(
               className = ` ${lineUp}-left ${lineUp}`;
             }
           } else if (
-            specialColumnsList.includes(3) &&
-            specialColumnsList.includes(4)
+            specialColumnList.includes(3) &&
+            specialColumnList.includes(4)
           ) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 2 ? 'right-half' : 'right'} ${lineUp}`;
@@ -1313,8 +1315,8 @@ function createNodeLineClass(
               className = ` ${lineUp}-${indexInRow === 1 ? 'right' : 'right-half'} ${lineUp}`;
             }
           } else if (
-            specialColumnsList.includes(2) &&
-            specialColumnsList.includes(3)
+            specialColumnList.includes(2) &&
+            specialColumnList.includes(3)
           ) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 1 ? 'right-half' : 'left-half'} ${lineUp}`;
@@ -1322,8 +1324,8 @@ function createNodeLineClass(
               className = ` ${lineUp}-${indexInRow === 1 ? 'right' : 'left'} ${lineUp}`;
             }
           } else if (
-            specialColumnsList.includes(2) &&
-            specialColumnsList.includes(4)
+            specialColumnList.includes(2) &&
+            specialColumnList.includes(4)
           ) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 1 ? 'right-half' : 'right'} ${lineUp}`;
@@ -1331,8 +1333,8 @@ function createNodeLineClass(
               className = ` ${lineUp}-${indexInRow === 1 ? 'right' : 'left-half'} ${lineUp}`;
             }
           } else if (
-            specialColumnsList.includes(1) &&
-            specialColumnsList.includes(3)
+            specialColumnList.includes(1) &&
+            specialColumnList.includes(3)
           ) {
             if (isLaptop) {
               className = ` ${lineUp}-left-half ${lineUp}`;
@@ -1340,8 +1342,8 @@ function createNodeLineClass(
               className = ` ${lineUp}-${indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
             }
           } else if (
-            specialColumnsList.includes(1) &&
-            specialColumnsList.includes(4)
+            specialColumnList.includes(1) &&
+            specialColumnList.includes(4)
           ) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 2 ? 'left-half' : 'right'} ${lineUp}`;
@@ -1350,31 +1352,31 @@ function createNodeLineClass(
             }
           }
         } else {
-          if (specialColumnsList.includes(1)) {
+          if (specialColumnList.includes(1)) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 3 ? 'right' : indexInRow === 2 ? 'left-half' : 'left'} ${lineUp}`;
             } else {
               className = ` ${lineUp}-${indexInRow === 2 ? 'right-half' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(2)) {
+          } else if (specialColumnList.includes(2)) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 1 || indexInRow === 4 ? 'right-half' : indexInRow === 3 ? 'right' : 'left-half'} ${lineUp}`;
             } else {
               className = ` ${lineUp}-${indexInRow === 1 ? 'right' : indexInRow === 3 ? 'left-half' : 'left'} ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(3)) {
+          } else if (specialColumnList.includes(3)) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 1 || indexInRow === 4 ? 'right' : 'right-half'} ${lineUp}`;
             } else {
               className = ` ${lineUp}-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left'} ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(4)) {
+          } else if (specialColumnList.includes(4)) {
             if (isLaptop) {
               className = ` ${lineUp}-${indexInRow === 1 ? 'right' : indexInRow === 2 ? 'right-half' : 'left-half'} ${lineUp}`;
             } else {
               className = ` ${lineUp}-${indexInRow === 3 ? 'right-half' : indexInRow === 5 ? 'left' : 'right'} ${lineUp}`;
             }
-          } else if (specialColumnsList.includes(5)) {
+          } else if (specialColumnList.includes(5)) {
             className = ` ${lineUp}-${indexInRow === 3 ? 'right-half' : indexInRow === 4 ? 'left-half' : 'right'} ${lineUp}`;
           }
         }
@@ -1496,24 +1498,24 @@ function calculateChildrenDifferenceInRow({
   siblingsAmount,
   isLaptop,
   isTablet,
-  specialColumnsList,
+  specialColumnList,
 }: {
   row: Row;
   siblingsAmount: number;
   isLaptop: boolean;
   isTablet: boolean;
-  specialColumnsList: number[];
+  specialColumnList: number[];
 }) {
   let diff = 0;
-  if (specialColumnsList.length > 0) {
-    siblingsAmount += specialColumnsList.length;
+  if (specialColumnList.length > 0) {
+    siblingsAmount += specialColumnList.length;
     if (isLaptop) {
       if (siblingsAmount === 4) {
         let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
 
         diff = upperHalfHighest;
       } else if (siblingsAmount === 5) {
-        if (specialColumnsList.length === 1) {
+        if (specialColumnList.length === 1) {
           let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
           let lowerHalfHighest = findHighestChildrenAmountInRow(row, 2, 3);
           diff = upperHalfHighest - lowerHalfHighest;
@@ -1527,14 +1529,14 @@ function calculateChildrenDifferenceInRow({
       } else if (siblingsAmount === 6) {
         let upperHalfHighest = 0;
         if (
-          specialColumnsList.length > 2 ||
-          specialColumnsList.includes(4) ||
-          specialColumnsList.includes(3)
+          specialColumnList.length > 2 ||
+          specialColumnList.includes(4) ||
+          specialColumnList.includes(3)
         ) {
           upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 2);
         } else if (
-          specialColumnsList.includes(2) ||
-          specialColumnsList.includes(1)
+          specialColumnList.includes(2) ||
+          specialColumnList.includes(1)
         ) {
           upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
         } else {
@@ -1549,17 +1551,17 @@ function calculateChildrenDifferenceInRow({
         diff = upperHalfHighest - lowerHalfHighest;
       } else if (siblingsAmount === 5) {
         ///
-        if (specialColumnsList.length === 1) {
-          let firstColumn = specialColumnsList.includes(1)
+        if (specialColumnList.length === 1) {
+          let firstColumn = specialColumnList.includes(1)
             ? findHighestChildrenAmountInRow(row, 0, 0) + 1
             : findHighestChildrenAmountInRow(row, 0, 0);
-          let secondColumn = specialColumnsList.includes(2)
+          let secondColumn = specialColumnList.includes(2)
             ? findHighestChildrenAmountInRow(row, 1, 1) + 1
             : findHighestChildrenAmountInRow(row, 1, 1);
-          let thirdColumn = specialColumnsList.includes(3)
+          let thirdColumn = specialColumnList.includes(3)
             ? findHighestChildrenAmountInRow(row, 2, 2) + 1
             : findHighestChildrenAmountInRow(row, 2, 2);
-          let fourthColumn = specialColumnsList.includes(4)
+          let fourthColumn = specialColumnList.includes(4)
             ? findHighestChildrenAmountInRow(row, 3, 3) + 1
             : findHighestChildrenAmountInRow(row, 3, 3);
 
@@ -1567,10 +1569,10 @@ function calculateChildrenDifferenceInRow({
             getHighestNumber(firstColumn, secondColumn) -
             getHighestNumber(thirdColumn, fourthColumn);
         } else {
-          let firstColumn = specialColumnsList.includes(1)
+          let firstColumn = specialColumnList.includes(1)
             ? findHighestChildrenAmountInRow(row, 0, 0) + 1
             : findHighestChildrenAmountInRow(row, 0, 0);
-          let secondColumn = specialColumnsList.includes(2)
+          let secondColumn = specialColumnList.includes(2)
             ? findHighestChildrenAmountInRow(row, 1, 1) + 1
             : findHighestChildrenAmountInRow(row, 1, 1);
           let thirdColumn = findHighestChildrenAmountInRow(row, 2, 2);
@@ -1579,15 +1581,15 @@ function calculateChildrenDifferenceInRow({
         }
         //
       } else if (siblingsAmount === 6) {
-        if (specialColumnsList.length === 3) {
+        if (specialColumnList.length === 3) {
           let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1) + 1;
           let lowerHalf = findHighestChildrenAmountInRow(row, 2, 2);
           diff = upperHalfHighest - lowerHalf;
-        } else if (specialColumnsList.length >= 2) {
-          let firstColumn = specialColumnsList.includes(1)
+        } else if (specialColumnList.length >= 2) {
+          let firstColumn = specialColumnList.includes(1)
             ? findHighestChildrenAmountInRow(row, 0, 0) + 1
             : findHighestChildrenAmountInRow(row, 0, 0);
-          let secondColumn = specialColumnsList.includes(2)
+          let secondColumn = specialColumnList.includes(2)
             ? findHighestChildrenAmountInRow(row, 1, 1) + 1
             : findHighestChildrenAmountInRow(row, 1, 1);
 
