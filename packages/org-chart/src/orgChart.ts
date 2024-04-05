@@ -457,14 +457,14 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     }
 
     if (isLastRow) {
-      rowClass = getLastRowClass(
+      rowClass = getLastRowClass({
         row,
         isMobile,
         isLaptop,
         isTablet,
         rowContainsSpecialColumns,
-        indexToSpecialColumnList,
-      );
+        specialColumnList: indexToSpecialColumnList,
+      });
     }
 
     rowElement.className = rowClass;
@@ -1436,14 +1436,21 @@ function provideNewBreakpoint(
   }
 }
 
-function getLastRowClass(
-  row: Row,
-  isMobile: boolean,
-  isLaptop: boolean,
-  isTablet: boolean,
-  rowContainsSpecialColumns: boolean,
-  specialColumnList: number[],
-) {
+function getLastRowClass({
+  row,
+  isMobile,
+  isLaptop,
+  isTablet,
+  rowContainsSpecialColumns,
+  specialColumnList,
+}: {
+  row: Row;
+  isMobile: boolean;
+  isLaptop: boolean;
+  isTablet: boolean;
+  rowContainsSpecialColumns: boolean;
+  specialColumnList: number[];
+}) {
   let rowLength = row.row.length;
 
   if (rowContainsSpecialColumns && specialColumnList) {
