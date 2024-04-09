@@ -26,6 +26,7 @@ import jsonDigdir3 from '../../data/digdir3.json';
 import test from '../../data/test.json';
 
 import styles from './Home.module.css';
+import { json } from 'stream/consumers';
 
 const datasets: { [key: string]: any } = {
   digdir1: jsonDigdir1,
