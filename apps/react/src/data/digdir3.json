@@ -6,8 +6,8 @@
   "toc": [
     { "title": "Direktør", "color": "#0062BA" },
     { "title": "Avdeling", "color": "#1e2b3c" },
-    { "title": "Leveranseområde", "color": "#f28b82" },
-    { "title": "Produktgruppe", "color": "#aecbfa" }
+    { "title": "Leveranseområde", "color": "#FDDFE0" },
+    { "title": "Produktgruppe", "color": "#D2EAFD" }
   ],
   "nodes": [
     {
@@ -67,37 +67,37 @@
     {
       "title": "Livshendingar",
       "id": "liv",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Digitaliseringsrådet",
       "id": "dig",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Medfinansieringsordninga",
       "id": "medf",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Stimulab",
       "id": "stim",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Digihjelpen",
       "id": "digihjelpen",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Innovation@digdir.no",
       "id": "inno",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
@@ -110,37 +110,37 @@
     {
       "title": "Fellessystem",
       "id": "felles",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Deling av data og informasjonsforvaltning",
       "id": "deling",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Internasjonalt arbeid",
       "id": "inter",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Informasjonssikkerhet",
       "id": "info",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Kunnskap og analyse",
       "id": "kunn",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
       "title": "Skate",
       "id": "skate",
-      "backgroundColor": "#f28b82",
+      "backgroundColor": "#FDDFE0",
       "textColor": "black"
     },
     {
@@ -160,37 +160,37 @@
     {
       "title": "Tillitstjenester",
       "id": "tillit",
-      "backgroundColor": "#aecbfa",
+      "backgroundColor": "#D2EAFD",
       "textColor": "black"
     },
     {
       "title": "Datadeling",
       "id": "data",
-      "backgroundColor": "#aecbfa",
+      "backgroundColor": "#D2EAFD",
       "textColor": "black"
     },
     {
       "title": "Meldingsutveksling",
       "id": "meld",
-      "backgroundColor": "#aecbfa",
+      "backgroundColor": "#D2EAFD",
       "textColor": "black"
     },
     {
       "title": "Portaler og brukeropplevelse",
       "id": "port",
-      "backgroundColor": "#aecbfa",
+      "backgroundColor": "#D2EAFD",
       "textColor": "black"
     },
     {
       "title": "Tjenesteutvikling",
       "id": "tjen",
-      "backgroundColor": "#aecbfa",
+      "backgroundColor": "#D2EAFD",
       "textColor": "black"
     },
     {
       "title": "Innsyn og oppslag",
       "id": "innsyn",
-      "backgroundColor": "#aecbfa",
+      "backgroundColor": "#D2EAFD",
       "textColor": "black"
     }
   ],

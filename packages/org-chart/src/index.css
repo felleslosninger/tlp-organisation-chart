@@ -281,7 +281,7 @@
 
   .och-inner-node:focus-visible {
     outline: 3px solid #1e2b3c;
-    outline-offset: 2px;
+    outline-offset: 3px;
     opacity: 1 !important;
   }
 
