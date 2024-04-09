@@ -46,13 +46,13 @@ describe('generateOrgChart', () => {
   //test if the correct number of columns are generated
   it('should generate the correct number of columns', () => {
     const columns = document.querySelectorAll('.och-column');
-    expect(columns.length).toBe(6);
+    expect(columns.length).toBe(5);
   });
 
   //test if the correct number of rows are generated
   it('should generate the correct number of rows', () => {
     const rows = document.querySelectorAll('.och-row');
-    expect(rows.length).toBe(4);
+    expect(rows.length).toBe(3);
   });
 
   //test if the prefix is added to the node id
@@ -66,7 +66,7 @@ describe('generateOrgChart', () => {
   it('should have the correct data properties', () => {
     const node = document.getElementById('och-item2');
     expect(node).toBeDefined();
-    expect(node?.getAttribute('data-arrow-down')).toBe('och-child3');
+    expect(node?.getAttribute('data-arrow-down')).toBe('och-child1');
     expect(node?.getAttribute('data-arrow-left')).toBe('och-item1');
     expect(node?.getAttribute('data-arrow-right')).toBe('och-item3');
   });
@@ -76,14 +76,14 @@ describe('generateOrgChart', () => {
   it('should have the correct data properties for special columns', () => {
     const node = document.getElementById('och-item4');
     expect(node).toBeDefined();
-    expect(node?.getAttribute('data-arrow-down')).toBe('och-child1');
+    expect(node?.getAttribute('data-arrow-down')).toBe('och-child3');
     expect(node?.getAttribute('data-arrow-left')).toBe('och-item3');
     expect(node?.getAttribute('data-arrow-right')).toBe('och-item5');
   });
 
   //special column child should have data property data-arrow-up="och-item5"
   it('should have the correct data properties for special column children', () => {
-    const node = document.getElementById('och-child1');
+    const node = document.getElementById('och-child3');
     expect(node?.getAttribute('data-arrow-up')).toBe('och-item5');
   });
 
@@ -101,28 +101,29 @@ describe('generateOrgChart', () => {
   //Arrow navation tests
   it('should navigate from root to last level 2 element', () => {
     const root = document.getElementById('och-root');
-    const lastLevel2 = document.getElementById('och-item6');
+    const lastLevel2 = document.getElementById('och-item5');
+    const lastElement = document.getElementById('och-child4');
     const item2 = document.getElementById('och-item2');
-    const child3 = document.getElementById('och-child3');
+    const child1 = document.getElementById('och-child1');
     root?.focus();
-    userEvent.keyboard('{ArrowRight>6/}');
+    userEvent.keyboard('{ArrowRight>5/}');
     expect(document.activeElement).toBe(lastLevel2);
-    userEvent.keyboard('{ArrowLeft>6/}');
+    userEvent.keyboard('{ArrowLeft>5/}');
     expect(document.activeElement).toBe(root);
     userEvent.keyboard('{ArrowRight>2/}{ArrowDown>1/}');
     expect(document.activeElement).not.toBe(item2);
-    expect(document.activeElement).toBe(child3);
+    expect(document.activeElement).toBe(child1);
     userEvent.keyboard('{ArrowUp>1/}');
     expect(document.activeElement).toBe(item2);
     userEvent.keyboard('{End}');
-    expect(document.activeElement).toBe(lastLevel2);
+    expect(document.activeElement).toBe(lastElement);
     expect(document.activeElement).not.toBe(root);
     userEvent.keyboard('{Home}');
     expect(document.activeElement).toBe(root);
-    expect(document.activeElement).not.toBe(lastLevel2);
+    expect(document.activeElement).not.toBe(lastElement);
     userEvent.keyboard('{ArrowLeft/}');
     expect(document.activeElement).toBe(root);
     userEvent.keyboard('{End}{ArrowRight/}');
-    expect(document.activeElement).toBe(lastLevel2);
+    expect(document.activeElement).toBe(lastElement);
   });
 });

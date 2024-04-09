@@ -56,7 +56,7 @@ const datasets: { [key: string]: any } = {
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState('1800px');
 
-  const [data, setData] = useState(jsonData1);
+  const [data, setData] = useState(test);
 
   useEffect(() => {
     generateOrgChart(data, 'test');
