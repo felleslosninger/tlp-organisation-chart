@@ -1976,11 +1976,10 @@ function getArrowNavigaitonData({
   } else {
     if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
       // If the node is not the first or last in the row, add data attributes for arrow right and left navigation
-
       addDataAttribute(
         dataAttributes,
         'data-arrow-right',
-        layout.rows[currentRowIndex].row[indexInRow - 1].id[0],
+        layout.rows[currentRowIndex].row[indexInRow].id[0],
       );
       addDataAttribute(
         dataAttributes,
