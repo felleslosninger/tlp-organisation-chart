@@ -5,6 +5,8 @@
     --line-color: #68707c;
     --row-padding-top: 40px;
     --row-column-gap: 80px;
+    --font-size: 16px;
+    --font-weight: 400;
   }
 
   .och-org-chart-main-container {
@@ -284,6 +286,8 @@
   }
 
   .och-inner-node {
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
     box-sizing: border-box;
     width: 100%;
     height: var(--col-height);
@@ -431,13 +435,12 @@
 
   .och-column a {
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 4px;
     text-decoration-thickness: 1px;
   }
 
   .och-column a:hover,
   .och-column a:focus-visible {
-    text-underline-offset: 4px;
     text-decoration-thickness: 2px;
   }
 
