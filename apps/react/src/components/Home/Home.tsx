@@ -26,6 +26,7 @@ import jsonDigdir3 from '../../data/digdir3.json';
 import test from '../../data/test.json';
 
 import styles from './Home.module.css';
+import { json } from 'stream/consumers';
 
 const datasets: { [key: string]: any } = {
   digdir1: jsonDigdir1,
@@ -55,7 +56,7 @@ const datasets: { [key: string]: any } = {
 const Home = () => {
   const [wrapperWidth, setWrapperWidth] = useState('1800px');
 
-  const [data, setData] = useState(test);
+  const [data, setData] = useState(jsonData1);
 
   useEffect(() => {
     generateOrgChart(data, 'test');
