@@ -17,9 +17,12 @@
     font-size: 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
     list-style: none;
-    padding: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     background: white;
     z-index: 1000;
     border: 1px solid #d6d6d6;
@@ -27,6 +30,7 @@
     margin-right: auto;
     width: fit-content;
     margin: 0 0 40px 0;
+    min-width: 220px;
   }
 
   .och-toc-box-mobile {
@@ -39,7 +43,6 @@
     flex-direction: row;
     gap: 8px;
     align-items: center;
-    padding: 8px;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -202,7 +205,7 @@
     position: relative;
     width: 100%;
     justify-content: flex-start;
-    row-gap: 80px;
+    row-gap: var(--row-column-gap);
     column-gap: 24px;
     padding: 40px 0;
   }
