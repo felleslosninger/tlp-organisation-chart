@@ -605,7 +605,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   if (mainContainer) {
     // Create element to hold the org chart
     const orgChart = document.createElement('div');
-    orgChart.className = `${prefix}-org-chart${isMobile ? '-mobile' : ''}`;
     orgChart.setAttribute('lang', meta.langcode);
     orgChart.setAttribute('aria-label', meta.title);
 
@@ -617,6 +616,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     isLaptop = device.laptop;
     isTablet = device.tablet;
     isMain = device.main;
+
+    orgChart.className = `${prefix}-org-chart${isMobile ? '-mobile' : ''}`;
 
     orgChart.appendChild(createTOC(toc, isMobile));
 
