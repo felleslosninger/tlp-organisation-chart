@@ -1974,9 +1974,10 @@ function getArrowNavigaitonData({
     );
   } else {
     //const to handle data attributes for arrow navigation in case of special columns
-    const specialColumnLength = specialColumnList.length
-      ? specialColumnList.length - 1
-      : 0;
+    let specialColumnLength = specialColumnList.length;
+    if (specialColumnList.length === 2) {
+      specialColumnLength = 1;
+    }
 
     if (
       indexInRow !== 1 &&

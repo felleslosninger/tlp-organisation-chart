@@ -138,16 +138,25 @@
               "children": ["child4"]
             },
             {
-              "id": ["item5"],
-              "children": ["child3"]
-            },
-            {
               "id": ["item2", "item3"],
               "children": ["child1", "child2"]
             },
             {
+              "id": ["item5"],
+              "children": ["child3"]
+            },
+
+            {
               "id": ["item6", "item7"],
               "children": ["child5", "child6"]
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item8"],
+              "alignment": "center"
             }
           ]
         }
