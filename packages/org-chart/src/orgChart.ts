@@ -1740,9 +1740,8 @@ function calculateChildrenDifferenceInRow({
         //
       } else if (siblingsAmount === 6) {
         if (specialColumnList.length === 3) {
-          let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1) + 1;
-          let lowerHalf = findHighestChildrenAmountInRow(row, 2, 2);
-          diff = upperHalfHighest - lowerHalf;
+          let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+          diff = upperHalfHighest;
         } else if (specialColumnList.length >= 2) {
           let firstColumn = specialColumnList.includes(1)
             ? findHighestChildrenAmountInRow(row, 0, 0) + 1
