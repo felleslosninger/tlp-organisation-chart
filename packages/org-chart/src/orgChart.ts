@@ -1405,13 +1405,10 @@ function createNodeLineClass({
             specialColumnList.includes(3) &&
             specialColumnList.includes(4)
           ) {
-            if (isLaptop) {
-              className.push(
-                `${lineUp}-${indexInRow === 2 ? 'right-half' : 'right'}`,
-                lineUp,
-              );
-            } else {
-            }
+            className.push(
+              `${lineUp}-${indexInRow === 2 ? 'right-half' : 'right'}`,
+              lineUp,
+            );
           } else if (
             specialColumnList.includes(2) &&
             specialColumnList.includes(3)
