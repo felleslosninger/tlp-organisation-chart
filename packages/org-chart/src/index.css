@@ -524,6 +524,8 @@
   .och-special-column-3 .och-node:first-child:before,
   .och-special-column-left-wrappet .och-node:first-child:before,
   .och-special-column-1 .och-node:first-child:after,
+  .och-special-column-1-alone .och-node:first-child:after,
+  .och-special-column-1-alone .och-node:before,
   .och-special-column-1-short .och-node:first-child:after,
   .och-special-column-1-long .och-node:first-child:after,
   .och-special-column-1-long .och-node::before,
@@ -549,6 +551,7 @@
   }
 
   .och-special-column-1 .och-node::before,
+  .och-special-column-1-alone .och-node:before,
   .och-special-column-2 .och-node::before,
   .och-special-column-3 .och-node:first-child:before,
   .och-special-column-1-long .och-node::before,
@@ -560,6 +563,12 @@
   .och-special-column-3-center .och-node:last-child:before {
     width: 2px;
     height: calc(50% + 40px);
+  }
+
+  .och-special-column-1-alone .och-node:first-child:after {
+    width: calc(100% + 24px);
+    height: 2px;
+    left: 50%;
   }
 
   .och-special-column-1 .och-node:first-child:after {

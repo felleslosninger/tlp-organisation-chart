@@ -829,6 +829,12 @@ function createSpecialColumnLines({
         } else {
           className += '-2-long';
         }
+      } else if (
+        siblingsAmount === 2 &&
+        indexToColumnsWithSpecialColumnList.length === 1
+      ) {
+        // console.log('here1');
+        className += `-${indexInRow}-alone`;
       } else {
         className += `-${indexInRow}`;
       }
