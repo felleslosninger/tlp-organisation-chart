@@ -832,9 +832,9 @@ function createSpecialColumnLines({
         }
       } else if (
         siblingsAmount === 2 &&
-        indexToColumnsWithSpecialColumnList.length === 1
+        indexToColumnsWithSpecialColumnList.length === 1 &&
+        isLastRow
       ) {
-        // console.log('here1');
         className += `-${indexInRow}-alone`;
       } else {
         className += `-${indexInRow}`;

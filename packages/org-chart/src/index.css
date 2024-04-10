@@ -336,6 +336,17 @@
     left: 50%;
   }
 
+  .och-node-line-right::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    width: 2px;
+    height: 22px;
+    top: 20px;
+    background-color: var(--line-color);
+    left: calc(100% + 52px + 11px);
+  }
+
   .och-node-line-up::before {
     content: '';
     position: absolute;
@@ -364,6 +375,17 @@
     height: 2px;
     background-color: var(--line-color);
     right: 50%;
+  }
+
+  .och-node-line-left::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    width: 2px;
+    height: 22px;
+    top: 20px;
+    background-color: var(--line-color);
+    right: calc(100% + 52px + 11px);
   }
 
   .och-node-line-up-right::after {
@@ -434,6 +456,16 @@
     top: 40px;
   }
 
+  .och-column-line-offset-right::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 22px;
+    background-color: var(--line-color);
+    right: calc(100% + 63px);
+    top: 20px;
+  }
+
   .och-column-line-offset-left::after {
     content: '';
     position: absolute;
@@ -442,6 +474,16 @@
     background-color: var(--line-color);
     left: 290px;
     top: 40px;
+  }
+
+  .och-column-line-offset-left::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 22px;
+    background-color: var(--line-color);
+    left: calc(100% + 63px);
+    top: 20px;
   }
 
   .och-column a {

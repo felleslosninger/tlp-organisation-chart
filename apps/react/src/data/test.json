@@ -138,6 +138,22 @@
               "children": ["child5", "child6"]
             }
           ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item8"],
+              "alignment": "left"
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item2", "item3"],
+              "children": ["child1", "child2", "child3", "child4"]
+            }
+          ]
         }
       ]
     }
