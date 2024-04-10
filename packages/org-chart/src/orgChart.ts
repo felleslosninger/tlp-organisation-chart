@@ -167,6 +167,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         currentRowIndex,
         isLastRow,
         children: node.children ? node.children : null,
+        specialColumnList,
       });
 
       arrowNavigationAttributes.forEach((dataAttribute) => {
@@ -1949,6 +1950,7 @@ function getArrowNavigaitonData({
   currentRowIndex,
   isLastRow,
   children,
+  specialColumnList,
 }: {
   layout: Layout;
   isRoot: boolean;
@@ -1957,6 +1959,7 @@ function getArrowNavigaitonData({
   currentRowIndex: number;
   isLastRow: boolean;
   children: string[] | null;
+  specialColumnList: number[];
 }) {
   const dataAttributes: { key: string; id: string }[] = [];
 
@@ -1973,7 +1976,15 @@ function getArrowNavigaitonData({
       layout.rows[1].row[0].id[0],
     );
   } else {
-    if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
+    //const to handle data attributes for arrow navigation in case of special columns
+    const specialColumnLength = specialColumnList.length
+      ? specialColumnList.length - 1
+      : 0;
+
+    if (
+      indexInRow !== 1 &&
+      indexInRow !== siblingsAmount - specialColumnLength
+    ) {
       // If the node is not the first or last in the row, add data attributes for arrow right and left navigation
       addDataAttribute(
         dataAttributes,
@@ -1994,7 +2005,6 @@ function getArrowNavigaitonData({
           layout.rows[currentRowIndex - 1].row[previousRowLength - 1].id
             .length - 1
         ];
-      //const nextRowFirstItem = layout.rows[currentRowIndex + 1].row[0].id[0];
 
       if (siblingsAmount > 1) {
         // If the node is the first in the row and there are more than one sibling, add data attributes for arrow right and left navigation
@@ -2029,7 +2039,7 @@ function getArrowNavigaitonData({
           previousRowLastItem,
         );
       }
-    } else if (indexInRow === siblingsAmount) {
+    } else if (indexInRow === siblingsAmount - specialColumnLength) {
       // If the node is the last in the row, add data attribute for arrow left navigation
       addDataAttribute(
         dataAttributes,

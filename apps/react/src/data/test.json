@@ -104,6 +104,12 @@
       "id": "child7",
       "backgroundColor": "#2457",
       "textColor": "white"
+    },
+    {
+      "title": "ITEM8",
+      "id": "item8",
+      "backgroundColor": "#2457",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -132,12 +138,27 @@
               "children": ["child1", "child2"]
             },
             {
-              "id": ["item4", "item5"],
-              "children": ["child3", "child4", "child4"]
-            },
-            {
               "id": ["item6", "item7"],
               "children": ["child5", "child6"]
+            },
+            {
+              "id": ["item4"],
+              "children": ["child4"]
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item5"],
+              "children": ["child3"]
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item8"]
             }
           ]
         }
