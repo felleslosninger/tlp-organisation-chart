@@ -140,13 +140,23 @@ The above JSON structure is the minimum required to generate a chart. Let's go t
 ### Nodes
 
 Nodes are the boxes that will be rendered out, this is where you customize the rendered content.
-Each node must always have an id and a title. Keep in mind that the id must be unique.
+Each node must always have an id, a title, background-color and text-color. Keep in mind that the id must be unique.
 
 ```json
 {
   "nodes": [
-    { "id": "1", "title": "Root" },
-    { "id": "2", "title": "Item" }
+    {
+      "id": "1",
+      "title": "Root",
+      "backgroundColor": "#0062BA",
+      "textColor": "#fff"
+    },
+    {
+      "id": "2",
+      "title": "Item",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "#fff"
+    }
   ]
 }
 ```
@@ -154,13 +164,15 @@ Each node must always have an id and a title. Keep in mind that the id must be u
 You can send in more props, to further customize how the nodes look.
 For example, you can make the node a link.
 
-| Key             | Type   |
-| --------------- | ------ |
-| id              | string |
-| title           | string |
-| url             | string |
-| backgroundColor | string |
-| textColor       | string |
+| Key             | Type   | Required? |
+| --------------- | ------ | --------- |
+| id              | string | yes       |
+| title           | string | yes       |
+| backgroundColor | string | yes       |
+| textColor       | string | yes       |
+| url             | string | no        |
+| border          | string | no        |
+| opacity         | string | no        |
 
 ### Layouts
 
