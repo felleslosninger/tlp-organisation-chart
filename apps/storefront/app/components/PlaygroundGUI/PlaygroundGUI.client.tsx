@@ -4,57 +4,7 @@ import '@digdir/organisation-chart/dist/index.css';
 import { Button } from '@digdir/designsystemet-react';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import styles from './PlaygroundGUI.module.css';
-
-const INITIALDATA = {
-  meta: {
-    title: 'Test',
-    langcode: 'no',
-  },
-  toc: [
-    { title: 'Root', color: '#0062BA' },
-    { title: 'Item', color: '#1e2b3c' },
-  ],
-  nodes: [
-    {
-      title: 'Root',
-      id: 'root',
-      backgroundColor: '#0062BA',
-      textColor: '#1e2b3c',
-    },
-    {
-      title: 'Item',
-      id: 'item1',
-      backgroundColor: '#1e2b3c',
-      textColor: 'white',
-      url: 'https://www.digdir.no/',
-    },
-  ],
-  layouts: {
-    main: {
-      rows: [
-        {
-          row: [
-            {
-              id: ['root'],
-              alignment: 'center',
-              component: {
-                type: 'root',
-                children: ['item1'],
-              },
-            },
-          ],
-        },
-        {
-          row: [
-            {
-              id: ['item1'],
-            },
-          ],
-        },
-      ],
-    },
-  },
-};
+import INITIALDATA from '../../data/short.json';
 
 export default function PlaygroundGUI() {
   const [data, setData] = useState(INITIALDATA);

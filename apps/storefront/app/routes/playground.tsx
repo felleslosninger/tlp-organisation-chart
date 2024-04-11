@@ -1,17 +1,5 @@
-import type { MetaFunction } from '@remix-run/node';
-
 import { Heading } from '@digdir/designsystemet-react';
 import PlaygroundGUI from '../components/PlaygroundGUI/PlaygroundGUI.client';
-
-export const meta: MetaFunction = () => {
-  return [
-    { title: 'Organisation Chart' },
-    {
-      name: 'description',
-      content: 'Display an accessible organisational chart on any website',
-    },
-  ];
-};
 
 export default function Playground() {
   return (
@@ -25,7 +13,7 @@ export default function Playground() {
         size='large'
         spacing
       >
-        Playground
+        Lekeplass
       </Heading>
       <PlaygroundGUI />
     </div>
