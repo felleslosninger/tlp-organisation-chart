@@ -58,6 +58,15 @@ export const Header = () => {
               </RemixLink>
             </li>
 
+            <li className={classes.item}>
+              <RemixLink
+                className={cl(classes.link)}
+                to='/playground'
+              >
+                Lekeplass
+              </RemixLink>
+            </li>
+
             <li
               className={cl(classes.item, classes.itemIcon, classes.firstIcon)}
             >
