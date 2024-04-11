@@ -1,7 +1,7 @@
 import type { MetaFunction } from '@remix-run/node';
 
-import { Chart } from '../components/Chart/Chart.client';
 import { Heading } from '@digdir/designsystemet-react';
+import PlaygroundGUI from '../components/PlaygroundGUI/PlaygroundGUI.client';
 
 export const meta: MetaFunction = () => {
   return [
@@ -27,8 +27,7 @@ export default function Playground() {
       >
         Playground
       </Heading>
-
-      <Chart />
+      <PlaygroundGUI />
     </div>
   );
 }
