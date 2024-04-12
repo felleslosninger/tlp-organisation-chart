@@ -106,10 +106,12 @@ To ensure the chart functions correctly, it is designed to adhere to a set of ru
 - A column can contain a node with children, or two nodes that share children.
 - A column containing two nodes that share children will take up twice as much space as a column with only one node. We refer to this type of column as a special column.
 - A node that is to have children can have as many children as the user desires.
+- The first column must be a regular column, and should be aligned or have children.
+- If not the column contains the root node, and is one of maximum two columns in the row, you have the ability to align it.
 
 #### Rules for Rows:
 
-- The first row must, and can only have one column.
+- The first row must, can only have one column.
 - A row must have at least one column, and can have up to six columns.
 - If a row contains columns with two nodes that share children, also known as a special column, this column will occupy the space of two columns.
   - This means that if a row contains one special column, there is only room for four regular columns.
@@ -178,6 +180,7 @@ For example, you can make the node a link.
 
 The layouts key is used to define how the nodes should connect to eachother.
 This is always required, and might be difficult to understand at first.
+Main is the default layout, and is used if no other layout is defined, therefor also a required key.
 
 You can see examples on [Github](https://github.com/felleslosninger/tlp-organisation-chart/tree/main/apps/react/src/data).
 
@@ -216,6 +219,172 @@ You can define a layout for each of our breakpoints, or you can use the same lay
 We split the layout into rows, and each row can have multiple nodes. Refer to the REGLER HERE for more information
 about limitations.
 
+### Rows
+
+To define a row, you need to define the row key, and then an array of columns.
+The first row will be the root node, and the rest of the rows will be the children of the root node. Therefore make sure there is only one node in the first row.
+
+```json
+{
+  "rows": [
+    {
+      "row": [
+        {
+          "id": ["root"],
+          "children": ["item1"]
+        }
+      ]
+    },
+    {
+      "row": [
+        {
+          "id": ["item1"]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Row
+
+To define a row, you need to define the row key, and then an array of columns. You can have from one up to six columns in a row.
+
+Rember thar a special column takes up the space of two columns.
+
+#### Default row with six columns
+
+```json
+{
+  "row": [
+    {
+      "id": ["item1"]
+    },
+    {
+      "id": ["item2"]
+    },
+    {
+      "id": ["item3"]
+    },
+    {
+      "id": ["item4"]
+    },
+    {
+      "id": ["item5"]
+    },
+    {
+      "id": ["item6"]
+    }
+  ]
+}
+```
+
+#### Row with six columns, including a special column
+
+```json
+{
+  "row": [
+    {
+      "id": ["item1"]
+    },
+    {
+      "id": ["item2"]
+    },
+    {
+      "id": ["item3"]
+    },
+    {
+      "id": ["item4"]
+    },
+    {
+      "id": ["item5", "item6"]
+    }
+  ]
+}
+```
+
+#### Row with six columns, including only special column
+
+```json
+{
+  "row": [
+    {
+      "id": ["item1", "item2"]
+    },
+    {
+      "id": ["item3", "item4"]
+    },
+    {
+      "id": ["item5", "item6"]
+    }
+  ]
+}
+```
+
+### Column
+
+A column is a container for nodes, and can contain one or two nodes. If a column contains two nodes, it is called a special column.
+To define a column, you need to define the id key, and then an array containing the node id's for the nodes you want to display in the column.
+
+#### Simplest column
+
+The Simplest column is a column with only one node.
+
+```json
+{
+    {
+      "id": ["item1"]
+    }
+}
+```
+
+#### Column with children
+
+You can define a column with children, and the children will be displayed below the parent node.
+
+```json
+{
+    {
+      "id": ["item"],
+      "children": ["child1", "child2"]
+    }
+}
+```
+
+#### Column with alignment
+
+If you have a row with one or two columns, you can align the column to the left, center or right.
+
+| Value        | Behaviour                               |
+| ------------ | --------------------------------------- |
+| left         | Aligns the column slightly to the left  |
+| right        | Aligns the column slightly to the right |
+| center       | Aligns the column to the center         |
+| offset-left  | Aligns the column far left              |
+| offset-right | Aligns the column far rigth             |
+
+```json
+{
+    {
+      "id": ["item"],
+      "alignment": "offset-left"
+    }
+}
+```
+
+#### Special column
+
+To define a special column, you must insert two node id's in the array belonging to the key id.
+
+```json
+{
+    {
+      "id": ["item1", "item2"],
+      "children": ["child1", "child2"]
+    }
+}
+```
+
 ### TOC
 
 The TOC (Table of Contents) is a legend that shows what your different nodes are.
@@ -232,7 +401,7 @@ We do not generate this, so make sure to keep this updated to be on par with you
 
 ### Meta
 
-The meta object is used to define a name, and the language code. This key is optional.
+The meta object is used to define a name, and the language code.
 
 ```json
 {
