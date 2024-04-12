@@ -167,6 +167,7 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
         currentRowIndex,
         isLastRow,
         children: node.children ? node.children : null,
+        specialColumnList,
       });
 
       arrowNavigationAttributes.forEach((dataAttribute) => {
@@ -604,7 +605,6 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
   if (mainContainer) {
     // Create element to hold the org chart
     const orgChart = document.createElement('div');
-    orgChart.className = `${prefix}-org-chart${isMobile ? '-mobile' : ''}`;
     orgChart.setAttribute('lang', meta.langcode);
     orgChart.setAttribute('aria-label', meta.title);
 
@@ -616,6 +616,8 @@ export function generateOrgChart(data: OrgChartData, containerId: string) {
     isLaptop = device.laptop;
     isTablet = device.tablet;
     isMain = device.main;
+
+    orgChart.className = `${prefix}-org-chart${isMobile ? '-mobile' : ''}`;
 
     orgChart.appendChild(createTOC(toc, isMobile));
 
@@ -828,6 +830,12 @@ function createSpecialColumnLines({
         } else {
           className += '-2-long';
         }
+      } else if (
+        siblingsAmount === 2 &&
+        indexToColumnsWithSpecialColumnList.length === 1 &&
+        isLastRow
+      ) {
+        className += `-${indexInRow}-alone`;
       } else {
         className += `-${indexInRow}`;
       }
@@ -1404,13 +1412,10 @@ function createNodeLineClass({
             specialColumnList.includes(3) &&
             specialColumnList.includes(4)
           ) {
-            if (isLaptop) {
-              className.push(
-                `${lineUp}-${indexInRow === 2 ? 'right-half' : 'right'}`,
-                lineUp,
-              );
-            } else {
-            }
+            className.push(
+              `${lineUp}-${indexInRow === 2 ? 'right-half' : 'right'}`,
+              lineUp,
+            );
           } else if (
             specialColumnList.includes(2) &&
             specialColumnList.includes(3)
@@ -1740,9 +1745,8 @@ function calculateChildrenDifferenceInRow({
         //
       } else if (siblingsAmount === 6) {
         if (specialColumnList.length === 3) {
-          let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1) + 1;
-          let lowerHalf = findHighestChildrenAmountInRow(row, 2, 2);
-          diff = upperHalfHighest - lowerHalf;
+          let upperHalfHighest = findHighestChildrenAmountInRow(row, 0, 1);
+          diff = upperHalfHighest;
         } else if (specialColumnList.length >= 2) {
           let firstColumn = specialColumnList.includes(1)
             ? findHighestChildrenAmountInRow(row, 0, 0) + 1
@@ -1950,6 +1954,7 @@ function getArrowNavigaitonData({
   currentRowIndex,
   isLastRow,
   children,
+  specialColumnList,
 }: {
   layout: Layout;
   isRoot: boolean;
@@ -1958,6 +1963,7 @@ function getArrowNavigaitonData({
   currentRowIndex: number;
   isLastRow: boolean;
   children: string[] | null;
+  specialColumnList: number[];
 }) {
   const dataAttributes: { key: string; id: string }[] = [];
 
@@ -1974,7 +1980,16 @@ function getArrowNavigaitonData({
       layout.rows[1].row[0].id[0],
     );
   } else {
-    if (indexInRow !== 1 && indexInRow !== siblingsAmount) {
+    //const to handle data attributes for arrow navigation in case of special columns
+    let specialColumnLength = specialColumnList.length;
+    if (specialColumnLength  === 2) {
+      specialColumnLength = 1;
+    }
+
+    if (
+      indexInRow !== 1 &&
+      indexInRow !== siblingsAmount - specialColumnLength
+    ) {
       // If the node is not the first or last in the row, add data attributes for arrow right and left navigation
       addDataAttribute(
         dataAttributes,
@@ -1995,7 +2010,6 @@ function getArrowNavigaitonData({
           layout.rows[currentRowIndex - 1].row[previousRowLength - 1].id
             .length - 1
         ];
-      //const nextRowFirstItem = layout.rows[currentRowIndex + 1].row[0].id[0];
 
       if (siblingsAmount > 1) {
         // If the node is the first in the row and there are more than one sibling, add data attributes for arrow right and left navigation
@@ -2030,7 +2044,7 @@ function getArrowNavigaitonData({
           previousRowLastItem,
         );
       }
-    } else if (indexInRow === siblingsAmount) {
+    } else if (indexInRow === siblingsAmount - specialColumnLength) {
       // If the node is the last in the row, add data attribute for arrow left navigation
       addDataAttribute(
         dataAttributes,
