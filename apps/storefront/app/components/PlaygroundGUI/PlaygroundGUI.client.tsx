@@ -15,7 +15,11 @@ export default function PlaygroundGUI() {
   }, [data]);
 
   const handleCodeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setEditorData(JSON.parse(e.target.value));
+    try {
+      setEditorData(JSON.parse(e.target.value));
+    } catch (error) {
+      return;
+    }
   };
 
   const handleGenerateChart = () => {
