@@ -1982,7 +1982,7 @@ function getArrowNavigaitonData({
   } else {
     //const to handle data attributes for arrow navigation in case of special columns
     let specialColumnLength = specialColumnList.length;
-    if (specialColumnList.length === 2) {
+    if (specialColumnLength  === 2) {
       specialColumnLength = 1;
     }
 
