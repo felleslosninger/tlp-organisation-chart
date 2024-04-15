@@ -131,6 +131,8 @@ Some browsers or screenreaders might work differently, but this is a limitation 
 
 You are free to choose the color of your boxes, however we don't check the contrast between background and foreground.
 
+You have to choose which language the organisation chart should be in, and ensure that the content of the chart follows the language you have set. This is required in the field with the key.
+
 ---
 
 ## JSON structure
@@ -193,11 +195,7 @@ You can see examples on [Github](https://github.com/felleslosninger/tlp-organisa
           "row": [
             {
               "id": ["root"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": ["item1"]
-              }
+              "children": ["item1"]
             }
           ]
         },
@@ -406,8 +404,8 @@ The meta object is used to define a name, and the language code.
 ```json
 {
   "meta": {
-    "title": "Test",
-    "langcode": "no"
+    "title": "Title of the chart",
+    "langcode": "en"
   }
 }
 ```
