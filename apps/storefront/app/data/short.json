@@ -20,6 +20,38 @@
       "backgroundColor": "#1e2b3c",
       "textColor": "white",
       "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item2",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item3",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white",
+      "url": "https://www.digdir.no/"
+    },
+    {
+      "title": "Item",
+      "id": "item4",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Item",
+      "id": "item5",
+      "backgroundColor": "#1e2b3c",
+      "textColor": "white"
+    },
+    {
+      "title": "Child",
+      "id": "child1",
+      "backgroundColor": "#808080",
+      "textColor": "white"
     }
   ],
   "layouts": {
@@ -29,11 +61,8 @@
           "row": [
             {
               "id": ["root"],
-              "alignment": "center",
-              "component": {
-                "type": "root",
-                "children": ["item1"]
-              }
+
+              "children": ["item1"]
             }
           ]
         },
@@ -41,6 +70,20 @@
           "row": [
             {
               "id": ["item1"]
+            },
+            {
+              "id": ["item2"]
+            },
+            {
+              "id": ["item3"]
+            }
+          ]
+        },
+        {
+          "row": [
+            {
+              "id": ["item4", "item5"],
+              "children": ["child1"]
             }
           ]
         }
