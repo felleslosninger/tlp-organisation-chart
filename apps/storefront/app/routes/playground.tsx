@@ -5,7 +5,7 @@ import PlaygroundGUI from '../components/PlaygroundGUI/PlaygroundGUI.client';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'Organisation Chart' },
+    { title: 'Lekeplass - Organisation Chart' },
     {
       name: 'description',
       content: 'Display an accessible organisational chart on any website',
