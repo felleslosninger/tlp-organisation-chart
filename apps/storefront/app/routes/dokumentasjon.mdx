@@ -106,8 +106,8 @@ To ensure the chart functions correctly, it is designed to adhere to a set of ru
 - A column can contain a node with children, or two nodes that share children.
 - A column containing two nodes that share children will take up twice as much space as a column with only one node. We refer to this type of column as a special column.
 - A node that is to have children can have as many children as the user desires.
-- The first column must be a regular column, and should be aligned or have children.
-- If not the column contains the root node, and is one of maximum two columns in the row, you have the ability to align it.
+- The initial column, in the first row (root node) must adhere to regular specifications and either include alignment or the children key.
+- If a row contains one or two columns, you can use the alignment key to align the column to the left, center or right.
 
 #### Rules for Rows:
 
@@ -131,7 +131,7 @@ Some browsers or screenreaders might work differently, but this is a limitation 
 
 You are free to choose the color of your boxes, however we don't check the contrast between background and foreground.
 
-You have to choose which language the organisation chart should be in, and ensure that the content of the chart follows the language you have set. This is required in the field with the key.
+You have to choose which language the chart is in, and ensure that the content of the chart follows the language you have set. This is required, and can be set with `langcode` in `meta`.
 
 ---
 
@@ -158,8 +158,8 @@ Each node must always have an id, a title, background-color and text-color. Keep
     {
       "id": "2",
       "title": "Item",
-      "backgroundColor": "#1e2b3c",
-      "textColor": "#fff"
+      "backgroundColor": "#1E2B3C",
+      "textColor": "#FFF"
     }
   ]
 }
@@ -168,21 +168,21 @@ Each node must always have an id, a title, background-color and text-color. Keep
 You can send in more props, to further customize how the nodes look.
 For example, you can make the node a link.
 
-| Key             | Type   | Required? |
-| --------------- | ------ | --------- |
-| id              | string | yes       |
-| title           | string | yes       |
-| backgroundColor | string | yes       |
-| textColor       | string | yes       |
-| url             | string | no        |
-| border          | string | no        |
-| opacity         | string | no        |
+| Key             | Type   | Required |
+| --------------- | ------ | -------- |
+| id              | string | yes      |
+| title           | string | yes      |
+| backgroundColor | string | yes      |
+| textColor       | string | yes      |
+| url             | string | no       |
+| border          | string | no       |
+| opacity         | string | no       |
 
 ### Layouts
 
 The layouts key is used to define how the nodes should connect to eachother.
 This is always required, and might be difficult to understand at first.
-Main is the default layout, and is used if no other layout is defined, therefor also a required key.
+Main is the default layout, and is used if no other layout is defined, therefore also a required key.
 
 You can see examples on [Github](https://github.com/felleslosninger/tlp-organisation-chart/tree/main/apps/react/src/data).
 
@@ -219,7 +219,7 @@ about limitations.
 
 ### Rows
 
-To define a row, you need to define the row key, and then an array of columns.
+To define a row, you need to define the row key as an array with columns as objects.
 The first row will be the root node, and the rest of the rows will be the children of the root node. Therefore make sure there is only one node in the first row.
 
 ```json
@@ -246,9 +246,9 @@ The first row will be the root node, and the rest of the rows will be the childr
 
 ### Row
 
-To define a row, you need to define the row key, and then an array of columns. You can have from one up to six columns in a row.
+To define a row, you need to define the row key, and then an array of columns. You can have up to six columns in a row.
 
-Rember thar a special column takes up the space of two columns.
+Remember that a special column takes up the space of two columns.
 
 #### Default row with six columns
 
@@ -277,7 +277,7 @@ Rember thar a special column takes up the space of two columns.
 }
 ```
 
-#### Row with six columns, including a special column
+#### Row with five columns, including a special column
 
 ```json
 {
@@ -323,18 +323,6 @@ Rember thar a special column takes up the space of two columns.
 
 A column is a container for nodes, and can contain one or two nodes. If a column contains two nodes, it is called a special column.
 To define a column, you need to define the id key, and then an array containing the node id's for the nodes you want to display in the column.
-
-#### Simplest column
-
-The Simplest column is a column with only one node.
-
-```json
-{
-    {
-      "id": ["item1"]
-    }
-}
-```
 
 #### Column with children
 
