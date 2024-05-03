@@ -416,7 +416,9 @@ After we merge the PR with the new version, we have to publish the package to np
 
 First, **always** make sure you are in the `main` branch, with all changes pulled.
 
-Secondly, run `npm whoami` to make sure you are logged in to npm on an account that has access to the digdir organisation.
+Secondly, run `pnpm build:chart`.
+
+Third, run `npm whoami` to make sure you are logged in to npm on an account that has access to the digdir organisation.
 
 Since the PR we merged contains a version changeset already, we only need to run the publish command.
 Now we are safe to publish the package. We will run this commands:
