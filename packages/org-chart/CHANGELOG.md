@@ -1,5 +1,13 @@
 # @digdir/organisation-chart
 
+## 0.4.2
+
+### Patch Changes
+
+- b430089: Fix/home navigation
+- d4f02ec: fix: test, locate and fix bugs in chart function
+- 6d4cf95: fix: refactor org-chart function
+
 ## 0.4.1
 
 ### Patch Changes
