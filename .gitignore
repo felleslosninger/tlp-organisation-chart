@@ -11,6 +11,8 @@ tsc-build
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.npmrc
+.pnpm-store
 
 # testing
 /coverage

@@ -1,0 +1,28 @@
+services:
+
+  organisation-chart:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - ~/.ssh/github_rsa.pub:/home/node/.ssh/github_rsa.pub:ro
+      - $SSH_AUTH_SOCK:/ssh-agent
+    environment:
+      - GIT_SSH_COMMAND=ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+      - GIT_USER_NAME=${GIT_USER_NAME}
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL}
+      - SSH_AUTH_SOCK=/ssh-agent
+    command: > 
+      /bin/sh -c "
+      echo \"Override CMD and run pnpm install and pnpm run:dev :-)\" &&
+      git config --global user.name \"$GIT_USER_NAME\" &&
+      git config --global user.email \"$GIT_USER_EMAIL\" &&
+      git config --global gpg.format ssh &&
+      git config --global user.signingkey /home/node/.ssh/github_rsa.pub &&
+      git config --global commit.gpgsign true &&
+      echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" > .npmrc &&
+      pnpm install && pnpm run:dev
+      "
