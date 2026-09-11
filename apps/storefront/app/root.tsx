@@ -38,8 +38,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Container
             style={{
               minHeight: 'calc(100vh - 100px)',
-              marginTop: 'var(--fds-spacing-4)',
-              marginBottom: 'var(--fds-spacing-4)',
+              marginTop: 'var(--ds-size-4)',
+              marginBottom: 'var(--ds-size-4)',
             }}
           >
             <MDX>{children}</MDX>
@@ -60,7 +60,7 @@ export default function App() {
 export function HydrateFallback() {
   return (
     <div>
-      <Spinner title='loading content' />
+      <Spinner aria-label='loading content' />
     </div>
   );
 }

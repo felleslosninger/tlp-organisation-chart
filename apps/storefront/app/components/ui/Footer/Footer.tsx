@@ -19,7 +19,7 @@ const Footer = () => {
               </RemixLink>
             </Link>
             <Paragraph
-              size='small'
+              data-size='sm'
               className={classes.text}
             >
               Et lett og tilgjengelig JavaScript bibliotek for å vise
@@ -29,34 +29,24 @@ const Footer = () => {
           <div>
             <Heading
               level={2}
-              size='xsmall'
+              data-size='xs'
               className={classes.heading}
-              spacing
             >
               Om nettstedet
             </Heading>
             <ul className={classes.links}>
               <li>
-                <Link
-                  asChild
-                  inverted
-                >
+                <Link asChild>
                   <RemixLink to='/dokumentasjon'>Dokumentasjon</RemixLink>
                 </Link>
               </li>
               <li>
-                <Link
-                  asChild
-                  inverted
-                >
+                <Link asChild>
                   <RemixLink to='/endringslogg'>Endringslogg</RemixLink>
                 </Link>
               </li>
               <li>
-                <Link
-                  asChild
-                  inverted
-                >
+                <Link asChild>
                   <RemixLink to='/personvernerklæring'>
                     Personvernerklæring
                   </RemixLink>
@@ -67,9 +57,8 @@ const Footer = () => {
           <div>
             <Heading
               level={2}
-              size='xsmall'
+              data-size='xs'
               className={classes.heading}
-              spacing
             >
               Kom i kontakt med oss
             </Heading>
@@ -78,7 +67,6 @@ const Footer = () => {
                 <Link
                   href='https://github.com/felleslosninger/tlp-organisation-chart/issues/new'
                   target='_blank'
-                  inverted
                 >
                   Github issues
                 </Link>

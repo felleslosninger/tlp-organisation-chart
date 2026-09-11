@@ -11,6 +11,14 @@ import {
 
 import classes from './mdx.module.css';
 
+// MDX passes JSX.IntrinsicElements props, whose `ref` is a LegacyRef (allows
+// string refs). Designsystemet only accepts Ref, so drop it.
+const dropRef = <P extends object>(props: P): Omit<P, 'ref'> => {
+  const rest = { ...props };
+  delete (rest as { ref?: unknown }).ref;
+  return rest;
+};
+
 export const MDX = ({ children }: { children: React.ReactNode }) => {
   return (
     <MDXProvider
@@ -18,96 +26,74 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
         h1: (props) => (
           <Heading
             level={1}
-            spacing
-            size='xlarge'
-            {...props}
+            data-size='xl'
+            {...dropRef(props)}
           />
         ),
         h2: (props) => (
           <Heading
             level={2}
-            spacing
-            size='large'
-            {...props}
+            data-size='lg'
+            {...dropRef(props)}
           />
         ),
         h3: (props) => (
           <Heading
             level={3}
-            spacing
-            size='medium'
-            {...props}
+            data-size='md'
+            {...dropRef(props)}
           />
         ),
         h4: (props) => (
           <Heading
             level={4}
-            spacing
-            size='small'
-            {...props}
+            data-size='sm'
+            {...dropRef(props)}
           />
         ),
         h5: (props) => (
           <Heading
             level={5}
-            spacing
-            size='xsmall'
-            {...props}
+            data-size='xs'
+            {...dropRef(props)}
           />
         ),
         h6: (props) => (
           <Heading
             level={6}
-            spacing
-            size='xxsmall'
-            {...props}
+            data-size='2xs'
+            {...dropRef(props)}
           />
         ),
-        a: ({ ref, children, ...props }) => {
-          if (props.href?.startsWith('http')) {
-            return (
-              <Link
-                {...props}
-                target='_blank'
-              >
-                {children}
-              </Link>
-            );
-          }
+        a: (props) => {
+          const { children: linkChildren, ...rest } = dropRef(props);
 
-          return <Link {...props}>{children}</Link>;
+          return (
+            <Link
+              {...rest}
+              target={rest.href?.startsWith('http') ? '_blank' : undefined}
+            >
+              {linkChildren}
+            </Link>
+          );
         },
-        p: Paragraph,
-        ol: ({ ref, ...props }) => (
-          <List.Root>
-            <List.Ordered {...props} />
-          </List.Root>
-        ),
-        ul: ({ ref, ...props }) => (
-          <List.Root>
-            <List.Unordered {...props} />
-          </List.Root>
-        ),
-        li: ({ ref, ...props }) => <List.Item {...props} />,
-        hr: (props) => (
-          <Divider
-            {...props}
-            color='default'
-            ref={null}
-          />
-        ),
-        table: ({ ref, ...props }) => (
+        p: (props) => <Paragraph {...dropRef(props)} />,
+        ol: (props) => <List.Ordered {...dropRef(props)} />,
+        ul: (props) => <List.Unordered {...dropRef(props)} />,
+        li: (props) => <List.Item {...dropRef(props)} />,
+        hr: (props) => <Divider {...dropRef(props)} />,
+        table: (props) => (
           <Table
-            {...props}
+            {...dropRef(props)}
             zebra
             border
           />
         ),
-        thead: ({ ref, ...props }) => <Table.Head {...props} />,
-        tbody: ({ ref, ...props }) => <Table.Body {...props} />,
-        tr: ({ ref, ...props }) => <Table.Row {...props} />,
-        th: ({ ref, ...props }) => <Table.HeaderCell {...props} />,
-        td: ({ ref, ...props }) => <Table.Cell {...props} />,
+        thead: (props) => <Table.Head {...dropRef(props)} />,
+        tbody: (props) => <Table.Body {...dropRef(props)} />,
+        tr: (props) => <Table.Row {...dropRef(props)} />,
+        th: (props) => <Table.HeaderCell {...dropRef(props)} />,
+        td: (props) => <Table.Cell {...dropRef(props)} />,
       }}
     >
       <div className={classes.content}>{children}</div>

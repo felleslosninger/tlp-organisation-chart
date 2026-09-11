@@ -10,10 +10,10 @@ export default function JsonView({ src }: { src: object }) {
       enableClipboard={false}
       collapsed={1}
       style={{
-        padding: 'var(--fds-spacing-4)',
-        borderRadius: 'var(--fds-border_radius-medium)',
+        padding: 'var(--ds-size-4)',
+        borderRadius: 'var(--ds-border-radius-md)',
         maxWidth: '800px',
-        margin: 'var(--fds-spacing-5) 0',
+        margin: 'var(--ds-size-5) 0',
         backgroundColor: 'rgb(1, 22, 39)',
       }}
     />

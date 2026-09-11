@@ -22,8 +22,7 @@ export default function Playground() {
     >
       <Heading
         level={2}
-        size='large'
-        spacing
+        data-size='lg'
       >
         Lekeplass
       </Heading>

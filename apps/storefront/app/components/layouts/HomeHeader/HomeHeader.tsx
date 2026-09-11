@@ -1,24 +1,15 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Link,
-  Paragraph,
-} from '@digdir/designsystemet-react';
+import { Button, Heading, Link, Paragraph } from '@digdir/designsystemet-react';
 import { Link as RemixLink } from '@remix-run/react';
 
 import classes from './HomeHeader.module.css';
 
 export default function HomeHeader() {
   return (
-    <Box
-      borderRadius='xxlarge'
-      className={classes.box}
-    >
+    <div className={classes.box}>
       <div className={classes.betaTag}>Beta</div>
       <Heading
         className={classes.heading}
-        size='3xlarge'
+        data-size='2xl'
       >
         Tilgjengelige <span>organisasjonskart</span> på nett
       </Heading>
@@ -39,7 +30,10 @@ export default function HomeHeader() {
         />
       </Link>
 
-      <div className={classes.buttons}>
+      <div
+        className={classes.buttons}
+        data-color-scheme='dark'
+      >
         <Button
           asChild
           className={classes.whiteButton}
@@ -49,11 +43,10 @@ export default function HomeHeader() {
         <Button
           asChild
           variant='secondary'
-          color='inverted'
         >
           <RemixLink to='/endringslogg'>Endringslogg</RemixLink>
         </Button>
       </div>
-    </Box>
+    </div>
   );
 }

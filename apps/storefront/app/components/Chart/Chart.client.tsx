@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { NativeSelect } from '@digdir/designsystemet-react';
+import { Field, Label, Select } from '@digdir/designsystemet-react';
 
 import { generateOrgChart } from '@digdir/organisation-chart';
 import '@digdir/organisation-chart/dist/index.css';
@@ -22,19 +22,19 @@ export const Chart = () => {
   return (
     <>
       <div className={classes.select}>
-        <NativeSelect
-          label='Velg ett kart'
-          onChange={handleChange}
-        >
-          {Object.keys(charts).map((key) => (
-            <option
-              key={key}
-              value={key}
-            >
-              {key.charAt(0).toUpperCase() + key.slice(1)}
-            </option>
-          ))}
-        </NativeSelect>
+        <Field>
+          <Label>Velg ett kart</Label>
+          <Select onChange={handleChange}>
+            {Object.keys(charts).map((key) => (
+              <Select.Option
+                key={key}
+                value={key}
+              >
+                {key.charAt(0).toUpperCase() + key.slice(1)}
+              </Select.Option>
+            ))}
+          </Select>
+        </Field>
       </div>
       <div className={classes.wrapper}>
         <div id='chart' />

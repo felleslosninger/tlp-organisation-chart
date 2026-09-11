@@ -1,6 +1,7 @@
 .box {
-  padding: var(--fds-spacing-12) var(--fds-spacing-8);
-  background-color: var(--fds-semantic-surface-neutral-inverted);
+  padding: var(--ds-size-12) var(--ds-size-8);
+  background-color: var(--ds-color-neutral-base-default);
+  border-radius: var(--ds-border-radius-xl);
 }
 
 .box .heading {
@@ -8,13 +9,13 @@
   font-weight: bold;
   margin-top: 0;
   color: white;
-  margin-top: var(--fds-spacing-8);
-  margin-bottom: var(--fds-spacing-4);
+  margin-top: var(--ds-size-8);
+  margin-bottom: var(--ds-size-4);
 }
 
 .box .heading span {
   font-weight: bolder;
-  color: var(--fds-brand-alt3-500);
+  color: var(--ds-color-accent-border-subtle);
 }
 
 .box .subheading {
@@ -25,7 +26,9 @@
 .buttons {
   display: flex;
   gap: 1rem;
-  margin-top: var(--fds-spacing-4);
+  margin-top: var(--ds-size-4);
+  /* data-color-scheme paints its own surface; keep the hero background */
+  background-color: transparent;
 }
 
 .buttons .whiteButton {

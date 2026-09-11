@@ -25,8 +25,7 @@ export default function Index() {
 
       <Heading
         level={2}
-        size='large'
-        spacing
+        data-size='lg'
       >
         Eksempel på et organisasjonskart
       </Heading>

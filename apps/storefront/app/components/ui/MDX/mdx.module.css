@@ -1,6 +1,6 @@
 .content {
   width: 100%;
-  margin-bottom: var(--fds-spacing-14);
+  margin-bottom: var(--ds-size-14);
 }
 
 .content p,
@@ -11,15 +11,17 @@
 }
 
 .content p {
-  font: var(--fds-typography-paragraph-medium);
-  margin-bottom: var(--fds-spacing-5);
+  font-size: var(--ds-body-md-font-size);
+  line-height: var(--ds-body-md-line-height);
+  margin-bottom: var(--ds-size-5);
 }
 
 /* A <p> tag that comes directly after <h1> will be treated as an ingress */
 .content h1 + p {
-  font: var(--fds-typography-ingress-medium);
+  font-size: var(--ds-body-long-lg-font-size);
+  line-height: var(--ds-body-long-lg-line-height);
   margin-top: 0;
-  margin-bottom: var(--fds-spacing-8);
+  margin-bottom: var(--ds-size-8);
 }
 
 .content h1,
@@ -28,19 +30,21 @@
 .content h4,
 .content h5,
 .content h6 {
-  margin-top: var(--fds-spacing-10);
+  margin-top: var(--ds-size-10);
+  /* v1 dropped the Heading `spacing` prop, so the gap lives here instead */
+  margin-bottom: var(--ds-size-3);
 }
 
 .content img {
   width: 100%;
-  margin: var(--fds-spacing-5) 0;
-  border-radius: var(--fds-border_radius-medium);
-  box-shadow: var(--fds-shadow-medium);
+  margin: var(--ds-size-5) 0;
+  border-radius: var(--ds-border-radius-md);
+  box-shadow: var(--ds-shadow-md);
 }
 
 .content strong {
   display: inline-block;
-  margin-top: var(--fds-spacing-1);
+  margin-top: var(--ds-size-1);
   font-weight: 500;
 }
 
@@ -48,16 +52,16 @@
   max-width: 800px;
   background-color: rgb(1, 22, 39);
   color: white;
-  padding: var(--fds-spacing-5);
-  margin: var(--fds-spacing-5) 0;
-  border-radius: var(--fds-border_radius-medium);
+  padding: var(--ds-size-5);
+  margin: var(--ds-size-5) 0;
+  border-radius: var(--ds-border-radius-md);
   overflow-x: auto;
 }
 
 .content > iframe {
-  box-shadow: var(--fds-shadow-medium);
-  margin: var(--fds-spacing-5);
-  border-radius: var(--fds-border_radius-medium);
+  box-shadow: var(--ds-shadow-md);
+  margin: var(--ds-size-5);
+  border-radius: var(--ds-border-radius-md);
 }
 
 .content p code {
@@ -65,8 +69,8 @@
   margin: 1px;
   font-size: 0.9em;
   white-space: break-spaces;
-  background-color: var(--fds-semantic-surface-neutral-subtle-hover);
-  border-radius: var(--fds-border_radius-medium);
+  background-color: var(--ds-color-neutral-surface-hover);
+  border-radius: var(--ds-border-radius-md);
 }
 
 .content > *:first-child {
@@ -78,5 +82,5 @@
 }
 
 .content table {
-  margin: var(--fds-spacing-5) 0;
+  margin: var(--ds-size-5) 0;
 }

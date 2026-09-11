@@ -46,9 +46,8 @@ export default function PlaygroundGUI() {
           />
         </div>
         <Button
-          color='first'
-          size='medium'
           variant='primary'
+          data-size='md'
           onClick={handleGenerateChart}
         >
           Generer organisasjonskart
