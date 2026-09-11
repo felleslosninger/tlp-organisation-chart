@@ -63,30 +63,32 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
             {...props}
           />
         ),
-        a: (props) => {
-          if (props && props.href && props.href.startsWith('http')) {
+        a: ({ ref, children, ...props }) => {
+          if (props.href?.startsWith('http')) {
             return (
               <Link
                 {...props}
                 target='_blank'
-              />
+              >
+                {children}
+              </Link>
             );
           }
 
-          return <Link {...props} />;
+          return <Link {...props}>{children}</Link>;
         },
         p: Paragraph,
-        ol: (props) => (
+        ol: ({ ref, ...props }) => (
           <List.Root>
             <List.Ordered {...props} />
           </List.Root>
         ),
-        ul: (props) => (
+        ul: ({ ref, ...props }) => (
           <List.Root>
             <List.Unordered {...props} />
           </List.Root>
         ),
-        li: (props) => <List.Item {...props} />,
+        li: ({ ref, ...props }) => <List.Item {...props} />,
         hr: (props) => (
           <Divider
             {...props}
@@ -94,18 +96,18 @@ export const MDX = ({ children }: { children: React.ReactNode }) => {
             ref={null}
           />
         ),
-        table: (props) => (
+        table: ({ ref, ...props }) => (
           <Table
             {...props}
             zebra
             border
           />
         ),
-        thead: (props) => <Table.Head {...props} />,
-        tbody: (props) => <Table.Body {...props} />,
-        tr: (props) => <Table.Row {...props} />,
-        th: (props) => <Table.HeaderCell {...props} />,
-        td: (props) => <Table.Cell {...props} />,
+        thead: ({ ref, ...props }) => <Table.Head {...props} />,
+        tbody: ({ ref, ...props }) => <Table.Body {...props} />,
+        tr: ({ ref, ...props }) => <Table.Row {...props} />,
+        th: ({ ref, ...props }) => <Table.HeaderCell {...props} />,
+        td: ({ ref, ...props }) => <Table.Cell {...props} />,
       }}
     >
       <div className={classes.content}>{children}</div>
