@@ -2,11 +2,11 @@ import ReactJson from 'react-json-view'
 
 export default function JsonView({ src }: { src: object }) {
   return (
-    <ReactJson 
-      src={src} 
-      theme='tube' 
-      displayDataTypes={false} 
-      displayObjectSize={false} 
+    <ReactJson
+      src={src}
+      theme='tube'
+      displayDataTypes={false}
+      displayObjectSize={false}
       enableClipboard={false}
       collapsed={1}
       style={{
