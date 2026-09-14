@@ -30,7 +30,7 @@
     "watch": "chokidar \"src/**/*\" -c \"pnpm run build\""
   },
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-terser": "^1.0.0",
     "chokidar-cli": "^3.0.0",
     "postcss": "^8.5.28",
     "rimraf": "^5.0.10",

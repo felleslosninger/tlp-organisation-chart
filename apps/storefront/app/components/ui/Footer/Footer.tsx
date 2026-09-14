@@ -2,7 +2,7 @@ import { Container } from '../Container/Container';
 
 import classes from './Footer.module.css';
 import { Heading, Link, Paragraph } from '@digdir/designsystemet-react';
-import { Link as RemixLink } from '@remix-run/react';
+import { Link as RemixLink } from 'react-router';
 
 const Footer = () => {
   return (

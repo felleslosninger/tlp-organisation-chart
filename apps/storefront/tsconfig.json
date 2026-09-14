@@ -3,6 +3,7 @@
     "env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    ".react-router/types/**/*",
     "app/routes/endringslogg.mdx",
     "app/routes/dokumentasjon.mdx"
   ],
@@ -20,11 +21,12 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "rootDirs": [".", "./.react-router/types"],
     "paths": {
       "~/*": ["./app/*"]
     },
 
-    // Remix takes care of building everything in `remix build`.
+    // React Router takes care of building everything in `react-router build`.
     "noEmit": true
   }
 }

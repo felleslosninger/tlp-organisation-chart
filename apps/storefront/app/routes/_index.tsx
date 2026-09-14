@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { MetaFunction } from 'react-router';
 
 import { Chart } from '../components/Chart/Chart.client';
 import HomeHeader from '../components/layouts/HomeHeader';

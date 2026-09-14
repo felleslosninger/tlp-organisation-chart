@@ -1,5 +1,5 @@
 import { Button, Heading, Link, Paragraph } from '@digdir/designsystemet-react';
-import { Link as RemixLink } from '@remix-run/react';
+import { Link as RemixLink } from 'react-router';
 
 import classes from './HomeHeader.module.css';
 

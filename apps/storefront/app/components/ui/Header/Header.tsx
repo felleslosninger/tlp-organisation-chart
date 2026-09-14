@@ -1,5 +1,5 @@
 import { Link } from '@digdir/designsystemet-react';
-import { Link as RemixLink } from '@remix-run/react';
+import { Link as RemixLink } from 'react-router';
 
 import GithubLogo from '../../GithubLogo';
 

@@ -4,7 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from '@remix-run/react';
+} from 'react-router';
 import { Container } from './components/ui/Container/Container';
 import { Header } from './components/ui/Header/Header';
 

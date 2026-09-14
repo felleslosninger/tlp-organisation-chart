@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node';
+import type { MetaFunction } from 'react-router';
 
 import { Heading } from '@digdir/designsystemet-react';
 import PlaygroundGUI from '../components/PlaygroundGUI/PlaygroundGUI.client';
