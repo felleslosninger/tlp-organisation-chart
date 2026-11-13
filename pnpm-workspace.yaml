@@ -1,3 +1,28 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+
+# Security overrides for transitive dependencies that cannot be updated through their parents.
+overrides:
+  # Pinned 1.13.6 by jsonpath (react-scripts > bfj)
+  'jsonpath>underscore': 1.13.8
+  # Pinned 9.0.3 by @typescript-eslint/typescript-estree 6.x
+  '@typescript-eslint/typescript-estree@6>minimatch': ^9.0.9
+  # Pinned 6.30.4 / 1.23.3 by @remix-run/* 2.17.5 (latest Remix v2)
+  '@remix-run/react>react-router': 6.30.6
+  '@remix-run/react>react-router-dom': 6.30.6
+  '@remix-run/react>@remix-run/router': 1.23.4
+  '@remix-run/server-runtime>@remix-run/router': 1.23.4
+  '@remix-run/dev>@remix-run/router': 1.23.4
+  # cacache 17 declares tar but never imports it
+  'cacache@17>tar': ^7.5.21
+  # remark-mdx-frontmatter 1.x only uses toml.parse(), unchanged in toml 5
+  'remark-mdx-frontmatter@1>toml': ^5.0.1
+  # Only serialize(value) is used; v7 only drops Node < 20
+  'css-minimizer-webpack-plugin@3>serialize-javascript': ^7.1.4
+  'rollup-plugin-terser@7>serialize-javascript': ^7.1.4
+  '@rollup/plugin-terser@0.4>serialize-javascript': ^7.1.4
+  # sockjs only uses require('uuid').v4, still available in uuid 11 CJS build
+  'sockjs>uuid': ^11.1.1
+  # http-proxy-agent 4 (jsdom 16 in react-scripts' jest) only uses once.default(emitter, event)
+  'http-proxy-agent@4>@tootallnate/once': ^2.0.1
